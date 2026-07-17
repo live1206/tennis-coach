@@ -1,0 +1,145 @@
+{
+  "stats_version": 1,
+  "source": {
+    "segment_count": 1,
+    "start": 10.0,
+    "end": 12.0,
+    "duration": 2.0
+  },
+  "data_quality": {
+    "ball": {
+      "available": true,
+      "observation_count": 60,
+      "visible_count": 55,
+      "visible_ratio": 0.916667,
+      "longest_missing_run_observations": 5,
+      "normalized_image_travel": 0.483017,
+      "speed_sample_count": 53,
+      "mean_normalized_image_speed_per_second": 0.273406,
+      "max_normalized_image_speed_per_second": 1.6683,
+      "court_half_crossings": 1,
+      "direction_change_candidates": 6,
+      "mean_detection_confidence": 0.927059
+    },
+    "warnings": [
+      "Segment boundaries are accepted from the input report and are not guaranteed to be rallies.",
+      "Court projection assumes points lie on the court plane; airborne ball projections are approximate."
+    ]
+  },
+  "analysis_capabilities": {
+    "supported": [
+      "approximate player positioning and court coverage",
+      "ball visibility analysis",
+      "ball image-space trajectory analysis",
+      "candidate court crossings and direction changes"
+    ],
+    "unsupported": [
+      "forehand/backhand classification",
+      "shot success ratios",
+      "winner/error attribution",
+      "serve and return classification",
+      "target-player identification from a key frame",
+      "physical ball speed or 3D trajectory"
+    ]
+  },
+  "players": {
+    "player_1": {
+      "segments_detected": 1,
+      "segment_detection_rate": 1.0,
+      "trajectory_samples": 3,
+      "side_sample_counts": {
+        "near": 3,
+        "far": 0
+      },
+      "mean_detection_confidence": 0.8049,
+      "mean_identity_confidence": 0.5,
+      "mean_identity_confidence_after_initialization": null,
+      "total_image_movement_distance_normalized": 0.035412,
+      "total_court_movement_normalized": 0.033745,
+      "court_transition_samples": 2,
+      "mean_court_position": [
+        0.424856,
+        1.011916
+      ],
+      "mean_in_court_position": null
+    },
+    "player_2": {
+      "segments_detected": 0,
+      "segment_detection_rate": 0.0,
+      "trajectory_samples": 0,
+      "side_sample_counts": {
+        "near": 0,
+        "far": 0
+      },
+      "mean_detection_confidence": null,
+      "mean_identity_confidence": null,
+      "mean_identity_confidence_after_initialization": null,
+      "total_image_movement_distance_normalized": 0,
+      "total_court_movement_normalized": 0,
+      "court_transition_samples": 0,
+      "mean_court_position": null,
+      "mean_in_court_position": null
+    }
+  },
+  "segments": [
+    {
+      "index": 1,
+      "start": 10.0,
+      "end": 12.0,
+      "duration": 2.0,
+      "motion": {
+        "player_motion_max": 0.011996,
+        "player_motion_var": 1.76e-06,
+        "near_motion_mean": 0.003855,
+        "far_motion_mean": 0.000103,
+        "motion_sample_count": 30
+      },
+      "players": {
+        "player_1": {
+          "detected": true,
+          "side": "near",
+          "detection_confidence": 0.8049,
+          "identity_confidence": 0.5,
+          "image_movement_distance_normalized": 0.035412,
+          "court_movement_normalized": 0.033745,
+          "trajectory_samples": 3,
+          "mean_image_position": [
+            0.415538,
+            0.912346
+          ],
+          "mean_court_position": [
+            0.424856,
+            1.011916
+          ],
+          "mean_in_court_position": null
+        },
+        "player_2": {
+          "detected": false,
+          "side": null,
+          "detection_confidence": null,
+          "identity_confidence": null,
+          "image_movement_distance_normalized": null,
+          "court_movement_normalized": 0,
+          "trajectory_samples": 0,
+          "mean_image_position": null,
+          "mean_court_position": null,
+          "mean_in_court_position": null
+        }
+      },
+      "ball": {
+        "available": true,
+        "observation_count": 60,
+        "visible_count": 55,
+        "visible_ratio": 0.916667,
+        "longest_missing_run_observations": 5,
+        "normalized_image_travel": 0.483017,
+        "speed_sample_count": 53,
+        "mean_normalized_image_speed_per_second": 0.273406,
+        "max_normalized_image_speed_per_second": 1.6683,
+        "court_half_crossings": 1,
+        "direction_change_candidates": 6,
+        "mean_detection_confidence": 0.927059
+      }
+    }
+  ]
+}

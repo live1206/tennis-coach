@@ -81,6 +81,12 @@ quality warnings; and explicit supported/unsupported analysis capabilities.
 It intentionally does not claim forehand/backhand, shot success, winners, or
 errors until those signals are implemented and validated.
 
+`examples/sample_stats.json` demonstrates the full-video player/motion output
+without external ball weights. `examples/sample_ball_stats.json` demonstrates
+the ball-enabled schema on the independently checked two-second interval,
+including visibility, image-space trajectory, speed, court crossings, and
+direction-change candidates.
+
 ### Ball annotation and tracking
 
 Create a local frame-level annotation set from footage you have the right to use:
