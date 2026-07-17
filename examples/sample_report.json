@@ -37,7 +37,7 @@
       }
     },
     "video_extraction": {
-      "version": 2,
+      "version": 3,
       "status": "complete",
       "court_rois": {
         "near": [
@@ -78,7 +78,10 @@
         ],
         "format": "polygon"
       },
-      "sample_seconds": 0.5
+      "sample_seconds": 0.5,
+      "ball_tracking_status": "disabled",
+      "ball_frame_step": null,
+      "ball_temporal_stride": null
     },
     "player_trajectories": {
       "player_1": [
@@ -2913,7 +2916,7 @@
       }
     },
     "video_extraction": {
-      "version": 2,
+      "version": 3,
       "status": "complete",
       "court_rois": {
         "near": [
@@ -2954,7 +2957,10 @@
         ],
         "format": "polygon"
       },
-      "sample_seconds": 0.5
+      "sample_seconds": 0.5,
+      "ball_tracking_status": "disabled",
+      "ball_frame_step": null,
+      "ball_temporal_stride": null
     },
     "player_trajectories": {
       "player_1": [
@@ -5685,7 +5691,7 @@
       }
     },
     "video_extraction": {
-      "version": 2,
+      "version": 3,
       "status": "complete",
       "court_rois": {
         "near": [
@@ -5726,7 +5732,10 @@
         ],
         "format": "polygon"
       },
-      "sample_seconds": 0.5
+      "sample_seconds": 0.5,
+      "ball_tracking_status": "disabled",
+      "ball_frame_step": null,
+      "ball_temporal_stride": null
     },
     "player_trajectories": {
       "player_1": [
@@ -7840,7 +7849,7 @@
       }
     },
     "video_extraction": {
-      "version": 2,
+      "version": 3,
       "status": "complete",
       "court_rois": {
         "near": [
@@ -7881,7 +7890,10 @@
         ],
         "format": "polygon"
       },
-      "sample_seconds": 0.5
+      "sample_seconds": 0.5,
+      "ball_tracking_status": "disabled",
+      "ball_frame_step": null,
+      "ball_temporal_stride": null
     },
     "player_trajectories": {
       "player_1": [
@@ -10532,7 +10544,7 @@
       }
     },
     "video_extraction": {
-      "version": 2,
+      "version": 3,
       "status": "complete",
       "court_rois": {
         "near": [
@@ -10573,7 +10585,10 @@
         ],
         "format": "polygon"
       },
-      "sample_seconds": 0.5
+      "sample_seconds": 0.5,
+      "ball_tracking_status": "disabled",
+      "ball_frame_step": null,
+      "ball_temporal_stride": null
     },
     "player_trajectories": {
       "player_1": [

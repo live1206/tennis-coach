@@ -62,6 +62,59 @@ The enriched `reports.json` keeps the original segment fields and adds:
 
 If court detection fails, each segment is preserved and marked with `video_extraction.status: "skipped_court_detection"`.
 
+### Ball annotation and tracking
+
+Create a local frame-level annotation set from footage you have the right to use:
+
+```bash
+tennis-coach-ball-frames match.mp4 annotations.local/session-01 \
+  --start 30 --end 40 --stride 1
+```
+
+This writes source frames and `annotations.json`. Label each frame as
+`visible`, `occluded`, or `absent`; visible balls require pixel `x`/`y`
+coordinates, and optional events are `hit`, `bounce`, or `net`.
+
+```bash
+tennis-coach-ball-annotate annotations.local/session-01/annotations.json
+```
+
+The annotation window uses left click for a visible ball; `o` for occluded,
+`x` for absent, `h`/`b`/`n` for hit/bounce/net, `a`/`d` to navigate, and `q`
+to save and exit.
+
+```bash
+tennis-coach-ball-validate annotations.local/session-01/annotations.json \
+  --require-complete
+```
+
+An externally supplied TrackNet-compatible ONNX model can run at full frame
+rate during report enrichment:
+
+```bash
+tennis-coach-extract match.mp4 full_report.json \
+  --model-path /path/to/yolox_nano.onnx \
+  --ball-model-path /path/to/tracknet.onnx \
+  --ball-temporal-stride 2 \
+  --output reports.json
+```
+
+The external model and weights are not bundled because the available TrackNet
+V1 checkpoint has no verified redistribution license. When enabled, each
+segment receives `ball_trajectory` observations with frame/time, visibility,
+coordinates, confidence, and interpolation status.
+
+Standalone tracking and evaluation are also available:
+
+```bash
+tennis-coach-ball-track match.mp4 /path/to/tracknet.onnx \
+  --start 30 --end 40 --temporal-stride 2 \
+  --output ball_trajectory.json
+
+tennis-coach-ball-evaluate annotations.local/session-01/annotations.json \
+  ball_trajectory.json --tolerance-pixels 10
+```
+
 ### Sample output
 
 `examples/sample_report.json` was generated from Breakpoint's

@@ -18,6 +18,11 @@ test = [
 
 [project.scripts]
 tennis-coach-extract = "video_extraction.cli:main"
+tennis-coach-ball-frames = "video_extraction.ball_annotations:extract_main"
+tennis-coach-ball-annotate = "video_extraction.ball_annotations:annotate_main"
+tennis-coach-ball-evaluate = "video_extraction.ball_annotations:evaluate_main"
+tennis-coach-ball-track = "video_extraction.vision.ball_tracking:main"
+tennis-coach-ball-validate = "video_extraction.ball_annotations:validate_main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

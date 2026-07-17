@@ -18,3 +18,9 @@ __pycache__/
 .pytest_cache/
 .venv/
 *.egg-info/
+
+# External model weights and local annotation footage
+*.onnx
+*.pth
+*.pt
+annotations.local/
