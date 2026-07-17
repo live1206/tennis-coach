@@ -3,7 +3,13 @@ import numpy as np
 from video_extraction import cli
 from video_extraction.ball_annotations import evaluate_predictions, validate_annotation_manifest
 from video_extraction.cli import enrich_report, load_report
+from video_extraction.court_projection import CourtProjector, add_court_projections
 from video_extraction.vision.ball_tracking import TrackNetOnnxDetector, observations_for_segment
+from video_extraction.statistics import (
+    aggregate_ball_summaries,
+    build_llm_statistics,
+    summarize_ball_trajectory,
+)
 from video_extraction.vision.player_observation import (
     YoloXPersonDetector,
     _attach_player_ids,
@@ -284,3 +290,302 @@ def test_evaluates_ball_predictions_with_localization_tolerance():
         "mean_localization_error": 5.0,
         "median_localization_error": 5.0,
     }
+
+
+def test_projects_image_positions_to_normalized_court():
+    rois = {
+        "far": [[20, 20], [80, 20], [90, 50], [10, 50]],
+        "near": [[10, 50], [90, 50], [100, 100], [0, 100]],
+    }
+    projector = CourtProjector(rois, frame_width=100, frame_height=100)
+
+    assert projector.project_pixel(20, 20) == {
+        "x": 0.0,
+        "y": 0.0,
+        "inside_court": True,
+    }
+    assert projector.project_pixel(100, 100) == {
+        "x": 1.0,
+        "y": 1.0,
+        "inside_court": True,
+    }
+
+
+def test_adds_court_projections_to_players_and_visible_ball():
+    rois = {
+        "far": [[0, 0], [100, 0], [100, 50], [0, 50]],
+        "near": [[0, 50], [100, 50], [100, 100], [0, 100]],
+    }
+    projector = CourtProjector(rois, frame_width=100, frame_height=100)
+    players = {"player_1": [{"position": [0.5, 0.75]}]}
+    ball = [
+        {"visible": True, "x": 25, "y": 50},
+        {"visible": False},
+    ]
+
+    add_court_projections(players, ball, projector)
+
+    assert players["player_1"][0]["court_position"] == {
+        "x": 0.5,
+        "y": 0.75,
+        "inside_court": True,
+    }
+    assert ball[0]["court_projection"] == {
+        "x": 0.25,
+        "y": 0.5,
+        "inside_court": True,
+    }
+    assert "court_projection" not in ball[1]
+
+
+def test_summarizes_ball_trajectory_without_claiming_shot_events():
+    observations = [
+        {
+            "time": 0.0,
+            "visible": True,
+            "x_normalized": 0.1,
+            "y_normalized": 0.2,
+            "confidence": 0.9,
+            "court_projection": {"x": 0.1, "y": 0.4, "inside_court": True},
+        },
+        {
+            "time": 0.1,
+            "visible": True,
+            "x_normalized": 0.2,
+            "y_normalized": 0.3,
+            "confidence": 0.8,
+            "court_projection": {"x": 0.2, "y": 0.6, "inside_court": True},
+        },
+        {"time": 0.2, "visible": False, "confidence": 0.0},
+    ]
+
+    summary = summarize_ball_trajectory(observations)
+
+    assert summary["visible_ratio"] == 0.666667
+    assert summary["longest_missing_run_observations"] == 1
+    assert summary["court_half_crossings"] == 1
+    assert summary["direction_change_candidates"] == 0
+    assert "hits" not in summary
+    assert "bounces" not in summary
+
+
+def test_builds_compact_llm_statistics_with_capability_limits():
+    report = [{
+        "index": 1,
+        "start": 0.0,
+        "end": 1.0,
+        "features": {
+            "player_motion_max": 0.1,
+            "player_motion_var": 0.01,
+            "near_motion_mean": 0.02,
+            "far_motion_mean": 0.01,
+            "motion_sample_count": 15,
+        },
+        "players": {
+            "player_1": {
+                "detected": True,
+                "side": "near",
+                "detection_confidence": 0.9,
+                "identity_confidence": 0.8,
+                "movement_distance": 0.2,
+                "mean_position": [0.5, 0.8],
+            },
+        },
+        "player_trajectories": {
+            "player_1": [{
+                "side": "near",
+                "court_position": {"x": 0.5, "y": 0.8, "inside_court": True},
+            }],
+        },
+    }]
+
+    stats = build_llm_statistics(report)
+
+    assert stats["stats_version"] == 1
+    assert stats["players"]["player_1"]["segment_detection_rate"] == 1.0
+    assert stats["players"]["player_1"]["mean_court_position"] == [0.5, 0.8]
+    assert "shot success ratios" in stats["analysis_capabilities"]["unsupported"]
+    assert stats["segments"][0]["ball"]["available"] is False
+
+
+def test_global_ball_summary_does_not_bridge_segments():
+    first = summarize_ball_trajectory([{
+        "time": 0.0,
+        "visible": True,
+        "x_normalized": 0.1,
+        "y_normalized": 0.1,
+        "confidence": 0.9,
+    }])
+    second = summarize_ball_trajectory([{
+        "time": 10.0,
+        "visible": True,
+        "x_normalized": 0.9,
+        "y_normalized": 0.9,
+        "confidence": 0.8,
+    }])
+
+    summary = aggregate_ball_summaries([first, second])
+
+    assert summary["normalized_image_travel"] == 0.0
+    assert summary["speed_sample_count"] == 0
+    assert summary["court_half_crossings"] == 0
+
+
+def test_empty_statistics_do_not_claim_analysis_capabilities():
+    stats = build_llm_statistics([])
+
+    assert stats["analysis_capabilities"]["supported"] == []
+
+
+def test_out_of_court_projection_does_not_count_as_crossing():
+    observations = [
+        {
+            "time": 0.0,
+            "visible": True,
+            "x_normalized": 0.1,
+            "y_normalized": 0.2,
+            "confidence": 0.9,
+            "court_projection": {"x": -0.2, "y": 0.4, "inside_court": False},
+        },
+        {
+            "time": 0.1,
+            "visible": True,
+            "x_normalized": 0.2,
+            "y_normalized": 0.3,
+            "confidence": 0.9,
+            "court_projection": {"x": -0.1, "y": 0.6, "inside_court": False},
+        },
+    ]
+
+    assert summarize_ball_trajectory(observations)["court_half_crossings"] == 0
+
+
+def test_player_confidence_is_weighted_by_detection_samples():
+    report = [
+        {
+            "start": 0.0,
+            "end": 1.0,
+            "players": {
+                "player_1": {
+                    "detected": True,
+                    "detection_confidence": 0.2,
+                    "identity_confidence": 0.5,
+                    "movement_distance": 0.1,
+                    "sample_count": 1,
+                },
+            },
+            "player_trajectories": {"player_1": []},
+        },
+        {
+            "start": 1.0,
+            "end": 2.0,
+            "players": {
+                "player_1": {
+                    "detected": True,
+                    "detection_confidence": 0.8,
+                    "identity_confidence": 0.9,
+                    "movement_distance": 0.1,
+                    "sample_count": 9,
+                },
+            },
+            "player_trajectories": {"player_1": []},
+        },
+    ]
+
+    player = build_llm_statistics(report)["players"]["player_1"]
+
+    assert player["mean_detection_confidence"] == 0.74
+    assert player["mean_identity_confidence"] == 0.86
+    assert player["mean_identity_confidence_after_initialization"] == 0.9
+
+
+def test_single_player_and_segment_do_not_enable_comparisons():
+    report = [{
+        "start": 0.0,
+        "end": 1.0,
+        "features": {"motion_sample_count": 10},
+        "players": {
+            "player_1": {
+                "detected": True,
+                "detection_confidence": 0.9,
+                "identity_confidence": 0.8,
+                "movement_distance": 0.2,
+                "sample_count": 2,
+            },
+        },
+        "player_trajectories": {
+            "player_1": [
+                {"court_position": {"x": 0.5, "y": 1.1, "inside_court": False}},
+                {"court_position": {"x": 0.6, "y": 1.2, "inside_court": False}},
+            ],
+        },
+    }]
+
+    stats = build_llm_statistics(report)
+
+    assert "player movement comparison" not in stats["analysis_capabilities"]["supported"]
+    assert "segment activity comparison" not in stats["analysis_capabilities"]["supported"]
+    assert stats["players"]["player_1"]["mean_court_position"] == [0.55, 1.15]
+    assert stats["players"]["player_1"]["mean_in_court_position"] is None
+    assert stats["players"]["player_1"]["total_court_movement_normalized"] == 0.141421
+
+
+def test_disconnected_ball_sightings_only_enable_visibility_analysis():
+    report = [
+        {
+            "start": 0.0,
+            "end": 1.0,
+            "ball_trajectory": [{
+                "time": 0.0,
+                "visible": True,
+                "x_normalized": 0.1,
+                "y_normalized": 0.1,
+                "confidence": 0.9,
+            }],
+        },
+        {
+            "start": 10.0,
+            "end": 11.0,
+            "ball_trajectory": [{
+                "time": 10.0,
+                "visible": True,
+                "x_normalized": 0.9,
+                "y_normalized": 0.9,
+                "confidence": 0.8,
+            }],
+        },
+    ]
+
+    supported = build_llm_statistics(report)["analysis_capabilities"]["supported"]
+
+    assert "ball visibility analysis" in supported
+    assert "ball image-space trajectory analysis" not in supported
+
+
+def test_stationary_players_still_enable_movement_comparison():
+    player = {
+        "detected": True,
+        "detection_confidence": 0.9,
+        "identity_confidence": 0.8,
+        "movement_distance": 0.0,
+        "sample_count": 2,
+    }
+    stationary_points = [
+        {"court_position": {"x": 0.5, "y": 0.8, "inside_court": True}},
+        {"court_position": {"x": 0.5, "y": 0.8, "inside_court": True}},
+    ]
+    report = [{
+        "start": 0.0,
+        "end": 1.0,
+        "players": {"player_1": player, "player_2": player},
+        "player_trajectories": {
+            "player_1": stationary_points,
+            "player_2": stationary_points,
+        },
+    }]
+
+    stats = build_llm_statistics(report)
+
+    assert "player movement comparison" in stats["analysis_capabilities"]["supported"]
+    assert stats["players"]["player_1"]["total_court_movement_normalized"] == 0.0
+    assert stats["players"]["player_1"]["court_transition_samples"] == 1

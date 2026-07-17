@@ -100,7 +100,12 @@
           "position": [
             0.21849,
             0.901852
-          ]
+          ],
+          "court_position": {
+            "x": 0.233733,
+            "y": 1.007939,
+            "inside_court": false
+          }
         },
         {
           "time": 0.5,
@@ -117,7 +122,12 @@
           "position": [
             0.217708,
             0.893519
-          ]
+          ],
+          "court_position": {
+            "x": 0.229868,
+            "y": 1.00459,
+            "inside_court": false
+          }
         },
         {
           "time": 1.0,
@@ -134,7 +144,12 @@
           "position": [
             0.215625,
             0.899074
-          ]
+          ],
+          "court_position": {
+            "x": 0.229933,
+            "y": 1.006831,
+            "inside_court": false
+          }
         },
         {
           "time": 1.5,
@@ -151,7 +166,12 @@
           "position": [
             0.217969,
             0.90463
-          ]
+          ],
+          "court_position": {
+            "x": 0.23425,
+            "y": 1.009039,
+            "inside_court": false
+          }
         },
         {
           "time": 2.0,
@@ -168,7 +188,12 @@
           "position": [
             0.209115,
             0.897222
-          ]
+          ],
+          "court_position": {
+            "x": 0.222917,
+            "y": 1.006088,
+            "inside_court": false
+          }
         },
         {
           "time": 2.5,
@@ -185,7 +210,12 @@
           "position": [
             0.198437,
             0.907407
-          ]
+          ],
+          "court_position": {
+            "x": 0.216566,
+            "y": 1.010129,
+            "inside_court": false
+          }
         },
         {
           "time": 3.0,
@@ -202,7 +232,12 @@
           "position": [
             0.19349,
             0.823148
-          ]
+          ],
+          "court_position": {
+            "x": 0.174174,
+            "y": 0.972844,
+            "inside_court": true
+          }
         },
         {
           "time": 3.5,
@@ -219,7 +254,12 @@
           "position": [
             0.208854,
             0.797222
-          ]
+          ],
+          "court_position": {
+            "x": 0.177849,
+            "y": 0.959324,
+            "inside_court": true
+          }
         },
         {
           "time": 4.0,
@@ -236,7 +276,12 @@
           "position": [
             0.215885,
             0.790741
-          ]
+          ],
+          "court_position": {
+            "x": 0.182454,
+            "y": 0.955765,
+            "inside_court": true
+          }
         },
         {
           "time": 4.5,
@@ -253,7 +298,12 @@
           "position": [
             0.248177,
             0.814815
-          ]
+          ],
+          "court_position": {
+            "x": 0.229884,
+            "y": 0.968619,
+            "inside_court": true
+          }
         },
         {
           "time": 5.0,
@@ -270,7 +320,12 @@
           "position": [
             0.30599,
             0.849074
-          ]
+          ],
+          "court_position": {
+            "x": 0.303838,
+            "y": 0.985317,
+            "inside_court": true
+          }
         },
         {
           "time": 5.5,
@@ -287,7 +342,12 @@
           "position": [
             0.371094,
             0.822222
-          ]
+          ],
+          "court_position": {
+            "x": 0.366245,
+            "y": 0.97238,
+            "inside_court": true
+          }
         },
         {
           "time": 6.0,
@@ -304,7 +364,12 @@
           "position": [
             0.371615,
             0.802778
-          ]
+          ],
+          "court_position": {
+            "x": 0.362673,
+            "y": 0.962316,
+            "inside_court": true
+          }
         },
         {
           "time": 6.5,
@@ -321,7 +386,12 @@
           "position": [
             0.344531,
             0.794444
-          ]
+          ],
+          "court_position": {
+            "x": 0.330131,
+            "y": 0.957808,
+            "inside_court": true
+          }
         },
         {
           "time": 7.0,
@@ -338,7 +408,12 @@
           "position": [
             0.352344,
             0.760185
-          ]
+          ],
+          "court_position": {
+            "x": 0.329518,
+            "y": 0.937914,
+            "inside_court": true
+          }
         },
         {
           "time": 7.5,
@@ -355,7 +430,12 @@
           "position": [
             0.391667,
             0.771296
-          ]
+          ],
+          "court_position": {
+            "x": 0.379009,
+            "y": 0.944619,
+            "inside_court": true
+          }
         },
         {
           "time": 8.0,
@@ -372,7 +452,12 @@
           "position": [
             0.419792,
             0.801852
-          ]
+          ],
+          "court_position": {
+            "x": 0.416408,
+            "y": 0.961821,
+            "inside_court": true
+          }
         },
         {
           "time": 8.5,
@@ -389,7 +474,12 @@
           "position": [
             0.445833,
             0.881481
-          ]
+          ],
+          "court_position": {
+            "x": 0.451666,
+            "y": 0.999611,
+            "inside_court": true
+          }
         },
         {
           "time": 9.0,
@@ -406,7 +496,12 @@
           "position": [
             0.479948,
             0.922222
-          ]
+          ],
+          "court_position": {
+            "x": 0.486284,
+            "y": 1.01581,
+            "inside_court": false
+          }
         },
         {
           "time": 9.5,
@@ -423,7 +518,12 @@
           "position": [
             0.475,
             0.931481
-          ]
+          ],
+          "court_position": {
+            "x": 0.481861,
+            "y": 1.019247,
+            "inside_court": false
+          }
         },
         {
           "time": 10.0,
@@ -440,7 +540,12 @@
           "position": [
             0.426563,
             0.911111
-          ]
+          ],
+          "court_position": {
+            "x": 0.435247,
+            "y": 1.011571,
+            "inside_court": false
+          }
         },
         {
           "time": 10.5,
@@ -457,7 +562,12 @@
           "position": [
             0.410677,
             0.893519
-          ]
+          ],
+          "court_position": {
+            "x": 0.418165,
+            "y": 1.00459,
+            "inside_court": false
+          }
         },
         {
           "time": 11.0,
@@ -474,7 +584,12 @@
           "position": [
             0.409375,
             0.932407
-          ]
+          ],
+          "court_position": {
+            "x": 0.421155,
+            "y": 1.019586,
+            "inside_court": false
+          }
         },
         {
           "time": 13.5,
@@ -491,7 +606,12 @@
           "position": [
             0.502344,
             0.912037
-          ]
+          ],
+          "court_position": {
+            "x": 0.507404,
+            "y": 1.011929,
+            "inside_court": false
+          }
         },
         {
           "time": 14.0,
@@ -508,7 +628,12 @@
           "position": [
             0.497135,
             0.877778
-          ]
+          ],
+          "court_position": {
+            "x": 0.502602,
+            "y": 0.998045,
+            "inside_court": true
+          }
         },
         {
           "time": 14.5,
@@ -525,7 +650,12 @@
           "position": [
             0.473958,
             0.883333
-          ]
+          ],
+          "court_position": {
+            "x": 0.479633,
+            "y": 1.000388,
+            "inside_court": false
+          }
         },
         {
           "time": 15.0,
@@ -542,7 +672,12 @@
           "position": [
             0.44974,
             0.938889
-          ]
+          ],
+          "court_position": {
+            "x": 0.458856,
+            "y": 1.021936,
+            "inside_court": false
+          }
         },
         {
           "time": 15.5,
@@ -559,7 +694,12 @@
           "position": [
             0.408854,
             0.928704
-          ]
+          ],
+          "court_position": {
+            "x": 0.420284,
+            "y": 1.018225,
+            "inside_court": false
+          }
         },
         {
           "time": 16.0,
@@ -576,7 +716,12 @@
           "position": [
             0.413802,
             0.831481
-          ]
+          ],
+          "court_position": {
+            "x": 0.413778,
+            "y": 0.976961,
+            "inside_court": true
+          }
         },
         {
           "time": 16.5,
@@ -593,7 +738,12 @@
           "position": [
             0.44375,
             0.675926
-          ]
+          ],
+          "court_position": {
+            "x": 0.428991,
+            "y": 0.877297,
+            "inside_court": true
+          }
         },
         {
           "time": 21.0,
@@ -610,7 +760,12 @@
           "position": [
             0.588802,
             0.92963
-          ]
+          ],
+          "court_position": {
+            "x": 0.587516,
+            "y": 1.018567,
+            "inside_court": false
+          }
         },
         {
           "time": 21.5,
@@ -627,7 +782,12 @@
           "position": [
             0.603906,
             0.923148
-          ]
+          ],
+          "court_position": {
+            "x": 0.602436,
+            "y": 1.016158,
+            "inside_court": false
+          }
         },
         {
           "time": 22.0,
@@ -644,7 +804,12 @@
           "position": [
             0.597917,
             0.92963
-          ]
+          ],
+          "court_position": {
+            "x": 0.595982,
+            "y": 1.018567,
+            "inside_court": false
+          }
         },
         {
           "time": 22.5,
@@ -661,7 +826,12 @@
           "position": [
             0.594792,
             0.932407
-          ]
+          ],
+          "court_position": {
+            "x": 0.592733,
+            "y": 1.019586,
+            "inside_court": false
+          }
         },
         {
           "time": 23.0,
@@ -678,7 +848,12 @@
           "position": [
             0.577604,
             0.938889
-          ]
+          ],
+          "court_position": {
+            "x": 0.576166,
+            "y": 1.021936,
+            "inside_court": false
+          }
         },
         {
           "time": 23.5,
@@ -695,7 +870,12 @@
           "position": [
             0.566927,
             0.938889
-          ]
+          ],
+          "court_position": {
+            "x": 0.566371,
+            "y": 1.021936,
+            "inside_court": false
+          }
         },
         {
           "time": 24.0,
@@ -712,7 +892,12 @@
           "position": [
             0.570573,
             0.942593
-          ]
+          ],
+          "court_position": {
+            "x": 0.569374,
+            "y": 1.023261,
+            "inside_court": false
+          }
         },
         {
           "time": 24.5,
@@ -729,7 +914,12 @@
           "position": [
             0.584375,
             0.939815
-          ]
+          ],
+          "court_position": {
+            "x": 0.582277,
+            "y": 1.022269,
+            "inside_court": false
+          }
         },
         {
           "time": 25.0,
@@ -746,7 +936,12 @@
           "position": [
             0.59375,
             0.878704
-          ]
+          ],
+          "court_position": {
+            "x": 0.598873,
+            "y": 0.998438,
+            "inside_court": true
+          }
         },
         {
           "time": 25.5,
@@ -763,7 +958,12 @@
           "position": [
             0.559635,
             0.871296
-          ]
+          ],
+          "court_position": {
+            "x": 0.56558,
+            "y": 0.995263,
+            "inside_court": true
+          }
         },
         {
           "time": 26.0,
@@ -780,7 +980,12 @@
           "position": [
             0.536719,
             0.868519
-          ]
+          ],
+          "court_position": {
+            "x": 0.542674,
+            "y": 0.994055,
+            "inside_court": true
+          }
         },
         {
           "time": 26.5,
@@ -797,7 +1002,12 @@
           "position": [
             0.571354,
             0.902778
-          ]
+          ],
+          "court_position": {
+            "x": 0.573984,
+            "y": 1.008307,
+            "inside_court": false
+          }
         },
         {
           "time": 27.0,
@@ -814,7 +1024,12 @@
           "position": [
             0.617708,
             0.931481
-          ]
+          ],
+          "court_position": {
+            "x": 0.61408,
+            "y": 1.019247,
+            "inside_court": false
+          }
         },
         {
           "time": 27.5,
@@ -831,7 +1046,12 @@
           "position": [
             0.566406,
             0.937963
-          ]
+          ],
+          "court_position": {
+            "x": 0.565974,
+            "y": 1.021603,
+            "inside_court": false
+          }
         },
         {
           "time": 28.0,
@@ -848,7 +1068,12 @@
           "position": [
             0.501823,
             0.914815
-          ]
+          ],
+          "court_position": {
+            "x": 0.50688,
+            "y": 1.012999,
+            "inside_court": false
+          }
         },
         {
           "time": 28.5,
@@ -865,7 +1090,12 @@
           "position": [
             0.466927,
             0.897222
-          ]
+          ],
+          "court_position": {
+            "x": 0.473189,
+            "y": 1.006088,
+            "inside_court": false
+          }
         },
         {
           "time": 29.0,
@@ -882,7 +1112,12 @@
           "position": [
             0.446875,
             0.952778
-          ]
+          ],
+          "court_position": {
+            "x": 0.457002,
+            "y": 1.026839,
+            "inside_court": false
+          }
         }
       ],
       "player_2": [
@@ -901,7 +1136,12 @@
           "position": [
             0.505469,
             0.349074
-          ]
+          ],
+          "court_position": {
+            "x": 0.547121,
+            "y": 0.070852,
+            "inside_court": true
+          }
         },
         {
           "time": 6.0,
@@ -918,7 +1158,12 @@
           "position": [
             0.503125,
             0.342593
-          ]
+          ],
+          "court_position": {
+            "x": 0.538994,
+            "y": 0.022105,
+            "inside_court": true
+          }
         },
         {
           "time": 6.5,
@@ -935,7 +1180,12 @@
           "position": [
             0.503385,
             0.340741
-          ]
+          ],
+          "court_position": {
+            "x": 0.540576,
+            "y": 0.007454,
+            "inside_court": true
+          }
         },
         {
           "time": 7.0,
@@ -952,7 +1202,12 @@
           "position": [
             0.50625,
             0.340741
-          ]
+          ],
+          "court_position": {
+            "x": 0.552977,
+            "y": 0.007454,
+            "inside_court": true
+          }
         },
         {
           "time": 12.5,
@@ -969,7 +1224,12 @@
           "position": [
             0.484115,
             0.34537
-          ]
+          ],
+          "court_position": {
+            "x": 0.458342,
+            "y": 0.04346,
+            "inside_court": true
+          }
         },
         {
           "time": 14.0,
@@ -986,7 +1246,12 @@
           "position": [
             0.507292,
             0.339815
-          ]
+          ],
+          "court_position": {
+            "x": 0.557824,
+            "y": 2e-06,
+            "inside_court": true
+          }
         },
         {
           "time": 15.0,
@@ -1003,7 +1268,12 @@
           "position": [
             0.541406,
             0.347222
-          ]
+          ],
+          "court_position": {
+            "x": 0.697186,
+            "y": 0.057307,
+            "inside_court": true
+          }
         },
         {
           "time": 16.5,
@@ -1020,7 +1290,12 @@
           "position": [
             0.50625,
             0.338889
-          ]
+          ],
+          "court_position": {
+            "x": 0.553602,
+            "y": -0.007538,
+            "inside_court": false
+          }
         },
         {
           "time": 17.0,
@@ -1037,7 +1312,12 @@
           "position": [
             0.478646,
             0.596296
-          ]
+          ],
+          "court_position": {
+            "x": 0.473895,
+            "y": 0.797465,
+            "inside_court": true
+          }
         },
         {
           "time": 17.5,
@@ -1054,7 +1334,12 @@
           "position": [
             0.5,
             0.566667
-          ]
+          ],
+          "court_position": {
+            "x": 0.510391,
+            "y": 0.75937,
+            "inside_court": true
+          }
         },
         {
           "time": 18.0,
@@ -1071,7 +1356,12 @@
           "position": [
             0.502083,
             0.564815
-          ]
+          ],
+          "court_position": {
+            "x": 0.514213,
+            "y": 0.756794,
+            "inside_court": true
+          }
         },
         {
           "time": 18.5,
@@ -1088,7 +1378,12 @@
           "position": [
             0.492708,
             0.562963
-          ]
+          ],
+          "court_position": {
+            "x": 0.497243,
+            "y": 0.754193,
+            "inside_court": true
+          }
         },
         {
           "time": 19.0,
@@ -1105,7 +1400,12 @@
           "position": [
             0.484635,
             0.543519
-          ]
+          ],
+          "court_position": {
+            "x": 0.481672,
+            "y": 0.725289,
+            "inside_court": true
+          }
         },
         {
           "time": 19.5,
@@ -1122,7 +1422,12 @@
           "position": [
             0.478906,
             0.549074
-          ]
+          ],
+          "court_position": {
+            "x": 0.471132,
+            "y": 0.733857,
+            "inside_court": true
+          }
         },
         {
           "time": 20.0,
@@ -1139,7 +1444,12 @@
           "position": [
             0.466667,
             0.541667
-          ]
+          ],
+          "court_position": {
+            "x": 0.446998,
+            "y": 0.722373,
+            "inside_court": true
+          }
         },
         {
           "time": 20.5,
@@ -1156,7 +1466,12 @@
           "position": [
             0.465104,
             0.552778
-          ]
+          ],
+          "court_position": {
+            "x": 0.445638,
+            "y": 0.739429,
+            "inside_court": true
+          }
         },
         {
           "time": 21.0,
@@ -1173,7 +1488,12 @@
           "position": [
             0.432552,
             0.337037
-          ]
+          ],
+          "court_position": {
+            "x": 0.227709,
+            "y": -0.022884,
+            "inside_court": false
+          }
         },
         {
           "time": 21.5,
@@ -1190,7 +1510,12 @@
           "position": [
             0.433073,
             0.337037
-          ]
+          ],
+          "court_position": {
+            "x": 0.230017,
+            "y": -0.022884,
+            "inside_court": false
+          }
         },
         {
           "time": 26.0,
@@ -1207,7 +1532,12 @@
           "position": [
             0.427865,
             0.343519
-          ]
+          ],
+          "court_position": {
+            "x": 0.218523,
+            "y": 0.029307,
+            "inside_court": true
+          }
         },
         {
           "time": 28.0,
@@ -1224,7 +1554,12 @@
           "position": [
             0.483333,
             0.337037
-          ]
+          ],
+          "court_position": {
+            "x": 0.452704,
+            "y": -0.022884,
+            "inside_court": false
+          }
         }
       ]
     },
@@ -2979,7 +3314,12 @@
           "position": [
             0.210677,
             0.958333
-          ]
+          ],
+          "court_position": {
+            "x": 0.246014,
+            "y": 1.028751,
+            "inside_court": false
+          }
         },
         {
           "time": 32.0,
@@ -2996,7 +3336,12 @@
           "position": [
             0.148958,
             0.882407
-          ]
+          ],
+          "court_position": {
+            "x": 0.157459,
+            "y": 1.0,
+            "inside_court": true
+          }
         },
         {
           "time": 32.5,
@@ -3013,7 +3358,12 @@
           "position": [
             0.138542,
             0.884259
-          ]
+          ],
+          "court_position": {
+            "x": 0.148061,
+            "y": 1.000775,
+            "inside_court": false
+          }
         },
         {
           "time": 33.0,
@@ -3030,7 +3380,12 @@
           "position": [
             0.219531,
             0.888889
-          ]
+          ],
+          "court_position": {
+            "x": 0.229899,
+            "y": 1.002695,
+            "inside_court": false
+          }
         },
         {
           "time": 33.5,
@@ -3047,7 +3402,12 @@
           "position": [
             0.319271,
             0.884259
-          ]
+          ],
+          "court_position": {
+            "x": 0.326733,
+            "y": 1.000775,
+            "inside_court": false
+          }
         },
         {
           "time": 34.0,
@@ -3064,7 +3424,12 @@
           "position": [
             0.422917,
             0.894444
-          ]
+          ],
+          "court_position": {
+            "x": 0.430199,
+            "y": 1.004965,
+            "inside_court": false
+          }
         },
         {
           "time": 34.5,
@@ -3081,7 +3446,12 @@
           "position": [
             0.495312,
             0.888889
-          ]
+          ],
+          "court_position": {
+            "x": 0.500761,
+            "y": 1.002695,
+            "inside_court": false
+          }
         },
         {
           "time": 35.0,
@@ -3098,7 +3468,12 @@
           "position": [
             0.520833,
             0.882407
-          ]
+          ],
+          "court_position": {
+            "x": 0.526071,
+            "y": 1.0,
+            "inside_court": true
+          }
         },
         {
           "time": 39.0,
@@ -3115,7 +3490,12 @@
           "position": [
             0.844531,
             0.883333
-          ]
+          ],
+          "court_position": {
+            "x": 0.846471,
+            "y": 1.000388,
+            "inside_court": false
+          }
         },
         {
           "time": 39.5,
@@ -3132,7 +3512,12 @@
           "position": [
             0.838542,
             0.882407
-          ]
+          ],
+          "court_position": {
+            "x": 0.840992,
+            "y": 1.0,
+            "inside_court": true
+          }
         },
         {
           "time": 40.0,
@@ -3149,7 +3534,12 @@
           "position": [
             0.779427,
             0.860185
-          ]
+          ],
+          "court_position": {
+            "x": 0.791642,
+            "y": 0.990371,
+            "inside_court": true
+          }
         },
         {
           "time": 40.5,
@@ -3166,7 +3556,12 @@
           "position": [
             0.677604,
             0.890741
-          ]
+          ],
+          "court_position": {
+            "x": 0.679331,
+            "y": 1.003456,
+            "inside_court": false
+          }
         },
         {
           "time": 41.0,
@@ -3183,7 +3578,12 @@
           "position": [
             0.583594,
             0.951852
-          ]
+          ],
+          "court_position": {
+            "x": 0.58028,
+            "y": 1.026518,
+            "inside_court": false
+          }
         },
         {
           "time": 42.5,
@@ -3200,7 +3600,12 @@
           "position": [
             0.442969,
             0.922222
-          ]
+          ],
+          "court_position": {
+            "x": 0.451596,
+            "y": 1.01581,
+            "inside_court": false
+          }
         },
         {
           "time": 43.0,
@@ -3217,7 +3622,12 @@
           "position": [
             0.420312,
             0.962037
-          ]
+          ],
+          "court_position": {
+            "x": 0.433854,
+            "y": 1.030011,
+            "inside_court": false
+          }
         },
         {
           "time": 46.5,
@@ -3234,7 +3644,12 @@
           "position": [
             0.170833,
             0.911111
-          ]
+          ],
+          "court_position": {
+            "x": 0.191711,
+            "y": 1.011571,
+            "inside_court": false
+          }
         },
         {
           "time": 47.0,
@@ -3251,7 +3666,12 @@
           "position": [
             0.166927,
             0.917593
-          ]
+          ],
+          "court_position": {
+            "x": 0.190727,
+            "y": 1.01406,
+            "inside_court": false
+          }
         },
         {
           "time": 47.5,
@@ -3268,7 +3688,12 @@
           "position": [
             0.166406,
             0.912963
-          ]
+          ],
+          "court_position": {
+            "x": 0.188283,
+            "y": 1.012287,
+            "inside_court": false
+          }
         },
         {
           "time": 48.0,
@@ -3285,7 +3710,12 @@
           "position": [
             0.16849,
             0.911111
-          ]
+          ],
+          "court_position": {
+            "x": 0.18948,
+            "y": 1.011571,
+            "inside_court": false
+          }
         },
         {
           "time": 48.5,
@@ -3302,7 +3732,12 @@
           "position": [
             0.175,
             0.887037
-          ]
+          ],
+          "court_position": {
+            "x": 0.185342,
+            "y": 1.00193,
+            "inside_court": false
+          }
         },
         {
           "time": 49.0,
@@ -3319,7 +3754,12 @@
           "position": [
             0.239063,
             0.862963
-          ]
+          ],
+          "court_position": {
+            "x": 0.239585,
+            "y": 0.991609,
+            "inside_court": true
+          }
         },
         {
           "time": 49.5,
@@ -3336,7 +3776,12 @@
           "position": [
             0.285677,
             0.800926
-          ]
+          ],
+          "court_position": {
+            "x": 0.265906,
+            "y": 0.961325,
+            "inside_court": true
+          }
         },
         {
           "time": 50.0,
@@ -3353,7 +3798,12 @@
           "position": [
             0.333854,
             0.782407
-          ]
+          ],
+          "court_position": {
+            "x": 0.314411,
+            "y": 0.951076,
+            "inside_court": true
+          }
         },
         {
           "time": 50.5,
@@ -3370,7 +3820,12 @@
           "position": [
             0.350781,
             0.799074
-          ]
+          ],
+          "court_position": {
+            "x": 0.338425,
+            "y": 0.960328,
+            "inside_court": true
+          }
         },
         {
           "time": 51.0,
@@ -3387,7 +3842,12 @@
           "position": [
             0.35599,
             0.862963
-          ]
+          ],
+          "court_position": {
+            "x": 0.358785,
+            "y": 0.991609,
+            "inside_court": true
+          }
         },
         {
           "time": 51.5,
@@ -3404,7 +3864,12 @@
           "position": [
             0.360156,
             0.856481
-          ]
+          ],
+          "court_position": {
+            "x": 0.361726,
+            "y": 0.988704,
+            "inside_court": true
+          }
         },
         {
           "time": 52.0,
@@ -3421,7 +3886,12 @@
           "position": [
             0.407292,
             0.790741
-          ]
+          ],
+          "court_position": {
+            "x": 0.400651,
+            "y": 0.955765,
+            "inside_court": true
+          }
         },
         {
           "time": 52.5,
@@ -3438,7 +3908,12 @@
           "position": [
             0.438542,
             0.757407
-          ]
+          ],
+          "court_position": {
+            "x": 0.432635,
+            "y": 0.936198,
+            "inside_court": true
+          }
         },
         {
           "time": 53.0,
@@ -3455,7 +3930,12 @@
           "position": [
             0.470052,
             0.734259
-          ]
+          ],
+          "court_position": {
+            "x": 0.46943,
+            "y": 0.921225,
+            "inside_court": true
+          }
         },
         {
           "time": 53.5,
@@ -3472,7 +3952,12 @@
           "position": [
             0.48724,
             0.723148
-          ]
+          ],
+          "court_position": {
+            "x": 0.49085,
+            "y": 0.913585,
+            "inside_court": true
+          }
         },
         {
           "time": 54.0,
@@ -3489,7 +3974,12 @@
           "position": [
             0.49349,
             0.72963
-          ]
+          ],
+          "court_position": {
+            "x": 0.498867,
+            "y": 0.91808,
+            "inside_court": true
+          }
         },
         {
           "time": 54.5,
@@ -3506,7 +3996,12 @@
           "position": [
             0.473958,
             0.775
-          ]
+          ],
+          "court_position": {
+            "x": 0.476048,
+            "y": 0.946798,
+            "inside_court": true
+          }
         },
         {
           "time": 55.0,
@@ -3523,7 +4018,12 @@
           "position": [
             0.483073,
             0.774074
-          ]
+          ],
+          "court_position": {
+            "x": 0.486694,
+            "y": 0.946256,
+            "inside_court": true
+          }
         },
         {
           "time": 55.5,
@@ -3540,7 +4040,12 @@
           "position": [
             0.55,
             0.687963
-          ]
+          ],
+          "court_position": {
+            "x": 0.576279,
+            "y": 0.887188,
+            "inside_court": true
+          }
         },
         {
           "time": 56.0,
@@ -3557,7 +4062,12 @@
           "position": [
             0.618229,
             0.623148
-          ]
+          ],
+          "court_position": {
+            "x": 0.694714,
+            "y": 0.82759,
+            "inside_court": true
+          }
         }
       ],
       "player_2": [
@@ -3576,7 +4086,12 @@
           "position": [
             0.543229,
             0.35463
-          ]
+          ],
+          "court_position": {
+            "x": 0.696063,
+            "y": 0.109762,
+            "inside_court": true
+          }
         },
         {
           "time": 30.5,
@@ -3593,7 +4108,12 @@
           "position": [
             0.545833,
             0.353704
-          ]
+          ],
+          "court_position": {
+            "x": 0.707542,
+            "y": 0.10345,
+            "inside_court": true
+          }
         },
         {
           "time": 31.0,
@@ -3610,7 +4130,12 @@
           "position": [
             0.542969,
             0.350926
-          ]
+          ],
+          "court_position": {
+            "x": 0.699264,
+            "y": 0.084103,
+            "inside_court": true
+          }
         },
         {
           "time": 32.0,
@@ -3627,7 +4152,12 @@
           "position": [
             0.53151,
             0.34537
-          ]
+          ],
+          "court_position": {
+            "x": 0.657761,
+            "y": 0.04346,
+            "inside_court": true
+          }
         },
         {
           "time": 35.0,
@@ -3644,7 +4174,12 @@
           "position": [
             0.504167,
             0.339815
-          ]
+          ],
+          "court_position": {
+            "x": 0.544219,
+            "y": 2e-06,
+            "inside_court": true
+          }
         },
         {
           "time": 40.5,
@@ -3661,7 +4196,12 @@
           "position": [
             0.510156,
             0.336111
-          ]
+          ],
+          "court_position": {
+            "x": 0.571976,
+            "y": -0.030693,
+            "inside_court": false
+          }
         },
         {
           "time": 42.5,
@@ -3678,7 +4218,12 @@
           "position": [
             0.523177,
             0.340741
-          ]
+          ],
+          "court_position": {
+            "x": 0.626249,
+            "y": 0.007454,
+            "inside_court": true
+          }
         },
         {
           "time": 51.0,
@@ -3695,7 +4240,12 @@
           "position": [
             0.542708,
             0.346296
-          ]
+          ],
+          "court_position": {
+            "x": 0.703734,
+            "y": 0.050422,
+            "inside_court": true
+          }
         },
         {
           "time": 51.5,
@@ -3712,7 +4262,12 @@
           "position": [
             0.531771,
             0.340741
-          ]
+          ],
+          "court_position": {
+            "x": 0.663449,
+            "y": 0.007454,
+            "inside_court": true
+          }
         },
         {
           "time": 52.5,
@@ -3729,7 +4284,12 @@
           "position": [
             0.504167,
             0.334259
-          ]
+          ],
+          "court_position": {
+            "x": 0.545834,
+            "y": -0.046593,
+            "inside_court": false
+          }
         },
         {
           "time": 53.0,
@@ -3746,7 +4306,12 @@
           "position": [
             0.492708,
             0.338889
-          ]
+          ],
+          "court_position": {
+            "x": 0.494301,
+            "y": -0.007538,
+            "inside_court": false
+          }
         },
         {
           "time": 56.0,
@@ -3763,7 +4328,12 @@
           "position": [
             0.508854,
             0.336111
-          ]
+          ],
+          "court_position": {
+            "x": 0.566173,
+            "y": -0.030693,
+            "inside_court": false
+          }
         },
         {
           "time": 56.5,
@@ -3780,7 +4350,12 @@
           "position": [
             0.651563,
             0.560185
-          ]
+          ],
+          "court_position": {
+            "x": 0.788096,
+            "y": 0.750245,
+            "inside_court": true
+          }
         },
         {
           "time": 57.0,
@@ -3797,7 +4372,12 @@
           "position": [
             0.672396,
             0.506481
-          ]
+          ],
+          "court_position": {
+            "x": 0.879995,
+            "y": 0.660708,
+            "inside_court": true
+          }
         },
         {
           "time": 57.5,
@@ -3814,7 +4394,12 @@
           "position": [
             0.678906,
             0.484259
-          ]
+          ],
+          "court_position": {
+            "x": 0.922678,
+            "y": 0.614417,
+            "inside_court": true
+          }
         },
         {
           "time": 58.0,
@@ -3831,7 +4416,12 @@
           "position": [
             0.658333,
             0.484259
-          ]
+          ],
+          "court_position": {
+            "x": 0.875612,
+            "y": 0.614417,
+            "inside_court": true
+          }
         },
         {
           "time": 58.5,
@@ -3848,7 +4438,12 @@
           "position": [
             0.626042,
             0.505556
-          ]
+          ],
+          "court_position": {
+            "x": 0.781964,
+            "y": 0.658907,
+            "inside_court": true
+          }
         },
         {
           "time": 59.0,
@@ -3865,7 +4460,12 @@
           "position": [
             0.608594,
             0.522222
-          ]
+          ],
+          "court_position": {
+            "x": 0.732715,
+            "y": 0.689862,
+            "inside_court": true
+          }
         },
         {
           "time": 59.5,
@@ -3882,7 +4482,12 @@
           "position": [
             0.596094,
             0.536111
-          ]
+          ],
+          "court_position": {
+            "x": 0.699181,
+            "y": 0.713446,
+            "inside_court": true
+          }
         }
       ]
     },
@@ -5754,7 +6359,12 @@
           "position": [
             0.75026,
             0.894444
-          ]
+          ],
+          "court_position": {
+            "x": 0.749203,
+            "y": 1.004965,
+            "inside_court": false
+          }
         },
         {
           "time": 61.0,
@@ -5771,7 +6381,12 @@
           "position": [
             0.763021,
             0.877778
-          ]
+          ],
+          "court_position": {
+            "x": 0.767903,
+            "y": 0.998045,
+            "inside_court": true
+          }
         },
         {
           "time": 61.5,
@@ -5788,7 +6403,12 @@
           "position": [
             0.739844,
             0.878704
-          ]
+          ],
+          "court_position": {
+            "x": 0.744452,
+            "y": 0.998438,
+            "inside_court": true
+          }
         },
         {
           "time": 62.0,
@@ -5805,7 +6425,12 @@
           "position": [
             0.726302,
             0.87963
-          ]
+          ],
+          "court_position": {
+            "x": 0.730651,
+            "y": 0.99883,
+            "inside_court": true
+          }
         },
         {
           "time": 62.5,
@@ -5822,7 +6447,12 @@
           "position": [
             0.738542,
             0.87963
-          ]
+          ],
+          "court_position": {
+            "x": 0.742832,
+            "y": 0.99883,
+            "inside_court": true
+          }
         },
         {
           "time": 63.0,
@@ -5839,7 +6469,12 @@
           "position": [
             0.729688,
             0.880556
-          ]
+          ],
+          "court_position": {
+            "x": 0.733711,
+            "y": 0.999221,
+            "inside_court": true
+          }
         },
         {
           "time": 63.5,
@@ -5856,7 +6491,12 @@
           "position": [
             0.722396,
             0.882407
-          ]
+          ],
+          "court_position": {
+            "x": 0.725865,
+            "y": 1.0,
+            "inside_court": true
+          }
         },
         {
           "time": 64.0,
@@ -5873,7 +6513,12 @@
           "position": [
             0.721615,
             0.882407
-          ]
+          ],
+          "court_position": {
+            "x": 0.725091,
+            "y": 1.0,
+            "inside_court": true
+          }
         },
         {
           "time": 64.5,
@@ -5890,7 +6535,12 @@
           "position": [
             0.742969,
             0.834259
-          ]
+          ],
+          "court_position": {
+            "x": 0.764425,
+            "y": 0.97831,
+            "inside_court": true
+          }
         },
         {
           "time": 65.0,
@@ -5907,7 +6557,12 @@
           "position": [
             0.81875,
             0.833333
-          ]
+          ],
+          "court_position": {
+            "x": 0.845558,
+            "y": 0.977862,
+            "inside_court": true
+          }
         },
         {
           "time": 65.5,
@@ -5924,7 +6579,12 @@
           "position": [
             0.940365,
             0.830556
-          ]
+          ],
+          "court_position": {
+            "x": 0.977189,
+            "y": 0.976509,
+            "inside_court": true
+          }
         },
         {
           "time": 66.0,
@@ -5941,7 +6601,12 @@
           "position": [
             0.953125,
             0.859259
-          ]
+          ],
+          "court_position": {
+            "x": 0.97008,
+            "y": 0.989956,
+            "inside_court": true
+          }
         },
         {
           "time": 66.5,
@@ -5958,7 +6623,12 @@
           "position": [
             0.889844,
             0.887963
-          ]
+          ],
+          "court_position": {
+            "x": 0.888764,
+            "y": 1.002313,
+            "inside_court": false
+          }
         },
         {
           "time": 67.0,
@@ -5975,7 +6645,12 @@
           "position": [
             0.774479,
             0.923148
-          ]
+          ],
+          "court_position": {
+            "x": 0.762244,
+            "y": 1.016158,
+            "inside_court": false
+          }
         },
         {
           "time": 67.5,
@@ -5992,7 +6667,12 @@
           "position": [
             0.63099,
             0.944444
-          ]
+          ],
+          "court_position": {
+            "x": 0.624232,
+            "y": 1.023919,
+            "inside_court": false
+          }
         },
         {
           "time": 75.0,
@@ -6009,7 +6689,12 @@
           "position": [
             0.308333,
             0.918519
-          ]
+          ],
+          "court_position": {
+            "x": 0.324426,
+            "y": 1.014412,
+            "inside_court": false
+          }
         },
         {
           "time": 75.5,
@@ -6026,7 +6711,12 @@
           "position": [
             0.325521,
             0.924074
-          ]
+          ],
+          "court_position": {
+            "x": 0.341815,
+            "y": 1.016504,
+            "inside_court": false
+          }
         },
         {
           "time": 76.0,
@@ -6043,7 +6733,12 @@
           "position": [
             0.329948,
             0.923148
-          ]
+          ],
+          "court_position": {
+            "x": 0.345767,
+            "y": 1.016158,
+            "inside_court": false
+          }
         },
         {
           "time": 76.5,
@@ -6060,7 +6755,12 @@
           "position": [
             0.322656,
             0.92037
-          ]
+          ],
+          "court_position": {
+            "x": 0.338333,
+            "y": 1.015113,
+            "inside_court": false
+          }
         },
         {
           "time": 77.0,
@@ -6077,7 +6777,12 @@
           "position": [
             0.336198,
             0.927778
-          ]
+          ],
+          "court_position": {
+            "x": 0.352536,
+            "y": 1.017883,
+            "inside_court": false
+          }
         },
         {
           "time": 77.5,
@@ -6094,7 +6799,12 @@
           "position": [
             0.353646,
             0.926852
-          ]
+          ],
+          "court_position": {
+            "x": 0.36862,
+            "y": 1.017539,
+            "inside_court": false
+          }
         },
         {
           "time": 78.0,
@@ -6111,7 +6821,12 @@
           "position": [
             0.348958,
             0.925
-          ]
+          ],
+          "court_position": {
+            "x": 0.363914,
+            "y": 1.01685,
+            "inside_court": false
+          }
         },
         {
           "time": 78.5,
@@ -6128,7 +6843,12 @@
           "position": [
             0.351562,
             0.926852
-          ]
+          ],
+          "court_position": {
+            "x": 0.366678,
+            "y": 1.017539,
+            "inside_court": false
+          }
         },
         {
           "time": 79.0,
@@ -6145,7 +6865,12 @@
           "position": [
             0.351562,
             0.92963
-          ]
+          ],
+          "court_position": {
+            "x": 0.367169,
+            "y": 1.018567,
+            "inside_court": false
+          }
         },
         {
           "time": 79.5,
@@ -6162,7 +6887,12 @@
           "position": [
             0.350781,
             0.926852
-          ]
+          ],
+          "court_position": {
+            "x": 0.365949,
+            "y": 1.017539,
+            "inside_court": false
+          }
         },
         {
           "time": 80.0,
@@ -6179,7 +6909,12 @@
           "position": [
             0.339844,
             0.939815
-          ]
+          ],
+          "court_position": {
+            "x": 0.358203,
+            "y": 1.022269,
+            "inside_court": false
+          }
         },
         {
           "time": 80.5,
@@ -6196,7 +6931,12 @@
           "position": [
             0.317708,
             0.933333
-          ]
+          ],
+          "court_position": {
+            "x": 0.33653,
+            "y": 1.019924,
+            "inside_court": false
+          }
         },
         {
           "time": 81.0,
@@ -6213,7 +6953,12 @@
           "position": [
             0.323437,
             0.944444
-          ]
+          ],
+          "court_position": {
+            "x": 0.344114,
+            "y": 1.023919,
+            "inside_court": false
+          }
         },
         {
           "time": 81.5,
@@ -6230,7 +6975,12 @@
           "position": [
             0.339583,
             0.937037
-          ]
+          ],
+          "court_position": {
+            "x": 0.357445,
+            "y": 1.021269,
+            "inside_court": false
+          }
         },
         {
           "time": 82.0,
@@ -6247,7 +6997,12 @@
           "position": [
             0.351042,
             0.87963
-          ]
+          ],
+          "court_position": {
+            "x": 0.357208,
+            "y": 0.99883,
+            "inside_court": true
+          }
         },
         {
           "time": 82.5,
@@ -6264,7 +7019,12 @@
           "position": [
             0.333594,
             0.884259
-          ]
+          ],
+          "court_position": {
+            "x": 0.340893,
+            "y": 1.000775,
+            "inside_court": false
+          }
         },
         {
           "time": 83.0,
@@ -6281,7 +7041,12 @@
           "position": [
             0.325521,
             0.84537
-          ]
+          ],
+          "court_position": {
+            "x": 0.323187,
+            "y": 0.983594,
+            "inside_court": true
+          }
         },
         {
           "time": 83.5,
@@ -6298,7 +7063,12 @@
           "position": [
             0.338281,
             0.849074
-          ]
+          ],
+          "court_position": {
+            "x": 0.33744,
+            "y": 0.985317,
+            "inside_court": true
+          }
         },
         {
           "time": 84.0,
@@ -6315,7 +7085,12 @@
           "position": [
             0.379948,
             0.832407
-          ]
+          ],
+          "court_position": {
+            "x": 0.377771,
+            "y": 0.977412,
+            "inside_court": true
+          }
         },
         {
           "time": 84.5,
@@ -6332,7 +7107,12 @@
           "position": [
             0.396615,
             0.79537
-          ]
+          ],
+          "court_position": {
+            "x": 0.389313,
+            "y": 0.958315,
+            "inside_court": true
+          }
         },
         {
           "time": 85.0,
@@ -6349,7 +7129,12 @@
           "position": [
             0.376823,
             0.757407
-          ]
+          ],
+          "court_position": {
+            "x": 0.358217,
+            "y": 0.936198,
+            "inside_court": true
+          }
         },
         {
           "time": 85.5,
@@ -6366,7 +7151,12 @@
           "position": [
             0.389062,
             0.761111
-          ]
+          ],
+          "court_position": {
+            "x": 0.373779,
+            "y": 0.938483,
+            "inside_court": true
+          }
         },
         {
           "time": 86.0,
@@ -6383,7 +7173,12 @@
           "position": [
             0.402865,
             0.778704
-          ]
+          ],
+          "court_position": {
+            "x": 0.393519,
+            "y": 0.948951,
+            "inside_court": true
+          }
         },
         {
           "time": 88.5,
@@ -6400,7 +7195,12 @@
           "position": [
             0.860156,
             0.888889
-          ]
+          ],
+          "court_position": {
+            "x": 0.859097,
+            "y": 1.002695,
+            "inside_court": false
+          }
         },
         {
           "time": 89.0,
@@ -6417,7 +7217,12 @@
           "position": [
             0.842448,
             0.883333
-          ]
+          ],
+          "court_position": {
+            "x": 0.844409,
+            "y": 1.000388,
+            "inside_court": false
+          }
         },
         {
           "time": 89.5,
@@ -6434,7 +7239,12 @@
           "position": [
             0.819531,
             0.878704
-          ]
+          ],
+          "court_position": {
+            "x": 0.823858,
+            "y": 0.998438,
+            "inside_court": true
+          }
         }
       ],
       "player_2": [
@@ -6453,7 +7263,12 @@
           "position": [
             0.577865,
             0.538889
-          ]
+          ],
+          "court_position": {
+            "x": 0.662277,
+            "y": 0.717944,
+            "inside_court": true
+          }
         },
         {
           "time": 88.0,
@@ -6470,7 +7285,12 @@
           "position": [
             0.466146,
             0.333333
-          ]
+          ],
+          "court_position": {
+            "x": 0.37359,
+            "y": -0.054687,
+            "inside_court": false
+          }
         }
       ]
     },
@@ -7912,7 +8732,12 @@
           "position": [
             0.827604,
             0.87963
-          ]
+          ],
+          "court_position": {
+            "x": 0.831463,
+            "y": 0.99883,
+            "inside_court": true
+          }
         },
         {
           "time": 90.5,
@@ -7929,7 +8754,12 @@
           "position": [
             0.828906,
             0.887037
-          ]
+          ],
+          "court_position": {
+            "x": 0.829266,
+            "y": 1.00193,
+            "inside_court": false
+          }
         },
         {
           "time": 91.0,
@@ -7946,7 +8776,12 @@
           "position": [
             0.788281,
             0.881481
-          ]
+          ],
+          "court_position": {
+            "x": 0.791557,
+            "y": 0.999611,
+            "inside_court": true
+          }
         },
         {
           "time": 91.5,
@@ -7963,7 +8798,12 @@
           "position": [
             0.748698,
             0.886111
-          ]
+          ],
+          "court_position": {
+            "x": 0.750611,
+            "y": 1.001546,
+            "inside_court": false
+          }
         },
         {
           "time": 92.0,
@@ -7980,7 +8820,12 @@
           "position": [
             0.699479,
             0.885185
-          ]
+          ],
+          "court_position": {
+            "x": 0.702346,
+            "y": 1.001161,
+            "inside_court": false
+          }
         },
         {
           "time": 92.5,
@@ -7997,7 +8842,12 @@
           "position": [
             0.623437,
             0.881481
-          ]
+          ],
+          "court_position": {
+            "x": 0.627944,
+            "y": 0.999611,
+            "inside_court": true
+          }
         },
         {
           "time": 93.0,
@@ -8014,7 +8864,12 @@
           "position": [
             0.56276,
             0.761111
-          ]
+          ],
+          "court_position": {
+            "x": 0.581883,
+            "y": 0.938483,
+            "inside_court": true
+          }
         },
         {
           "time": 93.5,
@@ -8031,7 +8886,12 @@
           "position": [
             0.521354,
             0.689815
-          ]
+          ],
+          "court_position": {
+            "x": 0.536881,
+            "y": 0.888668,
+            "inside_court": true
+          }
         },
         {
           "time": 94.0,
@@ -8048,7 +8908,12 @@
           "position": [
             0.502083,
             0.646296
-          ]
+          ],
+          "court_position": {
+            "x": 0.511613,
+            "y": 0.850776,
+            "inside_court": true
+          }
         },
         {
           "time": 94.5,
@@ -8065,7 +8930,12 @@
           "position": [
             0.49375,
             0.642593
-          ]
+          ],
+          "court_position": {
+            "x": 0.499171,
+            "y": 0.847223,
+            "inside_court": true
+          }
         },
         {
           "time": 95.0,
@@ -8082,7 +8952,12 @@
           "position": [
             0.483073,
             0.637037
-          ]
+          ],
+          "court_position": {
+            "x": 0.482905,
+            "y": 0.841784,
+            "inside_court": true
+          }
         },
         {
           "time": 95.5,
@@ -8099,7 +8974,12 @@
           "position": [
             0.455469,
             0.631481
-          ]
+          ],
+          "court_position": {
+            "x": 0.440139,
+            "y": 0.836211,
+            "inside_court": true
+          }
         },
         {
           "time": 96.5,
@@ -8116,7 +8996,12 @@
           "position": [
             0.903646,
             0.832407
-          ]
+          ],
+          "court_position": {
+            "x": 0.936648,
+            "y": 0.977412,
+            "inside_court": true
+          }
         },
         {
           "time": 98.5,
@@ -8133,7 +9018,12 @@
           "position": [
             0.849219,
             0.881481
-          ]
+          ],
+          "court_position": {
+            "x": 0.85204,
+            "y": 0.999611,
+            "inside_court": true
+          }
         },
         {
           "time": 99.0,
@@ -8150,7 +9040,12 @@
           "position": [
             0.828906,
             0.860185
-          ]
+          ],
+          "court_position": {
+            "x": 0.842288,
+            "y": 0.990371,
+            "inside_court": true
+          }
         },
         {
           "time": 99.5,
@@ -8167,7 +9062,12 @@
           "position": [
             0.829688,
             0.907407
-          ]
+          ],
+          "court_position": {
+            "x": 0.820777,
+            "y": 1.010129,
+            "inside_court": false
+          }
         },
         {
           "time": 101.5,
@@ -8184,7 +9084,12 @@
           "position": [
             0.628906,
             0.887037
-          ]
+          ],
+          "court_position": {
+            "x": 0.632319,
+            "y": 1.00193,
+            "inside_court": false
+          }
         },
         {
           "time": 102.0,
@@ -8201,7 +9106,12 @@
           "position": [
             0.564583,
             0.761111
-          ]
+          ],
+          "court_position": {
+            "x": 0.584067,
+            "y": 0.938483,
+            "inside_court": true
+          }
         },
         {
           "time": 102.5,
@@ -8218,7 +9128,12 @@
           "position": [
             0.559375,
             0.709259
-          ]
+          ],
+          "court_position": {
+            "x": 0.585516,
+            "y": 0.903584,
+            "inside_court": true
+          }
         },
         {
           "time": 103.0,
@@ -8235,7 +9150,12 @@
           "position": [
             0.549219,
             0.723148
-          ]
+          ],
+          "court_position": {
+            "x": 0.570294,
+            "y": 0.913585,
+            "inside_court": true
+          }
         },
         {
           "time": 103.5,
@@ -8252,7 +9172,12 @@
           "position": [
             0.540885,
             0.802778
-          ]
+          ],
+          "court_position": {
+            "x": 0.551906,
+            "y": 0.962316,
+            "inside_court": true
+          }
         },
         {
           "time": 104.0,
@@ -8269,7 +9194,12 @@
           "position": [
             0.516406,
             0.885185
-          ]
+          ],
+          "court_position": {
+            "x": 0.521595,
+            "y": 1.001161,
+            "inside_court": false
+          }
         },
         {
           "time": 104.5,
@@ -8286,7 +9216,12 @@
           "position": [
             0.498437,
             0.915741
-          ]
+          ],
+          "court_position": {
+            "x": 0.503666,
+            "y": 1.013353,
+            "inside_court": false
+          }
         },
         {
           "time": 110.5,
@@ -8303,7 +9238,12 @@
           "position": [
             0.417969,
             0.928704
-          ]
+          ],
+          "court_position": {
+            "x": 0.42876,
+            "y": 1.018225,
+            "inside_court": false
+          }
         },
         {
           "time": 111.0,
@@ -8320,7 +9260,12 @@
           "position": [
             0.434115,
             0.909259
-          ]
+          ],
+          "court_position": {
+            "x": 0.442294,
+            "y": 1.010852,
+            "inside_court": false
+          }
         },
         {
           "time": 111.5,
@@ -8337,7 +9282,12 @@
           "position": [
             0.457813,
             0.883333
-          ]
+          ],
+          "court_position": {
+            "x": 0.463651,
+            "y": 1.000388,
+            "inside_court": false
+          }
         },
         {
           "time": 112.0,
@@ -8354,7 +9304,12 @@
           "position": [
             0.483333,
             0.891667
-          ]
+          ],
+          "court_position": {
+            "x": 0.489036,
+            "y": 1.003835,
+            "inside_court": false
+          }
         },
         {
           "time": 114.5,
@@ -8371,7 +9326,12 @@
           "position": [
             0.377344,
             0.877778
-          ]
+          ],
+          "court_position": {
+            "x": 0.383075,
+            "y": 0.998045,
+            "inside_court": true
+          }
         },
         {
           "time": 115.0,
@@ -8388,7 +9348,12 @@
           "position": [
             0.38776,
             0.901852
-          ]
+          ],
+          "court_position": {
+            "x": 0.396998,
+            "y": 1.007939,
+            "inside_court": false
+          }
         }
       ],
       "player_2": [
@@ -8407,7 +9372,12 @@
           "position": [
             0.471354,
             0.330556
-          ]
+          ],
+          "court_position": {
+            "x": 0.39534,
+            "y": -0.079555,
+            "inside_court": false
+          }
         },
         {
           "time": 93.5,
@@ -8424,7 +9394,12 @@
           "position": [
             0.483854,
             0.332407
-          ]
+          ],
+          "court_position": {
+            "x": 0.453667,
+            "y": -0.062878,
+            "inside_court": false
+          }
         },
         {
           "time": 95.0,
@@ -8441,7 +9416,12 @@
           "position": [
             0.490104,
             0.339815
-          ]
+          ],
+          "court_position": {
+            "x": 0.482993,
+            "y": 2e-06,
+            "inside_court": true
+          }
         },
         {
           "time": 95.5,
@@ -8458,7 +9438,12 @@
           "position": [
             0.484375,
             0.337963
-          ]
+          ],
+          "court_position": {
+            "x": 0.457566,
+            "y": -0.015166,
+            "inside_court": false
+          }
         },
         {
           "time": 113.0,
@@ -8475,7 +9460,12 @@
           "position": [
             0.546094,
             0.34537
-          ]
+          ],
+          "court_position": {
+            "x": 0.719125,
+            "y": 0.04346,
+            "inside_court": true
+          }
         }
       ]
     },
@@ -10607,7 +11597,12 @@
           "position": [
             0.452344,
             0.940741
-          ]
+          ],
+          "court_position": {
+            "x": 0.461338,
+            "y": 1.0226,
+            "inside_court": false
+          }
         },
         {
           "time": 121.0,
@@ -10624,7 +11619,12 @@
           "position": [
             0.430469,
             0.871296
-          ]
+          ],
+          "court_position": {
+            "x": 0.43549,
+            "y": 0.995263,
+            "inside_court": true
+          }
         },
         {
           "time": 121.5,
@@ -10641,7 +11641,12 @@
           "position": [
             0.432292,
             0.832407
-          ]
+          ],
+          "court_position": {
+            "x": 0.433631,
+            "y": 0.977412,
+            "inside_court": true
+          }
         },
         {
           "time": 122.0,
@@ -10658,7 +11663,12 @@
           "position": [
             0.455729,
             0.840741
-          ]
+          ],
+          "court_position": {
+            "x": 0.459156,
+            "y": 0.981415,
+            "inside_court": true
+          }
         },
         {
           "time": 122.5,
@@ -10675,7 +11685,12 @@
           "position": [
             0.46849,
             0.848148
-          ]
+          ],
+          "court_position": {
+            "x": 0.472898,
+            "y": 0.984888,
+            "inside_court": true
+          }
         },
         {
           "time": 123.0,
@@ -10692,7 +11707,12 @@
           "position": [
             0.495573,
             0.840741
-          ]
+          ],
+          "court_position": {
+            "x": 0.50114,
+            "y": 0.981415,
+            "inside_court": true
+          }
         },
         {
           "time": 125.5,
@@ -10709,7 +11729,12 @@
           "position": [
             0.595833,
             0.932407
-          ]
+          ],
+          "court_position": {
+            "x": 0.593697,
+            "y": 1.019586,
+            "inside_court": false
+          }
         },
         {
           "time": 126.0,
@@ -10726,7 +11751,12 @@
           "position": [
             0.591146,
             0.890741
-          ]
+          ],
+          "court_position": {
+            "x": 0.594636,
+            "y": 1.003456,
+            "inside_court": false
+          }
         },
         {
           "time": 126.5,
@@ -10743,7 +11773,12 @@
           "position": [
             0.589844,
             0.886111
-          ]
+          ],
+          "court_position": {
+            "x": 0.593977,
+            "y": 1.001546,
+            "inside_court": false
+          }
         },
         {
           "time": 127.0,
@@ -10760,7 +11795,12 @@
           "position": [
             0.561198,
             0.862037
-          ]
+          ],
+          "court_position": {
+            "x": 0.568075,
+            "y": 0.991197,
+            "inside_court": true
+          }
         },
         {
           "time": 127.5,
@@ -10777,7 +11817,12 @@
           "position": [
             0.523698,
             0.887037
-          ]
+          ],
+          "court_position": {
+            "x": 0.528717,
+            "y": 1.00193,
+            "inside_court": false
+          }
         },
         {
           "time": 128.0,
@@ -10794,7 +11839,12 @@
           "position": [
             0.492448,
             0.887037
-          ]
+          ],
+          "court_position": {
+            "x": 0.497944,
+            "y": 1.00193,
+            "inside_court": false
+          }
         },
         {
           "time": 128.5,
@@ -10811,7 +11861,12 @@
           "position": [
             0.528646,
             0.885185
-          ]
+          ],
+          "court_position": {
+            "x": 0.53368,
+            "y": 1.001161,
+            "inside_court": false
+          }
         },
         {
           "time": 129.0,
@@ -10828,7 +11883,12 @@
           "position": [
             0.554688,
             0.887037
-          ]
+          ],
+          "court_position": {
+            "x": 0.559234,
+            "y": 1.00193,
+            "inside_court": false
+          }
         },
         {
           "time": 129.5,
@@ -10845,7 +11905,12 @@
           "position": [
             0.526302,
             0.887037
-          ]
+          ],
+          "court_position": {
+            "x": 0.531281,
+            "y": 1.00193,
+            "inside_court": false
+          }
         },
         {
           "time": 130.0,
@@ -10862,7 +11927,12 @@
           "position": [
             0.532813,
             0.878704
-          ]
+          ],
+          "court_position": {
+            "x": 0.53815,
+            "y": 0.998438,
+            "inside_court": true
+          }
         },
         {
           "time": 130.5,
@@ -10879,7 +11949,12 @@
           "position": [
             0.478125,
             0.880556
-          ]
+          ],
+          "court_position": {
+            "x": 0.483697,
+            "y": 0.999221,
+            "inside_court": true
+          }
         },
         {
           "time": 131.0,
@@ -10896,7 +11971,12 @@
           "position": [
             0.442188,
             0.838889
-          ]
+          ],
+          "court_position": {
+            "x": 0.444734,
+            "y": 0.980534,
+            "inside_court": true
+          }
         },
         {
           "time": 131.5,
@@ -10913,7 +11993,12 @@
           "position": [
             0.361979,
             0.830556
-          ]
+          ],
+          "court_position": {
+            "x": 0.358194,
+            "y": 0.976509,
+            "inside_court": true
+          }
         },
         {
           "time": 132.0,
@@ -10930,7 +12015,12 @@
           "position": [
             0.232552,
             0.806481
-          ]
+          ],
+          "court_position": {
+            "x": 0.208936,
+            "y": 0.964281,
+            "inside_court": true
+          }
         },
         {
           "time": 132.5,
@@ -10947,7 +12037,12 @@
           "position": [
             0.109635,
             0.741667
-          ]
+          ],
+          "court_position": {
+            "x": 0.023073,
+            "y": 0.926151,
+            "inside_court": true
+          }
         },
         {
           "time": 136.5,
@@ -10964,7 +12059,12 @@
           "position": [
             0.445312,
             0.94537
-          ]
+          ],
+          "court_position": {
+            "x": 0.45517,
+            "y": 1.024246,
+            "inside_court": false
+          }
         },
         {
           "time": 137.0,
@@ -10981,7 +12081,12 @@
           "position": [
             0.454688,
             0.913889
-          ]
+          ],
+          "court_position": {
+            "x": 0.462172,
+            "y": 1.012643,
+            "inside_court": false
+          }
         },
         {
           "time": 137.5,
@@ -10998,7 +12103,12 @@
           "position": [
             0.464323,
             0.912037
-          ]
+          ],
+          "court_position": {
+            "x": 0.471242,
+            "y": 1.011929,
+            "inside_court": false
+          }
         },
         {
           "time": 138.0,
@@ -11015,7 +12125,12 @@
           "position": [
             0.457552,
             0.882407
-          ]
+          ],
+          "court_position": {
+            "x": 0.463345,
+            "y": 1.0,
+            "inside_court": true
+          }
         },
         {
           "time": 138.5,
@@ -11032,7 +12147,12 @@
           "position": [
             0.384635,
             0.884259
-          ]
+          ],
+          "court_position": {
+            "x": 0.391353,
+            "y": 1.000775,
+            "inside_court": false
+          }
         },
         {
           "time": 139.0,
@@ -11049,7 +12169,12 @@
           "position": [
             0.375,
             0.885185
-          ]
+          ],
+          "court_position": {
+            "x": 0.381982,
+            "y": 1.001161,
+            "inside_court": false
+          }
         },
         {
           "time": 139.5,
@@ -11066,7 +12191,12 @@
           "position": [
             0.401823,
             0.891667
-          ]
+          ],
+          "court_position": {
+            "x": 0.409292,
+            "y": 1.003835,
+            "inside_court": false
+          }
         },
         {
           "time": 140.0,
@@ -11083,7 +12213,12 @@
           "position": [
             0.392448,
             0.887037
-          ]
+          ],
+          "court_position": {
+            "x": 0.399471,
+            "y": 1.00193,
+            "inside_court": false
+          }
         },
         {
           "time": 143.0,
@@ -11100,7 +12235,12 @@
           "position": [
             0.296615,
             0.836111
-          ]
+          ],
+          "court_position": {
+            "x": 0.290028,
+            "y": 0.979204,
+            "inside_court": true
+          }
         },
         {
           "time": 144.5,
@@ -11117,7 +12257,12 @@
           "position": [
             0.165365,
             0.885185
-          ]
+          ],
+          "court_position": {
+            "x": 0.175005,
+            "y": 1.001161,
+            "inside_court": false
+          }
         },
         {
           "time": 150.0,
@@ -11134,7 +12279,12 @@
           "position": [
             0.415885,
             0.953704
-          ]
+          ],
+          "court_position": {
+            "x": 0.429165,
+            "y": 1.02716,
+            "inside_court": false
+          }
         },
         {
           "time": 150.5,
@@ -11151,7 +12301,12 @@
           "position": [
             0.445312,
             0.886111
-          ]
+          ],
+          "court_position": {
+            "x": 0.451465,
+            "y": 1.001546,
+            "inside_court": false
+          }
         },
         {
           "time": 151.0,
@@ -11168,7 +12323,12 @@
           "position": [
             0.488542,
             0.87963
-          ]
+          ],
+          "court_position": {
+            "x": 0.494042,
+            "y": 0.99883,
+            "inside_court": true
+          }
         },
         {
           "time": 151.5,
@@ -11185,7 +12345,12 @@
           "position": [
             0.530208,
             0.823148
-          ]
+          ],
+          "court_position": {
+            "x": 0.538683,
+            "y": 0.972844,
+            "inside_court": true
+          }
         }
       ],
       "player_2": [
@@ -11204,7 +12369,12 @@
           "position": [
             0.465104,
             0.34537
-          ]
+          ],
+          "court_position": {
+            "x": 0.378351,
+            "y": 0.04346,
+            "inside_court": true
+          }
         },
         {
           "time": 128.0,
@@ -11221,7 +12391,12 @@
           "position": [
             0.466667,
             0.346296
-          ]
+          ],
+          "court_position": {
+            "x": 0.385564,
+            "y": 0.050422,
+            "inside_court": true
+          }
         },
         {
           "time": 128.5,
@@ -11238,7 +12413,12 @@
           "position": [
             0.483594,
             0.341667
-          ]
+          ],
+          "court_position": {
+            "x": 0.455161,
+            "y": 0.014822,
+            "inside_court": true
+          }
         }
       ]
     },

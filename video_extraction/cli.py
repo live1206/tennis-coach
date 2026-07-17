@@ -4,6 +4,9 @@ import argparse
 import json
 from pathlib import Path
 
+import cv2
+
+from video_extraction.court_projection import CourtProjector, add_court_projections
 from video_extraction.vision.ball_tracking import (
     TrackNetOnnxDetector,
     observations_for_segment,
@@ -86,6 +89,19 @@ def enrich_report(
         sample_seconds=sample_seconds,
         include_sampled_detections=include_sampled_detections,
     )
+    cap = cv2.VideoCapture(str(video_path))
+    frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    cap.release()
+    projector = CourtProjector(selected_rois, frame_width, frame_height)
+    for observation in observation_data:
+        add_court_projections(
+            observation["player_trajectories"],
+            None,
+            projector,
+        )
+    if ball_observations is not None:
+        add_court_projections({}, ball_observations, projector)
     enriched = []
     for segment, motion, observation in zip(report, motion_data, observation_data):
         features = {**segment.get("features", {}), **motion}

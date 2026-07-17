@@ -66,6 +66,21 @@ The report schema is still pre-release. Its version remains `1` while the
 fields are being designed; version increments begin after the first published
 schema release.
 
+### LLM-ready statistics
+
+Generate compact deterministic statistics instead of sending raw bounding
+boxes and sampled frames to an LLM:
+
+```bash
+tennis-coach-stats reports.json --output stats.json
+```
+
+`stats.json` contains per-player movement, identity quality, side usage, and
+mean court position; compact per-segment motion and ball summaries; global data
+quality warnings; and explicit supported/unsupported analysis capabilities.
+It intentionally does not claim forehand/backhand, shot success, winners, or
+errors until those signals are implemented and validated.
+
 ### Ball annotation and tracking
 
 Create a local frame-level annotation set from footage you have the right to use:
