@@ -22,7 +22,7 @@ The intended workflow is:
 
 ## Planned extraction foundation
 
-The first implementation phase is expected to reuse Breakpoint's YOLO + OpenCV approach for local video understanding, then emit a JSON analysis file for later coaching workflows. The initial target is structured data extraction rather than direct model-driven video interpretation.
+The first implementation phase reuses the focused Breakpoint YOLO + OpenCV approach for local video understanding, then emits a JSON analysis file for later coaching workflows. The initial target is structured data extraction rather than direct model-driven video interpretation.
 
 Planned JSON signals include:
 
@@ -32,6 +32,34 @@ Planned JSON signals include:
 - player motion and positioning features
 - shot or pose labels when confidence is sufficient
 - selected rally IDs for downstream clip export
+
+## Video report enrichment
+
+Tennis Coach now includes a small Python extraction layer that takes an existing segment report with `start` and `end` timestamps and fills in more video-derived data. It intentionally does not copy Breakpoint's full audio pipeline or desktop app.
+
+```bash
+tennis-coach-extract match.mp4 full_report.json \
+  --model-path /path/to/yolox_nano.onnx \
+  --output reports.json
+```
+
+You can also run it as a module:
+
+```bash
+python -m tennis_coach.video_extraction match.mp4 full_report.json \
+  --model-path /path/to/yolox_nano.onnx \
+  --output reports.json
+```
+
+The enriched `reports.json` keeps the original segment fields and adds:
+
+- `features.player_motion_max`, `features.player_motion_var`
+- `features.near_motion_mean`, `features.far_motion_mean`, `features.motion_sample_count`
+- `players.player_1` and `players.player_2` with anonymous side, confidence, movement, and normalized mean position
+- `video_extraction.status`, `video_extraction.version`, `video_extraction.court_rois`, and `video_extraction.sample_seconds`
+- `sampled_frames` with sampled YOLO person boxes, confidence scores, and detected court side
+
+If court detection fails, each segment is preserved and marked with `video_extraction.status: "skipped_court_detection"`.
 
 ## Privacy and data routing
 
