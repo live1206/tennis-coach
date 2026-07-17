@@ -182,6 +182,8 @@ def test_yolox_sports_ball_uses_coco_class_32_score():
 
 def test_yolox_ball_detector_returns_highest_confidence_center():
     detector = YoloXBallDetector.__new__(YoloXBallDetector)
+    detector.tile_grid = 1
+    detector.tile_overlap = 0.15
     detector.detector = type(
         "FakeDetector",
         (),
@@ -200,6 +202,30 @@ def test_yolox_ball_detector_returns_highest_confidence_center():
     assert observation["y"] == 30.0
     assert observation["x_normalized"] == 0.25
     assert observation["confidence"] == 0.8
+
+
+def test_yolox_ball_tiling_maps_crop_box_to_full_frame():
+    detector = YoloXBallDetector.__new__(YoloXBallDetector)
+    detector.tile_grid = 2
+    detector.tile_overlap = 0.0
+    call_count = 0
+
+    class FakeDetector:
+        def detect(self, _frame):
+            nonlocal call_count
+            call_count += 1
+            if call_count == 4:
+                return [{"bbox": [10, 20, 30, 40], "confidence": 0.8}]
+            return []
+
+    detector.detector = FakeDetector()
+    frame = np.zeros((100, 200, 3), dtype=np.uint8)
+
+    observation = detector.detect([frame, frame, frame])
+
+    assert observation["bbox"] == [110, 70, 130, 90]
+    assert observation["x"] == 120.0
+    assert observation["y"] == 80.0
 
 
 def test_attaches_player_ids_and_builds_grouped_trajectories():
