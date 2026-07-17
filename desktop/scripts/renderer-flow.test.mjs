@@ -602,6 +602,7 @@ assert.match(pythonBridgeExecutableSource, /const settle = \(result: \{ error\?:
 assert.match(pythonBridgeExecutableSource, /child\.on\('close', \(code\) => \{[\s\S]*clearAnalysisProcess\(child\)[\s\S]*type: 'complete'[\s\S]*settle\(\{\}\)/)
 assert.match(pythonBridgeExecutableSource, /video_extraction\.cli/)
 assert.match(pythonBridgeExecutableSource, /analysis\.json/)
+assert.match(pythonBridgeExecutableSource, /'--model-path',\s*yoloxModelPath[\s\S]*'--ball-model-path',\s*yoloxModelPath/)
 assert.match(pythonBridgeExecutableSource, /const detail = stderrBuf\.trim\(\)/)
 assert.doesNotMatch(pythonBridgeExecutableSource, /stderrBuf\.trim\(\)\.split\('\\n'\)\.pop\(\)/)
 assert.match(cancelAnalysisHandlerSource, /cancelPythonAnalysis\(\)/)

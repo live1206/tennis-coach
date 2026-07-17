@@ -198,8 +198,8 @@ export function setupPythonBridge(isApprovedVideoPath: (videoPath: string) => bo
         ].join('\n'),
       }
     }
-    const ballModelPath = resolveBallModelPath(cwd)
-    if (!ballModelPath) {
+    const yoloxModelPath = resolveBallModelPath(cwd)
+    if (!yoloxModelPath) {
       return { error: getBallModelSetupHint(cwd) }
     }
     const outputDir = getOutputDir(videoPath)
@@ -219,10 +219,12 @@ export function setupPythonBridge(isApprovedVideoPath: (videoPath: string) => bo
       videoPath,
       '--pose-model-path',
       poseModelPath,
+      '--model-path',
+      yoloxModelPath,
       '--ball-detector',
       'yolox',
       '--ball-model-path',
-      ballModelPath,
+      yoloxModelPath,
       ...resolvePlayerHandednessArgs(),
       '--output',
       getAnalysisReportPath(videoPath),
