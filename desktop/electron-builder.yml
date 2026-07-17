@@ -12,6 +12,9 @@ nsis:
   oneClick: false
   allowToChangeInstallationDirectory: true
   deleteAppDataOnUninstall: false
+msi:
+  additionalLightArgs:
+    - -sval
 extraResources:
   - from: build/icon.ico
     to: icon.ico

@@ -9,6 +9,8 @@ Thumbs.db
 # Runtime and build outputs
 dist/
 build/
+dist-engine/
+build-engine/
 !desktop/build/
 !desktop/build/*
 out/
