@@ -85,7 +85,7 @@ tennis-coach-ball-annotate annotations.local/session-01/annotations.json
 
 The annotation window uses left click for a visible ball; `o` for occluded,
 `x` for absent, `h`/`b`/`n` for hit/bounce/net, `a`/`d` to navigate, and `q`
-to save and exit.
+to save and exit. Visibility actions save and advance automatically.
 
 ```bash
 tennis-coach-ball-validate annotations.local/session-01/annotations.json \
@@ -118,6 +118,13 @@ tennis-coach-ball-track match.mp4 /path/to/tracknet.onnx \
 tennis-coach-ball-evaluate annotations.local/session-01/annotations.json \
   ball_trajectory.json --tolerance-pixels 10
 ```
+
+The initial independent smoke set under `validation/baseline-30/` contains 30
+manually labeled frames sampled from a two-second 1080p60 clip. The private
+TrackNet V1 baseline detected 28/30 balls within 10 pixels: recall `0.9333`,
+F1 `0.9655`, and mean localization error `4.33 px`. All frames contain a
+visible ball, so this small set does not measure false-positive behavior and
+is not a release-quality benchmark.
 
 ### Sample output
 

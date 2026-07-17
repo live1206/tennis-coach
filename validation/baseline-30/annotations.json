@@ -1,0 +1,312 @@
+{
+  "annotation_version": 1,
+  "source_video": "DJI_20260503154223_0534_D_highlight.MP4",
+  "fps": 60.0,
+  "width": 1920,
+  "height": 1080,
+  "start_frame": 600,
+  "end_frame": 720,
+  "stride": 4,
+  "frames": [
+    {
+      "frame_index": 600,
+      "time": 10.0,
+      "visibility": "visible",
+      "x": 734,
+      "y": 733,
+      "x_normalized": 0.382292,
+      "y_normalized": 0.678704,
+      "event": null
+    },
+    {
+      "frame_index": 604,
+      "time": 10.066667,
+      "visibility": "visible",
+      "x": 744,
+      "y": 689,
+      "x_normalized": 0.3875,
+      "y_normalized": 0.637963,
+      "event": null
+    },
+    {
+      "frame_index": 608,
+      "time": 10.133333,
+      "visibility": "visible",
+      "x": 780,
+      "y": 598,
+      "x_normalized": 0.40625,
+      "y_normalized": 0.553704,
+      "event": null
+    },
+    {
+      "frame_index": 612,
+      "time": 10.2,
+      "visibility": "visible",
+      "x": 803,
+      "y": 526,
+      "x_normalized": 0.418229,
+      "y_normalized": 0.487037,
+      "event": null
+    },
+    {
+      "frame_index": 616,
+      "time": 10.266667,
+      "visibility": "visible",
+      "x": 822,
+      "y": 473,
+      "x_normalized": 0.428125,
+      "y_normalized": 0.437963,
+      "event": null
+    },
+    {
+      "frame_index": 620,
+      "time": 10.333333,
+      "visibility": "visible",
+      "x": 835,
+      "y": 436,
+      "x_normalized": 0.434896,
+      "y_normalized": 0.403704,
+      "event": null
+    },
+    {
+      "frame_index": 624,
+      "time": 10.4,
+      "visibility": "visible",
+      "x": 852,
+      "y": 408,
+      "x_normalized": 0.44375,
+      "y_normalized": 0.377778,
+      "event": null
+    },
+    {
+      "frame_index": 628,
+      "time": 10.466667,
+      "visibility": "visible",
+      "x": 860,
+      "y": 388,
+      "x_normalized": 0.447917,
+      "y_normalized": 0.359259,
+      "event": null
+    },
+    {
+      "frame_index": 632,
+      "time": 10.533333,
+      "visibility": "visible",
+      "x": 866,
+      "y": 372,
+      "x_normalized": 0.451042,
+      "y_normalized": 0.344444,
+      "event": null
+    },
+    {
+      "frame_index": 636,
+      "time": 10.6,
+      "visibility": "visible",
+      "x": 875,
+      "y": 360,
+      "x_normalized": 0.455729,
+      "y_normalized": 0.333333,
+      "event": null
+    },
+    {
+      "frame_index": 640,
+      "time": 10.666667,
+      "visibility": "visible",
+      "x": 880,
+      "y": 352,
+      "x_normalized": 0.458333,
+      "y_normalized": 0.325926,
+      "event": null
+    },
+    {
+      "frame_index": 644,
+      "time": 10.733333,
+      "visibility": "visible",
+      "x": 887,
+      "y": 348,
+      "x_normalized": 0.461979,
+      "y_normalized": 0.322222,
+      "event": null
+    },
+    {
+      "frame_index": 648,
+      "time": 10.8,
+      "visibility": "visible",
+      "x": 890,
+      "y": 350,
+      "x_normalized": 0.463542,
+      "y_normalized": 0.324074,
+      "event": null
+    },
+    {
+      "frame_index": 652,
+      "time": 10.866667,
+      "visibility": "visible",
+      "x": 892,
+      "y": 349,
+      "x_normalized": 0.464583,
+      "y_normalized": 0.323148,
+      "event": null
+    },
+    {
+      "frame_index": 656,
+      "time": 10.933333,
+      "visibility": "visible",
+      "x": 896,
+      "y": 353,
+      "x_normalized": 0.466667,
+      "y_normalized": 0.326852,
+      "event": null
+    },
+    {
+      "frame_index": 660,
+      "time": 11.0,
+      "visibility": "visible",
+      "x": 898,
+      "y": 358,
+      "x_normalized": 0.467708,
+      "y_normalized": 0.331481,
+      "event": null
+    },
+    {
+      "frame_index": 664,
+      "time": 11.066667,
+      "visibility": "visible",
+      "x": 901,
+      "y": 365,
+      "x_normalized": 0.469271,
+      "y_normalized": 0.337963,
+      "event": null
+    },
+    {
+      "frame_index": 668,
+      "time": 11.133333,
+      "visibility": "visible",
+      "x": 902,
+      "y": 374,
+      "x_normalized": 0.469792,
+      "y_normalized": 0.346296,
+      "event": null
+    },
+    {
+      "frame_index": 672,
+      "time": 11.2,
+      "visibility": "visible",
+      "x": 904,
+      "y": 379,
+      "x_normalized": 0.470833,
+      "y_normalized": 0.350926,
+      "event": null
+    },
+    {
+      "frame_index": 676,
+      "time": 11.266667,
+      "visibility": "visible",
+      "x": 906,
+      "y": 389,
+      "x_normalized": 0.471875,
+      "y_normalized": 0.360185,
+      "event": null
+    },
+    {
+      "frame_index": 680,
+      "time": 11.333333,
+      "visibility": "visible",
+      "x": 905,
+      "y": 392,
+      "x_normalized": 0.471354,
+      "y_normalized": 0.362963,
+      "event": null
+    },
+    {
+      "frame_index": 684,
+      "time": 11.4,
+      "visibility": "visible",
+      "x": 905,
+      "y": 379,
+      "x_normalized": 0.471354,
+      "y_normalized": 0.350926,
+      "event": null
+    },
+    {
+      "frame_index": 688,
+      "time": 11.466667,
+      "visibility": "visible",
+      "x": 902,
+      "y": 370,
+      "x_normalized": 0.469792,
+      "y_normalized": 0.342593,
+      "event": null
+    },
+    {
+      "frame_index": 692,
+      "time": 11.533333,
+      "visibility": "visible",
+      "x": 902,
+      "y": 359,
+      "x_normalized": 0.469792,
+      "y_normalized": 0.332407,
+      "event": null
+    },
+    {
+      "frame_index": 696,
+      "time": 11.6,
+      "visibility": "visible",
+      "x": 900,
+      "y": 355,
+      "x_normalized": 0.46875,
+      "y_normalized": 0.328704,
+      "event": null
+    },
+    {
+      "frame_index": 700,
+      "time": 11.666667,
+      "visibility": "visible",
+      "x": 899,
+      "y": 349,
+      "x_normalized": 0.468229,
+      "y_normalized": 0.323148,
+      "event": null
+    },
+    {
+      "frame_index": 704,
+      "time": 11.733333,
+      "visibility": "visible",
+      "x": 898,
+      "y": 346,
+      "x_normalized": 0.467708,
+      "y_normalized": 0.32037,
+      "event": null
+    },
+    {
+      "frame_index": 708,
+      "time": 11.8,
+      "visibility": "visible",
+      "x": 896,
+      "y": 348,
+      "x_normalized": 0.466667,
+      "y_normalized": 0.322222,
+      "event": null
+    },
+    {
+      "frame_index": 712,
+      "time": 11.866667,
+      "visibility": "visible",
+      "x": 895,
+      "y": 349,
+      "x_normalized": 0.466146,
+      "y_normalized": 0.323148,
+      "event": null
+    },
+    {
+      "frame_index": 716,
+      "time": 11.933333,
+      "visibility": "visible",
+      "x": 899,
+      "y": 347,
+      "x_normalized": 0.468229,
+      "y_normalized": 0.321296,
+      "event": null
+    }
+  ]
+}

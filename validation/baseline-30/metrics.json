@@ -1,0 +1,30 @@
+{
+  "validation_set": "baseline-30",
+  "model": {
+    "name": "TrackNet V1 unofficial PyTorch checkpoint",
+    "source": "https://github.com/yastrebksv/TrackNet",
+    "checkpoint_redistributed": false
+  },
+  "inference": {
+    "frame_step": 4,
+    "temporal_stride": 2,
+    "evaluated_frames": 30,
+    "tolerance_pixels": 10.0
+  },
+  "metrics": {
+    "true_positive": 28,
+    "false_positive": 0,
+    "false_negative": 2,
+    "true_negative": 0,
+    "precision": 1.0,
+    "recall": 0.933333,
+    "f1": 0.965517,
+    "mean_localization_error": 4.330883,
+    "median_localization_error": 4.274695
+  },
+  "limitations": [
+    "Single two-second clip from one camera and court.",
+    "All labeled frames contain a visible ball, so false-positive behavior is not covered.",
+    "This is an initial smoke validation set, not a release-quality benchmark."
+  ]
+}

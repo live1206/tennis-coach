@@ -214,7 +214,12 @@ def annotate_manifest(path: str | Path) -> None:
 
     index = 0
     window_name = "Tennis ball annotation"
-    state = {"image": None}
+    display_scale = min(1.0, 1600 / manifest["width"], 900 / manifest["height"])
+    display_size = (
+        round(manifest["width"] * display_scale),
+        round(manifest["height"] * display_scale),
+    )
+    state = {"advance": False, "redraw": True}
 
     def save() -> None:
         manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False))
@@ -222,42 +227,62 @@ def annotate_manifest(path: str | Path) -> None:
     def mark_visible(event, x, y, _flags, _parameter) -> None:
         if event != cv2.EVENT_LBUTTONDOWN:
             return
+        source_x = min(manifest["width"] - 1, max(0, round(x / display_scale)))
+        source_y = min(manifest["height"] - 1, max(0, round(y / display_scale)))
         frame = frames[index]
         frame["visibility"] = "visible"
-        frame["x"] = x
-        frame["y"] = y
-        frame["x_normalized"] = round(x / manifest["width"], 6)
-        frame["y_normalized"] = round(y / manifest["height"], 6)
+        frame["x"] = source_x
+        frame["y"] = source_y
+        frame["x_normalized"] = round(source_x / manifest["width"], 6)
+        frame["y_normalized"] = round(source_y / manifest["height"], 6)
         save()
+        state["advance"] = True
 
-    cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+    cv2.namedWindow(window_name, cv2.WINDOW_AUTOSIZE)
     cv2.setMouseCallback(window_name, mark_visible)
     try:
         while True:
+            if state["advance"]:
+                index = min(len(frames) - 1, index + 1)
+                state["advance"] = False
+                state["redraw"] = True
+
             frame = frames[index]
-            image_path = manifest_path.parent / frame["image"]
-            image = cv2.imread(str(image_path))
-            if image is None:
-                raise RuntimeError(f"Cannot read annotation image: {image_path}")
-            if frame["visibility"] == "visible":
-                cv2.circle(image, (int(frame["x"]), int(frame["y"])), 14, (0, 0, 255), 2)
-            status = (
-                f"{index + 1}/{len(frames)} frame={frame['frame_index']} "
-                f"visibility={frame['visibility']} event={frame['event'] or '-'}"
-            )
-            cv2.putText(image, status, (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
-            state["image"] = image
-            cv2.imshow(window_name, image)
-            key = cv2.waitKey(0) & 0xFF
+            if state["redraw"]:
+                image_path = manifest_path.parent / frame["image"]
+                image = cv2.imread(str(image_path))
+                if image is None:
+                    raise RuntimeError(f"Cannot read annotation image: {image_path}")
+                image = cv2.resize(image, display_size, interpolation=cv2.INTER_AREA)
+                if frame["visibility"] == "visible":
+                    display_point = (
+                        round(frame["x"] * display_scale),
+                        round(frame["y"] * display_scale),
+                    )
+                    cv2.circle(image, display_point, 12, (0, 0, 255), 2)
+                status = (
+                    f"{index + 1}/{len(frames)} frame={frame['frame_index']} "
+                    f"visibility={frame['visibility']} event={frame['event'] or '-'}"
+                )
+                cv2.putText(image, status, (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+                cv2.imshow(window_name, image)
+                state["redraw"] = False
+
+            key = cv2.waitKey(50)
+            if key == -1:
+                continue
+            key &= 0xFF
 
             if key in (ord("q"), 27):
                 save()
                 break
             if key in (ord("d"), 83):
                 index = min(len(frames) - 1, index + 1)
+                state["redraw"] = True
                 continue
             if key in (ord("a"), 81):
                 index = max(0, index - 1)
+                state["redraw"] = True
                 continue
 
             if key == ord("o"):
@@ -296,6 +321,9 @@ def annotate_manifest(path: str | Path) -> None:
             else:
                 continue
             save()
+            state["redraw"] = True
+            if key in (ord("o"), ord("x")):
+                state["advance"] = True
     finally:
         cv2.destroyWindow(window_name)
 
