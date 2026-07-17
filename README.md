@@ -39,10 +39,9 @@ Implemented signals include:
 - shot continuation/error evidence and conservative point outcomes;
 - explicit `unknown` reasons and supported/unsupported capability lists.
 
-The checked-in `examples/analysis.json` currently contains audio, player,
-motion, and court data. Ball, pose, target, and shot fields are structurally
-present but remain unpopulated until the licensed workflow is run on a GPU
-machine and its output is imported.
+The checked-in `examples/analysis.json` is a complete CPU run using the
+licensed YOLOX and MediaPipe workflow. It contains audio, player, motion,
+court, ball, pose/contact, and confidence-gated shot data.
 
 ## Video extraction
 
@@ -325,37 +324,31 @@ is not a release-quality benchmark.
 enrichment; those windows are not detected rally boundaries and are not
 required by the normal automatic extraction flow.
 
-The current canonical sample is `examples/analysis.json`. It contains seven
-audio-derived rally candidates, 72 hit candidates, court/motion summaries, and
-anonymous player trajectories. `examples/internal/` contains its detailed
+The current canonical sample is `examples/analysis.json`. It contains 10
+audio-derived rally candidates, 66 hit candidates, court/motion summaries,
+anonymous player trajectories, YOLOX ball observations, and preliminary
+pose/contact classifications. `examples/internal/` contains its detailed
 report, generated segments, and legacy fixtures; those files are not intended
 for LLM input.
 
-### Expected analysis after the GPU run
+### Latest populated sample
 
-For the current 156.7-second sample, rally/audio extraction already establishes
-seven candidate rallies and 72 audio-hit candidates. After the licensed YOLOX
-and MediaPipe workflow finishes, the same `analysis.json` will additionally
-summarize:
+The current sample analyzes a 300-second 1080p60 video and contains:
 
-- ball observation count, visibility ratio, missing runs, image-space travel,
-  speed, court-half crossings, and direction-change candidates;
-- target-player binding to `player_1`, `player_2`, or `null`, with confidence,
-  match margin, and abstention reason;
-- up to 72 contact candidates containing hitter identity, contact confidence,
-  inferred ball contact point, and dominant-wrist racket-location proxy;
-- per-player forehand, backhand, and unknown counts;
-- serve, return, rally-shot, and unknown role counts;
-- continued, error, and unresolved shot outcomes plus a confidence-gated
-  in-play/error ratio;
-- candidate-rally winner/loser identity only when validated terminal `net` or
-  `out` evidence exists;
-- updated data-quality warnings and dynamically enabled analysis capabilities.
+- 10 audio-derived candidate rallies and 66 audio-hit candidates;
+- 4,421 ball observations, 205 visible detections, and a 4.64% visibility ratio;
+- 24 candidate direction changes and 125 image-speed samples;
+- 66 contact candidates, of which 8 received confidence-gated stroke labels;
+- `player_1`: 5 forehands and 3 backhands;
+- `player_2`: no resolved stroke labels;
+- no resolved serve/return roles, target-player binding, or point winners.
 
-The exact ball, contact, shot, and outcome counts cannot be known before
-inference. Missing or weak evidence remains `unknown`; the pipeline does not
-manufacture labels. Physical 3D speed and forced/unforced error attribution
-are outside the output contract.
+Both anonymous players were provisionally configured as right-handed for this
+run because no handedness metadata was supplied. Ball visibility and mean
+detection confidence are low, so these eight labels are preliminary rather
+than validated coaching statistics. Missing or weak evidence remains
+`unknown`; the pipeline does not manufacture labels. Physical 3D speed and
+forced/unforced error attribution are outside the output contract.
 
 ## Privacy and data routing
 
@@ -385,11 +378,11 @@ automatic highlight extraction to actionable coaching intelligence.
 
 The extraction, aggregation, schema, annotation, target matching, pose/contact,
 shot-role, and conservative outcome implementations are published. The
-licensed YOLOX and optional MediaPipe path is ready for execution on a CUDA
-machine.
+licensed YOLOX and optional MediaPipe path has completed an end-to-end CPU run
+and remains ready for faster execution on a CUDA machine.
 
 Production readiness still requires a representative independently labeled
-benchmark and GPU results for the publishable YOLOX/pose workflow. The
+benchmark and GPU validation for the publishable YOLOX/pose workflow. The
 checked-in TrackNet V1 numbers are private-baseline research only because that
 checkpoint has no verified redistribution license.
 

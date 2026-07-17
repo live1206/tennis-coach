@@ -59,6 +59,9 @@ class MediaPipePoseDetector:
             for name, index in POSE_LANDMARKS.items()
         }
 
+    def close(self) -> None:
+        self._landmarker.close()
+
 
 def expanded_crop(
     frame: np.ndarray,

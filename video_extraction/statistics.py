@@ -550,6 +550,17 @@ def build_llm_statistics(report: list[dict]) -> dict:
     warnings = []
     if not ball_summary["available"]:
         warnings.append("Ball tracking is unavailable in this report.")
+    elif ball_summary["visible_ratio"] is not None and ball_summary["visible_ratio"] < 0.1:
+        warnings.append(
+            "Ball visibility is below 10%; contact and shot analysis may be sparse."
+        )
+    if (
+        ball_summary.get("mean_detection_confidence") is not None
+        and ball_summary["mean_detection_confidence"] < 0.2
+    ):
+        warnings.append(
+            "Mean ball detection confidence is below 0.2; treat trajectory evidence as preliminary."
+        )
     low_identity_players = [
         player_id
         for player_id, player in players.items()

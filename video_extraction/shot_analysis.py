@@ -274,6 +274,7 @@ def analyze_segment_shots(
     player_handedness: dict[str, str],
     pose_detector=None,
 ) -> list[dict]:
+    owns_detector = pose_detector is None
     detector = pose_detector or MediaPipePoseDetector(pose_model_path)
     cap = cv2.VideoCapture(str(video_path))
     if not cap.isOpened():
@@ -365,4 +366,6 @@ def analyze_segment_shots(
             results.append({**segment, "shots": assign_shot_roles(shots)})
     finally:
         cap.release()
+        if owns_detector:
+            detector.close()
     return results

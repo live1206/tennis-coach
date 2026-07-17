@@ -99,47 +99,60 @@
   },
   "stats_version": 1,
   "source": {
-    "segment_count": 7,
-    "start": 1.309615,
-    "end": 156.666667,
-    "duration": 155.357052
+    "segment_count": 10,
+    "start": 12.292653,
+    "end": 299.9997,
+    "duration": 287.707047
   },
   "data_quality": {
     "audio": {
       "available": true,
-      "segment_count": 7,
-      "hit_count": 72
+      "segment_count": 10,
+      "hit_count": 66
     },
     "ball": {
-      "available": false,
-      "observation_count": 0,
-      "visible_count": 0,
-      "visible_ratio": null
+      "available": true,
+      "observation_count": 4421,
+      "visible_count": 205,
+      "visible_ratio": 0.04637,
+      "longest_missing_run_observations": 302,
+      "normalized_image_travel": 1.580479,
+      "speed_sample_count": 125,
+      "mean_normalized_image_speed_per_second": 0.378936,
+      "max_normalized_image_speed_per_second": 3.141769,
+      "court_half_crossings": 0,
+      "direction_change_candidates": 24,
+      "mean_detection_confidence": 0.121919
     },
     "shots": {
-      "candidate_count": 0,
-      "classified_count": 0,
-      "unknown_count": 0
+      "candidate_count": 66,
+      "classified_count": 8,
+      "unknown_count": 58
     },
     "outcomes": {
       "resolved_point_count": 0,
-      "unknown_point_count": 7
+      "unknown_point_count": 10
     },
     "warnings": [
-      "Ball tracking is unavailable in this report.",
+      "Ball visibility is below 10%; contact and shot analysis may be sparse.",
+      "Mean ball detection confidence is below 0.2; treat trajectory evidence as preliminary.",
       "Audio-derived boundaries and hit times are candidates, not validated rally or contact labels.",
-      "Court projection assumes points lie on the court plane; airborne ball projections are approximate."
+      "Court projection assumes points lie on the court plane; airborne ball projections are approximate.",
+      "Shot classification abstained for 58 of 66 contact candidates."
     ]
   },
   "analysis_capabilities": {
     "supported": [
       "candidate rally timing and audio hit analysis",
+      "confidence-gated forehand/backhand classification",
       "player movement comparison",
       "approximate player positioning and court coverage",
-      "segment activity comparison"
+      "segment activity comparison",
+      "ball visibility analysis",
+      "ball image-space trajectory analysis",
+      "candidate court crossings and direction changes"
     ],
     "unsupported": [
-      "forehand/backhand classification",
       "shot success ratios",
       "winner/error attribution",
       "serve and return classification",
@@ -154,67 +167,67 @@
   },
   "players": {
     "player_1": {
-      "segments_detected": 7,
+      "segments_detected": 10,
       "segment_detection_rate": 1.0,
-      "trajectory_samples": 152,
+      "trajectory_samples": 217,
       "side_sample_counts": {
-        "near": 152,
+        "near": 217,
         "far": 0
       },
-      "mean_detection_confidence": 0.815903,
-      "mean_identity_confidence": 0.656613,
-      "mean_identity_confidence_after_initialization": 0.685978,
-      "total_image_movement_distance_normalized": 6.043021,
-      "total_court_movement_normalized": 7.003395,
-      "court_transition_samples": 145,
+      "mean_detection_confidence": 0.824122,
+      "mean_identity_confidence": 0.797005,
+      "mean_identity_confidence_after_initialization": 0.817488,
+      "total_image_movement_distance_normalized": 6.121308,
+      "total_court_movement_normalized": 7.18304,
+      "court_transition_samples": 207,
       "mean_court_position": [
-        0.48749,
-        0.987383
+        0.410774,
+        0.990014
       ],
       "mean_in_court_position": [
-        0.501896,
-        0.963741
+        0.420701,
+        0.966234
       ],
       "shot_counts": {
-        "forehand": 0,
-        "backhand": 0,
+        "forehand": 5,
+        "backhand": 3,
         "unknown": 0
       },
       "shot_role_counts": {
         "serve": 0,
         "return": 0,
-        "rally_shot": 0,
-        "unknown": 0
+        "rally_shot": 1,
+        "unknown": 7
       },
       "shot_outcome_counts": {
         "continued": 0,
         "error": 0,
-        "terminal_unknown": 0
+        "terminal_unknown": 8
       },
       "shot_continuation_rate": null,
       "is_target": false
     },
     "player_2": {
-      "segments_detected": 6,
-      "segment_detection_rate": 0.857143,
-      "trajectory_samples": 38,
+      "segments_detected": 10,
+      "segment_detection_rate": 1.0,
+      "trajectory_samples": 95,
       "side_sample_counts": {
         "near": 0,
-        "far": 38
+        "far": 95
       },
-      "mean_detection_confidence": 0.474624,
-      "mean_identity_confidence": 0.630382,
-      "mean_identity_confidence_after_initialization": 0.66515,
-      "total_image_movement_distance_normalized": 0.658458,
-      "total_court_movement_normalized": 3.287921,
-      "court_transition_samples": 32,
+      "mean_detection_confidence": 0.494512,
+      "mean_identity_confidence": 0.717732,
+      "mean_identity_confidence_after_initialization": 0.724832,
+      "total_image_movement_distance_normalized": 2.260058,
+      "total_court_movement_normalized": 10.204507,
+      "court_transition_samples": 85,
       "mean_court_position": [
-        0.585581,
-        0.117014
+        0.528752,
+        0.104462
       ],
       "mean_in_court_position": [
-        0.640317,
-        0.180806
+        0.607914,
+        0.117606
       ],
       "shot_counts": {
         "forehand": 0,
@@ -239,57 +252,246 @@
   "segments": [
     {
       "index": 1,
-      "start": 1.309615,
-      "end": 14.921134,
-      "duration": 13.611519,
+      "start": 12.292653,
+      "end": 18.845306,
+      "duration": 6.552653,
       "motion": {
-        "player_motion_max": 0.01137,
-        "player_motion_var": 2.16e-06,
-        "near_motion_mean": 0.003626,
-        "far_motion_mean": 0.001045,
-        "motion_sample_count": 204
+        "player_motion_max": 0.016021,
+        "player_motion_var": 3.64e-06,
+        "near_motion_mean": 0.004644,
+        "far_motion_mean": 0.001368,
+        "motion_sample_count": 98
       },
       "players": {
         "player_1": {
           "detected": true,
           "side": "near",
-          "detection_confidence": 0.8191,
+          "detection_confidence": 0.8183,
           "identity_confidence": 0.5,
-          "image_movement_distance_normalized": 0.697174,
-          "court_movement_normalized": 0.820049,
-          "trajectory_samples": 24,
+          "image_movement_distance_normalized": 0.522029,
+          "court_movement_normalized": 0.692521,
+          "trajectory_samples": 14,
           "mean_image_position": [
-            0.357227,
-            0.856096
+            0.658705,
+            0.855688
           ],
           "mean_court_position": [
-            0.354138,
-            0.98651
+            0.685411,
+            0.979512
           ],
           "mean_in_court_position": [
-            0.318921,
-            0.97116
+            0.691859,
+            0.964487
           ]
         },
         "player_2": {
           "detected": true,
           "side": "far",
-          "detection_confidence": 0.4346,
+          "detection_confidence": 0.4351,
           "identity_confidence": 0.5,
-          "image_movement_distance_normalized": 0.086162,
-          "court_movement_normalized": 0.444793,
-          "trajectory_samples": 8,
+          "image_movement_distance_normalized": 0.006255,
+          "court_movement_normalized": 0.064174,
+          "trajectory_samples": 3,
           "mean_image_position": [
-            0.509961,
-            0.343519
+            0.429514,
+            0.339506
           ],
           "mean_court_position": [
-            0.567949,
-            0.02895
+            0.215475,
+            0.004696
           ],
           "mean_in_court_position": [
-            0.567949,
-            0.02895
+            0.213547,
+            0.018535
+          ]
+        }
+      },
+      "audio": {
+        "available": true,
+        "sample_rate": 22050,
+        "hit_count": 5,
+        "hit_times": [
+          13.79265306122449,
+          14.55891156462585,
+          15.74312925170068,
+          16.439727891156462,
+          17.345306122448978
+        ],
+        "mean_hit_interval_seconds": 0.888163,
+        "mean_hit_energy": 4.924686,
+        "max_hit_energy": 7.682793
+      },
+      "ball": {
+        "available": true,
+        "observation_count": 196,
+        "visible_count": 7,
+        "visible_ratio": 0.035714,
+        "longest_missing_run_observations": 115,
+        "normalized_image_travel": 0.01438,
+        "speed_sample_count": 2,
+        "mean_normalized_image_speed_per_second": 0.215484,
+        "max_normalized_image_speed_per_second": 0.374947,
+        "court_half_crossings": 0,
+        "direction_change_candidates": 0,
+        "mean_detection_confidence": 0.069895
+      },
+      "shots": [
+        {
+          "time": 13.79265306122449,
+          "player_id": "player_1",
+          "classification": "forehand",
+          "confidence": 0.453327,
+          "reason": null,
+          "contact_confidence": 0.327067,
+          "contact_method": "audio_ball_player_pose",
+          "contact_point": {
+            "x": 1273.5,
+            "y": 824.0,
+            "x_normalized": 0.663281,
+            "y_normalized": 0.762963
+          },
+          "racket_hand_position": {
+            "x": 0.626229,
+            "y": 0.785641,
+            "visibility": 0.995878,
+            "presence": 0.99946
+          },
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "serve_evidence_insufficient",
+          "outcome": "terminal_unknown",
+          "outcome_confidence": 0.0,
+          "outcome_reason": "no_validated_terminal_event"
+        },
+        {
+          "time": 14.55891156462585,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 15.74312925170068,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 16.439727891156462,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 17.345306122448978,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        }
+      ],
+      "outcome": {
+        "classification": "unknown",
+        "winner_player_id": null,
+        "confidence": 0.0,
+        "reason": "terminal_ball_event_unavailable"
+      }
+    },
+    {
+      "index": 2,
+      "start": 37.579184,
+      "end": 51.956961,
+      "duration": 14.377777,
+      "motion": {
+        "player_motion_max": 0.012173,
+        "player_motion_var": 2.25e-06,
+        "near_motion_mean": 0.003528,
+        "far_motion_mean": 0.001048,
+        "motion_sample_count": 216
+      },
+      "players": {
+        "player_1": {
+          "detected": true,
+          "side": "near",
+          "detection_confidence": 0.8267,
+          "identity_confidence": 0.8423,
+          "image_movement_distance_normalized": 0.698487,
+          "court_movement_normalized": 0.794048,
+          "trajectory_samples": 27,
+          "mean_image_position": [
+            0.351881,
+            0.861866
+          ],
+          "mean_court_position": [
+            0.350584,
+            0.984679
+          ],
+          "mean_in_court_position": [
+            0.347027,
+            0.968418
+          ]
+        },
+        "player_2": {
+          "detected": true,
+          "side": "far",
+          "detection_confidence": 0.407,
+          "identity_confidence": 0.6546,
+          "image_movement_distance_normalized": 0.069607,
+          "court_movement_normalized": 0.483296,
+          "trajectory_samples": 10,
+          "mean_image_position": [
+            0.501875,
+            0.343889
+          ],
+          "mean_court_position": [
+            0.531565,
+            0.038861
+          ],
+          "mean_in_court_position": [
+            0.531565,
+            0.038861
           ]
         }
       },
@@ -298,82 +500,269 @@
         "sample_rate": 22050,
         "hit_count": 9,
         "hit_times": [
-          2.809614512471655,
-          3.4829931972789114,
-          3.8312925170068026,
-          5.9675283446712015,
-          6.664126984126984,
-          8.777142857142858,
-          10.077460317460318,
-          11.981496598639456,
-          13.421133786848072
+          39.07918367346939,
+          40.518820861678,
+          40.867120181405895,
+          42.98013605442177,
+          43.67673469387755,
+          45.81297052154195,
+          47.09006802721088,
+          49.017324263038546,
+          50.45696145124717
         ],
-        "mean_hit_interval_seconds": 1.32644,
-        "mean_hit_energy": 4.045413,
-        "max_hit_energy": 6.800599
+        "mean_hit_interval_seconds": 1.422222,
+        "mean_hit_energy": 4.197805,
+        "max_hit_energy": 7.994105
       },
       "ball": {
-        "available": false,
-        "observation_count": 0,
-        "visible_count": 0,
-        "visible_ratio": null
+        "available": true,
+        "observation_count": 430,
+        "visible_count": 21,
+        "visible_ratio": 0.048837,
+        "longest_missing_run_observations": 104,
+        "normalized_image_travel": 0.077519,
+        "speed_sample_count": 10,
+        "mean_normalized_image_speed_per_second": 0.232323,
+        "max_normalized_image_speed_per_second": 0.804654,
+        "court_half_crossings": 0,
+        "direction_change_candidates": 2,
+        "mean_detection_confidence": 0.135053
       },
-      "shots": [],
-      "outcome": null
+      "shots": [
+        {
+          "time": 39.07918367346939,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 40.518820861678,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 40.867120181405895,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 42.98013605442177,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 43.67673469387755,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 45.81297052154195,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 47.09006802721088,
+          "player_id": "player_1",
+          "classification": "forehand",
+          "confidence": 0.520632,
+          "reason": null,
+          "contact_confidence": 0.34231,
+          "contact_method": "audio_ball_player_pose",
+          "contact_point": {
+            "x": 787.5,
+            "y": 575.5,
+            "x_normalized": 0.410156,
+            "y_normalized": 0.53287
+          },
+          "racket_hand_position": {
+            "x": 0.449101,
+            "y": 0.681462,
+            "visibility": 0.978988,
+            "presence": 1.0
+          },
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "serve_evidence_insufficient",
+          "outcome": "terminal_unknown",
+          "outcome_confidence": 0.0,
+          "outcome_reason": "no_validated_terminal_event"
+        },
+        {
+          "time": 49.017324263038546,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 50.45696145124717,
+          "player_id": "player_1",
+          "classification": "forehand",
+          "confidence": 0.424326,
+          "reason": null,
+          "contact_confidence": 0.321445,
+          "contact_method": "audio_ball_player_pose",
+          "contact_point": {
+            "x": 1066.5,
+            "y": 532.5,
+            "x_normalized": 0.555469,
+            "y_normalized": 0.493056
+          },
+          "racket_hand_position": {
+            "x": 0.510308,
+            "y": 0.613058,
+            "visibility": 0.247124,
+            "presence": 0.997939
+          },
+          "shot_role": "rally_shot",
+          "role_confidence": 0.321445,
+          "role_reason": null,
+          "outcome": "terminal_unknown",
+          "outcome_confidence": 0.0,
+          "outcome_reason": "no_validated_terminal_event"
+        }
+      ],
+      "outcome": {
+        "classification": "unknown",
+        "winner_player_id": null,
+        "confidence": 0.0,
+        "reason": "terminal_ball_event_unavailable"
+      }
     },
     {
-      "index": 2,
-      "start": 23.322132,
-      "end": 35.029615,
-      "duration": 11.707483,
+      "index": 3,
+      "start": 58.56966,
+      "end": 78.938186,
+      "duration": 20.368526,
       "motion": {
-        "player_motion_max": 0.021417,
-        "player_motion_var": 4.85e-06,
-        "near_motion_mean": 0.007482,
-        "far_motion_mean": 0.000455,
-        "motion_sample_count": 176
+        "player_motion_max": 0.019164,
+        "player_motion_var": 1.79e-06,
+        "near_motion_mean": 0.00392,
+        "far_motion_mean": 0.000202,
+        "motion_sample_count": 305
       },
       "players": {
         "player_1": {
           "detected": true,
           "side": "near",
-          "detection_confidence": 0.8211,
-          "identity_confidence": 0.8618,
-          "image_movement_distance_normalized": 0.939868,
-          "court_movement_normalized": 1.026651,
-          "trajectory_samples": 20,
+          "detection_confidence": 0.8261,
+          "identity_confidence": 0.8452,
+          "image_movement_distance_normalized": 0.954107,
+          "court_movement_normalized": 1.049674,
+          "trajectory_samples": 32,
           "mean_image_position": [
-            0.453815,
-            0.901944
+            0.528564,
+            0.868605
           ],
           "mean_court_position": [
-            0.459672,
-            1.007555
+            0.520901,
+            0.981194
           ],
           "mean_in_court_position": [
-            0.537714,
-            0.996188
+            0.375275,
+            0.923779
           ]
         },
         "player_2": {
           "detected": true,
           "side": "far",
-          "detection_confidence": 0.4862,
-          "identity_confidence": 0.7855,
-          "image_movement_distance_normalized": 0.143902,
-          "court_movement_normalized": 0.754826,
-          "trajectory_samples": 10,
+          "detection_confidence": 0.5191,
+          "identity_confidence": 0.7067,
+          "image_movement_distance_normalized": 0.825893,
+          "court_movement_normalized": 3.342161,
+          "trajectory_samples": 19,
           "mean_image_position": [
-            0.502812,
-            0.346481
+            0.420546,
+            0.407407
           ],
           "mean_court_position": [
-            0.531122,
-            0.050539
+            0.305518,
+            0.264394
           ],
           "mean_in_court_position": [
-            0.56708,
-            0.057839
+            0.44187,
+            0.595438
           ]
         }
       },
@@ -382,162 +771,1064 @@
         "sample_rate": 22050,
         "hit_count": 7,
         "hit_times": [
-          24.822131519274375,
-          26.656507936507936,
-          27.515646258503402,
-          28.212244897959184,
-          30.162721088435376,
-          31.7881179138322,
-          33.52961451247165
+          60.06965986394558,
+          62.043356009070294,
+          65.73532879818595,
+          69.40408163265306,
+          72.77097505668934,
+          73.9784126984127,
+          77.43818594104309
         ],
-        "mean_hit_interval_seconds": 1.451247,
-        "mean_hit_energy": 4.931742,
-        "max_hit_energy": 6.798395
+        "mean_hit_interval_seconds": 2.894754,
+        "mean_hit_energy": 3.395925,
+        "max_hit_energy": 4.249214
       },
       "ball": {
-        "available": false,
-        "observation_count": 0,
-        "visible_count": 0,
-        "visible_ratio": null
+        "available": true,
+        "observation_count": 610,
+        "visible_count": 7,
+        "visible_ratio": 0.011475,
+        "longest_missing_run_observations": 302,
+        "normalized_image_travel": 0.038817,
+        "speed_sample_count": 5,
+        "mean_normalized_image_speed_per_second": 0.232673,
+        "max_normalized_image_speed_per_second": 0.278483,
+        "court_half_crossings": 0,
+        "direction_change_candidates": 0,
+        "mean_detection_confidence": 0.078506
       },
-      "shots": [],
-      "outcome": null
+      "shots": [
+        {
+          "time": 60.06965986394558,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 62.043356009070294,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 65.73532879818595,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 69.40408163265306,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 72.77097505668934,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 73.9784126984127,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 77.43818594104309,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        }
+      ],
+      "outcome": {
+        "classification": "unknown",
+        "winner_player_id": null,
+        "confidence": 0.0,
+        "reason": "no_resolved_contacts"
+      }
     },
     {
-      "index": 3,
-      "start": 36.023447,
-      "end": 59.457007,
-      "duration": 23.43356,
+      "index": 4,
+      "start": 95.303628,
+      "end": 118.272789,
+      "duration": 22.969161,
       "motion": {
-        "player_motion_max": 0.050168,
-        "player_motion_var": 1.374e-05,
-        "near_motion_mean": 0.003274,
-        "far_motion_mean": 0.001534,
-        "motion_sample_count": 352
+        "player_motion_max": 0.022531,
+        "player_motion_var": 1.6e-06,
+        "near_motion_mean": 0.001469,
+        "far_motion_mean": 0.001034,
+        "motion_sample_count": 344
       },
       "players": {
         "player_1": {
           "detected": true,
           "side": "near",
-          "detection_confidence": 0.823,
-          "identity_confidence": 0.6873,
-          "image_movement_distance_normalized": 1.141489,
-          "court_movement_normalized": 1.343584,
-          "trajectory_samples": 26,
+          "detection_confidence": 0.8169,
+          "identity_confidence": 0.8249,
+          "image_movement_distance_normalized": 0.75673,
+          "court_movement_normalized": 1.261484,
+          "trajectory_samples": 21,
           "mean_image_position": [
-            0.436769,
-            0.826531
+            0.597879,
+            0.803616
           ],
           "mean_court_position": [
-            0.443852,
-            0.968638
+            0.66593,
+            0.944333
           ],
           "mean_in_court_position": [
-            0.493753,
-            0.94928
+            0.609562,
+            0.960866
           ]
         },
         "player_2": {
           "detected": true,
           "side": "far",
-          "detection_confidence": 0.5561,
-          "identity_confidence": 0.6464,
-          "image_movement_distance_normalized": 0.366762,
-          "court_movement_normalized": 1.703242,
-          "trajectory_samples": 12,
+          "detection_confidence": 0.541,
+          "identity_confidence": 0.7636,
+          "image_movement_distance_normalized": 0.665209,
+          "court_movement_normalized": 2.887632,
+          "trajectory_samples": 23,
           "mean_image_position": [
-            0.581228,
-            0.424614
+            0.532699,
+            0.380153
           ],
           "mean_court_position": [
-            0.705714,
-            0.324718
+            0.548294,
+            0.14853
           ],
           "mean_in_court_position": [
-            0.793234,
-            0.505422
+            0.758023,
+            0.245797
           ]
         }
       },
       "audio": {
         "available": true,
         "sample_rate": 22050,
-        "hit_count": 16,
+        "hit_count": 10,
         "hit_times": [
-          37.52344671201814,
-          38.98630385487528,
-          40.542040816326534,
-          41.795918367346935,
-          42.120997732426304,
-          42.67827664399093,
-          43.02657596371882,
-          45.99873015873016,
-          48.808344671201816,
-          49.458503401360545,
-          51.037460317460315,
-          53.15047619047619,
-          54.35791383219954,
-          55.86721088435374,
-          56.70312925170068,
-          57.95700680272109
+          96.80362811791383,
+          97.4073469387755,
+          98.70766439909298,
+          100.93678004535147,
+          102.44607709750568,
+          102.84081632653061,
+          103.79283446712017,
+          109.38884353741497,
+          111.87337868480725,
+          116.77278911564626
         ],
-        "mean_hit_interval_seconds": 1.362237,
-        "mean_hit_energy": 3.64179,
-        "max_hit_energy": 4.988357
+        "mean_hit_interval_seconds": 2.218796,
+        "mean_hit_energy": 3.740423,
+        "max_hit_energy": 6.484385
       },
       "ball": {
-        "available": false,
-        "observation_count": 0,
-        "visible_count": 0,
-        "visible_ratio": null
+        "available": true,
+        "observation_count": 688,
+        "visible_count": 24,
+        "visible_ratio": 0.034884,
+        "longest_missing_run_observations": 294,
+        "normalized_image_travel": 0.444478,
+        "speed_sample_count": 19,
+        "mean_normalized_image_speed_per_second": 0.701105,
+        "max_normalized_image_speed_per_second": 3.057625,
+        "court_half_crossings": 0,
+        "direction_change_candidates": 2,
+        "mean_detection_confidence": 0.182159
       },
-      "shots": [],
-      "outcome": null
+      "shots": [
+        {
+          "time": 96.80362811791383,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 97.4073469387755,
+          "player_id": "player_1",
+          "classification": "backhand",
+          "confidence": 0.52286,
+          "reason": null,
+          "contact_confidence": 0.421354,
+          "contact_method": "audio_ball_player_pose",
+          "contact_point": {
+            "x": 534.0,
+            "y": 813.0,
+            "x_normalized": 0.278125,
+            "y_normalized": 0.752778
+          },
+          "racket_hand_position": {
+            "x": 0.370868,
+            "y": 0.629323,
+            "visibility": 0.947625,
+            "presence": 0.999988
+          },
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "serve_evidence_insufficient",
+          "outcome": "terminal_unknown",
+          "outcome_confidence": 0.0,
+          "outcome_reason": "no_validated_terminal_event"
+        },
+        {
+          "time": 98.70766439909298,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 100.93678004535147,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 102.44607709750568,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 102.84081632653061,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 103.79283446712017,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 109.38884353741497,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 111.87337868480725,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 116.77278911564626,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        }
+      ],
+      "outcome": {
+        "classification": "unknown",
+        "winner_player_id": null,
+        "confidence": 0.0,
+        "reason": "terminal_ball_event_unavailable"
+      }
     },
     {
-      "index": 4,
-      "start": 62.447392,
-      "end": 77.684308,
-      "duration": 15.236916,
+      "index": 5,
+      "start": 133.68585,
+      "end": 145.393333,
+      "duration": 11.707483,
       "motion": {
-        "player_motion_max": 0.051491,
-        "player_motion_var": 2.473e-05,
-        "near_motion_mean": 0.004229,
-        "far_motion_mean": 8.6e-05,
-        "motion_sample_count": 229
+        "player_motion_max": 0.023008,
+        "player_motion_var": 5.23e-06,
+        "near_motion_mean": 0.007671,
+        "far_motion_mean": 0.000507,
+        "motion_sample_count": 175
       },
       "players": {
         "player_1": {
           "detected": true,
           "side": "near",
-          "detection_confidence": 0.8356,
-          "identity_confidence": 0.8785,
-          "image_movement_distance_normalized": 0.864616,
-          "court_movement_normalized": 1.016719,
-          "trajectory_samples": 18,
+          "detection_confidence": 0.82,
+          "identity_confidence": 0.8592,
+          "image_movement_distance_normalized": 0.938361,
+          "court_movement_normalized": 1.024408,
+          "trajectory_samples": 20,
           "mean_image_position": [
-            0.620718,
-            0.894239
+            0.4575,
+            0.902222
           ],
           "mean_court_position": [
-            0.632324,
-            1.003998
+            0.463191,
+            1.003045
           ],
           "mean_in_court_position": [
-            0.806889,
-            0.988764
+            0.418171,
+            0.993839
           ]
         },
         "player_2": {
-          "detected": false,
-          "side": null,
-          "detection_confidence": null,
-          "identity_confidence": null,
-          "image_movement_distance_normalized": null,
+          "detected": true,
+          "side": "far",
+          "detection_confidence": 0.4794,
+          "identity_confidence": 0.8046,
+          "image_movement_distance_normalized": 0.149696,
+          "court_movement_normalized": 0.823572,
+          "trajectory_samples": 13,
+          "mean_image_position": [
+            0.50004,
+            0.343447
+          ],
+          "mean_court_position": [
+            0.518728,
+            0.034256
+          ],
+          "mean_in_court_position": [
+            0.53263,
+            0.046167
+          ]
+        }
+      },
+      "audio": {
+        "available": true,
+        "sample_rate": 22050,
+        "hit_count": 6,
+        "hit_times": [
+          135.18585034013606,
+          137.0202267573696,
+          138.55274376417233,
+          140.50321995464853,
+          142.12861678004535,
+          143.89333333333335
+        ],
+        "mean_hit_interval_seconds": 1.741497,
+        "mean_hit_energy": 5.234855,
+        "max_hit_energy": 6.712533
+      },
+      "ball": {
+        "available": true,
+        "observation_count": 350,
+        "visible_count": 34,
+        "visible_ratio": 0.097143,
+        "longest_missing_run_observations": 71,
+        "normalized_image_travel": 0.312783,
+        "speed_sample_count": 22,
+        "mean_normalized_image_speed_per_second": 0.426095,
+        "max_normalized_image_speed_per_second": 3.141769,
+        "court_half_crossings": 0,
+        "direction_change_candidates": 2,
+        "mean_detection_confidence": 0.112556
+      },
+      "shots": [
+        {
+          "time": 135.18585034013606,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 137.0202267573696,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "ball_too_far_from_players",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 138.55274376417233,
+          "player_id": "player_1",
+          "classification": "backhand",
+          "confidence": 0.7555,
+          "reason": null,
+          "contact_confidence": 0.647479,
+          "contact_method": "audio_ball_player_pose",
+          "contact_point": {
+            "x": 804.0,
+            "y": 818.0,
+            "x_normalized": 0.41875,
+            "y_normalized": 0.757407
+          },
+          "racket_hand_position": {
+            "x": 0.495606,
+            "y": 0.703015,
+            "visibility": 0.791728,
+            "presence": 1.0
+          },
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "serve_evidence_insufficient",
+          "outcome": "terminal_unknown",
+          "outcome_confidence": 0.0,
+          "outcome_reason": "no_validated_terminal_event"
+        },
+        {
+          "time": 140.50321995464853,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 142.12861678004535,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 143.89333333333335,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        }
+      ],
+      "outcome": {
+        "classification": "unknown",
+        "winner_player_id": null,
+        "confidence": 0.0,
+        "reason": "terminal_ball_event_unavailable"
+      }
+    },
+    {
+      "index": 6,
+      "start": 164.916689,
+      "end": 180.826984,
+      "duration": 15.910295,
+      "motion": {
+        "player_motion_max": 0.015662,
+        "player_motion_var": 1.2e-06,
+        "near_motion_mean": 0.001922,
+        "far_motion_mean": 0.000223,
+        "motion_sample_count": 238
+      },
+      "players": {
+        "player_1": {
+          "detected": true,
+          "side": "near",
+          "detection_confidence": 0.7957,
+          "identity_confidence": 0.8068,
+          "image_movement_distance_normalized": 0.595623,
+          "court_movement_normalized": 0.644653,
+          "trajectory_samples": 24,
+          "mean_image_position": [
+            0.141243,
+            0.870255
+          ],
+          "mean_court_position": [
+            0.138336,
+            0.986656
+          ],
+          "mean_in_court_position": [
+            0.145069,
+            0.94871
+          ]
+        },
+        "player_2": {
+          "detected": true,
+          "side": "far",
+          "detection_confidence": 0.4887,
+          "identity_confidence": 0.6632,
+          "image_movement_distance_normalized": 0.31067,
+          "court_movement_normalized": 1.295328,
+          "trajectory_samples": 5,
+          "mean_image_position": [
+            0.469844,
+            0.356667
+          ],
+          "mean_court_position": [
+            0.486643,
+            0.07355
+          ],
+          "mean_in_court_position": [
+            0.567506,
+            1e-06
+          ]
+        }
+      },
+      "audio": {
+        "available": true,
+        "sample_rate": 22050,
+        "hit_count": 6,
+        "hit_times": [
+          166.41668934240363,
+          167.71700680272107,
+          168.7851247165533,
+          172.082358276644,
+          175.07773242630384,
+          179.32698412698414
+        ],
+        "mean_hit_interval_seconds": 2.582059,
+        "mean_hit_energy": 4.966721,
+        "max_hit_energy": 8.969069
+      },
+      "ball": {
+        "available": true,
+        "observation_count": 476,
+        "visible_count": 22,
+        "visible_ratio": 0.046218,
+        "longest_missing_run_observations": 276,
+        "normalized_image_travel": 0.123656,
+        "speed_sample_count": 14,
+        "mean_normalized_image_speed_per_second": 0.264711,
+        "max_normalized_image_speed_per_second": 0.76867,
+        "court_half_crossings": 0,
+        "direction_change_candidates": 6,
+        "mean_detection_confidence": 0.101046
+      },
+      "shots": [
+        {
+          "time": 166.41668934240363,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 167.71700680272107,
+          "player_id": "player_1",
+          "classification": "forehand",
+          "confidence": 0.427934,
+          "reason": null,
+          "contact_confidence": 0.345631,
+          "contact_method": "audio_ball_player_pose",
+          "contact_point": {
+            "x": 128.0,
+            "y": 689.5,
+            "x_normalized": 0.066667,
+            "y_normalized": 0.638426
+          },
+          "racket_hand_position": {
+            "x": 0.053679,
+            "y": 0.745986,
+            "visibility": 0.205191,
+            "presence": 0.9415
+          },
+          "shot_role": "unknown",
+          "role_confidence": 0.26630878791545726,
+          "role_reason": "serve_evidence_insufficient",
+          "outcome": "terminal_unknown",
+          "outcome_confidence": 0.0,
+          "outcome_reason": "no_validated_terminal_event"
+        },
+        {
+          "time": 168.7851247165533,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 172.082358276644,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 175.07773242630384,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 179.32698412698414,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        }
+      ],
+      "outcome": {
+        "classification": "unknown",
+        "winner_player_id": null,
+        "confidence": 0.0,
+        "reason": "terminal_ball_event_unavailable"
+      }
+    },
+    {
+      "index": 7,
+      "start": 190.318957,
+      "end": 199.913424,
+      "duration": 9.594467,
+      "motion": {
+        "player_motion_max": 0.009235,
+        "player_motion_var": 6.5e-07,
+        "near_motion_mean": 0.002679,
+        "far_motion_mean": 0.00048,
+        "motion_sample_count": 144
+      },
+      "players": {
+        "player_1": {
+          "detected": true,
+          "side": "near",
+          "detection_confidence": 0.8257,
+          "identity_confidence": 0.823,
+          "image_movement_distance_normalized": 0.330779,
+          "court_movement_normalized": 0.366503,
+          "trajectory_samples": 20,
+          "mean_image_position": [
+            0.248594,
+            0.88963
+          ],
+          "mean_court_position": [
+            0.262597,
+            0.996609
+          ],
+          "mean_in_court_position": [
+            0.303981,
+            0.976651
+          ]
+        },
+        "player_2": {
+          "detected": true,
+          "side": "far",
+          "detection_confidence": 0.3951,
+          "identity_confidence": 0.723,
+          "image_movement_distance_normalized": 0.028953,
+          "court_movement_normalized": 0.166916,
+          "trajectory_samples": 3,
+          "mean_image_position": [
+            0.493316,
+            0.338272
+          ],
+          "mean_court_position": [
+            0.494839,
+            -0.005166
+          ],
+          "mean_in_court_position": [
+            0.470709,
+            0.003743
+          ]
+        }
+      },
+      "audio": {
+        "available": true,
+        "sample_rate": 22050,
+        "hit_count": 4,
+        "hit_times": [
+          191.81895691609978,
+          192.51555555555555,
+          194.4428117913832,
+          198.41342403628119
+        ],
+        "mean_hit_interval_seconds": 2.198156,
+        "mean_hit_energy": 5.417517,
+        "max_hit_energy": 9.743114
+      },
+      "ball": {
+        "available": true,
+        "observation_count": 287,
+        "visible_count": 17,
+        "visible_ratio": 0.059233,
+        "longest_missing_run_observations": 143,
+        "normalized_image_travel": 0.016899,
+        "speed_sample_count": 8,
+        "mean_normalized_image_speed_per_second": 0.063308,
+        "max_normalized_image_speed_per_second": 0.19489,
+        "court_half_crossings": 0,
+        "direction_change_candidates": 1,
+        "mean_detection_confidence": 0.061272
+      },
+      "shots": [
+        {
+          "time": 191.81895691609978,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 192.51555555555555,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 194.4428117913832,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 198.41342403628119,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        }
+      ],
+      "outcome": {
+        "classification": "unknown",
+        "winner_player_id": null,
+        "confidence": 0.0,
+        "reason": "no_resolved_contacts"
+      }
+    },
+    {
+      "index": 8,
+      "start": 208.221542,
+      "end": 218.210748,
+      "duration": 9.989206,
+      "motion": {
+        "player_motion_max": 0.018203,
+        "player_motion_var": 1.77e-06,
+        "near_motion_mean": 0.005675,
+        "far_motion_mean": 0.000133,
+        "motion_sample_count": 150
+      },
+      "players": {
+        "player_1": {
+          "detected": true,
+          "side": "near",
+          "detection_confidence": 0.8327,
+          "identity_confidence": 0.9164,
+          "image_movement_distance_normalized": 0.423299,
+          "court_movement_normalized": 0.440657,
+          "trajectory_samples": 8,
+          "mean_image_position": [
+            0.689128,
+            0.911806
+          ],
+          "mean_court_position": [
+            0.688576,
+            1.006441
+          ],
+          "mean_in_court_position": [
+            0.792181,
+            0.993696
+          ]
+        },
+        "player_2": {
+          "detected": true,
+          "side": "far",
+          "detection_confidence": 0.4183,
+          "identity_confidence": 0.621,
+          "image_movement_distance_normalized": 0.0,
           "court_movement_normalized": 0,
-          "trajectory_samples": 0,
-          "mean_image_position": null,
-          "mean_court_position": null,
+          "trajectory_samples": 1,
+          "mean_image_position": [
+            0.509375,
+            0.335185
+          ],
+          "mean_court_position": [
+            0.56679,
+            -0.030827
+          ],
           "mean_in_court_position": null
         }
       },
@@ -546,161 +1837,205 @@
         "sample_rate": 22050,
         "hit_count": 6,
         "hit_times": [
-          63.94739229024943,
-          65.20126984126983,
-          67.19818594104308,
-          68.89324263038549,
-          71.74929705215419,
-          76.18430839002268
+          209.7215419501134,
+          211.27727891156462,
+          212.53115646258505,
+          212.8562358276644,
+          213.41351473922902,
+          216.71074829931973
         ],
-        "mean_hit_interval_seconds": 2.447383,
-        "mean_hit_energy": 4.807474,
-        "max_hit_energy": 6.266042
+        "mean_hit_interval_seconds": 1.397841,
+        "mean_hit_energy": 5.001703,
+        "max_hit_energy": 7.956635
       },
       "ball": {
-        "available": false,
-        "observation_count": 0,
-        "visible_count": 0,
-        "visible_ratio": null
-      },
-      "shots": [],
-      "outcome": null
-    },
-    {
-      "index": 5,
-      "start": 79.467619,
-      "end": 100.184444,
-      "duration": 20.716825,
-      "motion": {
-        "player_motion_max": 0.040625,
-        "player_motion_var": 1.953e-05,
-        "near_motion_mean": 0.003078,
-        "far_motion_mean": 0.001209,
-        "motion_sample_count": 311
-      },
-      "players": {
-        "player_1": {
-          "detected": true,
-          "side": "near",
-          "detection_confidence": 0.7964,
-          "identity_confidence": 0.6396,
-          "image_movement_distance_normalized": 1.597116,
-          "court_movement_normalized": 1.944402,
-          "trajectory_samples": 35,
-          "mean_image_position": [
-            0.577016,
-            0.837513
-          ],
-          "mean_court_position": [
-            0.581416,
-            0.972369
-          ],
-          "mean_in_court_position": [
-            0.543712,
-            0.941095
-          ]
-        },
-        "player_2": {
-          "detected": true,
-          "side": "far",
-          "detection_confidence": 0.3742,
-          "identity_confidence": 0.5419,
-          "image_movement_distance_normalized": 0.028643,
-          "court_movement_normalized": 0.198121,
-          "trajectory_samples": 5,
-          "mean_image_position": [
-            0.482187,
-            0.334074
-          ],
-          "mean_court_position": [
-            0.446391,
-            -0.048521
-          ],
-          "mean_in_court_position": null
-        }
-      },
-      "audio": {
         "available": true,
-        "sample_rate": 22050,
-        "hit_count": 10,
-        "hit_times": [
-          80.96761904761905,
-          81.94285714285715,
-          83.26639455782313,
-          84.54349206349207,
-          88.25868480725623,
-          89.51256235827664,
-          90.41814058956916,
-          93.27419501133787,
-          97.54666666666667,
-          98.68444444444444
-        ],
-        "mean_hit_interval_seconds": 1.968536,
-        "mean_hit_energy": 5.729838,
-        "max_hit_energy": 8.17131
+        "observation_count": 299,
+        "visible_count": 23,
+        "visible_ratio": 0.076923,
+        "longest_missing_run_observations": 113,
+        "normalized_image_travel": 0.143738,
+        "speed_sample_count": 16,
+        "mean_normalized_image_speed_per_second": 0.269242,
+        "max_normalized_image_speed_per_second": 1.408422,
+        "court_half_crossings": 0,
+        "direction_change_candidates": 6,
+        "mean_detection_confidence": 0.140195
       },
-      "ball": {
-        "available": false,
-        "observation_count": 0,
-        "visible_count": 0,
-        "visible_ratio": null
-      },
-      "shots": [],
-      "outcome": null
+      "shots": [
+        {
+          "time": 209.7215419501134,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 211.27727891156462,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 212.53115646258505,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_player",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 212.8562358276644,
+          "player_id": "player_1",
+          "classification": "backhand",
+          "confidence": 0.568089,
+          "reason": null,
+          "contact_confidence": 0.382574,
+          "contact_method": "audio_ball_player_pose",
+          "contact_point": {
+            "x": 796.5,
+            "y": 553.5,
+            "x_normalized": 0.414844,
+            "y_normalized": 0.5125
+          },
+          "racket_hand_position": {
+            "x": 0.484737,
+            "y": 0.705339,
+            "visibility": 0.012605,
+            "presence": 0.997329
+          },
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "serve_evidence_insufficient",
+          "outcome": "terminal_unknown",
+          "outcome_confidence": 0.0,
+          "outcome_reason": "no_validated_terminal_event"
+        },
+        {
+          "time": 213.41351473922902,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 216.71074829931973,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_player",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        }
+      ],
+      "outcome": {
+        "classification": "unknown",
+        "winner_player_id": null,
+        "confidence": 0.0,
+        "reason": "terminal_ball_event_unavailable"
+      }
     },
     {
-      "index": 6,
-      "start": 102.803673,
-      "end": 122.428798,
-      "duration": 19.625125,
+      "index": 9,
+      "start": 227.052925,
+      "end": 247.351429,
+      "duration": 20.298504,
       "motion": {
-        "player_motion_max": 0.033988,
-        "player_motion_var": 1.105e-05,
-        "near_motion_mean": 0.004019,
-        "far_motion_mean": 0.000527,
-        "motion_sample_count": 294
+        "player_motion_max": 0.025887,
+        "player_motion_var": 5.51e-06,
+        "near_motion_mean": 0.005427,
+        "far_motion_mean": 0.000587,
+        "motion_sample_count": 304
       },
       "players": {
         "player_1": {
           "detected": true,
           "side": "near",
-          "detection_confidence": 0.832,
-          "identity_confidence": 0.4768,
-          "image_movement_distance_normalized": 0.522238,
-          "court_movement_normalized": 0.557981,
-          "trajectory_samples": 17,
+          "detection_confidence": 0.8411,
+          "identity_confidence": 0.8329,
+          "image_movement_distance_normalized": 0.514188,
+          "court_movement_normalized": 0.509726,
+          "trajectory_samples": 29,
           "mean_image_position": [
-            0.458379,
-            0.874129
+            0.323824,
+            0.918742
           ],
           "mean_court_position": [
-            0.466462,
-            0.994144
+            0.338692,
+            1.009424
           ],
           "mean_in_court_position": [
-            0.484746,
-            0.969719
+            0.323831,
+            0.993627
           ]
         },
         "player_2": {
           "detected": true,
           "side": "far",
-          "detection_confidence": 0.3871,
-          "identity_confidence": 0.4552,
-          "image_movement_distance_normalized": 0.0,
-          "court_movement_normalized": 0,
-          "trajectory_samples": 1,
+          "detection_confidence": 0.5242,
+          "identity_confidence": 0.7417,
+          "image_movement_distance_normalized": 0.065874,
+          "court_movement_normalized": 0.43705,
+          "trajectory_samples": 13,
           "mean_image_position": [
-            0.548438,
-            0.342593
+            0.54998,
+            0.342094
           ],
           "mean_court_position": [
-            0.732907,
-            0.022105
+            0.73931,
+            0.024938
           ],
           "mean_in_court_position": [
-            0.732907,
-            0.022105
+            0.73931,
+            0.024938
           ]
         }
       },
@@ -709,118 +2044,360 @@
         "sample_rate": 22050,
         "hit_count": 9,
         "hit_times": [
-          104.30367346938775,
-          105.92907029478458,
-          110.96780045351474,
-          112.6164172335601,
-          114.17215419501133,
-          116.4477097505669,
-          117.84090702947846,
-          118.72326530612244,
-          120.92879818594105
+          228.55292517006802,
+          230.29442176870748,
+          231.2,
+          232.38421768707482,
+          236.74956916099774,
+          238.53750566893424,
+          240.5340589569161,
+          242.02013605442176,
+          245.85142857142858
         ],
-        "mean_hit_interval_seconds": 2.078141,
-        "mean_hit_energy": 4.721647,
-        "max_hit_energy": 8.471486
+        "mean_hit_interval_seconds": 2.162313,
+        "mean_hit_energy": 5.79915,
+        "max_hit_energy": 10.122664
       },
       "ball": {
-        "available": false,
-        "observation_count": 0,
-        "visible_count": 0,
-        "visible_ratio": null
+        "available": true,
+        "observation_count": 608,
+        "visible_count": 29,
+        "visible_ratio": 0.047697,
+        "longest_missing_run_observations": 100,
+        "normalized_image_travel": 0.264316,
+        "speed_sample_count": 14,
+        "mean_normalized_image_speed_per_second": 0.565827,
+        "max_normalized_image_speed_per_second": 2.225948,
+        "court_half_crossings": 0,
+        "direction_change_candidates": 1,
+        "mean_detection_confidence": 0.10967
       },
-      "shots": [],
-      "outcome": null
+      "shots": [
+        {
+          "time": 228.55292517006802,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 230.29442176870748,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 231.2,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 232.38421768707482,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 236.74956916099774,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 238.53750566893424,
+          "player_id": "player_1",
+          "classification": "forehand",
+          "confidence": 0.610632,
+          "reason": null,
+          "contact_confidence": 0.490979,
+          "contact_method": "audio_ball_player_pose",
+          "contact_point": {
+            "x": 770.5,
+            "y": 674.0,
+            "x_normalized": 0.401302,
+            "y_normalized": 0.624074
+          },
+          "racket_hand_position": {
+            "x": 0.362677,
+            "y": 0.639715,
+            "visibility": 0.808026,
+            "presence": 0.99991
+          },
+          "shot_role": "unknown",
+          "role_confidence": 0.2243265513174934,
+          "role_reason": "serve_evidence_insufficient",
+          "outcome": "terminal_unknown",
+          "outcome_confidence": 0.0,
+          "outcome_reason": "no_validated_terminal_event"
+        },
+        {
+          "time": 240.5340589569161,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 242.02013605442176,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "ball_too_far_from_players",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 245.85142857142858,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        }
+      ],
+      "outcome": {
+        "classification": "unknown",
+        "winner_player_id": null,
+        "confidence": 0.0,
+        "reason": "terminal_ball_event_unavailable"
+      }
     },
     {
-      "index": 7,
-      "start": 135.636327,
-      "end": 156.666667,
-      "duration": 21.03034,
+      "index": 10,
+      "start": 284.057551,
+      "end": 299.9997,
+      "duration": 15.942149,
       "motion": {
-        "player_motion_max": 0.985536,
-        "player_motion_var": 0.00546536,
-        "near_motion_mean": 0.012344,
-        "far_motion_mean": 0.01021,
-        "motion_sample_count": 316
+        "player_motion_max": 0.014467,
+        "player_motion_var": 1.26e-06,
+        "near_motion_mean": 0.00336,
+        "far_motion_mean": 0.000147,
+        "motion_sample_count": 239
       },
       "players": {
         "player_1": {
           "detected": true,
           "side": "near",
-          "detection_confidence": 0.79,
-          "identity_confidence": 0.5329,
-          "image_movement_distance_normalized": 0.28052,
-          "court_movement_normalized": 0.294009,
-          "trajectory_samples": 12,
+          "detection_confidence": 0.8365,
+          "identity_confidence": 0.6521,
+          "image_movement_distance_normalized": 0.387705,
+          "court_movement_normalized": 0.399366,
+          "trajectory_samples": 22,
           "mean_image_position": [
-            0.426584,
-            0.896373
+            0.26108,
+            0.930724
           ],
           "mean_court_position": [
-            0.433694,
-            1.005414
+            0.284395,
+            1.013946
           ],
-          "mean_in_court_position": [
-            0.421445,
-            0.998738
-          ]
+          "mean_in_court_position": null
         },
         "player_2": {
           "detected": true,
           "side": "far",
-          "detection_confidence": 0.3828,
-          "identity_confidence": 0.589,
-          "image_movement_distance_normalized": 0.032989,
-          "court_movement_normalized": 0.186939,
-          "trajectory_samples": 2,
+          "detection_confidence": 0.4407,
+          "identity_confidence": 0.5881,
+          "image_movement_distance_normalized": 0.137901,
+          "court_movement_normalized": 0.704378,
+          "trajectory_samples": 5,
           "mean_image_position": [
-            0.490495,
-            0.34213
+            0.609687,
+            0.338704
           ],
           "mean_court_position": [
-            0.481915,
-            0.016712
+            1.002947,
+            -0.001897
           ],
-          "mean_in_court_position": [
-            0.562472,
-            0.064117
-          ]
+          "mean_in_court_position": null
         }
       },
       "audio": {
         "available": true,
         "sample_rate": 22050,
-        "hit_count": 15,
+        "hit_count": 4,
         "hit_times": [
-          137.13632653061225,
-          137.69360544217687,
-          139.99238095238096,
-          143.1502947845805,
-          143.8701133786848,
-          145.42585034013607,
-          146.14566893424035,
-          147.5156462585034,
-          151.81133786848073,
-          152.7633560090703,
-          153.22775510204082,
-          153.71537414965985,
-          154.17977324263038,
-          155.10857142857142,
-          155.85160997732427
+          285.55755102040814,
+          291.52507936507936,
+          297.1443083900227,
+          298.5839455782313
         ],
-        "mean_hit_interval_seconds": 1.336806,
-        "mean_hit_energy": 5.979027,
-        "max_hit_energy": 11.425085
+        "mean_hit_interval_seconds": 4.342132,
+        "mean_hit_energy": 5.750096,
+        "max_hit_energy": 9.518596
       },
       "ball": {
-        "available": false,
-        "observation_count": 0,
-        "visible_count": 0,
-        "visible_ratio": null
+        "available": true,
+        "observation_count": 477,
+        "visible_count": 21,
+        "visible_ratio": 0.044025,
+        "longest_missing_run_observations": 144,
+        "normalized_image_travel": 0.143893,
+        "speed_sample_count": 15,
+        "mean_normalized_image_speed_per_second": 0.287497,
+        "max_normalized_image_speed_per_second": 1.221097,
+        "court_half_crossings": 0,
+        "direction_change_candidates": 4,
+        "mean_detection_confidence": 0.154769
       },
-      "shots": [],
-      "outcome": null
+      "shots": [
+        {
+          "time": 285.55755102040814,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_player",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 291.52507936507936,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 297.1443083900227,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        },
+        {
+          "time": 298.5839455782313,
+          "player_id": null,
+          "classification": "unknown",
+          "confidence": 0.0,
+          "reason": "no_nearby_ball",
+          "contact_confidence": null,
+          "contact_method": null,
+          "contact_point": null,
+          "racket_hand_position": null,
+          "shot_role": "unknown",
+          "role_confidence": 0.0,
+          "role_reason": "hitter_unresolved",
+          "outcome": null,
+          "outcome_confidence": null,
+          "outcome_reason": null
+        }
+      ],
+      "outcome": {
+        "classification": "unknown",
+        "winner_player_id": null,
+        "confidence": 0.0,
+        "reason": "no_resolved_contacts"
+      }
     }
   ]
 }
