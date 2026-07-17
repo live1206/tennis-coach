@@ -338,6 +338,10 @@ The current sample analyzes a 300-second 1080p60 video and contains:
 - 10 audio-derived candidate rallies and 66 audio-hit candidates;
 - 4,421 ball observations, 205 visible detections, and a 4.64% visibility ratio;
 - 24 candidate direction changes and 125 image-speed samples;
+- `player_1`: detected in 10/10 rallies, 217 trajectory samples, 0.824 mean
+  detection confidence, and 0.797 mean identity confidence;
+- `player_2`: detected in 10/10 rallies, 95 trajectory samples, 0.495 mean
+  detection confidence, and 0.718 mean identity confidence;
 - 66 contact candidates, of which 8 received confidence-gated stroke labels;
 - `player_1`: 5 forehands and 3 backhands;
 - `player_2`: no resolved stroke labels;
