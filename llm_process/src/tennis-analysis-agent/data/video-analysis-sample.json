@@ -1,0 +1,11 @@
+{
+  "video_id": "session-001",
+  "player": "sample-player",
+  "shots": {
+    "serve": {"first_serve_in": 0.58, "avg_speed_kph": 168, "toss_variance": 0.31},
+    "forehand": {"topspin_rpm": 2550, "contact_height_m": 1.15, "late_contact_rate": 0.34},
+    "backhand": {"unforced_error_rate": 0.29, "stance_open_rate": 0.62}
+  },
+  "footwork": {"split_step_timing_ms": 210, "recovery_efficiency": 0.54},
+  "notes": ["fatigue observed after 30 minutes", "serve toss drifts right under pressure"]
+}
