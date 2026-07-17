@@ -9,6 +9,8 @@ Thumbs.db
 # Runtime and build outputs
 dist/
 build/
+!desktop/build/
+!desktop/build/*
 out/
 artifacts/
 *.log
@@ -19,9 +21,14 @@ __pycache__/
 .pytest_cache/
 .venv/
 *.egg-info/
+.vite/
+desktop/node_modules/
+desktop/release/
+desktop/dist-electron/
 
 # External model weights and local annotation footage
 *.onnx
+!video_extraction/vision/models/yolox_nano.onnx
 *.pth
 *.pt
 annotations.local/

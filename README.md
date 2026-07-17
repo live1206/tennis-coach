@@ -21,6 +21,18 @@ The implemented workflow is:
 7. Delegate complex requests to a cloud LLM/agent using structured JSON and optional sampled frames only.
 8. Present results in the app as technical stats, training tips, and selected rally IDs for export.
 
+## Desktop application
+
+The migrated Electron/React application lives in [`desktop/`](desktop/). It
+preserves Breakpoint's video review and highlight-export workflow, adapted to
+consume Tennis Coach's canonical `analysis.json`.
+
+The welcome screen also includes an **AI Analysis** entry. It opens a canonical
+analysis file, displays mandatory quality warnings and supported/unsupported
+capabilities, and can invoke the existing Foundry Local CLI without exposing
+raw video. See [`desktop/README.md`](desktop/README.md) for development setup
+and Breakpoint attribution.
+
 ## Implemented extraction pipeline
 
 The pipeline reuses focused Breakpoint audio, YOLOX, OpenCV, and anonymous
@@ -483,7 +495,7 @@ This project follows Breakpoint's licensing model and is released under the **GN
 - **Cloud service and commercial use**: if you integrate this project's core algorithms, including tennis target detection, rally segmentation, video-derived JSON extraction, coaching analysis, or automatic highlight editing logic, into a commercial SaaS, mini-program, commercial app, or paid website backend service, AGPL-3.0 requires you to open-source the complete source code of that system under compatible terms.
 - **Commercial License**: if you do not want to open-source your system code but would like to use Tennis Coach technology in commercial products, contact the author for a commercial license.
 
-Externally supplied YOLOX-Nano model files should preserve their upstream
-Apache License 2.0 attribution and model source documentation, following
-Breakpoint's `MODEL_INFO.txt` pattern. Model weights and MediaPipe model assets
-are not bundled by this repository.
+The bundled YOLOX-Nano model is distributed under Apache License 2.0 with
+source/checksum metadata in `video_extraction/vision/models/MODEL_INFO.txt`
+and its license in `third_party/YOLOX/LICENSE`. TrackNet and MediaPipe model
+assets are not bundled by this repository.

@@ -1,0 +1,25 @@
+appId: com.tenniscoach.app
+productName: Tennis Coach
+directories:
+  output: release
+  buildResources: build
+win:
+  target:
+    - nsis
+    - msi
+  icon: build/icon.ico
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  deleteAppDataOnUninstall: false
+extraResources:
+  - from: build/icon.ico
+    to: icon.ico
+  - from: ../dist-engine/
+    to: engine
+    filter:
+      - "**/*"
+files:
+  - dist/**/*
+  - dist-electron/**/*
+  - "!node_modules/**/*"
