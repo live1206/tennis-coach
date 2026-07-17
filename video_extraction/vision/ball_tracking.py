@@ -8,6 +8,8 @@ from pathlib import Path
 import cv2
 import numpy as np
 
+from video_extraction.vision.onnx_inference import OnnxInference
+
 
 TRACKNET_INPUT_WIDTH = 640
 TRACKNET_INPUT_HEIGHT = 360
@@ -23,11 +25,12 @@ class TrackNetOnnxDetector:
         input_height: int = TRACKNET_INPUT_HEIGHT,
         class_threshold: int = 128,
         minimum_component_area: int = 3,
+        inference_backend: str = "opencv",
     ):
         self.model_path = Path(model_path)
         if not self.model_path.exists():
             raise FileNotFoundError(f"TrackNet ONNX model not found: {self.model_path}")
-        self.net = cv2.dnn.readNetFromONNX(str(self.model_path))
+        self.inference = OnnxInference(self.model_path, inference_backend)
         self.input_width = input_width
         self.input_height = input_height
         self.class_threshold = class_threshold
@@ -43,8 +46,7 @@ class TrackNetOnnxDetector:
         ]
         stacked = np.concatenate((resized[2], resized[1], resized[0]), axis=2)
         tensor = np.transpose(stacked.astype(np.float32) / 255.0, (2, 0, 1))[None, ...]
-        self.net.setInput(tensor)
-        output = np.asarray(self.net.forward())
+        output = self.inference.forward(tensor)
         class_map = self._class_map(output)
         detected = self._locate_ball(class_map)
         if detected is None:
@@ -152,6 +154,38 @@ def track_ball_video(
     finally:
         cap.release()
 
+    return observations
+
+
+def track_ball_intervals(
+    video_path: str | Path,
+    detector,
+    intervals: list[tuple[float, float]],
+    frame_step: int = 1,
+    temporal_stride: int = 1,
+) -> list[dict]:
+    merged_intervals: list[tuple[float, float]] = []
+    for start, end in sorted(intervals):
+        if end <= start:
+            raise ValueError(f"Ball tracking interval must have end > start: {(start, end)}")
+        if merged_intervals and start <= merged_intervals[-1][1]:
+            previous_start, previous_end = merged_intervals[-1]
+            merged_intervals[-1] = (previous_start, max(previous_end, end))
+        else:
+            merged_intervals.append((start, end))
+
+    observations = []
+    for start, end in merged_intervals:
+        observations.extend(
+            track_ball_video(
+                video_path,
+                detector,
+                frame_step=frame_step,
+                temporal_stride=temporal_stride,
+                start=start,
+                end=end,
+            )
+        )
     return observations
 
 

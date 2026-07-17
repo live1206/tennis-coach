@@ -8,14 +8,16 @@ import cv2
 
 from video_extraction.audio import extract_rally_segments
 from video_extraction.court_projection import CourtProjector, add_court_projections
+from video_extraction.statistics import build_llm_statistics
 from video_extraction.vision.ball_tracking import (
     TrackNetOnnxDetector,
     observations_for_segment,
-    track_ball_video,
+    track_ball_intervals,
 )
 from video_extraction.vision.court import select_rois
 from video_extraction.vision.motion import analyze_motion
 from video_extraction.vision.player_observation import analyze_player_observations
+from video_extraction.vision.yolox_ball import YoloXBallDetector
 
 
 EXTRACTION_VERSION = 1
@@ -42,20 +44,35 @@ def enrich_report(
     ball_model_path: str | Path | None = None,
     ball_frame_step: int = 1,
     ball_temporal_stride: int = 1,
+    ball_detector_type: str = "tracknet",
+    inference_backend: str = "opencv",
 ) -> list[dict]:
     if not report:
         return []
 
     ball_observations = None
     if ball_model_path is not None:
-        ball_detector = TrackNetOnnxDetector(ball_model_path)
-        ball_observations = track_ball_video(
+        if ball_detector_type == "tracknet":
+            ball_detector = TrackNetOnnxDetector(
+                ball_model_path,
+                inference_backend=inference_backend,
+            )
+        elif ball_detector_type == "yolox":
+            ball_detector = YoloXBallDetector(
+                ball_model_path,
+                inference_backend=inference_backend,
+            )
+        else:
+            raise ValueError(f"Unsupported ball detector: {ball_detector_type}")
+        ball_observations = track_ball_intervals(
             video_path,
             ball_detector,
+            [
+                (float(segment["start"]), float(segment["end"]))
+                for segment in report
+            ],
             frame_step=ball_frame_step,
             temporal_stride=ball_temporal_stride,
-            start=min(float(segment["start"]) for segment in report),
-            end=max(float(segment["end"]) for segment in report),
         )
 
     selected_rois = rois if rois is not None else select_rois(str(video_path))
@@ -68,6 +85,8 @@ def enrich_report(
                     "version": EXTRACTION_VERSION,
                     "status": "skipped_court_detection",
                     "ball_tracking_status": "complete" if ball_observations is not None else "disabled",
+                    "ball_detector": ball_detector_type if ball_observations is not None else None,
+                    "inference_backend": inference_backend,
                     "ball_frame_step": ball_frame_step if ball_observations is not None else None,
                     "ball_temporal_stride": ball_temporal_stride if ball_observations is not None else None,
                 },
@@ -89,6 +108,7 @@ def enrich_report(
         model_path=model_path,
         sample_seconds=sample_seconds,
         include_sampled_detections=include_sampled_detections,
+        inference_backend=inference_backend,
     )
     cap = cv2.VideoCapture(str(video_path))
     frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -116,6 +136,8 @@ def enrich_report(
                 "court_rois": selected_rois,
                 "sample_seconds": sample_seconds,
                 "ball_tracking_status": "complete" if ball_observations is not None else "disabled",
+                "ball_detector": ball_detector_type if ball_observations is not None else None,
+                "inference_backend": inference_backend,
                 "ball_frame_step": ball_frame_step if ball_observations is not None else None,
                 "ball_temporal_stride": ball_temporal_stride if ball_observations is not None else None,
             },
@@ -142,6 +164,8 @@ def enrich_report_file(
     ball_model_path: str | Path | None = None,
     ball_frame_step: int = 1,
     ball_temporal_stride: int = 1,
+    ball_detector_type: str = "tracknet",
+    inference_backend: str = "opencv",
 ) -> list[dict]:
     report = load_report(report_path)
     enriched = enrich_report(
@@ -153,6 +177,8 @@ def enrich_report_file(
         ball_model_path=ball_model_path,
         ball_frame_step=ball_frame_step,
         ball_temporal_stride=ball_temporal_stride,
+        ball_detector_type=ball_detector_type,
+        inference_backend=inference_backend,
     )
     Path(output_path).write_text(json.dumps(enriched, indent=2, ensure_ascii=False))
     return enriched
@@ -168,14 +194,35 @@ def main(argv: list[str] | None = None) -> int:
         nargs="?",
         help="Optional report JSON; audio-derived rally candidates are generated when omitted",
     )
-    parser.add_argument("-o", "--output", default="reports.json", help="Output path for enriched reports JSON")
     parser.add_argument(
-        "--segments-output",
+        "-o",
+        "--output",
+        default="analysis.json",
+        help="Output path for consolidated LLM-ready analysis JSON",
+    )
+    parser.add_argument(
+        "--internal-output-dir",
         default=None,
-        help="Optionally save generated audio rally candidates for inspection",
+        help="Optionally save internal segments.json and report.json for debugging",
     )
     parser.add_argument("--model-path", default=None, help="Path to yolox_nano.onnx")
-    parser.add_argument("--ball-model-path", default=None, help="Path to a TrackNet-compatible ONNX model")
+    parser.add_argument(
+        "--ball-model-path",
+        default=None,
+        help="Path to the selected ball detector's ONNX model",
+    )
+    parser.add_argument(
+        "--ball-detector",
+        choices=("tracknet", "yolox"),
+        default="tracknet",
+        help="Ball detector architecture for --ball-model-path",
+    )
+    parser.add_argument(
+        "--inference-backend",
+        choices=("opencv", "cuda"),
+        default="opencv",
+        help="ONNX inference backend; cuda requires the gpu optional dependency",
+    )
     parser.add_argument("--ball-frame-step", type=int, default=1, help="Run ball tracking every Nth video frame")
     parser.add_argument(
         "--ball-temporal-stride",
@@ -198,29 +245,31 @@ def main(argv: list[str] | None = None) -> int:
         "ball_model_path": args.ball_model_path,
         "ball_frame_step": args.ball_frame_step,
         "ball_temporal_stride": args.ball_temporal_stride,
+        "ball_detector_type": args.ball_detector,
+        "inference_backend": args.inference_backend,
     }
     if args.report:
-        if args.segments_output:
-            parser.error("--segments-output is only valid when segments are generated")
-        enriched = enrich_report_file(
-            args.video,
-            args.report,
-            args.output,
-            **common_options,
-        )
+        report = load_report(args.report)
     else:
         report = extract_rally_segments(args.video)
         if not report:
             parser.error("Audio analysis found no rally candidates")
-        if args.segments_output:
-            Path(args.segments_output).write_text(
+    enriched = enrich_report(args.video, report, **common_options)
+    analysis = build_llm_statistics(enriched)
+    Path(args.output).write_text(
+        json.dumps(analysis, indent=2, ensure_ascii=False)
+    )
+    if args.internal_output_dir:
+        internal_dir = Path(args.internal_output_dir)
+        internal_dir.mkdir(parents=True, exist_ok=True)
+        if not args.report:
+            (internal_dir / "segments.json").write_text(
                 json.dumps(report, indent=2, ensure_ascii=False)
             )
-        enriched = enrich_report(args.video, report, **common_options)
-        Path(args.output).write_text(
+        (internal_dir / "report.json").write_text(
             json.dumps(enriched, indent=2, ensure_ascii=False)
         )
-    print(f"Wrote {len(enriched)} enriched segments to {args.output}")
+    print(f"Wrote analysis for {len(enriched)} segments to {args.output}")
     return 0
 
 

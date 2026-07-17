@@ -1,4 +1,70 @@
 {
+  "schema": {
+    "name": "tennis-coach-analysis",
+    "version": 1,
+    "purpose": "Deterministic tennis-video evidence for LLM coaching analysis. Use only capabilities listed as supported.",
+    "conventions": {
+      "time": "Seconds from the start of the source video.",
+      "normalized_image_coordinates": "[0, 0] is image top-left and [1, 1] is image bottom-right.",
+      "normalized_court_coordinates": "[0, 0] is the far-left court corner and [1, 1] is the near-right court corner; values outside 0..1 are outside the detected court.",
+      "confidence": "Values range from 0 to 1; higher means more reliable.",
+      "null": "The metric could not be calculated from available evidence.",
+      "candidate": "A heuristic observation that is not a validated semantic event."
+    },
+    "sections": {
+      "source": {
+        "segment_count": "Number of analyzed candidate rallies.",
+        "start": "Earliest analyzed video time.",
+        "end": "Latest analyzed video time.",
+        "duration": "Elapsed time from source.start to source.end, including gaps."
+      },
+      "data_quality": {
+        "audio": "Availability and total count of audio hit candidates.",
+        "ball": "Aggregate ball visibility, trajectory continuity, and confidence.",
+        "warnings": "Mandatory limitations the LLM must account for."
+      },
+      "analysis_capabilities": {
+        "supported": "Claims supported by available deterministic evidence.",
+        "unsupported": "Claims the LLM must not infer from this file."
+      },
+      "players": {
+        "segments_detected": "Candidate rallies in which the anonymous player was detected.",
+        "segment_detection_rate": "segments_detected divided by source.segment_count.",
+        "trajectory_samples": "Number of sampled player positions.",
+        "side_sample_counts": "Samples assigned to the near and far court sides.",
+        "mean_detection_confidence": "Sample-weighted YOLOX person confidence.",
+        "mean_identity_confidence": "Sample-weighted anonymous identity confidence.",
+        "mean_identity_confidence_after_initialization": "Identity confidence excluding the initial neutral assignment.",
+        "total_image_movement_distance_normalized": "Summed image-space movement divided by image diagonal.",
+        "total_court_movement_normalized": "Summed movement in normalized top-down court coordinates.",
+        "court_transition_samples": "Count of court-space movement intervals.",
+        "mean_court_position": "Mean projected court [x, y], including outside points.",
+        "mean_in_court_position": "Mean projected [x, y] using only inside-court points."
+      },
+      "segments": {
+        "index": "Candidate-rally identifier inherited from extraction.",
+        "start": "Candidate-rally start time.",
+        "end": "Candidate-rally end time.",
+        "duration": "end minus start.",
+        "motion": "OpenCV foreground-motion summaries; values are image-area ratios.",
+        "players": "Per-rally summaries for stable anonymous player IDs.",
+        "audio": {
+          "hit_times": "Absolute audio onset times, not validated racket contacts.",
+          "hit_count": "Number of audio onset candidates in this rally.",
+          "mean_hit_interval_seconds": "Mean time between consecutive candidates.",
+          "mean_hit_energy": "Mean onset-strength value; relative, not a physical unit.",
+          "max_hit_energy": "Maximum relative onset strength."
+        },
+        "ball": {
+          "visible_ratio": "Visible detections divided by ball observations.",
+          "normalized_image_travel": "Summed image-space trajectory distance.",
+          "mean_normalized_image_speed_per_second": "Mean image-space displacement per second; not physical ball speed.",
+          "court_half_crossings": "Candidate crossings of normalized court y=0.5.",
+          "direction_change_candidates": "Trajectory turns exceeding 60 degrees."
+        }
+      }
+    }
+  },
   "stats_version": 1,
   "source": {
     "segment_count": 7,

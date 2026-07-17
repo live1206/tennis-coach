@@ -4,18 +4,26 @@ from video_extraction import cli
 from video_extraction.ball_annotations import evaluate_predictions, validate_annotation_manifest
 from video_extraction.cli import enrich_report, load_report
 from video_extraction.court_projection import CourtProjector, add_court_projections
-from video_extraction.vision.ball_tracking import TrackNetOnnxDetector, observations_for_segment
+from video_extraction.vision import ball_tracking
+from video_extraction.vision.ball_tracking import (
+    TrackNetOnnxDetector,
+    observations_for_segment,
+    track_ball_intervals,
+)
 from video_extraction.statistics import (
     aggregate_ball_summaries,
     build_llm_statistics,
     summarize_ball_trajectory,
 )
 from video_extraction.vision.player_observation import (
+    COCO_SPORTS_BALL_CLASS_ID,
+    YoloXDetector,
     YoloXPersonDetector,
     _attach_player_ids,
     _assign_identities,
     _public_player_data,
 )
+from video_extraction.vision.yolox_ball import YoloXBallDetector
 
 
 def test_load_report_requires_segment_timestamps(tmp_path):
@@ -41,11 +49,50 @@ def test_empty_report_does_not_initialize_models():
     ) == []
 
 
-def test_ball_tracking_survives_court_detection_failure(monkeypatch):
-    monkeypatch.setattr(cli, "TrackNetOnnxDetector", lambda _path: object())
+def test_cli_writes_analysis_and_separates_internal_outputs(monkeypatch, tmp_path):
+    segments = [{
+        "index": 1,
+        "start": 1.0,
+        "end": 2.0,
+        "audio": {
+            "sample_rate": 22050,
+            "hit_times": [1.5],
+            "hit_energies": [1.0],
+        },
+    }]
+    monkeypatch.setattr(cli, "extract_rally_segments", lambda _video: segments)
     monkeypatch.setattr(
         cli,
-        "track_ball_video",
+        "enrich_report",
+        lambda _video, report, **_options: report,
+    )
+    analysis_path = tmp_path / "analysis.json"
+    internal_dir = tmp_path / "internal"
+
+    result = cli.main([
+        "video.mp4",
+        "--output",
+        str(analysis_path),
+        "--internal-output-dir",
+        str(internal_dir),
+    ])
+
+    assert result == 0
+    assert analysis_path.exists()
+    assert (internal_dir / "segments.json").exists()
+    assert (internal_dir / "report.json").exists()
+    assert not (tmp_path / "reports.json").exists()
+
+
+def test_ball_tracking_survives_court_detection_failure(monkeypatch):
+    monkeypatch.setattr(
+        cli,
+        "TrackNetOnnxDetector",
+        lambda _path, **_options: object(),
+    )
+    monkeypatch.setattr(
+        cli,
+        "track_ball_intervals",
         lambda *_args, **_kwargs: [{"time": 1.5, "visible": True}],
     )
     monkeypatch.setattr(cli, "select_rois", lambda _video_path: None)
@@ -120,6 +167,39 @@ def test_yolox_preprocessing_preserves_raw_rgb_values():
 
     assert scale == 1.0
     np.testing.assert_array_equal(blob[0, :, 0, 0], [30.0, 20.0, 10.0])
+
+
+def test_yolox_sports_ball_uses_coco_class_32_score():
+    detector = YoloXDetector.__new__(YoloXDetector)
+    detector.class_id = COCO_SPORTS_BALL_CLASS_ID
+    decoded = np.zeros((2, 85), dtype=np.float32)
+    decoded[:, 4] = [0.8, 0.5]
+    decoded[:, 5] = [0.99, 0.99]
+    decoded[:, 5 + COCO_SPORTS_BALL_CLASS_ID] = [0.25, 0.9]
+
+    np.testing.assert_allclose(detector._class_scores(decoded), [0.2, 0.45])
+
+
+def test_yolox_ball_detector_returns_highest_confidence_center():
+    detector = YoloXBallDetector.__new__(YoloXBallDetector)
+    detector.detector = type(
+        "FakeDetector",
+        (),
+        {
+            "detect": lambda _self, _frame: [
+                {"bbox": [10, 10, 20, 20], "confidence": 0.4},
+                {"bbox": [40, 20, 60, 40], "confidence": 0.8},
+            ]
+        },
+    )()
+    frame = np.zeros((100, 200, 3), dtype=np.uint8)
+
+    observation = detector.detect([frame, frame, frame])
+
+    assert observation["x"] == 50.0
+    assert observation["y"] == 30.0
+    assert observation["x_normalized"] == 0.25
+    assert observation["confidence"] == 0.8
 
 
 def test_attaches_player_ids_and_builds_grouped_trajectories():
@@ -257,6 +337,45 @@ def test_filters_ball_observations_by_segment_time():
     assert observations_for_segment(observations, 1.0, 2.0) == [
         {"time": 1.0, "visible": False}
     ]
+
+
+def test_ball_tracking_only_processes_requested_intervals(monkeypatch):
+    calls = []
+
+    def fake_track(_video, _detector, **options):
+        calls.append((options["start"], options["end"]))
+        return [{"time": options["start"]}]
+
+    monkeypatch.setattr(ball_tracking, "track_ball_video", fake_track)
+
+    observations = track_ball_intervals(
+        "video.mp4",
+        object(),
+        [(1.0, 2.0), (10.0, 12.0)],
+        frame_step=2,
+        temporal_stride=2,
+    )
+
+    assert calls == [(1.0, 2.0), (10.0, 12.0)]
+    assert observations == [{"time": 1.0}, {"time": 10.0}]
+
+
+def test_ball_tracking_merges_overlapping_intervals(monkeypatch):
+    calls = []
+
+    def fake_track(_video, _detector, **options):
+        calls.append((options["start"], options["end"]))
+        return []
+
+    monkeypatch.setattr(ball_tracking, "track_ball_video", fake_track)
+
+    track_ball_intervals(
+        "video.mp4",
+        object(),
+        [(10.0, 12.0), (1.0, 3.0), (2.5, 4.0)],
+    )
+
+    assert calls == [(1.0, 4.0), (10.0, 12.0)]
 
 
 def test_evaluates_ball_predictions_with_localization_tolerance():
@@ -402,6 +521,8 @@ def test_builds_compact_llm_statistics_with_capability_limits():
     stats = build_llm_statistics(report)
 
     assert stats["stats_version"] == 1
+    assert stats["schema"]["name"] == "tennis-coach-analysis"
+    assert "unsupported" in stats["schema"]["sections"]["analysis_capabilities"]
     assert stats["players"]["player_1"]["segment_detection_rate"] == 1.0
     assert stats["players"]["player_1"]["mean_court_position"] == [0.5, 0.8]
     assert "shot success ratios" in stats["analysis_capabilities"]["unsupported"]

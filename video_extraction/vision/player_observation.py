@@ -15,10 +15,14 @@ from pathlib import Path
 import cv2
 import numpy as np
 
+from video_extraction.vision.onnx_inference import OnnxInference
+
 
 MODEL_NAME = "yolox_nano.onnx"
 MODEL_INPUT_SIZE = 416
 PLAYER_IDS = ("player_1", "player_2")
+COCO_PERSON_CLASS_ID = 0
+COCO_SPORTS_BALL_CLASS_ID = 32
 
 
 def default_model_path() -> Path:
@@ -29,14 +33,16 @@ def default_model_path() -> Path:
     return Path(__file__).resolve().parent / "models" / MODEL_NAME
 
 
-class YoloXPersonDetector:
-    """Run the Apache-2.0 YOLOX-Nano COCO person detector with OpenCV DNN."""
+class YoloXDetector:
+    """Run one COCO class from an Apache-2.0 YOLOX-Nano ONNX model."""
 
     def __init__(
         self,
         model_path: str | Path | None = None,
+        class_id: int = COCO_PERSON_CLASS_ID,
         confidence_threshold: float = 0.35,
         nms_threshold: float = 0.45,
+        inference_backend: str = "opencv",
     ):
         self.model_path = Path(model_path) if model_path else default_model_path()
         if not self.model_path.exists():
@@ -44,7 +50,8 @@ class YoloXPersonDetector:
                 f"YOLOX person detector not found: {self.model_path}. "
                 "Pass --model-path or add the model under video_extraction/vision/models/."
             )
-        self.net = cv2.dnn.readNetFromONNX(str(self.model_path))
+        self.inference = OnnxInference(self.model_path, inference_backend)
+        self.class_id = class_id
         self.confidence_threshold = confidence_threshold
         self.nms_threshold = nms_threshold
         self._grid, self._expanded_strides = self._build_decode_grid()
@@ -81,15 +88,13 @@ class YoloXPersonDetector:
     def detect(self, frame: np.ndarray) -> list[dict]:
         height, width = frame.shape[:2]
         blob, scale = self._preprocess(frame)
-        self.net.setInput(blob)
-        output = np.asarray(self.net.forward()).squeeze(0)
+        output = self.inference.forward(blob).squeeze(0)
         if output.ndim != 2 or output.shape[0] != len(self._grid):
             raise RuntimeError(f"Unexpected YOLOX output shape: {output.shape}")
-
         decoded = output.copy()
         decoded[:, :2] = (decoded[:, :2] + self._grid) * self._expanded_strides
         decoded[:, 2:4] = np.exp(decoded[:, 2:4]) * self._expanded_strides
-        scores = decoded[:, 4] * decoded[:, 5]
+        scores = self._class_scores(decoded)
         candidate_indices = np.flatnonzero(scores >= self.confidence_threshold)
 
         boxes = []
@@ -120,6 +125,31 @@ class YoloXPersonDetector:
             }
             for index in np.asarray(kept).reshape(-1)
         ]
+
+    def _class_scores(self, decoded: np.ndarray) -> np.ndarray:
+        class_score_index = 5 + self.class_id
+        if decoded.shape[1] <= class_score_index:
+            raise RuntimeError(
+                f"YOLOX output does not contain COCO class {self.class_id}: {decoded.shape}"
+            )
+        return decoded[:, 4] * decoded[:, class_score_index]
+
+
+class YoloXPersonDetector(YoloXDetector):
+    def __init__(
+        self,
+        model_path: str | Path | None = None,
+        confidence_threshold: float = 0.35,
+        nms_threshold: float = 0.45,
+        inference_backend: str = "opencv",
+    ):
+        super().__init__(
+            model_path,
+            class_id=COCO_PERSON_CLASS_ID,
+            confidence_threshold=confidence_threshold,
+            nms_threshold=nms_threshold,
+            inference_backend=inference_backend,
+        )
 
 
 def _normalize_histogram(histogram: np.ndarray) -> np.ndarray:
@@ -307,10 +337,14 @@ def analyze_player_observations(
     sample_seconds: float = 0.5,
     detector=None,
     include_sampled_detections: bool = True,
+    inference_backend: str = "opencv",
 ) -> list[dict]:
     if not segments:
         return []
-    detector = detector or YoloXPersonDetector(model_path)
+    detector = detector or YoloXPersonDetector(
+        model_path,
+        inference_backend=inference_backend,
+    )
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
         raise RuntimeError(f"Cannot open video for player observation analysis: {video_path}")

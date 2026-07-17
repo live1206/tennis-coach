@@ -14,7 +14,7 @@ The intended workflow is:
 
 1. Import a raw match video and an optional player key frame.
 2. Run local processing for audio hit detection, rally segmentation, person detection, player re-identification, motion ranking, pose or shot classification, and video clipping.
-3. Produce structured outputs such as `report.json` and `stats.json` containing timestamps, density, intensity, player IDs, and shot labels.
+3. Produce one self-describing `analysis.json` containing timestamps, density, intensity, player IDs, and supported analysis signals.
 4. Let the user ask for coaching insights, such as technical stats, training tips, tactical patterns, or highlight reel requests.
 5. Route simple requests to local rules or a small local model.
 6. Delegate complex requests to a cloud LLM/agent using structured JSON and optional sampled frames only.
@@ -48,22 +48,23 @@ with video-derived data:
 ```bash
 tennis-coach-extract match.mp4 \
   --model-path /path/to/yolox_nano.onnx \
-  --output reports.json
+  --output analysis.json
 ```
 
-The generated rally timeline is an internal extraction intermediate, not an
-LLM input. To inspect or debug it, save it explicitly:
+`analysis.json` is the only output intended for an LLM. Generated rally
+segments and the detailed extraction report remain in memory unless internal
+debugging output is requested:
 
 ```bash
 tennis-coach-extract match.mp4 \
-  --segments-output segments.json \
-  --output reports.json
+  --output analysis.json \
+  --internal-output-dir artifacts/internal
 ```
 
 An existing JSON list containing `start` and `end` fields can still be supplied
 as the second positional argument to bypass automatic segmentation.
 
-The enriched `reports.json` includes:
+The optional `artifacts/internal/report.json` includes:
 
 - `audio` with absolute hit times, onset energies, sample rate, and hit count
 - `features.player_motion_max`, `features.player_motion_var`
@@ -81,26 +82,74 @@ schema release.
 
 ### LLM-ready statistics
 
-Generate compact deterministic statistics instead of sending raw bounding
-boxes and sampled frames to an LLM:
+The extraction command generates compact deterministic statistics directly.
+For an existing internal report, the standalone conversion command remains
+available:
 
 ```bash
-tennis-coach-stats reports.json --output stats.json
+tennis-coach-stats artifacts/internal/report.json --output analysis.json
 ```
 
-`stats.json` contains per-player movement, identity quality, side usage, and
+`analysis.json` contains per-player movement, identity quality, side usage, and
 mean court position; compact per-segment audio, motion, and ball summaries;
 global data quality warnings; and explicit supported/unsupported analysis capabilities.
 It intentionally does not claim forehand/backhand, shot success, winners, or
 errors until those signals are implemented and validated.
 
-`examples/sample_stats.json` demonstrates the full-video player/motion output
-without external ball weights. `examples/sample_ball_stats.json` demonstrates
-the ball-enabled schema on the independently checked two-second interval,
-including visibility, image-space trajectory, speed, court crossings, and
-direction-change candidates. `examples/sample_audio_segments.json`,
-`examples/sample_audio_report.json`, and `examples/sample_audio_stats.json`
-demonstrate the automatic audio-derived flow on the complete sample video.
+The top-level `schema` section explains field meanings, coordinate systems,
+units, confidence ranges, candidate-event semantics, and mandatory
+limitations so an LLM can interpret the evidence without external
+documentation. `examples/analysis.json` is the canonical LLM input example;
+detailed and legacy artifacts are isolated under `examples/internal/`.
+
+The output shape is:
+
+```json
+{
+  "schema": {
+    "name": "tennis-coach-analysis",
+    "version": 1,
+    "purpose": "Deterministic tennis-video evidence for LLM coaching analysis.",
+    "conventions": {
+      "time": "Seconds from the start of the source video.",
+      "confidence": "Values range from 0 to 1; higher means more reliable.",
+      "candidate": "A heuristic observation that is not a validated semantic event."
+    },
+    "sections": {
+      "players": {
+        "mean_detection_confidence": "Sample-weighted YOLOX person confidence.",
+        "mean_court_position": "Mean projected court [x, y]."
+      },
+      "segments": {
+        "audio": {
+          "hit_times": "Absolute audio onset times, not validated racket contacts."
+        },
+        "ball": {
+          "visible_ratio": "Visible detections divided by ball observations."
+        }
+      }
+    }
+  },
+  "source": {"segment_count": 7, "start": 1.31, "end": 156.67},
+  "data_quality": {"warnings": ["Ball tracking is unavailable in this report."]},
+  "analysis_capabilities": {
+    "supported": ["player movement comparison"],
+    "unsupported": ["forehand/backhand classification"]
+  },
+  "players": {
+    "player_1": {
+      "segments_detected": 7,
+      "mean_detection_confidence": 0.816,
+      "mean_court_position": [0.487, 0.987]
+    }
+  },
+  "segments": []
+}
+```
+
+The embedded `schema` in the actual file is more complete than this abbreviated
+README sample. The LLM must honor `analysis_capabilities.unsupported` and
+`data_quality.warnings`; absent fields must not be inferred.
 
 ### Ball annotation and tracking
 
@@ -128,21 +177,25 @@ tennis-coach-ball-validate annotations.local/session-01/annotations.json \
   --require-complete
 ```
 
-An externally supplied TrackNet-compatible ONNX model can run at full frame
-rate during report enrichment:
+The publishable ball baseline uses the Apache-2.0 YOLOX-Nano COCO `sports
+ball` class. A CUDA runner can install the optional GPU dependency and run:
 
 ```bash
+python -m pip install -e '.[gpu]'
+
 tennis-coach-extract match.mp4 \
   --model-path /path/to/yolox_nano.onnx \
-  --ball-model-path /path/to/tracknet.onnx \
-  --ball-temporal-stride 2 \
-  --output reports.json
+  --ball-detector yolox \
+  --ball-model-path /path/to/yolox_nano.onnx \
+  --inference-backend cuda \
+  --output analysis.json \
+  --internal-output-dir artifacts/internal
 ```
 
-The external model and weights are not bundled because the available TrackNet
-V1 checkpoint has no verified redistribution license. When enabled, each
-segment receives `ball_trajectory` observations with frame/time, visibility,
-coordinates, confidence, and interpolation status.
+YOLOX is expected to be less accurate than a temporal model for tiny, blurred,
+or occluded balls, so its output remains confidence-gated and must be measured
+on independent labels. The available TrackNet V1 checkpoint has no verified
+redistribution license and is not part of the publishable workflow.
 
 Standalone tracking and evaluation are also available:
 
@@ -164,9 +217,9 @@ is not a release-quality benchmark.
 
 ### Sample output
 
-`examples/sample_report.json` was generated from Breakpoint's
+`examples/internal/legacy_report.json` was generated from Breakpoint's
 `video/DJI_20260503154223_0534_D_highlight.MP4` using its bundled
-`yolox_nano.onnx` model. `examples/sample_segments.json` divides the full
+`yolox_nano.onnx` model. `examples/internal/legacy_segments.json` divides the full
 156.7-second video into five fixed windows solely to exercise report
 enrichment; those windows are not detected rally boundaries and are not
 required by the normal automatic extraction flow.
