@@ -4,10 +4,20 @@ import { app, ipcMain, BrowserWindow } from 'electron'
 import path from 'node:path'
 import fs from 'node:fs'
 import { processTreeSpawnOptions, terminateProcessTree } from './processControl'
-import { formatPythonDependencyError, resolveProjectPython } from './pythonRuntime'
+import {
+  getBallModelSetupHint,
+  formatPythonDependencyError,
+  resolveBallModelPath,
+  resolvePlayerHandedness,
+  resolvePlayerHandednessArgs,
+  resolvePoseModelPath,
+  resolveProjectPython,
+} from './pythonRuntime'
 
 let analysisProcess: ChildProcess | null = null
 let analysisCancellationPromise: Promise<void> | null = null
+const EXTRACTION_CONFIG_VERSION = 1
+const DEFAULT_POSE_MODEL_URL = 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_heavy/float16/latest/pose_landmarker_heavy.task'
 
 function clearAnalysisProcess(child: ChildProcess) {
   if (analysisProcess === child) {
@@ -87,12 +97,56 @@ function appendLogPath(error: string, logPath: string | null): string {
   return `${error}\n\nFull extraction log:\n${logPath}`
 }
 
-function getSourceMetadata(videoPath: string) {
+function getExtractionConfig(projectRoot: string) {
+  return {
+    version: EXTRACTION_CONFIG_VERSION,
+    poseModelPath: resolvePoseModelPath(projectRoot),
+    ballModelPath: resolveBallModelPath(projectRoot),
+    handedness: resolvePlayerHandedness(),
+  }
+}
+
+function getPoseModelTargetPath(projectRoot: string): string {
+  const configured = process.env.TENNIS_COACH_POSE_MODEL_PATH?.trim()
+  if (configured) {
+    return path.resolve(configured)
+  }
+  if (app.isPackaged) {
+    return path.join(app.getPath('userData'), 'models', 'pose_landmarker_heavy.task')
+  }
+  return path.join(projectRoot, 'models', 'pose_landmarker_heavy.task')
+}
+
+async function downloadPoseModel(targetPath: string): Promise<string> {
+  const modelUrl = process.env.TENNIS_COACH_POSE_MODEL_URL?.trim() || DEFAULT_POSE_MODEL_URL
+  const response = await fetch(modelUrl)
+  if (!response.ok) {
+    throw new Error(`Pose model download failed (${response.status}) from ${modelUrl}`)
+  }
+  const bytes = Buffer.from(await response.arrayBuffer())
+  fs.mkdirSync(path.dirname(targetPath), { recursive: true })
+  fs.writeFileSync(targetPath, bytes)
+  return targetPath
+}
+
+async function ensurePoseModelPath(projectRoot: string): Promise<string> {
+  const existing = resolvePoseModelPath(projectRoot)
+  if (existing) return existing
+  const targetPath = getPoseModelTargetPath(projectRoot)
+  if (fs.existsSync(targetPath)) return targetPath
+  return downloadPoseModel(targetPath)
+}
+
+function getSourceMetadata(
+  videoPath: string,
+  extractionConfig: ReturnType<typeof getExtractionConfig> = getExtractionConfig(getProjectRoot()),
+) {
   const stats = fs.statSync(videoPath)
   return {
     path: path.resolve(videoPath),
     size: stats.size,
     mtimeMs: stats.mtimeMs,
+    extractionConfig,
   }
 }
 
@@ -100,9 +154,12 @@ function sourceMetadataMatches(
   before: ReturnType<typeof getSourceMetadata>,
   after: ReturnType<typeof getSourceMetadata>,
 ): boolean {
+  const beforeConfig = JSON.stringify(before.extractionConfig ?? null)
+  const afterConfig = JSON.stringify(after.extractionConfig ?? null)
   return before.path === after.path
     && before.size === after.size
     && before.mtimeMs === after.mtimeMs
+    && beforeConfig === afterConfig
 }
 
 export function loadCachedAnalysisReport(videoPath: string): unknown | null {
@@ -128,6 +185,23 @@ export function setupPythonBridge(isApprovedVideoPath: (videoPath: string) => bo
 
     const { cmd, args } = getEngineCommand()
     const cwd = getProjectRoot()
+    let poseModelPath: string
+    try {
+      poseModelPath = await ensurePoseModelPath(cwd)
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Failed to prepare pose model.'
+      return {
+        error: [
+          'Could not prepare the MediaPipe Pose Landmarker model automatically.',
+          message,
+          'Set TENNIS_COACH_POSE_MODEL_PATH manually if needed.',
+        ].join('\n'),
+      }
+    }
+    const ballModelPath = resolveBallModelPath(cwd)
+    if (!ballModelPath) {
+      return { error: getBallModelSetupHint(cwd) }
+    }
     const outputDir = getOutputDir(videoPath)
     const sourcePath = path.join(outputDir, 'source.json')
     const errorLogPath = getAnalysisErrorLogPath(videoPath)
@@ -143,6 +217,13 @@ export function setupPythonBridge(isApprovedVideoPath: (videoPath: string) => bo
     const fullArgs = [
       ...args,
       videoPath,
+      '--pose-model-path',
+      poseModelPath,
+      '--ball-detector',
+      'yolox',
+      '--ball-model-path',
+      ballModelPath,
+      ...resolvePlayerHandednessArgs(),
       '--output',
       getAnalysisReportPath(videoPath),
       '--internal-output-dir',

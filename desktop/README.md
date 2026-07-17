@@ -26,6 +26,30 @@ Audio extraction also requires `ffmpeg` to be available. In WSL/Ubuntu:
 sudo apt update && sudo apt install -y ffmpeg
 ```
 
+Desktop extraction always passes `--pose-model-path` so shot analysis can run.
+If the model is missing, the app now downloads `pose_landmarker_heavy.task`
+automatically to a local models folder. You can still override the path:
+
+```bash
+TENNIS_COACH_POSE_MODEL_PATH=/absolute/path/to/pose_landmarker_heavy.task
+```
+
+Desktop extraction also always passes player handedness flags:
+- `player_1` and `player_2` default to `right`
+- override with environment variables before launch:
+
+```bash
+TENNIS_COACH_PLAYER_1_HAND=right
+TENNIS_COACH_PLAYER_2_HAND=left
+```
+
+Desktop extraction now also enables YOLOX ball tracking by default using the
+bundled `video_extraction/vision/models/yolox_nano.onnx`. Override with:
+
+```bash
+TENNIS_COACH_BALL_MODEL_PATH=/absolute/path/to/yolox_nano.onnx
+```
+
 ```bash
 TENNIS_COACH_PYTHON=/path/to/python npm run dev
 ```
