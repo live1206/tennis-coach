@@ -11,9 +11,20 @@ npm install
 npm run dev
 ```
 
-Set `TENNIS_COACH_PYTHON` when the desired Python executable is not available
-as `python`/`python3`. The selected environment must have this repository and
-the `foundry-local` optional dependency installed.
+In development, the app automatically uses `../.venv` when present. Set
+`TENNIS_COACH_PYTHON` when you need a different Python executable. The selected
+environment must have this repository and dependencies installed (including
+OpenCV/cv2 and `foundry-local` for AI analysis).
+
+```bash
+python -m pip install -e ".[foundry-local]"
+```
+
+Audio extraction also requires `ffmpeg` to be available. In WSL/Ubuntu:
+
+```bash
+sudo apt update && sudo apt install -y ffmpeg
+```
 
 ```bash
 TENNIS_COACH_PYTHON=/path/to/python npm run dev
@@ -24,6 +35,20 @@ review workspace. The renderer displays deterministic quality/capability
 metadata, while model execution goes through Electron IPC to
 `video_extraction.local_analysis`. Users never need to locate the intermediate
 JSON, and raw video is not sent to the model.
+
+AI Analysis defaults to **Cloud** mode. Configure cloud execution with:
+
+```bash
+TENNIS_COACH_CLOUD_API_BASE=https://api.openai.com/v1
+TENNIS_COACH_CLOUD_API_KEY=<your-api-key>
+# Optional, defaults to /chat/completions
+TENNIS_COACH_CLOUD_API_PATH=/chat/completions
+```
+
+Local mode remains available as a fallback.
+
+If extraction fails, Tennis Coach writes a copyable failure log to the video
+output folder as `analysis-error.log` (next to `analysis.json`).
 
 ## Attribution
 

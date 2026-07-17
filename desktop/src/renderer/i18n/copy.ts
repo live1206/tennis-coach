@@ -62,11 +62,16 @@ export interface Copy {
     supported: string
     unsupported: string
     askTitle: string
-    privacy: string
+    privacyCloud: string
+    privacyLocal: string
     model: string
+    provider: string
+    providerCloud: string
+    providerLocal: string
     question: string
     defaultQuestion: string
-    run: string
+    runCloud: string
+    runLocal: string
     running: string
     cancel: string
     resultTitle: string
@@ -80,6 +85,8 @@ export interface Copy {
     done: string
     failed: string
     retryVideo: string
+    copyError: string
+    copied: string
     successfulVideos: (done: number, total: number) => string
   }
   app: {
@@ -203,12 +210,17 @@ export const COPY: Record<Language, Copy> = {
       supported: 'Supported claims',
       unsupported: 'Unsupported claims',
       askTitle: 'Ask the local coach',
-      privacy: 'Only extracted tennis evidence is sent to the in-process model. Raw video remains on your device.',
+      privacyCloud: 'Extracted tennis evidence is sent to your configured cloud AI endpoint. Raw video remains on your device.',
+      privacyLocal: 'Only extracted tennis evidence is sent to the in-process model. Raw video remains on your device.',
       model: 'Foundry Local model alias',
+      provider: 'Run mode',
+      providerCloud: 'Cloud',
+      providerLocal: 'Local',
       question: 'Coaching question',
       defaultQuestion: 'Summarize the strongest evidence-backed observations, limitations, and next three practice priorities.',
-      run: 'Run local AI analysis',
-      running: 'Analyzing locally…',
+      runCloud: 'Run cloud AI analysis',
+      runLocal: 'Run local AI analysis',
+      running: 'Analyzing…',
       cancel: 'Cancel',
       resultTitle: 'Coaching analysis',
       unknownError: 'Local AI analysis failed.',
@@ -221,6 +233,8 @@ export const COPY: Record<Language, Copy> = {
       done: 'Ready',
       failed: 'Failed',
       retryVideo: 'Retry',
+      copyError: 'Copy error',
+      copied: 'Copied',
       successfulVideos: (done: number, total: number) => `${done} / ${total} videos ready`,
     },
     app: {
@@ -360,12 +374,17 @@ export const COPY: Record<Language, Copy> = {
       supported: '支持的结论',
       unsupported: '不支持的结论',
       askTitle: '询问本地教练',
-      privacy: '只有提取后的网球分析证据会传给本机模型，原始视频不会离开设备。',
+      privacyCloud: '提取后的网球分析证据会发送到您配置的云端 AI 服务，原始视频仍保留在本机。',
+      privacyLocal: '只有提取后的网球分析证据会传给本机模型，原始视频不会离开设备。',
       model: 'Foundry Local 模型别名',
+      provider: '运行方式',
+      providerCloud: '云端',
+      providerLocal: '本地',
       question: '训练问题',
       defaultQuestion: '总结最有证据支持的观察、数据限制和接下来三个训练重点。',
-      run: '运行本地 AI 分析',
-      running: '正在本地分析…',
+      runCloud: '运行云端 AI 分析',
+      runLocal: '运行本地 AI 分析',
+      running: '正在分析…',
       cancel: '取消',
       resultTitle: '训练分析',
       unknownError: '本地 AI 分析失败。',
@@ -378,6 +397,8 @@ export const COPY: Record<Language, Copy> = {
       done: '已完成',
       failed: '失败',
       retryVideo: '重试',
+      copyError: '复制错误',
+      copied: '已复制',
       successfulVideos: (done: number, total: number) => `${done} / ${total} 个视频已就绪`,
     },
     app: {

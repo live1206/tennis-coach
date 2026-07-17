@@ -53,7 +53,14 @@ declare global {
         question: string,
         modelAlias: string,
       ) => Promise<{ output?: string; error?: string }>
+      runCloudAIAnalysis: (
+        videoPath: string,
+        evidenceId: string,
+        question: string,
+        modelAlias: string,
+      ) => Promise<{ output?: string; error?: string }>
       cancelLocalAIAnalysis: () => Promise<void>
+      cancelAIAnalysis: () => Promise<void>
       getRecentProjects: () => Promise<string[]>
       getAppVersion: () => Promise<string>
       checkResources: () => Promise<{ ok: boolean; missing: string[] }>

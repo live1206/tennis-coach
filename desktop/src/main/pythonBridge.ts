@@ -4,6 +4,7 @@ import { app, ipcMain, BrowserWindow } from 'electron'
 import path from 'node:path'
 import fs from 'node:fs'
 import { processTreeSpawnOptions, terminateProcessTree } from './processControl'
+import { formatPythonDependencyError, resolveProjectPython } from './pythonRuntime'
 
 let analysisProcess: ChildProcess | null = null
 let analysisCancellationPromise: Promise<void> | null = null
@@ -20,8 +21,7 @@ function getEngineCommand(): { cmd: string; args: string[] } {
     const enginePath = path.join(process.resourcesPath, 'engine', 'TennisCoachAnalysis', 'TennisCoachAnalysis.exe')
     return { cmd: enginePath, args: [] }
   }
-  const python = process.env.TENNIS_COACH_PYTHON
-    || (process.platform === 'win32' ? 'python' : 'python3')
+  const python = resolveProjectPython(getProjectRoot())
   return { cmd: python, args: ['-m', 'video_extraction.cli'] }
 }
 
@@ -43,6 +43,48 @@ function getOutputDir(videoPath: string): string {
 
 export function getAnalysisReportPath(videoPath: string): string {
   return path.join(getOutputDir(videoPath), 'analysis.json')
+}
+
+function getAnalysisErrorLogPath(videoPath: string): string {
+  return path.join(getOutputDir(videoPath), 'analysis-error.log')
+}
+
+function writeAnalysisErrorLog(
+  videoPath: string,
+  commandLine: string,
+  cwd: string,
+  stdout: string,
+  stderr: string,
+  errorDetail: string,
+): string | null {
+  const logPath = getAnalysisErrorLogPath(videoPath)
+  const body = [
+    `timestamp=${new Date().toISOString()}`,
+    `video=${videoPath}`,
+    `cwd=${cwd}`,
+    `command=${commandLine}`,
+    '',
+    '=== ERROR ===',
+    errorDetail || '(none)',
+    '',
+    '=== STDERR ===',
+    stderr || '(none)',
+    '',
+    '=== STDOUT ===',
+    stdout || '(none)',
+    '',
+  ].join('\n')
+  try {
+    fs.writeFileSync(logPath, body, 'utf-8')
+    return logPath
+  } catch {
+    return null
+  }
+}
+
+function appendLogPath(error: string, logPath: string | null): string {
+  if (!logPath) return error
+  return `${error}\n\nFull extraction log:\n${logPath}`
 }
 
 function getSourceMetadata(videoPath: string) {
@@ -88,11 +130,13 @@ export function setupPythonBridge(isApprovedVideoPath: (videoPath: string) => bo
     const cwd = getProjectRoot()
     const outputDir = getOutputDir(videoPath)
     const sourcePath = path.join(outputDir, 'source.json')
+    const errorLogPath = getAnalysisErrorLogPath(videoPath)
     let sourceMetadata: ReturnType<typeof getSourceMetadata>
     try {
       sourceMetadata = getSourceMetadata(videoPath)
       fs.mkdirSync(outputDir, { recursive: true })
       fs.rmSync(sourcePath, { force: true })
+      fs.rmSync(errorLogPath, { force: true })
     } catch (error) {
       return { error: error instanceof Error ? error.message : 'Could not prepare the analysis output.' }
     }
@@ -104,6 +148,7 @@ export function setupPythonBridge(isApprovedVideoPath: (videoPath: string) => bo
       '--internal-output-dir',
       path.join(outputDir, 'internal'),
     ]
+    const commandLine = `${cmd} ${fullArgs.join(' ')}`
 
     const env = { ...process.env }
     if (app.isPackaged) {
@@ -135,6 +180,7 @@ export function setupPythonBridge(isApprovedVideoPath: (videoPath: string) => bo
         label: 'Extracting canonical tennis analysis',
       })
       let stdoutBuf = ''
+      let stdoutAll = ''
       let stderrBuf = ''
       let completionError: string | null = null
 
@@ -153,7 +199,9 @@ export function setupPythonBridge(isApprovedVideoPath: (videoPath: string) => bo
       }
 
       child.stdout?.on('data', (data: Buffer) => {
-        stdoutBuf += data.toString()
+        const text = data.toString()
+        stdoutBuf += text
+        stdoutAll += text
         const parts = stdoutBuf.split('\n')
         stdoutBuf = parts.pop()!
         for (const line of parts) {
@@ -174,10 +222,37 @@ export function setupPythonBridge(isApprovedVideoPath: (videoPath: string) => bo
         }
         clearAnalysisProcess(child)
         if (completionError) {
-          settle({ error: completionError })
+          const logPath = writeAnalysisErrorLog(
+            videoPath,
+            commandLine,
+            cwd,
+            stdoutAll,
+            stderrBuf,
+            completionError,
+          )
+          settle({
+            error: appendLogPath(
+              formatPythonDependencyError(completionError),
+              logPath,
+            ),
+          })
         } else if (code !== 0) {
           const detail = stderrBuf.trim()
-          settle({ error: detail || `Process exited with code ${code}` })
+          const failure = detail || `Process exited with code ${code}`
+          const logPath = writeAnalysisErrorLog(
+            videoPath,
+            commandLine,
+            cwd,
+            stdoutAll,
+            stderrBuf,
+            failure,
+          )
+          settle({
+            error: appendLogPath(
+              formatPythonDependencyError(failure),
+              logPath,
+            ),
+          })
         } else {
           try {
             const currentMetadata = getSourceMetadata(videoPath)
@@ -200,7 +275,20 @@ export function setupPythonBridge(isApprovedVideoPath: (videoPath: string) => bo
 
       child.on('error', (err) => {
         clearAnalysisProcess(child)
-        settle({ error: err.message })
+        const logPath = writeAnalysisErrorLog(
+          videoPath,
+          commandLine,
+          cwd,
+          stdoutAll,
+          stderrBuf,
+          err.message,
+        )
+        settle({
+          error: appendLogPath(
+            formatPythonDependencyError(err.message),
+            logPath,
+          ),
+        })
       })
     })
   })

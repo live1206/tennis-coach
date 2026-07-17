@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import { useState } from 'react'
 import type { VideoRecord } from '../state/AppState'
 import { useCopy, type Copy } from '../i18n'
 
@@ -26,6 +27,7 @@ function statusColor(video: VideoRecord): string {
 export default function BatchVideoList({ videos, activeVideoId, onSelect, onRetry }: Props) {
   const copy = useCopy()
   const doneCount = videos.filter((video) => video.status === 'done').length
+  const [copiedVideoId, setCopiedVideoId] = useState<string | null>(null)
 
   return (
     <aside style={panelStyle}>
@@ -58,23 +60,43 @@ export default function BatchVideoList({ videos, activeVideoId, onSelect, onRetr
                 <div style={cardContentStyle}>
                   <div style={cardTitleStyle}>{video.displayName}</div>
                   <div style={cardPathStyle}>{video.path}</div>
-                  {video.errorMessage && <div style={errorStyle}>{video.errorMessage}</div>}
                 </div>
                 <div style={statusWrapStyle}>
                   <strong style={{ ...statusStyle, color }}>{statusText} · {video.rallyCount}</strong>
                 </div>
               </button>
               {video.status === 'error' && (
-                <button
-                  type="button"
-                  onClick={(event) => {
-                    event.stopPropagation()
-                    onRetry(video.id)
-                  }}
-                  style={retryStyle}
-                >
-                  {copy.batch.retryVideo}
-                </button>
+                <>
+                  {video.errorMessage && <pre style={errorStyle}>{video.errorMessage}</pre>}
+                  <div style={errorActionsStyle}>
+                    <button
+                      type="button"
+                      onClick={async (event) => {
+                        event.stopPropagation()
+                        if (!video.errorMessage) return
+                        try {
+                          await navigator.clipboard.writeText(video.errorMessage)
+                          setCopiedVideoId(video.id)
+                        } catch {
+                          setCopiedVideoId(null)
+                        }
+                      }}
+                      style={retryStyle}
+                    >
+                      {copiedVideoId === video.id ? copy.batch.copied : copy.batch.copyError}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={(event) => {
+                        event.stopPropagation()
+                        onRetry(video.id)
+                      }}
+                      style={retryStyle}
+                    >
+                      {copy.batch.retryVideo}
+                    </button>
+                  </div>
+                </>
               )}
             </div>
           )
@@ -95,7 +117,8 @@ const progressPillStyle: CSSProperties = { fontFamily: 'var(--font-mono)', fontS
 const cardContentStyle: CSSProperties = { minWidth: 0 }
 const cardTitleStyle: CSSProperties = { fontFamily: 'var(--font-display)', fontSize: 14, fontWeight: 900, color: 'var(--color-text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }
 const cardPathStyle: CSSProperties = { fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--color-text-secondary)', marginTop: 4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }
-const errorStyle: CSSProperties = { color: 'var(--color-danger)', fontSize: 11, lineHeight: 1.45, marginTop: 8 }
+const errorStyle: CSSProperties = { whiteSpace: 'pre-wrap', color: 'var(--color-danger)', fontSize: 11, lineHeight: 1.45, marginTop: 8, marginBottom: 0, userSelect: 'text', maxHeight: 200, overflowY: 'auto' }
+const errorActionsStyle: CSSProperties = { display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 8 }
 const statusWrapStyle: CSSProperties = { display: 'grid', gap: 8, justifyItems: 'end', textAlign: 'right' }
 const statusStyle: CSSProperties = { fontSize: 11, fontWeight: 900, whiteSpace: 'nowrap' }
 const retryStyle: CSSProperties = { display: 'block', marginLeft: 'auto', marginTop: 8, padding: 0, border: 0, background: 'transparent', font: 'inherit', fontSize: 11, fontWeight: 900, color: 'var(--color-accent)', textDecoration: 'underline', cursor: 'pointer' }

@@ -11,7 +11,7 @@ import {
   setupPythonBridge,
 } from './pythonBridge'
 import { cancelFfmpegExport, setupFfmpegBridge } from './ffmpegBridge'
-import { cancelLocalAIAnalysis, setupAIAnalysisBridge } from './aiAnalysisBridge'
+import { cancelAnyAIAnalysis, setupAIAnalysisBridge } from './aiAnalysisBridge'
 import { validateTennisAnalysis } from '../shared/analysis'
 
 const store = new Store<{ recentProjects: string[] }>({
@@ -185,7 +185,7 @@ app.on('before-quit', (event) => {
   shutdownStarted = true
   Promise.allSettled([
     cancelPythonAnalysis(),
-    cancelLocalAIAnalysis(),
+    cancelAnyAIAnalysis(),
     cancelFfmpegExport(),
   ]).finally(() => app.exit(0))
 })
