@@ -3,6 +3,7 @@ Build the Python analysis engine into a standalone executable using PyInstaller.
 Run from the project root: python desktop/scripts/build_engine.py
 """
 import importlib.util
+import shutil
 import subprocess
 import sys
 import os
@@ -43,6 +44,11 @@ def native_runtime_args() -> list[str]:
     return ["--add-binary", str(native_bin / "*.dll") + os.pathsep + "."]
 
 
+def stage_models() -> None:
+    target = DIST_DIR / "video_extraction" / "vision" / "models"
+    shutil.copytree(MODELS_DIR, target, dirs_exist_ok=True)
+
+
 def build(
     entry_name: str,
     executable_name: str,
@@ -70,8 +76,6 @@ def build(
         "--hidden-import", "numpy",
         "--hidden-import", "_socket",
         "--collect-submodules", "video_extraction",
-        "--add-data",
-        str(MODELS_DIR) + os.pathsep + "video_extraction/vision/models",
         "--collect-all", "librosa",
         "--collect-all", "soundfile",
         str(entry),
@@ -112,6 +116,7 @@ def build(
 def main():
     build("TennisCoachAnalysis.py", "TennisCoachAnalysis", collect_pose=True)
     build("TennisCoachLocalAnalysis.py", "TennisCoachLocalAnalysis", collect_foundry=True)
+    stage_models()
     print("Next: place ffmpeg.exe in dist-engine/ffmpeg/ then run electron-builder")
 
 
