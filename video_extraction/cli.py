@@ -8,6 +8,7 @@ import cv2
 
 from video_extraction.audio import extract_rally_segments
 from video_extraction.court_projection import CourtProjector, add_court_projections
+from video_extraction.shot_analysis import analyze_segment_shots
 from video_extraction.statistics import build_llm_statistics
 from video_extraction.vision.ball_tracking import (
     TrackNetOnnxDetector,
@@ -21,6 +22,23 @@ from video_extraction.vision.yolox_ball import YoloXBallDetector
 
 
 EXTRACTION_VERSION = 1
+
+
+def parse_player_handedness(values: list[str]) -> dict[str, str]:
+    handedness = {}
+    for value in values:
+        try:
+            player_id, hand = value.split("=", 1)
+        except ValueError as error:
+            raise ValueError(
+                f"Invalid handedness '{value}'; expected player_id=left|right"
+            ) from error
+        if not player_id or hand not in {"left", "right"}:
+            raise ValueError(
+                f"Invalid handedness '{value}'; expected player_id=left|right"
+            )
+        handedness[player_id] = hand
+    return handedness
 
 
 def load_report(path: str | Path) -> list[dict]:
@@ -186,7 +204,7 @@ def enrich_report_file(
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="Extract local tennis video signals into a structured report."
+        description="Extract local tennis video signals into LLM-ready analysis."
     )
     parser.add_argument("video", help="Path to the original tennis video")
     parser.add_argument(
@@ -223,6 +241,18 @@ def main(argv: list[str] | None = None) -> int:
         default="opencv",
         help="ONNX inference backend; cuda requires the gpu optional dependency",
     )
+    parser.add_argument(
+        "--pose-model-path",
+        default=None,
+        help="Optional MediaPipe Pose Landmarker model for stroke-side analysis",
+    )
+    parser.add_argument(
+        "--player-handedness",
+        action="append",
+        default=[],
+        metavar="PLAYER_ID=HAND",
+        help="Player handedness used for forehand/backhand classification",
+    )
     parser.add_argument("--ball-frame-step", type=int, default=1, help="Run ball tracking every Nth video frame")
     parser.add_argument(
         "--ball-temporal-stride",
@@ -255,6 +285,17 @@ def main(argv: list[str] | None = None) -> int:
         if not report:
             parser.error("Audio analysis found no rally candidates")
     enriched = enrich_report(args.video, report, **common_options)
+    if args.pose_model_path:
+        try:
+            player_handedness = parse_player_handedness(args.player_handedness)
+        except ValueError as error:
+            parser.error(str(error))
+        enriched = analyze_segment_shots(
+            args.video,
+            enriched,
+            args.pose_model_path,
+            player_handedness,
+        )
     analysis = build_llm_statistics(enriched)
     Path(args.output).write_text(
         json.dumps(analysis, indent=2, ensure_ascii=False)

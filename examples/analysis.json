@@ -21,6 +21,7 @@
       "data_quality": {
         "audio": "Availability and total count of audio hit candidates.",
         "ball": "Aggregate ball visibility, trajectory continuity, and confidence.",
+        "shots": "Counts of classified and abstained contact candidates.",
         "warnings": "Mandatory limitations the LLM must account for."
       },
       "analysis_capabilities": {
@@ -39,7 +40,8 @@
         "total_court_movement_normalized": "Summed movement in normalized top-down court coordinates.",
         "court_transition_samples": "Count of court-space movement intervals.",
         "mean_court_position": "Mean projected court [x, y], including outside points.",
-        "mean_in_court_position": "Mean projected [x, y] using only inside-court points."
+        "mean_in_court_position": "Mean projected [x, y] using only inside-court points.",
+        "shot_counts": "Confidence-gated forehand, backhand, and unknown counts."
       },
       "segments": {
         "index": "Candidate-rally identifier inherited from extraction.",
@@ -61,6 +63,13 @@
           "mean_normalized_image_speed_per_second": "Mean image-space displacement per second; not physical ball speed.",
           "court_half_crossings": "Candidate crossings of normalized court y=0.5.",
           "direction_change_candidates": "Trajectory turns exceeding 60 degrees."
+        },
+        "shots": {
+          "time": "Audio candidate time used for contact association.",
+          "player_id": "Anonymous hitter identity, or null when unresolved.",
+          "classification": "forehand, backhand, or unknown.",
+          "confidence": "Combined ball, player detection/identity, pose, and geometric confidence.",
+          "reason": "Why classification abstained; null when classified."
         }
       }
     }
@@ -83,6 +92,11 @@
       "observation_count": 0,
       "visible_count": 0,
       "visible_ratio": null
+    },
+    "shots": {
+      "candidate_count": 0,
+      "classified_count": 0,
+      "unknown_count": 0
     },
     "warnings": [
       "Ball tracking is unavailable in this report.",
@@ -128,7 +142,12 @@
       "mean_in_court_position": [
         0.501896,
         0.963741
-      ]
+      ],
+      "shot_counts": {
+        "forehand": 0,
+        "backhand": 0,
+        "unknown": 0
+      }
     },
     "player_2": {
       "segments_detected": 6,
@@ -151,7 +170,12 @@
       "mean_in_court_position": [
         0.640317,
         0.180806
-      ]
+      ],
+      "shot_counts": {
+        "forehand": 0,
+        "backhand": 0,
+        "unknown": 0
+      }
     }
   },
   "segments": [
@@ -235,7 +259,8 @@
         "observation_count": 0,
         "visible_count": 0,
         "visible_ratio": null
-      }
+      },
+      "shots": []
     },
     {
       "index": 2,
@@ -315,7 +340,8 @@
         "observation_count": 0,
         "visible_count": 0,
         "visible_ratio": null
-      }
+      },
+      "shots": []
     },
     {
       "index": 3,
@@ -404,7 +430,8 @@
         "observation_count": 0,
         "visible_count": 0,
         "visible_ratio": null
-      }
+      },
+      "shots": []
     },
     {
       "index": 4,
@@ -474,7 +501,8 @@
         "observation_count": 0,
         "visible_count": 0,
         "visible_ratio": null
-      }
+      },
+      "shots": []
     },
     {
       "index": 5,
@@ -554,7 +582,8 @@
         "observation_count": 0,
         "visible_count": 0,
         "visible_ratio": null
-      }
+      },
+      "shots": []
     },
     {
       "index": 6,
@@ -636,7 +665,8 @@
         "observation_count": 0,
         "visible_count": 0,
         "visible_ratio": null
-      }
+      },
+      "shots": []
     },
     {
       "index": 7,
@@ -724,7 +754,8 @@
         "observation_count": 0,
         "visible_count": 0,
         "visible_ratio": null
-      }
+      },
+      "shots": []
     }
   ]
 }

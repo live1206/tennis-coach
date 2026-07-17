@@ -16,6 +16,9 @@ dependencies = [
 gpu = [
   "onnxruntime-gpu>=1.18,<2.0",
 ]
+pose = [
+  "mediapipe>=0.10,<1.0",
+]
 test = [
   "pytest>=8,<9",
 ]

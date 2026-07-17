@@ -40,6 +40,7 @@ ANALYSIS_SCHEMA = {
         "data_quality": {
             "audio": "Availability and total count of audio hit candidates.",
             "ball": "Aggregate ball visibility, trajectory continuity, and confidence.",
+            "shots": "Counts of classified and abstained contact candidates.",
             "warnings": "Mandatory limitations the LLM must account for.",
         },
         "analysis_capabilities": {
@@ -65,6 +66,7 @@ ANALYSIS_SCHEMA = {
             "court_transition_samples": "Count of court-space movement intervals.",
             "mean_court_position": "Mean projected court [x, y], including outside points.",
             "mean_in_court_position": "Mean projected [x, y] using only inside-court points.",
+            "shot_counts": "Confidence-gated forehand, backhand, and unknown counts.",
         },
         "segments": {
             "index": "Candidate-rally identifier inherited from extraction.",
@@ -88,6 +90,16 @@ ANALYSIS_SCHEMA = {
                 ),
                 "court_half_crossings": "Candidate crossings of normalized court y=0.5.",
                 "direction_change_candidates": "Trajectory turns exceeding 60 degrees.",
+            },
+            "shots": {
+                "time": "Audio candidate time used for contact association.",
+                "player_id": "Anonymous hitter identity, or null when unresolved.",
+                "classification": "forehand, backhand, or unknown.",
+                "confidence": (
+                    "Combined ball, player detection/identity, pose, and "
+                    "geometric confidence."
+                ),
+                "reason": "Why classification abstained; null when classified.",
             },
         },
     },
@@ -333,6 +345,12 @@ def _aggregate_players(report: list[dict], player_ids: list[str]) -> dict:
         image_movement = []
         court_movement = []
         court_transition_samples = 0
+        player_shots = [
+            shot
+            for segment in report
+            for shot in segment.get("shots", [])
+            if shot.get("player_id") == player_id
+        ]
         for segment in report:
             player = segment.get("players", {}).get(player_id)
             if player and player.get("detected"):
@@ -379,6 +397,13 @@ def _aggregate_players(report: list[dict], player_ids: list[str]) -> dict:
                 trajectory_points,
                 inside_only=True,
             ),
+            "shot_counts": {
+                classification: sum(
+                    shot.get("classification") == classification
+                    for shot in player_shots
+                )
+                for classification in ("forehand", "backhand", "unknown")
+            },
         }
     return aggregates
 
@@ -392,12 +417,27 @@ def build_llm_statistics(report: list[dict]) -> dict:
     segments = []
     ball_summaries = []
     audio_summaries = []
+    all_shots = []
     for segment in report:
         ball_trajectory = segment.get("ball_trajectory", [])
         ball_summary = summarize_ball_trajectory(ball_trajectory)
         ball_summaries.append(ball_summary)
         audio_summary = summarize_audio(segment)
         audio_summaries.append(audio_summary)
+        compact_shots = [
+            {
+                key: shot.get(key)
+                for key in (
+                    "time",
+                    "player_id",
+                    "classification",
+                    "confidence",
+                    "reason",
+                )
+            }
+            for shot in segment.get("shots", [])
+        ]
+        all_shots.extend(compact_shots)
         segments.append({
             "index": segment.get("index"),
             "start": segment["start"],
@@ -419,6 +459,7 @@ def build_llm_statistics(report: list[dict]) -> dict:
             },
             "audio": audio_summary,
             "ball": ball_summary,
+            "shots": compact_shots,
         })
 
     players = _aggregate_players(report, player_ids)
@@ -461,6 +502,19 @@ def build_llm_statistics(report: list[dict]) -> dict:
     supported = []
     if has_audio_segments:
         supported.append("candidate rally timing and audio hit analysis")
+    classified_shots = [
+        shot
+        for shot in all_shots
+        if shot.get("classification") in {"forehand", "backhand"}
+    ]
+    unknown_shot_count = len(all_shots) - len(classified_shots)
+    if all_shots and unknown_shot_count:
+        warnings.append(
+            f"Shot classification abstained for {unknown_shot_count} of "
+            f"{len(all_shots)} contact candidates."
+        )
+    if classified_shots:
+        supported.append("confidence-gated forehand/backhand classification")
     if comparable_movement_players >= 2:
         supported.append("player movement comparison")
     if has_player_positions:
@@ -509,12 +563,21 @@ def build_llm_statistics(report: list[dict]) -> dict:
                 ),
             },
             "ball": ball_summary,
+            "shots": {
+                "candidate_count": len(all_shots),
+                "classified_count": len(classified_shots),
+                "unknown_count": unknown_shot_count,
+            },
             "warnings": warnings,
         },
         "analysis_capabilities": {
             "supported": supported,
             "unsupported": [
-                "forehand/backhand classification",
+                *(
+                    []
+                    if classified_shots
+                    else ["forehand/backhand classification"]
+                ),
                 "shot success ratios",
                 "winner/error attribution",
                 "serve and return classification",

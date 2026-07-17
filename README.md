@@ -140,16 +140,64 @@ The output shape is:
     "player_1": {
       "segments_detected": 7,
       "mean_detection_confidence": 0.816,
-      "mean_court_position": [0.487, 0.987]
+      "mean_court_position": [0.487, 0.987],
+      "shot_counts": {"forehand": 0, "backhand": 0, "unknown": 0}
     }
   },
-  "segments": []
+  "segments": [
+    {
+      "index": 1,
+      "shots": [
+        {
+          "time": 2.81,
+          "player_id": "player_1",
+          "classification": "forehand",
+          "confidence": 0.78,
+          "reason": null
+        }
+      ]
+    }
+  ]
 }
 ```
 
 The embedded `schema` in the actual file is more complete than this abbreviated
 README sample. The LLM must honor `analysis_capabilities.unsupported` and
 `data_quality.warnings`; absent fields must not be inferred.
+
+### Forehand/backhand classification
+
+Forehand/backhand analysis is confidence-gated and depends on all of:
+
+- a ball observation near an audio hit candidate;
+- an unambiguous nearby player box;
+- usable shoulder pose from an externally supplied MediaPipe Pose Landmarker;
+- declared player handedness.
+
+Install the optional pose dependency and run the complete publishable path:
+
+```bash
+python -m pip install -e '.[gpu,pose]'
+
+tennis-coach-extract match.mp4 \
+  --model-path /path/to/yolox_nano.onnx \
+  --ball-detector yolox \
+  --ball-model-path /path/to/yolox_nano.onnx \
+  --inference-backend cuda \
+  --pose-model-path /path/to/pose_landmarker_heavy.task \
+  --player-handedness player_1=right \
+  --player-handedness player_2=right \
+  --output analysis.json \
+  --internal-output-dir artifacts/internal
+```
+
+The classifier associates each audio onset with a nearby ball and anonymous
+player, projects the contact onto the anatomical shoulder axis, and maps the
+contact side using declared handedness. Ambiguous contacts, missing balls,
+weak player identity, weak poses, and unknown handedness produce
+`classification: "unknown"` with a reason rather than a forced label. Pose
+model assets are not bundled; users must obtain and review their upstream
+terms separately.
 
 ### Ball annotation and tracking
 
