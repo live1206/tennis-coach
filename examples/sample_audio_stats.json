@@ -1,0 +1,664 @@
+{
+  "stats_version": 1,
+  "source": {
+    "segment_count": 7,
+    "start": 1.309615,
+    "end": 156.666667,
+    "duration": 155.357052
+  },
+  "data_quality": {
+    "audio": {
+      "available": true,
+      "segment_count": 7,
+      "hit_count": 72
+    },
+    "ball": {
+      "available": false,
+      "observation_count": 0,
+      "visible_count": 0,
+      "visible_ratio": null
+    },
+    "warnings": [
+      "Ball tracking is unavailable in this report.",
+      "Audio-derived boundaries and hit times are candidates, not validated rally or contact labels.",
+      "Court projection assumes points lie on the court plane; airborne ball projections are approximate."
+    ]
+  },
+  "analysis_capabilities": {
+    "supported": [
+      "candidate rally timing and audio hit analysis",
+      "player movement comparison",
+      "approximate player positioning and court coverage",
+      "segment activity comparison"
+    ],
+    "unsupported": [
+      "forehand/backhand classification",
+      "shot success ratios",
+      "winner/error attribution",
+      "serve and return classification",
+      "target-player identification from a key frame",
+      "physical ball speed or 3D trajectory"
+    ]
+  },
+  "players": {
+    "player_1": {
+      "segments_detected": 7,
+      "segment_detection_rate": 1.0,
+      "trajectory_samples": 152,
+      "side_sample_counts": {
+        "near": 152,
+        "far": 0
+      },
+      "mean_detection_confidence": 0.815903,
+      "mean_identity_confidence": 0.656613,
+      "mean_identity_confidence_after_initialization": 0.685978,
+      "total_image_movement_distance_normalized": 6.043021,
+      "total_court_movement_normalized": 7.003395,
+      "court_transition_samples": 145,
+      "mean_court_position": [
+        0.48749,
+        0.987383
+      ],
+      "mean_in_court_position": [
+        0.501896,
+        0.963741
+      ]
+    },
+    "player_2": {
+      "segments_detected": 6,
+      "segment_detection_rate": 0.857143,
+      "trajectory_samples": 38,
+      "side_sample_counts": {
+        "near": 0,
+        "far": 38
+      },
+      "mean_detection_confidence": 0.474624,
+      "mean_identity_confidence": 0.630382,
+      "mean_identity_confidence_after_initialization": 0.66515,
+      "total_image_movement_distance_normalized": 0.658458,
+      "total_court_movement_normalized": 3.287921,
+      "court_transition_samples": 32,
+      "mean_court_position": [
+        0.585581,
+        0.117014
+      ],
+      "mean_in_court_position": [
+        0.640317,
+        0.180806
+      ]
+    }
+  },
+  "segments": [
+    {
+      "index": 1,
+      "start": 1.309615,
+      "end": 14.921134,
+      "duration": 13.611519,
+      "motion": {
+        "player_motion_max": 0.01137,
+        "player_motion_var": 2.16e-06,
+        "near_motion_mean": 0.003626,
+        "far_motion_mean": 0.001045,
+        "motion_sample_count": 204
+      },
+      "players": {
+        "player_1": {
+          "detected": true,
+          "side": "near",
+          "detection_confidence": 0.8191,
+          "identity_confidence": 0.5,
+          "image_movement_distance_normalized": 0.697174,
+          "court_movement_normalized": 0.820049,
+          "trajectory_samples": 24,
+          "mean_image_position": [
+            0.357227,
+            0.856096
+          ],
+          "mean_court_position": [
+            0.354138,
+            0.98651
+          ],
+          "mean_in_court_position": [
+            0.318921,
+            0.97116
+          ]
+        },
+        "player_2": {
+          "detected": true,
+          "side": "far",
+          "detection_confidence": 0.4346,
+          "identity_confidence": 0.5,
+          "image_movement_distance_normalized": 0.086162,
+          "court_movement_normalized": 0.444793,
+          "trajectory_samples": 8,
+          "mean_image_position": [
+            0.509961,
+            0.343519
+          ],
+          "mean_court_position": [
+            0.567949,
+            0.02895
+          ],
+          "mean_in_court_position": [
+            0.567949,
+            0.02895
+          ]
+        }
+      },
+      "audio": {
+        "available": true,
+        "sample_rate": 22050,
+        "hit_count": 9,
+        "hit_times": [
+          2.809614512471655,
+          3.4829931972789114,
+          3.8312925170068026,
+          5.9675283446712015,
+          6.664126984126984,
+          8.777142857142858,
+          10.077460317460318,
+          11.981496598639456,
+          13.421133786848072
+        ],
+        "mean_hit_interval_seconds": 1.32644,
+        "mean_hit_energy": 4.045413,
+        "max_hit_energy": 6.800599
+      },
+      "ball": {
+        "available": false,
+        "observation_count": 0,
+        "visible_count": 0,
+        "visible_ratio": null
+      }
+    },
+    {
+      "index": 2,
+      "start": 23.322132,
+      "end": 35.029615,
+      "duration": 11.707483,
+      "motion": {
+        "player_motion_max": 0.021417,
+        "player_motion_var": 4.85e-06,
+        "near_motion_mean": 0.007482,
+        "far_motion_mean": 0.000455,
+        "motion_sample_count": 176
+      },
+      "players": {
+        "player_1": {
+          "detected": true,
+          "side": "near",
+          "detection_confidence": 0.8211,
+          "identity_confidence": 0.8618,
+          "image_movement_distance_normalized": 0.939868,
+          "court_movement_normalized": 1.026651,
+          "trajectory_samples": 20,
+          "mean_image_position": [
+            0.453815,
+            0.901944
+          ],
+          "mean_court_position": [
+            0.459672,
+            1.007555
+          ],
+          "mean_in_court_position": [
+            0.537714,
+            0.996188
+          ]
+        },
+        "player_2": {
+          "detected": true,
+          "side": "far",
+          "detection_confidence": 0.4862,
+          "identity_confidence": 0.7855,
+          "image_movement_distance_normalized": 0.143902,
+          "court_movement_normalized": 0.754826,
+          "trajectory_samples": 10,
+          "mean_image_position": [
+            0.502812,
+            0.346481
+          ],
+          "mean_court_position": [
+            0.531122,
+            0.050539
+          ],
+          "mean_in_court_position": [
+            0.56708,
+            0.057839
+          ]
+        }
+      },
+      "audio": {
+        "available": true,
+        "sample_rate": 22050,
+        "hit_count": 7,
+        "hit_times": [
+          24.822131519274375,
+          26.656507936507936,
+          27.515646258503402,
+          28.212244897959184,
+          30.162721088435376,
+          31.7881179138322,
+          33.52961451247165
+        ],
+        "mean_hit_interval_seconds": 1.451247,
+        "mean_hit_energy": 4.931742,
+        "max_hit_energy": 6.798395
+      },
+      "ball": {
+        "available": false,
+        "observation_count": 0,
+        "visible_count": 0,
+        "visible_ratio": null
+      }
+    },
+    {
+      "index": 3,
+      "start": 36.023447,
+      "end": 59.457007,
+      "duration": 23.43356,
+      "motion": {
+        "player_motion_max": 0.050168,
+        "player_motion_var": 1.374e-05,
+        "near_motion_mean": 0.003274,
+        "far_motion_mean": 0.001534,
+        "motion_sample_count": 352
+      },
+      "players": {
+        "player_1": {
+          "detected": true,
+          "side": "near",
+          "detection_confidence": 0.823,
+          "identity_confidence": 0.6873,
+          "image_movement_distance_normalized": 1.141489,
+          "court_movement_normalized": 1.343584,
+          "trajectory_samples": 26,
+          "mean_image_position": [
+            0.436769,
+            0.826531
+          ],
+          "mean_court_position": [
+            0.443852,
+            0.968638
+          ],
+          "mean_in_court_position": [
+            0.493753,
+            0.94928
+          ]
+        },
+        "player_2": {
+          "detected": true,
+          "side": "far",
+          "detection_confidence": 0.5561,
+          "identity_confidence": 0.6464,
+          "image_movement_distance_normalized": 0.366762,
+          "court_movement_normalized": 1.703242,
+          "trajectory_samples": 12,
+          "mean_image_position": [
+            0.581228,
+            0.424614
+          ],
+          "mean_court_position": [
+            0.705714,
+            0.324718
+          ],
+          "mean_in_court_position": [
+            0.793234,
+            0.505422
+          ]
+        }
+      },
+      "audio": {
+        "available": true,
+        "sample_rate": 22050,
+        "hit_count": 16,
+        "hit_times": [
+          37.52344671201814,
+          38.98630385487528,
+          40.542040816326534,
+          41.795918367346935,
+          42.120997732426304,
+          42.67827664399093,
+          43.02657596371882,
+          45.99873015873016,
+          48.808344671201816,
+          49.458503401360545,
+          51.037460317460315,
+          53.15047619047619,
+          54.35791383219954,
+          55.86721088435374,
+          56.70312925170068,
+          57.95700680272109
+        ],
+        "mean_hit_interval_seconds": 1.362237,
+        "mean_hit_energy": 3.64179,
+        "max_hit_energy": 4.988357
+      },
+      "ball": {
+        "available": false,
+        "observation_count": 0,
+        "visible_count": 0,
+        "visible_ratio": null
+      }
+    },
+    {
+      "index": 4,
+      "start": 62.447392,
+      "end": 77.684308,
+      "duration": 15.236916,
+      "motion": {
+        "player_motion_max": 0.051491,
+        "player_motion_var": 2.473e-05,
+        "near_motion_mean": 0.004229,
+        "far_motion_mean": 8.6e-05,
+        "motion_sample_count": 229
+      },
+      "players": {
+        "player_1": {
+          "detected": true,
+          "side": "near",
+          "detection_confidence": 0.8356,
+          "identity_confidence": 0.8785,
+          "image_movement_distance_normalized": 0.864616,
+          "court_movement_normalized": 1.016719,
+          "trajectory_samples": 18,
+          "mean_image_position": [
+            0.620718,
+            0.894239
+          ],
+          "mean_court_position": [
+            0.632324,
+            1.003998
+          ],
+          "mean_in_court_position": [
+            0.806889,
+            0.988764
+          ]
+        },
+        "player_2": {
+          "detected": false,
+          "side": null,
+          "detection_confidence": null,
+          "identity_confidence": null,
+          "image_movement_distance_normalized": null,
+          "court_movement_normalized": 0,
+          "trajectory_samples": 0,
+          "mean_image_position": null,
+          "mean_court_position": null,
+          "mean_in_court_position": null
+        }
+      },
+      "audio": {
+        "available": true,
+        "sample_rate": 22050,
+        "hit_count": 6,
+        "hit_times": [
+          63.94739229024943,
+          65.20126984126983,
+          67.19818594104308,
+          68.89324263038549,
+          71.74929705215419,
+          76.18430839002268
+        ],
+        "mean_hit_interval_seconds": 2.447383,
+        "mean_hit_energy": 4.807474,
+        "max_hit_energy": 6.266042
+      },
+      "ball": {
+        "available": false,
+        "observation_count": 0,
+        "visible_count": 0,
+        "visible_ratio": null
+      }
+    },
+    {
+      "index": 5,
+      "start": 79.467619,
+      "end": 100.184444,
+      "duration": 20.716825,
+      "motion": {
+        "player_motion_max": 0.040625,
+        "player_motion_var": 1.953e-05,
+        "near_motion_mean": 0.003078,
+        "far_motion_mean": 0.001209,
+        "motion_sample_count": 311
+      },
+      "players": {
+        "player_1": {
+          "detected": true,
+          "side": "near",
+          "detection_confidence": 0.7964,
+          "identity_confidence": 0.6396,
+          "image_movement_distance_normalized": 1.597116,
+          "court_movement_normalized": 1.944402,
+          "trajectory_samples": 35,
+          "mean_image_position": [
+            0.577016,
+            0.837513
+          ],
+          "mean_court_position": [
+            0.581416,
+            0.972369
+          ],
+          "mean_in_court_position": [
+            0.543712,
+            0.941095
+          ]
+        },
+        "player_2": {
+          "detected": true,
+          "side": "far",
+          "detection_confidence": 0.3742,
+          "identity_confidence": 0.5419,
+          "image_movement_distance_normalized": 0.028643,
+          "court_movement_normalized": 0.198121,
+          "trajectory_samples": 5,
+          "mean_image_position": [
+            0.482187,
+            0.334074
+          ],
+          "mean_court_position": [
+            0.446391,
+            -0.048521
+          ],
+          "mean_in_court_position": null
+        }
+      },
+      "audio": {
+        "available": true,
+        "sample_rate": 22050,
+        "hit_count": 10,
+        "hit_times": [
+          80.96761904761905,
+          81.94285714285715,
+          83.26639455782313,
+          84.54349206349207,
+          88.25868480725623,
+          89.51256235827664,
+          90.41814058956916,
+          93.27419501133787,
+          97.54666666666667,
+          98.68444444444444
+        ],
+        "mean_hit_interval_seconds": 1.968536,
+        "mean_hit_energy": 5.729838,
+        "max_hit_energy": 8.17131
+      },
+      "ball": {
+        "available": false,
+        "observation_count": 0,
+        "visible_count": 0,
+        "visible_ratio": null
+      }
+    },
+    {
+      "index": 6,
+      "start": 102.803673,
+      "end": 122.428798,
+      "duration": 19.625125,
+      "motion": {
+        "player_motion_max": 0.033988,
+        "player_motion_var": 1.105e-05,
+        "near_motion_mean": 0.004019,
+        "far_motion_mean": 0.000527,
+        "motion_sample_count": 294
+      },
+      "players": {
+        "player_1": {
+          "detected": true,
+          "side": "near",
+          "detection_confidence": 0.832,
+          "identity_confidence": 0.4768,
+          "image_movement_distance_normalized": 0.522238,
+          "court_movement_normalized": 0.557981,
+          "trajectory_samples": 17,
+          "mean_image_position": [
+            0.458379,
+            0.874129
+          ],
+          "mean_court_position": [
+            0.466462,
+            0.994144
+          ],
+          "mean_in_court_position": [
+            0.484746,
+            0.969719
+          ]
+        },
+        "player_2": {
+          "detected": true,
+          "side": "far",
+          "detection_confidence": 0.3871,
+          "identity_confidence": 0.4552,
+          "image_movement_distance_normalized": 0.0,
+          "court_movement_normalized": 0,
+          "trajectory_samples": 1,
+          "mean_image_position": [
+            0.548438,
+            0.342593
+          ],
+          "mean_court_position": [
+            0.732907,
+            0.022105
+          ],
+          "mean_in_court_position": [
+            0.732907,
+            0.022105
+          ]
+        }
+      },
+      "audio": {
+        "available": true,
+        "sample_rate": 22050,
+        "hit_count": 9,
+        "hit_times": [
+          104.30367346938775,
+          105.92907029478458,
+          110.96780045351474,
+          112.6164172335601,
+          114.17215419501133,
+          116.4477097505669,
+          117.84090702947846,
+          118.72326530612244,
+          120.92879818594105
+        ],
+        "mean_hit_interval_seconds": 2.078141,
+        "mean_hit_energy": 4.721647,
+        "max_hit_energy": 8.471486
+      },
+      "ball": {
+        "available": false,
+        "observation_count": 0,
+        "visible_count": 0,
+        "visible_ratio": null
+      }
+    },
+    {
+      "index": 7,
+      "start": 135.636327,
+      "end": 156.666667,
+      "duration": 21.03034,
+      "motion": {
+        "player_motion_max": 0.985536,
+        "player_motion_var": 0.00546536,
+        "near_motion_mean": 0.012344,
+        "far_motion_mean": 0.01021,
+        "motion_sample_count": 316
+      },
+      "players": {
+        "player_1": {
+          "detected": true,
+          "side": "near",
+          "detection_confidence": 0.79,
+          "identity_confidence": 0.5329,
+          "image_movement_distance_normalized": 0.28052,
+          "court_movement_normalized": 0.294009,
+          "trajectory_samples": 12,
+          "mean_image_position": [
+            0.426584,
+            0.896373
+          ],
+          "mean_court_position": [
+            0.433694,
+            1.005414
+          ],
+          "mean_in_court_position": [
+            0.421445,
+            0.998738
+          ]
+        },
+        "player_2": {
+          "detected": true,
+          "side": "far",
+          "detection_confidence": 0.3828,
+          "identity_confidence": 0.589,
+          "image_movement_distance_normalized": 0.032989,
+          "court_movement_normalized": 0.186939,
+          "trajectory_samples": 2,
+          "mean_image_position": [
+            0.490495,
+            0.34213
+          ],
+          "mean_court_position": [
+            0.481915,
+            0.016712
+          ],
+          "mean_in_court_position": [
+            0.562472,
+            0.064117
+          ]
+        }
+      },
+      "audio": {
+        "available": true,
+        "sample_rate": 22050,
+        "hit_count": 15,
+        "hit_times": [
+          137.13632653061225,
+          137.69360544217687,
+          139.99238095238096,
+          143.1502947845805,
+          143.8701133786848,
+          145.42585034013607,
+          146.14566893424035,
+          147.5156462585034,
+          151.81133786848073,
+          152.7633560090703,
+          153.22775510204082,
+          153.71537414965985,
+          154.17977324263038,
+          155.10857142857142,
+          155.85160997732427
+        ],
+        "mean_hit_interval_seconds": 1.336806,
+        "mean_hit_energy": 5.979027,
+        "max_hit_energy": 11.425085
+      },
+      "ball": {
+        "available": false,
+        "observation_count": 0,
+        "visible_count": 0,
+        "visible_ratio": null
+      }
+    }
+  ]
+}

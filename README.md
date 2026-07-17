@@ -33,26 +33,39 @@ Planned JSON signals include:
 - shot or pose labels when confidence is sufficient
 - selected rally IDs for downstream clip export
 
-## Video report enrichment
+## Video extraction
 
-Tennis Coach now includes a small Python extraction layer that takes an existing segment report with `start` and `end` timestamps and fills in more video-derived data. It intentionally does not copy Breakpoint's full audio pipeline or desktop app.
+Install the Python package and ensure `ffmpeg` is available on `PATH`:
 
 ```bash
-tennis-coach-extract match.mp4 full_report.json \
+python -m pip install -e .
+```
+
+By default, Tennis Coach extracts mono audio with ffmpeg, detects hit
+candidates, groups them into candidate rallies, and enriches those intervals
+with video-derived data:
+
+```bash
+tennis-coach-extract match.mp4 \
   --model-path /path/to/yolox_nano.onnx \
   --output reports.json
 ```
 
-You can also run it as a module:
+The generated rally timeline is an internal extraction intermediate, not an
+LLM input. To inspect or debug it, save it explicitly:
 
 ```bash
-python -m video_extraction.cli match.mp4 full_report.json \
-  --model-path /path/to/yolox_nano.onnx \
+tennis-coach-extract match.mp4 \
+  --segments-output segments.json \
   --output reports.json
 ```
 
-The enriched `reports.json` keeps the original segment fields and adds:
+An existing JSON list containing `start` and `end` fields can still be supplied
+as the second positional argument to bypass automatic segmentation.
 
+The enriched `reports.json` includes:
+
+- `audio` with absolute hit times, onset energies, sample rate, and hit count
 - `features.player_motion_max`, `features.player_motion_var`
 - `features.near_motion_mean`, `features.far_motion_mean`, `features.motion_sample_count`
 - `players.player_1` and `players.player_2` with anonymous side, confidence, movement, and normalized mean position
@@ -76,8 +89,8 @@ tennis-coach-stats reports.json --output stats.json
 ```
 
 `stats.json` contains per-player movement, identity quality, side usage, and
-mean court position; compact per-segment motion and ball summaries; global data
-quality warnings; and explicit supported/unsupported analysis capabilities.
+mean court position; compact per-segment audio, motion, and ball summaries;
+global data quality warnings; and explicit supported/unsupported analysis capabilities.
 It intentionally does not claim forehand/backhand, shot success, winners, or
 errors until those signals are implemented and validated.
 
@@ -85,7 +98,9 @@ errors until those signals are implemented and validated.
 without external ball weights. `examples/sample_ball_stats.json` demonstrates
 the ball-enabled schema on the independently checked two-second interval,
 including visibility, image-space trajectory, speed, court crossings, and
-direction-change candidates.
+direction-change candidates. `examples/sample_audio_segments.json`,
+`examples/sample_audio_report.json`, and `examples/sample_audio_stats.json`
+demonstrate the automatic audio-derived flow on the complete sample video.
 
 ### Ball annotation and tracking
 
@@ -117,7 +132,7 @@ An externally supplied TrackNet-compatible ONNX model can run at full frame
 rate during report enrichment:
 
 ```bash
-tennis-coach-extract match.mp4 full_report.json \
+tennis-coach-extract match.mp4 \
   --model-path /path/to/yolox_nano.onnx \
   --ball-model-path /path/to/tracknet.onnx \
   --ball-temporal-stride 2 \
@@ -153,7 +168,8 @@ is not a release-quality benchmark.
 `video/DJI_20260503154223_0534_D_highlight.MP4` using its bundled
 `yolox_nano.onnx` model. `examples/sample_segments.json` divides the full
 156.7-second video into five fixed windows solely to exercise report
-enrichment; those windows are not detected rally boundaries.
+enrichment; those windows are not detected rally boundaries and are not
+required by the normal automatic extraction flow.
 
 The sample contains court polygons, motion summaries, anonymous player
 summaries, and sampled person detections from the complete video.

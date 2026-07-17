@@ -6,6 +6,7 @@ from pathlib import Path
 
 import cv2
 
+from video_extraction.audio import extract_rally_segments
 from video_extraction.court_projection import CourtProjector, add_court_projections
 from video_extraction.vision.ball_tracking import (
     TrackNetOnnxDetector,
@@ -158,10 +159,21 @@ def enrich_report_file(
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Enrich tennis report JSON with local video-derived signals.")
+    parser = argparse.ArgumentParser(
+        description="Extract local tennis video signals into a structured report."
+    )
     parser.add_argument("video", help="Path to the original tennis video")
-    parser.add_argument("report", help="Path to existing report JSON with start/end segment fields")
+    parser.add_argument(
+        "report",
+        nargs="?",
+        help="Optional report JSON; audio-derived rally candidates are generated when omitted",
+    )
     parser.add_argument("-o", "--output", default="reports.json", help="Output path for enriched reports JSON")
+    parser.add_argument(
+        "--segments-output",
+        default=None,
+        help="Optionally save generated audio rally candidates for inspection",
+    )
     parser.add_argument("--model-path", default=None, help="Path to yolox_nano.onnx")
     parser.add_argument("--ball-model-path", default=None, help="Path to a TrackNet-compatible ONNX model")
     parser.add_argument("--ball-frame-step", type=int, default=1, help="Run ball tracking every Nth video frame")
@@ -179,17 +191,35 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
 
-    enriched = enrich_report_file(
-        args.video,
-        args.report,
-        args.output,
-        model_path=args.model_path,
-        include_sampled_detections=not args.no_sampled_detections,
-        sample_seconds=args.sample_seconds,
-        ball_model_path=args.ball_model_path,
-        ball_frame_step=args.ball_frame_step,
-        ball_temporal_stride=args.ball_temporal_stride,
-    )
+    common_options = {
+        "model_path": args.model_path,
+        "include_sampled_detections": not args.no_sampled_detections,
+        "sample_seconds": args.sample_seconds,
+        "ball_model_path": args.ball_model_path,
+        "ball_frame_step": args.ball_frame_step,
+        "ball_temporal_stride": args.ball_temporal_stride,
+    }
+    if args.report:
+        if args.segments_output:
+            parser.error("--segments-output is only valid when segments are generated")
+        enriched = enrich_report_file(
+            args.video,
+            args.report,
+            args.output,
+            **common_options,
+        )
+    else:
+        report = extract_rally_segments(args.video)
+        if not report:
+            parser.error("Audio analysis found no rally candidates")
+        if args.segments_output:
+            Path(args.segments_output).write_text(
+                json.dumps(report, indent=2, ensure_ascii=False)
+            )
+        enriched = enrich_report(args.video, report, **common_options)
+        Path(args.output).write_text(
+            json.dumps(enriched, indent=2, ensure_ascii=False)
+        )
     print(f"Wrote {len(enriched)} enriched segments to {args.output}")
     return 0
 

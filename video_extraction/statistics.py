@@ -219,6 +219,27 @@ def _segment_player_summary(segment: dict, player_id: str) -> dict:
     }
 
 
+def summarize_audio(segment: dict) -> dict:
+    audio = segment.get("audio")
+    if not audio:
+        return {"available": False, "hit_count": 0}
+    hit_times = audio.get("hit_times", [])
+    hit_energies = audio.get("hit_energies", [])
+    intervals = [
+        current - previous
+        for previous, current in zip(hit_times, hit_times[1:])
+    ]
+    return {
+        "available": True,
+        "sample_rate": audio.get("sample_rate"),
+        "hit_count": len(hit_times),
+        "hit_times": hit_times,
+        "mean_hit_interval_seconds": _rounded_mean(intervals),
+        "mean_hit_energy": _rounded_mean(hit_energies),
+        "max_hit_energy": round(max(hit_energies), 6) if hit_energies else None,
+    }
+
+
 def _aggregate_players(report: list[dict], player_ids: list[str]) -> dict:
     aggregates = {}
     segment_count = len(report)
@@ -286,10 +307,13 @@ def build_llm_statistics(report: list[dict]) -> dict:
     })
     segments = []
     ball_summaries = []
+    audio_summaries = []
     for segment in report:
         ball_trajectory = segment.get("ball_trajectory", [])
         ball_summary = summarize_ball_trajectory(ball_trajectory)
         ball_summaries.append(ball_summary)
+        audio_summary = summarize_audio(segment)
+        audio_summaries.append(audio_summary)
         segments.append({
             "index": segment.get("index"),
             "start": segment["start"],
@@ -309,6 +333,7 @@ def build_llm_statistics(report: list[dict]) -> dict:
                 player_id: _segment_player_summary(segment, player_id)
                 for player_id in player_ids
             },
+            "audio": audio_summary,
             "ball": ball_summary,
         })
 
@@ -327,10 +352,15 @@ def build_llm_statistics(report: list[dict]) -> dict:
         warnings.append(
             "Low identity confidence affects: " + ", ".join(low_identity_players) + "."
         )
-    warnings.extend([
-        "Segment boundaries are accepted from the input report and are not guaranteed to be rallies.",
-        "Court projection assumes points lie on the court plane; airborne ball projections are approximate.",
-    ])
+    has_audio_segments = any(summary["available"] for summary in audio_summaries)
+    warnings.append(
+        "Audio-derived boundaries and hit times are candidates, not validated rally or contact labels."
+        if has_audio_segments
+        else "Segment boundaries are accepted from the input report and are not guaranteed to be rallies."
+    )
+    warnings.append(
+        "Court projection assumes points lie on the court plane; airborne ball projections are approximate."
+    )
     comparable_movement_players = sum(
         player["segments_detected"] > 0
         and player["court_transition_samples"] > 0
@@ -345,6 +375,8 @@ def build_llm_statistics(report: list[dict]) -> dict:
         for segment in segments
     )
     supported = []
+    if has_audio_segments:
+        supported.append("candidate rally timing and audio hit analysis")
     if comparable_movement_players >= 2:
         supported.append("player movement comparison")
     if has_player_positions:
@@ -382,6 +414,15 @@ def build_llm_statistics(report: list[dict]) -> dict:
             ),
         },
         "data_quality": {
+            "audio": {
+                "available": has_audio_segments,
+                "segment_count": sum(
+                    summary["available"] for summary in audio_summaries
+                ),
+                "hit_count": sum(
+                    summary["hit_count"] for summary in audio_summaries
+                ),
+            },
             "ball": ball_summary,
             "warnings": warnings,
         },

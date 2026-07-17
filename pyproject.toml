@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = "AGPL-3.0-or-later"
 dependencies = [
+  "librosa>=0.10,<1.0",
   "numpy>=1.24,<2.0",
   "opencv-python>=4.8,<5.0",
   "scipy>=1.10,<2.0",

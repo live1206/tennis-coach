@@ -1,0 +1,5016 @@
+[
+  {
+    "index": 1,
+    "start": 1.309615,
+    "end": 14.921134,
+    "audio": {
+      "sample_rate": 22050,
+      "hit_times": [
+        2.809614512471655,
+        3.4829931972789114,
+        3.8312925170068026,
+        5.9675283446712015,
+        6.664126984126984,
+        8.777142857142858,
+        10.077460317460318,
+        11.981496598639456,
+        13.421133786848072
+      ],
+      "hit_energies": [
+        2.538962403709542,
+        4.296738523781855,
+        5.114299444163081,
+        3.0175009542756737,
+        5.4579407288989845,
+        3.458969707519054,
+        6.800598977272461,
+        2.7234726576640687,
+        3.000230816175845
+      ],
+      "hit_count": 9
+    },
+    "features": {
+      "player_motion_max": 0.01137,
+      "player_motion_var": 2.16e-06,
+      "near_motion_mean": 0.003626,
+      "far_motion_mean": 0.001045,
+      "motion_sample_count": 204
+    },
+    "players": {
+      "player_1": {
+        "detected": true,
+        "side": "near",
+        "detection_confidence": 0.8191,
+        "identity_confidence": 0.5,
+        "movement_distance": 0.697174,
+        "sample_count": 24,
+        "mean_position": [
+          0.357227,
+          0.856096
+        ]
+      },
+      "player_2": {
+        "detected": true,
+        "side": "far",
+        "detection_confidence": 0.4346,
+        "identity_confidence": 0.5,
+        "movement_distance": 0.086162,
+        "sample_count": 8,
+        "mean_position": [
+          0.509961,
+          0.343519
+        ]
+      }
+    },
+    "video_extraction": {
+      "version": 1,
+      "status": "complete",
+      "court_rois": {
+        "near": [
+          [
+            354,
+            660
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            1918,
+            953
+          ],
+          [
+            -19,
+            953
+          ]
+        ],
+        "far": [
+          [
+            728,
+            367
+          ],
+          [
+            1169,
+            367
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            354,
+            660
+          ]
+        ],
+        "format": "polygon"
+      },
+      "sample_seconds": 0.5,
+      "ball_tracking_status": "disabled",
+      "ball_frame_step": null,
+      "ball_temporal_stride": null
+    },
+    "player_trajectories": {
+      "player_1": [
+        {
+          "time": 1.3,
+          "frame_index": 78,
+          "side": "near",
+          "bbox": [
+            324,
+            682,
+            510,
+            976
+          ],
+          "detection_confidence": 0.842719,
+          "identity_confidence": 0.5,
+          "position": [
+            0.217188,
+            0.903704
+          ],
+          "court_position": {
+            "x": 0.233159,
+            "y": 1.008673,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 1.8,
+          "frame_index": 108,
+          "side": "near",
+          "bbox": [
+            332,
+            672,
+            504,
+            972
+          ],
+          "detection_confidence": 0.8545,
+          "identity_confidence": 0.5,
+          "position": [
+            0.217708,
+            0.9
+          ],
+          "court_position": {
+            "x": 0.232293,
+            "y": 1.007202,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 2.3,
+          "frame_index": 138,
+          "side": "near",
+          "bbox": [
+            313,
+            647,
+            443,
+            950
+          ],
+          "detection_confidence": 0.806443,
+          "identity_confidence": 0.5,
+          "position": [
+            0.196875,
+            0.87963
+          ],
+          "court_position": {
+            "x": 0.203788,
+            "y": 0.99883,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 2.8,
+          "frame_index": 168,
+          "side": "near",
+          "bbox": [
+            287,
+            622,
+            421,
+            908
+          ],
+          "detection_confidence": 0.787715,
+          "identity_confidence": 0.5,
+          "position": [
+            0.184375,
+            0.840741
+          ],
+          "court_position": {
+            "x": 0.173225,
+            "y": 0.981415,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 3.3,
+          "frame_index": 198,
+          "side": "near",
+          "bbox": [
+            328,
+            602,
+            441,
+            871
+          ],
+          "detection_confidence": 0.782509,
+          "identity_confidence": 0.5,
+          "position": [
+            0.20026,
+            0.806481
+          ],
+          "court_position": {
+            "x": 0.173049,
+            "y": 0.964281,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 3.8,
+          "frame_index": 228,
+          "side": "near",
+          "bbox": [
+            347,
+            585,
+            455,
+            845
+          ],
+          "detection_confidence": 0.806994,
+          "identity_confidence": 0.5,
+          "position": [
+            0.208854,
+            0.782407
+          ],
+          "court_position": {
+            "x": 0.169945,
+            "y": 0.951076,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 4.3,
+          "frame_index": 258,
+          "side": "near",
+          "bbox": [
+            374,
+            606,
+            521,
+            860
+          ],
+          "detection_confidence": 0.823893,
+          "identity_confidence": 0.5,
+          "position": [
+            0.233073,
+            0.796296
+          ],
+          "court_position": {
+            "x": 0.204726,
+            "y": 0.95882,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 4.8,
+          "frame_index": 288,
+          "side": "near",
+          "bbox": [
+            473,
+            618,
+            627,
+            918
+          ],
+          "detection_confidence": 0.818085,
+          "identity_confidence": 0.5,
+          "position": [
+            0.286458,
+            0.85
+          ],
+          "court_position": {
+            "x": 0.283811,
+            "y": 0.985744,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 5.3,
+          "frame_index": 318,
+          "side": "near",
+          "bbox": [
+            619,
+            618,
+            735,
+            894
+          ],
+          "detection_confidence": 0.810816,
+          "identity_confidence": 0.5,
+          "position": [
+            0.352604,
+            0.827778
+          ],
+          "court_position": {
+            "x": 0.347513,
+            "y": 0.975145,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 5.8,
+          "frame_index": 348,
+          "side": "near",
+          "bbox": [
+            677,
+            630,
+            815,
+            881
+          ],
+          "detection_confidence": 0.818739,
+          "identity_confidence": 0.5,
+          "position": [
+            0.388542,
+            0.815741
+          ],
+          "court_position": {
+            "x": 0.383996,
+            "y": 0.969094,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 6.3,
+          "frame_index": 378,
+          "side": "near",
+          "bbox": [
+            608,
+            620,
+            732,
+            872
+          ],
+          "detection_confidence": 0.800329,
+          "identity_confidence": 0.5,
+          "position": [
+            0.348958,
+            0.807407
+          ],
+          "court_position": {
+            "x": 0.338539,
+            "y": 0.964769,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 6.8,
+          "frame_index": 408,
+          "side": "near",
+          "bbox": [
+            571,
+            576,
+            755,
+            854
+          ],
+          "detection_confidence": 0.868231,
+          "identity_confidence": 0.5,
+          "position": [
+            0.345313,
+            0.790741
+          ],
+          "court_position": {
+            "x": 0.329997,
+            "y": 0.955765,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 7.3,
+          "frame_index": 438,
+          "side": "near",
+          "bbox": [
+            645,
+            569,
+            783,
+            812
+          ],
+          "detection_confidence": 0.83399,
+          "identity_confidence": 0.5,
+          "position": [
+            0.371875,
+            0.751852
+          ],
+          "court_position": {
+            "x": 0.350822,
+            "y": 0.932715,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 7.8,
+          "frame_index": 468,
+          "side": "near",
+          "bbox": [
+            725,
+            591,
+            839,
+            853
+          ],
+          "detection_confidence": 0.806626,
+          "identity_confidence": 0.5,
+          "position": [
+            0.407292,
+            0.789815
+          ],
+          "court_position": {
+            "x": 0.400501,
+            "y": 0.95525,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 8.3,
+          "frame_index": 498,
+          "side": "near",
+          "bbox": [
+            783,
+            630,
+            896,
+            896
+          ],
+          "detection_confidence": 0.817075,
+          "identity_confidence": 0.5,
+          "position": [
+            0.43724,
+            0.82963
+          ],
+          "court_position": {
+            "x": 0.438653,
+            "y": 0.976056,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 8.8,
+          "frame_index": 528,
+          "side": "near",
+          "bbox": [
+            829,
+            659,
+            950,
+            973
+          ],
+          "detection_confidence": 0.832318,
+          "identity_confidence": 0.5,
+          "position": [
+            0.463281,
+            0.900926
+          ],
+          "court_position": {
+            "x": 0.469802,
+            "y": 1.007571,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 9.3,
+          "frame_index": 558,
+          "side": "near",
+          "bbox": [
+            866,
+            671,
+            995,
+            999
+          ],
+          "detection_confidence": 0.82899,
+          "identity_confidence": 0.5,
+          "position": [
+            0.484635,
+            0.925
+          ],
+          "court_position": {
+            "x": 0.490713,
+            "y": 1.01685,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 9.8,
+          "frame_index": 588,
+          "side": "near",
+          "bbox": [
+            781,
+            686,
+            950,
+            1005
+          ],
+          "detection_confidence": 0.840245,
+          "identity_confidence": 0.5,
+          "position": [
+            0.450781,
+            0.930556
+          ],
+          "court_position": {
+            "x": 0.459372,
+            "y": 1.018907,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 10.3,
+          "frame_index": 618,
+          "side": "near",
+          "bbox": [
+            747,
+            676,
+            897,
+            956
+          ],
+          "detection_confidence": 0.771493,
+          "identity_confidence": 0.5,
+          "position": [
+            0.428125,
+            0.885185
+          ],
+          "court_position": {
+            "x": 0.434433,
+            "y": 1.001161,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 10.8,
+          "frame_index": 648,
+          "side": "near",
+          "bbox": [
+            711,
+            660,
+            852,
+            977
+          ],
+          "detection_confidence": 0.846679,
+          "identity_confidence": 0.5,
+          "position": [
+            0.407031,
+            0.90463
+          ],
+          "court_position": {
+            "x": 0.415907,
+            "y": 1.009039,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 13.3,
+          "frame_index": 798,
+          "side": "near",
+          "bbox": [
+            892,
+            683,
+            1067,
+            1030
+          ],
+          "detection_confidence": 0.837318,
+          "identity_confidence": 0.5,
+          "position": [
+            0.510156,
+            0.953704
+          ],
+          "court_position": {
+            "x": 0.513999,
+            "y": 1.02716,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 13.8,
+          "frame_index": 828,
+          "side": "near",
+          "bbox": [
+            863,
+            643,
+            1012,
+            953
+          ],
+          "detection_confidence": 0.83105,
+          "identity_confidence": 0.5,
+          "position": [
+            0.488281,
+            0.882407
+          ],
+          "court_position": {
+            "x": 0.493805,
+            "y": 1.0,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 14.3,
+          "frame_index": 858,
+          "side": "near",
+          "bbox": [
+            857,
+            637,
+            1009,
+            949
+          ],
+          "detection_confidence": 0.812331,
+          "identity_confidence": 0.5,
+          "position": [
+            0.485938,
+            0.878704
+          ],
+          "court_position": {
+            "x": 0.491441,
+            "y": 0.998438,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 14.8,
+          "frame_index": 888,
+          "side": "near",
+          "bbox": [
+            819,
+            659,
+            942,
+            986
+          ],
+          "detection_confidence": 0.779352,
+          "identity_confidence": 0.5,
+          "position": [
+            0.458594,
+            0.912963
+          ],
+          "court_position": {
+            "x": 0.465835,
+            "y": 1.012287,
+            "inside_court": false
+          }
+        }
+      ],
+      "player_2": [
+        {
+          "time": 6.3,
+          "frame_index": 378,
+          "side": "far",
+          "bbox": [
+            948,
+            290,
+            984,
+            368
+          ],
+          "detection_confidence": 0.447477,
+          "identity_confidence": 0.5,
+          "position": [
+            0.503125,
+            0.340741
+          ],
+          "court_position": {
+            "x": 0.53945,
+            "y": 0.007454,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 6.8,
+          "frame_index": 408,
+          "side": "far",
+          "bbox": [
+            951,
+            296,
+            986,
+            369
+          ],
+          "detection_confidence": 0.406222,
+          "identity_confidence": 0.5,
+          "position": [
+            0.504427,
+            0.341667
+          ],
+          "court_position": {
+            "x": 0.544824,
+            "y": 0.014822,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 7.3,
+          "frame_index": 438,
+          "side": "far",
+          "bbox": [
+            961,
+            292,
+            998,
+            368
+          ],
+          "detection_confidence": 0.510191,
+          "identity_confidence": 0.5,
+          "position": [
+            0.510156,
+            0.340741
+          ],
+          "court_position": {
+            "x": 0.569885,
+            "y": 0.007454,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 9.8,
+          "frame_index": 588,
+          "side": "far",
+          "bbox": [
+            988,
+            293,
+            1023,
+            368
+          ],
+          "detection_confidence": 0.351977,
+          "identity_confidence": 0.5,
+          "position": [
+            0.523698,
+            0.340741
+          ],
+          "court_position": {
+            "x": 0.628504,
+            "y": 0.007454,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 11.3,
+          "frame_index": 678,
+          "side": "far",
+          "bbox": [
+            950,
+            291,
+            982,
+            373
+          ],
+          "detection_confidence": 0.368702,
+          "identity_confidence": 0.5,
+          "position": [
+            0.503125,
+            0.34537
+          ],
+          "court_position": {
+            "x": 0.538328,
+            "y": 0.04346,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 13.3,
+          "frame_index": 798,
+          "side": "far",
+          "bbox": [
+            926,
+            293,
+            968,
+            376
+          ],
+          "detection_confidence": 0.434275,
+          "identity_confidence": 0.5,
+          "position": [
+            0.493229,
+            0.348148
+          ],
+          "court_position": {
+            "x": 0.496733,
+            "y": 0.064117,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 13.8,
+          "frame_index": 828,
+          "side": "far",
+          "bbox": [
+            944,
+            289,
+            982,
+            372
+          ],
+          "detection_confidence": 0.516505,
+          "identity_confidence": 0.5,
+          "position": [
+            0.501563,
+            0.344444
+          ],
+          "court_position": {
+            "x": 0.531938,
+            "y": 0.036419,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 14.8,
+          "frame_index": 888,
+          "side": "far",
+          "bbox": [
+            1016,
+            266,
+            1059,
+            374
+          ],
+          "detection_confidence": 0.44182,
+          "identity_confidence": 0.5,
+          "position": [
+            0.540365,
+            0.346296
+          ],
+          "court_position": {
+            "x": 0.693931,
+            "y": 0.050422,
+            "inside_court": true
+          }
+        }
+      ]
+    },
+    "sampled_frames": []
+  },
+  {
+    "index": 2,
+    "start": 23.322132,
+    "end": 35.029615,
+    "audio": {
+      "sample_rate": 22050,
+      "hit_times": [
+        24.822131519274375,
+        26.656507936507936,
+        27.515646258503402,
+        28.212244897959184,
+        30.162721088435376,
+        31.7881179138322,
+        33.52961451247165
+      ],
+      "hit_energies": [
+        5.543848247636537,
+        4.58572784278636,
+        2.6589079644500324,
+        6.798395193056062,
+        5.403460494343974,
+        4.156184602867658,
+        5.375671669029616
+      ],
+      "hit_count": 7
+    },
+    "features": {
+      "player_motion_max": 0.021417,
+      "player_motion_var": 4.85e-06,
+      "near_motion_mean": 0.007482,
+      "far_motion_mean": 0.000455,
+      "motion_sample_count": 176
+    },
+    "players": {
+      "player_1": {
+        "detected": true,
+        "side": "near",
+        "detection_confidence": 0.8211,
+        "identity_confidence": 0.8618,
+        "movement_distance": 0.939868,
+        "sample_count": 20,
+        "mean_position": [
+          0.453815,
+          0.901944
+        ]
+      },
+      "player_2": {
+        "detected": true,
+        "side": "far",
+        "detection_confidence": 0.4862,
+        "identity_confidence": 0.7855,
+        "movement_distance": 0.143902,
+        "sample_count": 10,
+        "mean_position": [
+          0.502812,
+          0.346481
+        ]
+      }
+    },
+    "video_extraction": {
+      "version": 1,
+      "status": "complete",
+      "court_rois": {
+        "near": [
+          [
+            354,
+            660
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            1918,
+            953
+          ],
+          [
+            -19,
+            953
+          ]
+        ],
+        "far": [
+          [
+            728,
+            367
+          ],
+          [
+            1169,
+            367
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            354,
+            660
+          ]
+        ],
+        "format": "polygon"
+      },
+      "sample_seconds": 0.5,
+      "ball_tracking_status": "disabled",
+      "ball_frame_step": null,
+      "ball_temporal_stride": null
+    },
+    "player_trajectories": {
+      "player_1": [
+        {
+          "time": 23.317,
+          "frame_index": 1399,
+          "side": "near",
+          "bbox": [
+            1031,
+            695,
+            1145,
+            1015
+          ],
+          "detection_confidence": 0.827673,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.566667,
+            0.939815
+          ],
+          "court_position": {
+            "x": 0.566051,
+            "y": 1.022269,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 23.817,
+          "frame_index": 1429,
+          "side": "near",
+          "bbox": [
+            1019,
+            669,
+            1209,
+            1016
+          ],
+          "detection_confidence": 0.826138,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.580208,
+            0.940741
+          ],
+          "court_position": {
+            "x": 0.578363,
+            "y": 1.0226,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 24.317,
+          "frame_index": 1459,
+          "side": "near",
+          "bbox": [
+            1091,
+            674,
+            1206,
+            1014
+          ],
+          "detection_confidence": 0.82525,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.598177,
+            0.938889
+          ],
+          "court_position": {
+            "x": 0.595041,
+            "y": 1.021936,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 24.817,
+          "frame_index": 1489,
+          "side": "near",
+          "bbox": [
+            1055,
+            617,
+            1211,
+            946
+          ],
+          "detection_confidence": 0.797823,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.590104,
+            0.875926
+          ],
+          "court_position": {
+            "x": 0.595622,
+            "y": 0.997255,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 25.317,
+          "frame_index": 1519,
+          "side": "near",
+          "bbox": [
+            1031,
+            649,
+            1190,
+            932
+          ],
+          "detection_confidence": 0.846936,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.578385,
+            0.862963
+          ],
+          "court_position": {
+            "x": 0.585503,
+            "y": 0.991609,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 25.817,
+          "frame_index": 1549,
+          "side": "near",
+          "bbox": [
+            953,
+            633,
+            1102,
+            936
+          ],
+          "detection_confidence": 0.791984,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.535156,
+            0.866667
+          ],
+          "court_position": {
+            "x": 0.541206,
+            "y": 0.993244,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 26.317,
+          "frame_index": 1579,
+          "side": "near",
+          "bbox": [
+            1005,
+            651,
+            1169,
+            951
+          ],
+          "detection_confidence": 0.857568,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.566146,
+            0.880556
+          ],
+          "court_position": {
+            "x": 0.571176,
+            "y": 0.999221,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 26.817,
+          "frame_index": 1609,
+          "side": "near",
+          "bbox": [
+            1092,
+            656,
+            1225,
+            985
+          ],
+          "detection_confidence": 0.822505,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.603385,
+            0.912037
+          ],
+          "court_position": {
+            "x": 0.603505,
+            "y": 1.011929,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 27.317,
+          "frame_index": 1639,
+          "side": "near",
+          "bbox": [
+            1056,
+            698,
+            1245,
+            1002
+          ],
+          "detection_confidence": 0.842391,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.599219,
+            0.927778
+          ],
+          "court_position": {
+            "x": 0.597433,
+            "y": 1.017883,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 27.817,
+          "frame_index": 1669,
+          "side": "near",
+          "bbox": [
+            911,
+            691,
+            1104,
+            1009
+          ],
+          "detection_confidence": 0.834111,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.52474,
+            0.934259
+          ],
+          "court_position": {
+            "x": 0.52784,
+            "y": 1.020262,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 28.317,
+          "frame_index": 1699,
+          "side": "near",
+          "bbox": [
+            828,
+            705,
+            989,
+            963
+          ],
+          "detection_confidence": 0.795193,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.473177,
+            0.891667
+          ],
+          "court_position": {
+            "x": 0.4791,
+            "y": 1.003835,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 28.817,
+          "frame_index": 1729,
+          "side": "near",
+          "bbox": [
+            796,
+            671,
+            979,
+            986
+          ],
+          "detection_confidence": 0.806172,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.46224,
+            0.912963
+          ],
+          "court_position": {
+            "x": 0.469298,
+            "y": 1.012287,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 31.317,
+          "frame_index": 1879,
+          "side": "near",
+          "bbox": [
+            417,
+            725,
+            621,
+            1036
+          ],
+          "detection_confidence": 0.888815,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.270313,
+            0.959259
+          ],
+          "court_position": {
+            "x": 0.299599,
+            "y": 1.029067,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 31.817,
+          "frame_index": 1909,
+          "side": "near",
+          "bbox": [
+            224,
+            680,
+            440,
+            954
+          ],
+          "detection_confidence": 0.803936,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.172917,
+            0.883333
+          ],
+          "court_position": {
+            "x": 0.181627,
+            "y": 1.000388,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 32.317,
+          "frame_index": 1939,
+          "side": "near",
+          "bbox": [
+            180,
+            641,
+            329,
+            955
+          ],
+          "detection_confidence": 0.815616,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.132552,
+            0.884259
+          ],
+          "court_position": {
+            "x": 0.142139,
+            "y": 1.000775,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 32.817,
+          "frame_index": 1969,
+          "side": "near",
+          "bbox": [
+            218,
+            691,
+            406,
+            962
+          ],
+          "detection_confidence": 0.773796,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.1625,
+            0.890741
+          ],
+          "court_position": {
+            "x": 0.174733,
+            "y": 1.003456,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 33.317,
+          "frame_index": 1999,
+          "side": "near",
+          "bbox": [
+            456,
+            667,
+            622,
+            954
+          ],
+          "detection_confidence": 0.781324,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.280729,
+            0.883333
+          ],
+          "court_position": {
+            "x": 0.288352,
+            "y": 1.000388,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 33.817,
+          "frame_index": 2029,
+          "side": "near",
+          "bbox": [
+            691,
+            655,
+            802,
+            952
+          ],
+          "detection_confidence": 0.837152,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.388802,
+            0.881481
+          ],
+          "court_position": {
+            "x": 0.395061,
+            "y": 0.999611,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 34.317,
+          "frame_index": 2059,
+          "side": "near",
+          "bbox": [
+            816,
+            662,
+            1013,
+            957
+          ],
+          "detection_confidence": 0.81687,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.476302,
+            0.886111
+          ],
+          "court_position": {
+            "x": 0.482022,
+            "y": 1.001546,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 34.817,
+          "frame_index": 2089,
+          "side": "near",
+          "bbox": [
+            940,
+            640,
+            1036,
+            957
+          ],
+          "detection_confidence": 0.83046,
+          "identity_confidence": 0.8618,
+          "position": [
+            0.514583,
+            0.886111
+          ],
+          "court_position": {
+            "x": 0.519768,
+            "y": 1.001546,
+            "inside_court": false
+          }
+        }
+      ],
+      "player_2": [
+        {
+          "time": 25.817,
+          "frame_index": 1549,
+          "side": "far",
+          "bbox": [
+            811,
+            290,
+            846,
+            368
+          ],
+          "detection_confidence": 0.435441,
+          "identity_confidence": 0.7855,
+          "position": [
+            0.43151,
+            0.340741
+          ],
+          "court_position": {
+            "x": 0.229452,
+            "y": 0.007454,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 26.317,
+          "frame_index": 1579,
+          "side": "far",
+          "bbox": [
+            798,
+            298,
+            836,
+            369
+          ],
+          "detection_confidence": 0.399669,
+          "identity_confidence": 0.7855,
+          "position": [
+            0.425521,
+            0.341667
+          ],
+          "court_position": {
+            "x": 0.205221,
+            "y": 0.014822,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 26.817,
+          "frame_index": 1609,
+          "side": "far",
+          "bbox": [
+            805,
+            292,
+            837,
+            365
+          ],
+          "detection_confidence": 0.479943,
+          "identity_confidence": 0.7855,
+          "position": [
+            0.427604,
+            0.337963
+          ],
+          "court_position": {
+            "x": 0.207505,
+            "y": -0.015166,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 29.817,
+          "frame_index": 1789,
+          "side": "far",
+          "bbox": [
+            1025,
+            296,
+            1060,
+            383
+          ],
+          "detection_confidence": 0.567709,
+          "identity_confidence": 0.7855,
+          "position": [
+            0.542969,
+            0.35463
+          ],
+          "court_position": {
+            "x": 0.695027,
+            "y": 0.109762,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 30.317,
+          "frame_index": 1819,
+          "side": "far",
+          "bbox": [
+            1029,
+            271,
+            1065,
+            383
+          ],
+          "detection_confidence": 0.637213,
+          "identity_confidence": 0.7855,
+          "position": [
+            0.545312,
+            0.35463
+          ],
+          "court_position": {
+            "x": 0.704363,
+            "y": 0.109762,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 30.817,
+          "frame_index": 1849,
+          "side": "far",
+          "bbox": [
+            1022,
+            268,
+            1065,
+            379
+          ],
+          "detection_confidence": 0.666407,
+          "identity_confidence": 0.7855,
+          "position": [
+            0.54349,
+            0.350926
+          ],
+          "court_position": {
+            "x": 0.701385,
+            "y": 0.084103,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 31.317,
+          "frame_index": 1879,
+          "side": "far",
+          "bbox": [
+            1019,
+            301,
+            1055,
+            375
+          ],
+          "detection_confidence": 0.415733,
+          "identity_confidence": 0.7855,
+          "position": [
+            0.540104,
+            0.347222
+          ],
+          "court_position": {
+            "x": 0.691768,
+            "y": 0.057307,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 31.817,
+          "frame_index": 1909,
+          "side": "far",
+          "bbox": [
+            1001,
+            301,
+            1038,
+            373
+          ],
+          "detection_confidence": 0.440875,
+          "identity_confidence": 0.7855,
+          "position": [
+            0.53099,
+            0.34537
+          ],
+          "court_position": {
+            "x": 0.655573,
+            "y": 0.04346,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 33.317,
+          "frame_index": 1999,
+          "side": "far",
+          "bbox": [
+            1002,
+            297,
+            1038,
+            373
+          ],
+          "detection_confidence": 0.455393,
+          "identity_confidence": 0.7855,
+          "position": [
+            0.53125,
+            0.34537
+          ],
+          "court_position": {
+            "x": 0.656667,
+            "y": 0.04346,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 34.317,
+          "frame_index": 2059,
+          "side": "far",
+          "bbox": [
+            961,
+            304,
+            995,
+            374
+          ],
+          "detection_confidence": 0.36384,
+          "identity_confidence": 0.7855,
+          "position": [
+            0.509375,
+            0.346296
+          ],
+          "court_position": {
+            "x": 0.564262,
+            "y": 0.050422,
+            "inside_court": true
+          }
+        }
+      ]
+    },
+    "sampled_frames": []
+  },
+  {
+    "index": 3,
+    "start": 36.023447,
+    "end": 59.457007,
+    "audio": {
+      "sample_rate": 22050,
+      "hit_times": [
+        37.52344671201814,
+        38.98630385487528,
+        40.542040816326534,
+        41.795918367346935,
+        42.120997732426304,
+        42.67827664399093,
+        43.02657596371882,
+        45.99873015873016,
+        48.808344671201816,
+        49.458503401360545,
+        51.037460317460315,
+        53.15047619047619,
+        54.35791383219954,
+        55.86721088435374,
+        56.70312925170068,
+        57.95700680272109
+      ],
+      "hit_energies": [
+        3.288884221436932,
+        3.7101041828820653,
+        3.411444294626187,
+        4.26677417986434,
+        4.591119709014415,
+        4.312441941631956,
+        3.4233173992826185,
+        2.910553051795781,
+        4.044781956070893,
+        3.6136289194671796,
+        3.3427442309049105,
+        4.988356892174902,
+        2.5940962892246793,
+        2.6367485899651335,
+        3.142011326541575,
+        3.9916251337955373
+      ],
+      "hit_count": 16
+    },
+    "features": {
+      "player_motion_max": 0.050168,
+      "player_motion_var": 1.374e-05,
+      "near_motion_mean": 0.003274,
+      "far_motion_mean": 0.001534,
+      "motion_sample_count": 352
+    },
+    "players": {
+      "player_1": {
+        "detected": true,
+        "side": "near",
+        "detection_confidence": 0.823,
+        "identity_confidence": 0.6873,
+        "movement_distance": 1.141489,
+        "sample_count": 26,
+        "mean_position": [
+          0.436769,
+          0.826531
+        ]
+      },
+      "player_2": {
+        "detected": true,
+        "side": "far",
+        "detection_confidence": 0.5561,
+        "identity_confidence": 0.6464,
+        "movement_distance": 0.366762,
+        "sample_count": 12,
+        "mean_position": [
+          0.581228,
+          0.424614
+        ]
+      }
+    },
+    "video_extraction": {
+      "version": 1,
+      "status": "complete",
+      "court_rois": {
+        "near": [
+          [
+            354,
+            660
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            1918,
+            953
+          ],
+          [
+            -19,
+            953
+          ]
+        ],
+        "far": [
+          [
+            728,
+            367
+          ],
+          [
+            1169,
+            367
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            354,
+            660
+          ]
+        ],
+        "format": "polygon"
+      },
+      "sample_seconds": 0.5,
+      "ball_tracking_status": "disabled",
+      "ball_frame_step": null,
+      "ball_temporal_stride": null
+    },
+    "player_trajectories": {
+      "player_1": [
+        {
+          "time": 39.017,
+          "frame_index": 2341,
+          "side": "near",
+          "bbox": [
+            1559,
+            628,
+            1687,
+            951
+          ],
+          "detection_confidence": 0.826814,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.845313,
+            0.880556
+          ],
+          "court_position": {
+            "x": 0.848624,
+            "y": 0.999221,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 39.517,
+          "frame_index": 2371,
+          "side": "near",
+          "bbox": [
+            1533,
+            647,
+            1681,
+            950
+          ],
+          "detection_confidence": 0.812708,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.836979,
+            0.87963
+          ],
+          "court_position": {
+            "x": 0.840792,
+            "y": 0.99883,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 40.017,
+          "frame_index": 2401,
+          "side": "near",
+          "bbox": [
+            1388,
+            654,
+            1559,
+            924
+          ],
+          "detection_confidence": 0.750084,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.767448,
+            0.855556
+          ],
+          "court_position": {
+            "x": 0.781298,
+            "y": 0.988285,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 40.517,
+          "frame_index": 2431,
+          "side": "near",
+          "bbox": [
+            1242,
+            654,
+            1358,
+            964
+          ],
+          "detection_confidence": 0.814248,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.677083,
+            0.892593
+          ],
+          "court_position": {
+            "x": 0.678354,
+            "y": 1.004213,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 41.017,
+          "frame_index": 2461,
+          "side": "near",
+          "bbox": [
+            1050,
+            692,
+            1179,
+            1029
+          ],
+          "detection_confidence": 0.798365,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.580469,
+            0.952778
+          ],
+          "court_position": {
+            "x": 0.577367,
+            "y": 1.026839,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 42.517,
+          "frame_index": 2551,
+          "side": "near",
+          "bbox": [
+            772,
+            688,
+            923,
+            996
+          ],
+          "detection_confidence": 0.85301,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.441406,
+            0.922222
+          ],
+          "court_position": {
+            "x": 0.450129,
+            "y": 1.01581,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 46.517,
+          "frame_index": 2791,
+          "side": "near",
+          "bbox": [
+            227,
+            686,
+            429,
+            983
+          ],
+          "detection_confidence": 0.869441,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.170833,
+            0.910185
+          ],
+          "court_position": {
+            "x": 0.191321,
+            "y": 1.011212,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 47.017,
+          "frame_index": 2821,
+          "side": "near",
+          "bbox": [
+            221,
+            668,
+            421,
+            991
+          ],
+          "detection_confidence": 0.873749,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.167187,
+            0.917593
+          ],
+          "court_position": {
+            "x": 0.190972,
+            "y": 1.01406,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 47.517,
+          "frame_index": 2851,
+          "side": "near",
+          "bbox": [
+            220,
+            674,
+            419,
+            986
+          ],
+          "detection_confidence": 0.876555,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.166406,
+            0.912963
+          ],
+          "court_position": {
+            "x": 0.188283,
+            "y": 1.012287,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 48.017,
+          "frame_index": 2881,
+          "side": "near",
+          "bbox": [
+            227,
+            668,
+            425,
+            984
+          ],
+          "detection_confidence": 0.858797,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.169792,
+            0.911111
+          ],
+          "court_position": {
+            "x": 0.19072,
+            "y": 1.011571,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 48.517,
+          "frame_index": 2911,
+          "side": "near",
+          "bbox": [
+            224,
+            653,
+            450,
+            957
+          ],
+          "detection_confidence": 0.861238,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.175521,
+            0.886111
+          ],
+          "court_position": {
+            "x": 0.185444,
+            "y": 1.001546,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 49.017,
+          "frame_index": 2941,
+          "side": "near",
+          "bbox": [
+            374,
+            642,
+            550,
+            933
+          ],
+          "detection_confidence": 0.844902,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.240625,
+            0.863889
+          ],
+          "court_position": {
+            "x": 0.241527,
+            "y": 0.992019,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 49.517,
+          "frame_index": 2971,
+          "side": "near",
+          "bbox": [
+            487,
+            584,
+            614,
+            864
+          ],
+          "detection_confidence": 0.825061,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.286719,
+            0.8
+          ],
+          "court_position": {
+            "x": 0.266727,
+            "y": 0.960827,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 50.017,
+          "frame_index": 3001,
+          "side": "near",
+          "bbox": [
+            562,
+            595,
+            722,
+            844
+          ],
+          "detection_confidence": 0.828872,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.334375,
+            0.781481
+          ],
+          "court_position": {
+            "x": 0.31473,
+            "y": 0.950547,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 50.517,
+          "frame_index": 3031,
+          "side": "near",
+          "bbox": [
+            622,
+            597,
+            730,
+            863
+          ],
+          "detection_confidence": 0.847728,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.352083,
+            0.799074
+          ],
+          "court_position": {
+            "x": 0.339889,
+            "y": 0.960328,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 51.017,
+          "frame_index": 3061,
+          "side": "near",
+          "bbox": [
+            634,
+            623,
+            729,
+            939
+          ],
+          "detection_confidence": 0.820388,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.354948,
+            0.869444
+          ],
+          "court_position": {
+            "x": 0.359053,
+            "y": 0.994458,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 51.517,
+          "frame_index": 3091,
+          "side": "near",
+          "bbox": [
+            617,
+            634,
+            771,
+            925
+          ],
+          "detection_confidence": 0.835086,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.361458,
+            0.856481
+          ],
+          "court_position": {
+            "x": 0.363066,
+            "y": 0.988704,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 52.017,
+          "frame_index": 3121,
+          "side": "near",
+          "bbox": [
+            725,
+            596,
+            842,
+            854
+          ],
+          "detection_confidence": 0.789277,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.408073,
+            0.790741
+          ],
+          "court_position": {
+            "x": 0.401541,
+            "y": 0.955765,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 52.517,
+          "frame_index": 3151,
+          "side": "near",
+          "bbox": [
+            786,
+            577,
+            903,
+            817
+          ],
+          "detection_confidence": 0.812792,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.439844,
+            0.756481
+          ],
+          "court_position": {
+            "x": 0.4341,
+            "y": 0.935622,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 53.017,
+          "frame_index": 3181,
+          "side": "near",
+          "bbox": [
+            846,
+            560,
+            978,
+            793
+          ],
+          "detection_confidence": 0.81359,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.475,
+            0.734259
+          ],
+          "court_position": {
+            "x": 0.475645,
+            "y": 0.921225,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 53.517,
+          "frame_index": 3211,
+          "side": "near",
+          "bbox": [
+            877,
+            551,
+            997,
+            782
+          ],
+          "detection_confidence": 0.815657,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.488021,
+            0.724074
+          ],
+          "court_position": {
+            "x": 0.491864,
+            "y": 0.914234,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 54.017,
+          "frame_index": 3241,
+          "side": "near",
+          "bbox": [
+            899,
+            556,
+            997,
+            787
+          ],
+          "detection_confidence": 0.798258,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.49375,
+            0.728704
+          ],
+          "court_position": {
+            "x": 0.499196,
+            "y": 0.917444,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 54.517,
+          "frame_index": 3271,
+          "side": "near",
+          "bbox": [
+            863,
+            574,
+            959,
+            843
+          ],
+          "detection_confidence": 0.787073,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.474479,
+            0.780556
+          ],
+          "court_position": {
+            "x": 0.476867,
+            "y": 0.950017,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 55.017,
+          "frame_index": 3301,
+          "side": "near",
+          "bbox": [
+            869,
+            586,
+            988,
+            835
+          ],
+          "detection_confidence": 0.823495,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.483594,
+            0.773148
+          ],
+          "court_position": {
+            "x": 0.487285,
+            "y": 0.945712,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 55.517,
+          "frame_index": 3331,
+          "side": "near",
+          "bbox": [
+            1002,
+            526,
+            1116,
+            743
+          ],
+          "detection_confidence": 0.789897,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.551562,
+            0.687963
+          ],
+          "court_position": {
+            "x": 0.57842,
+            "y": 0.887188,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 56.017,
+          "frame_index": 3361,
+          "side": "near",
+          "bbox": [
+            1143,
+            480,
+            1211,
+            672
+          ],
+          "detection_confidence": 0.770155,
+          "identity_confidence": 0.6873,
+          "position": [
+            0.613021,
+            0.622222
+          ],
+          "court_position": {
+            "x": 0.686925,
+            "y": 0.826612,
+            "inside_court": true
+          }
+        }
+      ],
+      "player_2": [
+        {
+          "time": 40.517,
+          "frame_index": 2431,
+          "side": "far",
+          "bbox": [
+            963,
+            286,
+            997,
+            361
+          ],
+          "detection_confidence": 0.3513,
+          "identity_confidence": 0.6464,
+          "position": [
+            0.510417,
+            0.334259
+          ],
+          "court_position": {
+            "x": 0.574024,
+            "y": -0.046593,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 51.017,
+          "frame_index": 3061,
+          "side": "far",
+          "bbox": [
+            1020,
+            264,
+            1064,
+            373
+          ],
+          "detection_confidence": 0.429276,
+          "identity_confidence": 0.6464,
+          "position": [
+            0.542708,
+            0.34537
+          ],
+          "court_position": {
+            "x": 0.704878,
+            "y": 0.04346,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 51.517,
+          "frame_index": 3091,
+          "side": "far",
+          "bbox": [
+            1003,
+            292,
+            1039,
+            367
+          ],
+          "detection_confidence": 0.440489,
+          "identity_confidence": 0.6464,
+          "position": [
+            0.531771,
+            0.339815
+          ],
+          "court_position": {
+            "x": 0.6644,
+            "y": 2e-06,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 53.017,
+          "frame_index": 3181,
+          "side": "far",
+          "bbox": [
+            925,
+            276,
+            968,
+            364
+          ],
+          "detection_confidence": 0.411478,
+          "identity_confidence": 0.6464,
+          "position": [
+            0.492969,
+            0.337037
+          ],
+          "court_position": {
+            "x": 0.495398,
+            "y": -0.022884,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 53.517,
+          "frame_index": 3211,
+          "side": "far",
+          "bbox": [
+            924,
+            297,
+            962,
+            361
+          ],
+          "detection_confidence": 0.360172,
+          "identity_confidence": 0.6464,
+          "position": [
+            0.491146,
+            0.334259
+          ],
+          "court_position": {
+            "x": 0.487104,
+            "y": -0.046593,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 56.017,
+          "frame_index": 3361,
+          "side": "far",
+          "bbox": [
+            959,
+            290,
+            995,
+            363
+          ],
+          "detection_confidence": 0.441997,
+          "identity_confidence": 0.6464,
+          "position": [
+            0.508854,
+            0.336111
+          ],
+          "court_position": {
+            "x": 0.566173,
+            "y": -0.030693,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 56.517,
+          "frame_index": 3391,
+          "side": "far",
+          "bbox": [
+            1217,
+            434,
+            1292,
+            606
+          ],
+          "detection_confidence": 0.766003,
+          "identity_confidence": 0.6464,
+          "position": [
+            0.653385,
+            0.561111
+          ],
+          "court_position": {
+            "x": 0.790723,
+            "y": 0.751567,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 57.017,
+          "frame_index": 3421,
+          "side": "far",
+          "bbox": [
+            1266,
+            411,
+            1320,
+            547
+          ],
+          "detection_confidence": 0.715071,
+          "identity_confidence": 0.6464,
+          "position": [
+            0.673438,
+            0.506481
+          ],
+          "court_position": {
+            "x": 0.882216,
+            "y": 0.660708,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 57.517,
+          "frame_index": 3451,
+          "side": "far",
+          "bbox": [
+            1281,
+            411,
+            1327,
+            524
+          ],
+          "detection_confidence": 0.569864,
+          "identity_confidence": 0.6464,
+          "position": [
+            0.679167,
+            0.485185
+          ],
+          "court_position": {
+            "x": 0.921989,
+            "y": 0.616481,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 58.017,
+          "frame_index": 3481,
+          "side": "far",
+          "bbox": [
+            1233,
+            407,
+            1292,
+            525
+          ],
+          "detection_confidence": 0.683874,
+          "identity_confidence": 0.6464,
+          "position": [
+            0.657552,
+            0.486111
+          ],
+          "court_position": {
+            "x": 0.871561,
+            "y": 0.618532,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 58.517,
+          "frame_index": 3511,
+          "side": "far",
+          "bbox": [
+            1169,
+            386,
+            1235,
+            550
+          ],
+          "detection_confidence": 0.766303,
+          "identity_confidence": 0.6464,
+          "position": [
+            0.626042,
+            0.509259
+          ],
+          "court_position": {
+            "x": 0.778786,
+            "y": 0.666055,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 59.017,
+          "frame_index": 3541,
+          "side": "far",
+          "bbox": [
+            1131,
+            418,
+            1201,
+            562
+          ],
+          "detection_confidence": 0.737707,
+          "identity_confidence": 0.6464,
+          "position": [
+            0.607292,
+            0.52037
+          ],
+          "court_position": {
+            "x": 0.731321,
+            "y": 0.686572,
+            "inside_court": true
+          }
+        }
+      ]
+    },
+    "sampled_frames": []
+  },
+  {
+    "index": 4,
+    "start": 62.447392,
+    "end": 77.684308,
+    "audio": {
+      "sample_rate": 22050,
+      "hit_times": [
+        63.94739229024943,
+        65.20126984126983,
+        67.19818594104308,
+        68.89324263038549,
+        71.74929705215419,
+        76.18430839002268
+      ],
+      "hit_energies": [
+        3.891292184333231,
+        6.266042489410333,
+        3.8055705774351467,
+        4.994839466505317,
+        3.769402689792213,
+        6.117695437274755
+      ],
+      "hit_count": 6
+    },
+    "features": {
+      "player_motion_max": 0.051491,
+      "player_motion_var": 2.473e-05,
+      "near_motion_mean": 0.004229,
+      "far_motion_mean": 8.6e-05,
+      "motion_sample_count": 229
+    },
+    "players": {
+      "player_1": {
+        "detected": true,
+        "side": "near",
+        "detection_confidence": 0.8356,
+        "identity_confidence": 0.8785,
+        "movement_distance": 0.864616,
+        "sample_count": 18,
+        "mean_position": [
+          0.620718,
+          0.894239
+        ]
+      },
+      "player_2": {
+        "detected": false
+      }
+    },
+    "video_extraction": {
+      "version": 1,
+      "status": "complete",
+      "court_rois": {
+        "near": [
+          [
+            354,
+            660
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            1918,
+            953
+          ],
+          [
+            -19,
+            953
+          ]
+        ],
+        "far": [
+          [
+            728,
+            367
+          ],
+          [
+            1169,
+            367
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            354,
+            660
+          ]
+        ],
+        "format": "polygon"
+      },
+      "sample_seconds": 0.5,
+      "ball_tracking_status": "disabled",
+      "ball_frame_step": null,
+      "ball_temporal_stride": null
+    },
+    "player_trajectories": {
+      "player_1": [
+        {
+          "time": 62.433,
+          "frame_index": 3746,
+          "side": "near",
+          "bbox": [
+            1343,
+            668,
+            1482,
+            950
+          ],
+          "detection_confidence": 0.830421,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.735677,
+            0.87963
+          ],
+          "court_position": {
+            "x": 0.739981,
+            "y": 0.99883,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 62.933,
+          "frame_index": 3776,
+          "side": "near",
+          "bbox": [
+            1318,
+            668,
+            1490,
+            950
+          ],
+          "detection_confidence": 0.86741,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.73125,
+            0.87963
+          ],
+          "court_position": {
+            "x": 0.735575,
+            "y": 0.99883,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 63.433,
+          "frame_index": 3806,
+          "side": "near",
+          "bbox": [
+            1307,
+            667,
+            1463,
+            951
+          ],
+          "detection_confidence": 0.868435,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.721354,
+            0.880556
+          ],
+          "court_position": {
+            "x": 0.725428,
+            "y": 0.999221,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 63.933,
+          "frame_index": 3836,
+          "side": "near",
+          "bbox": [
+            1304,
+            664,
+            1463,
+            951
+          ],
+          "detection_confidence": 0.85968,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.720573,
+            0.880556
+          ],
+          "court_position": {
+            "x": 0.724652,
+            "y": 0.999221,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 64.433,
+          "frame_index": 3866,
+          "side": "near",
+          "bbox": [
+            1322,
+            638,
+            1495,
+            922
+          ],
+          "detection_confidence": 0.857967,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.733594,
+            0.853704
+          ],
+          "court_position": {
+            "x": 0.747087,
+            "y": 0.987443,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 64.933,
+          "frame_index": 3896,
+          "side": "near",
+          "bbox": [
+            1416,
+            629,
+            1641,
+            882
+          ],
+          "detection_confidence": 0.766988,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.796094,
+            0.816667
+          ],
+          "court_position": {
+            "x": 0.829844,
+            "y": 0.969568,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 65.433,
+          "frame_index": 3926,
+          "side": "near",
+          "bbox": [
+            1703,
+            615,
+            1866,
+            894
+          ],
+          "detection_confidence": 0.802967,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.929427,
+            0.827778
+          ],
+          "court_position": {
+            "x": 0.967482,
+            "y": 0.975145,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 65.933,
+          "frame_index": 3956,
+          "side": "near",
+          "bbox": [
+            1786,
+            661,
+            1883,
+            909
+          ],
+          "detection_confidence": 0.793513,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.955469,
+            0.841667
+          ],
+          "court_position": {
+            "x": 0.98506,
+            "y": 0.981853,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 66.433,
+          "frame_index": 3986,
+          "side": "near",
+          "bbox": [
+            1662,
+            689,
+            1784,
+            954
+          ],
+          "detection_confidence": 0.793382,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.897396,
+            0.883333
+          ],
+          "court_position": {
+            "x": 0.898803,
+            "y": 1.000388,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 66.933,
+          "frame_index": 4016,
+          "side": "near",
+          "bbox": [
+            1424,
+            692,
+            1640,
+            993
+          ],
+          "detection_confidence": 0.843081,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.797917,
+            0.919444
+          ],
+          "court_position": {
+            "x": 0.78563,
+            "y": 1.014762,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 67.433,
+          "frame_index": 4046,
+          "side": "near",
+          "bbox": [
+            1160,
+            692,
+            1309,
+            1021
+          ],
+          "detection_confidence": 0.809033,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.642969,
+            0.94537
+          ],
+          "court_position": {
+            "x": 0.634978,
+            "y": 1.024246,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 67.933,
+          "frame_index": 4076,
+          "side": "near",
+          "bbox": [
+            984,
+            732,
+            1105,
+            1025
+          ],
+          "detection_confidence": 0.822472,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.54401,
+            0.949074
+          ],
+          "court_position": {
+            "x": 0.544736,
+            "y": 1.025549,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 74.933,
+          "frame_index": 4496,
+          "side": "near",
+          "bbox": [
+            489,
+            702,
+            676,
+            993
+          ],
+          "detection_confidence": 0.835606,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.303385,
+            0.919444
+          ],
+          "court_position": {
+            "x": 0.319986,
+            "y": 1.014762,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 75.433,
+          "frame_index": 4526,
+          "side": "near",
+          "bbox": [
+            509,
+            713,
+            736,
+            996
+          ],
+          "detection_confidence": 0.864208,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.324219,
+            0.922222
+          ],
+          "court_position": {
+            "x": 0.340201,
+            "y": 1.01581,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 75.933,
+          "frame_index": 4556,
+          "side": "near",
+          "bbox": [
+            543,
+            714,
+            730,
+            993
+          ],
+          "detection_confidence": 0.825136,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.33151,
+            0.919444
+          ],
+          "court_position": {
+            "x": 0.346468,
+            "y": 1.014762,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 76.433,
+          "frame_index": 4586,
+          "side": "near",
+          "bbox": [
+            528,
+            716,
+            703,
+            996
+          ],
+          "detection_confidence": 0.816439,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.320573,
+            0.922222
+          ],
+          "court_position": {
+            "x": 0.336781,
+            "y": 1.01581,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 76.933,
+          "frame_index": 4616,
+          "side": "near",
+          "bbox": [
+            533,
+            728,
+            758,
+            1002
+          ],
+          "detection_confidence": 0.902643,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.336198,
+            0.927778
+          ],
+          "court_position": {
+            "x": 0.352536,
+            "y": 1.017883,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 77.433,
+          "frame_index": 4646,
+          "side": "near",
+          "bbox": [
+            581,
+            721,
+            768,
+            1002
+          ],
+          "detection_confidence": 0.881928,
+          "identity_confidence": 0.8785,
+          "position": [
+            0.351302,
+            0.927778
+          ],
+          "court_position": {
+            "x": 0.3666,
+            "y": 1.017883,
+            "inside_court": false
+          }
+        }
+      ],
+      "player_2": []
+    },
+    "sampled_frames": []
+  },
+  {
+    "index": 5,
+    "start": 79.467619,
+    "end": 100.184444,
+    "audio": {
+      "sample_rate": 22050,
+      "hit_times": [
+        80.96761904761905,
+        81.94285714285715,
+        83.26639455782313,
+        84.54349206349207,
+        88.25868480725623,
+        89.51256235827664,
+        90.41814058956916,
+        93.27419501133787,
+        97.54666666666667,
+        98.68444444444444
+      ],
+      "hit_energies": [
+        6.493462603320233,
+        4.860212903101776,
+        6.514205030383851,
+        8.171310125873589,
+        4.183278195656258,
+        7.750943464048431,
+        3.471159498967671,
+        5.623753972213188,
+        4.744348585004976,
+        5.485706699000399
+      ],
+      "hit_count": 10
+    },
+    "features": {
+      "player_motion_max": 0.040625,
+      "player_motion_var": 1.953e-05,
+      "near_motion_mean": 0.003078,
+      "far_motion_mean": 0.001209,
+      "motion_sample_count": 311
+    },
+    "players": {
+      "player_1": {
+        "detected": true,
+        "side": "near",
+        "detection_confidence": 0.7964,
+        "identity_confidence": 0.6396,
+        "movement_distance": 1.597116,
+        "sample_count": 35,
+        "mean_position": [
+          0.577016,
+          0.837513
+        ]
+      },
+      "player_2": {
+        "detected": true,
+        "side": "far",
+        "detection_confidence": 0.3742,
+        "identity_confidence": 0.5419,
+        "movement_distance": 0.028643,
+        "sample_count": 5,
+        "mean_position": [
+          0.482187,
+          0.334074
+        ]
+      }
+    },
+    "video_extraction": {
+      "version": 1,
+      "status": "complete",
+      "court_rois": {
+        "near": [
+          [
+            354,
+            660
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            1918,
+            953
+          ],
+          [
+            -19,
+            953
+          ]
+        ],
+        "far": [
+          [
+            728,
+            367
+          ],
+          [
+            1169,
+            367
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            354,
+            660
+          ]
+        ],
+        "format": "polygon"
+      },
+      "sample_seconds": 0.5,
+      "ball_tracking_status": "disabled",
+      "ball_frame_step": null,
+      "ball_temporal_stride": null
+    },
+    "player_trajectories": {
+      "player_1": [
+        {
+          "time": 79.467,
+          "frame_index": 4768,
+          "side": "near",
+          "bbox": [
+            590,
+            714,
+            756,
+            1003
+          ],
+          "detection_confidence": 0.846259,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.350521,
+            0.928704
+          ],
+          "court_position": {
+            "x": 0.366038,
+            "y": 1.018225,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 79.967,
+          "frame_index": 4798,
+          "side": "near",
+          "bbox": [
+            568,
+            704,
+            742,
+            1010
+          ],
+          "detection_confidence": 0.867904,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.341146,
+            0.935185
+          ],
+          "court_position": {
+            "x": 0.358538,
+            "y": 1.020598,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 80.467,
+          "frame_index": 4828,
+          "side": "near",
+          "bbox": [
+            542,
+            694,
+            680,
+            1011
+          ],
+          "detection_confidence": 0.82199,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.318229,
+            0.936111
+          ],
+          "court_position": {
+            "x": 0.337608,
+            "y": 1.020934,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 80.967,
+          "frame_index": 4858,
+          "side": "near",
+          "bbox": [
+            512,
+            692,
+            724,
+            1015
+          ],
+          "detection_confidence": 0.849238,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.321875,
+            0.939815
+          ],
+          "court_position": {
+            "x": 0.341737,
+            "y": 1.022269,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 81.467,
+          "frame_index": 4888,
+          "side": "near",
+          "bbox": [
+            558,
+            696,
+            742,
+            1013
+          ],
+          "detection_confidence": 0.84081,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.338542,
+            0.937963
+          ],
+          "court_position": {
+            "x": 0.356662,
+            "y": 1.021603,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 81.967,
+          "frame_index": 4918,
+          "side": "near",
+          "bbox": [
+            593,
+            620,
+            757,
+            951
+          ],
+          "detection_confidence": 0.807906,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.351562,
+            0.880556
+          ],
+          "court_position": {
+            "x": 0.357913,
+            "y": 0.999221,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 82.467,
+          "frame_index": 4948,
+          "side": "near",
+          "bbox": [
+            574,
+            634,
+            710,
+            956
+          ],
+          "detection_confidence": 0.812454,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.334375,
+            0.885185
+          ],
+          "court_position": {
+            "x": 0.341872,
+            "y": 1.001161,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 82.967,
+          "frame_index": 4978,
+          "side": "near",
+          "bbox": [
+            559,
+            624,
+            693,
+            912
+          ],
+          "detection_confidence": 0.819363,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.326042,
+            0.844444
+          ],
+          "court_position": {
+            "x": 0.323487,
+            "y": 0.983161,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 83.467,
+          "frame_index": 5008,
+          "side": "near",
+          "bbox": [
+            582,
+            625,
+            711,
+            918
+          ],
+          "detection_confidence": 0.844733,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.336719,
+            0.85
+          ],
+          "court_position": {
+            "x": 0.33604,
+            "y": 0.985744,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 83.967,
+          "frame_index": 5038,
+          "side": "near",
+          "bbox": [
+            661,
+            621,
+            802,
+            898
+          ],
+          "detection_confidence": 0.818348,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.38099,
+            0.831481
+          ],
+          "court_position": {
+            "x": 0.378712,
+            "y": 0.976961,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 84.467,
+          "frame_index": 5068,
+          "side": "near",
+          "bbox": [
+            679,
+            589,
+            820,
+            865
+          ],
+          "detection_confidence": 0.818049,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.390365,
+            0.800926
+          ],
+          "court_position": {
+            "x": 0.383289,
+            "y": 0.961325,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 84.967,
+          "frame_index": 5098,
+          "side": "near",
+          "bbox": [
+            665,
+            569,
+            782,
+            817
+          ],
+          "detection_confidence": 0.80646,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.376823,
+            0.756481
+          ],
+          "court_position": {
+            "x": 0.35799,
+            "y": 0.935622,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 85.467,
+          "frame_index": 5128,
+          "side": "near",
+          "bbox": [
+            699,
+            572,
+            791,
+            828
+          ],
+          "detection_confidence": 0.78705,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.388021,
+            0.766667
+          ],
+          "court_position": {
+            "x": 0.373733,
+            "y": 0.941857,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 85.967,
+          "frame_index": 5158,
+          "side": "near",
+          "bbox": [
+            690,
+            575,
+            865,
+            835
+          ],
+          "detection_confidence": 0.816807,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.404948,
+            0.773148
+          ],
+          "court_position": {
+            "x": 0.394973,
+            "y": 0.945712,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 88.467,
+          "frame_index": 5308,
+          "side": "near",
+          "bbox": [
+            1563,
+            675,
+            1749,
+            959
+          ],
+          "detection_confidence": 0.843493,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.8625,
+            0.887963
+          ],
+          "court_position": {
+            "x": 0.861872,
+            "y": 1.002313,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 88.967,
+          "frame_index": 5338,
+          "side": "near",
+          "bbox": [
+            1517,
+            646,
+            1710,
+            956
+          ],
+          "detection_confidence": 0.847831,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.840365,
+            0.885185
+          ],
+          "court_position": {
+            "x": 0.841446,
+            "y": 1.001161,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 89.467,
+          "frame_index": 5368,
+          "side": "near",
+          "bbox": [
+            1486,
+            631,
+            1666,
+            957
+          ],
+          "detection_confidence": 0.796799,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.820833,
+            0.886111
+          ],
+          "court_position": {
+            "x": 0.821738,
+            "y": 1.001546,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 89.967,
+          "frame_index": 5398,
+          "side": "near",
+          "bbox": [
+            1504,
+            629,
+            1684,
+            951
+          ],
+          "detection_confidence": 0.843174,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.830208,
+            0.880556
+          ],
+          "court_position": {
+            "x": 0.833612,
+            "y": 0.999221,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 90.467,
+          "frame_index": 5428,
+          "side": "near",
+          "bbox": [
+            1507,
+            632,
+            1678,
+            958
+          ],
+          "detection_confidence": 0.81927,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.829427,
+            0.887037
+          ],
+          "court_position": {
+            "x": 0.829779,
+            "y": 1.00193,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 90.967,
+          "frame_index": 5458,
+          "side": "near",
+          "bbox": [
+            1438,
+            649,
+            1609,
+            952
+          ],
+          "detection_confidence": 0.793476,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.79349,
+            0.881481
+          ],
+          "court_position": {
+            "x": 0.796727,
+            "y": 0.999611,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 91.467,
+          "frame_index": 5488,
+          "side": "near",
+          "bbox": [
+            1370,
+            646,
+            1521,
+            956
+          ],
+          "detection_confidence": 0.783397,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.752865,
+            0.885185
+          ],
+          "court_position": {
+            "x": 0.755055,
+            "y": 1.001161,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 91.967,
+          "frame_index": 5518,
+          "side": "near",
+          "bbox": [
+            1260,
+            657,
+            1437,
+            956
+          ],
+          "detection_confidence": 0.860979,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.702344,
+            0.885185
+          ],
+          "court_position": {
+            "x": 0.705175,
+            "y": 1.001161,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 92.467,
+          "frame_index": 5548,
+          "side": "near",
+          "bbox": [
+            1129,
+            630,
+            1326,
+            957
+          ],
+          "detection_confidence": 0.821587,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.639323,
+            0.886111
+          ],
+          "court_position": {
+            "x": 0.642765,
+            "y": 1.001546,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 92.967,
+          "frame_index": 5578,
+          "side": "near",
+          "bbox": [
+            1017,
+            574,
+            1149,
+            826
+          ],
+          "detection_confidence": 0.82863,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.564063,
+            0.764815
+          ],
+          "court_position": {
+            "x": 0.582911,
+            "y": 0.940739,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 93.467,
+          "frame_index": 5608,
+          "side": "near",
+          "bbox": [
+            953,
+            522,
+            1092,
+            741
+          ],
+          "detection_confidence": 0.820155,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.532552,
+            0.686111
+          ],
+          "court_position": {
+            "x": 0.552559,
+            "y": 0.885697,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 93.967,
+          "frame_index": 5638,
+          "side": "near",
+          "bbox": [
+            926,
+            495,
+            1004,
+            703
+          ],
+          "detection_confidence": 0.814844,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.502604,
+            0.650926
+          ],
+          "court_position": {
+            "x": 0.512263,
+            "y": 0.855141,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 94.467,
+          "frame_index": 5668,
+          "side": "near",
+          "bbox": [
+            900,
+            475,
+            1001,
+            694
+          ],
+          "detection_confidence": 0.822999,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.495052,
+            0.642593
+          ],
+          "court_position": {
+            "x": 0.50113,
+            "y": 0.847223,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 94.967,
+          "frame_index": 5698,
+          "side": "near",
+          "bbox": [
+            881,
+            477,
+            980,
+            687
+          ],
+          "detection_confidence": 0.838121,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.484635,
+            0.636111
+          ],
+          "court_position": {
+            "x": 0.485256,
+            "y": 0.840865,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 95.467,
+          "frame_index": 5728,
+          "side": "near",
+          "bbox": [
+            841,
+            479,
+            914,
+            683
+          ],
+          "detection_confidence": 0.799724,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.457031,
+            0.632407
+          ],
+          "court_position": {
+            "x": 0.442663,
+            "y": 0.837149,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 95.967,
+          "frame_index": 5758,
+          "side": "near",
+          "bbox": [
+            1698,
+            766,
+            1784,
+            901
+          ],
+          "detection_confidence": 0.355715,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.906771,
+            0.834259
+          ],
+          "court_position": {
+            "x": 0.938736,
+            "y": 0.97831,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 96.467,
+          "frame_index": 5788,
+          "side": "near",
+          "bbox": [
+            1694,
+            769,
+            1775,
+            896
+          ],
+          "detection_confidence": 0.356291,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.903385,
+            0.82963
+          ],
+          "court_position": {
+            "x": 0.938238,
+            "y": 0.976056,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 98.467,
+          "frame_index": 5908,
+          "side": "near",
+          "bbox": [
+            1566,
+            666,
+            1705,
+            955
+          ],
+          "detection_confidence": 0.794306,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.851823,
+            0.884259
+          ],
+          "court_position": {
+            "x": 0.853223,
+            "y": 1.000775,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 98.967,
+          "frame_index": 5938,
+          "side": "near",
+          "bbox": [
+            1486,
+            633,
+            1693,
+            931
+          ],
+          "detection_confidence": 0.7907,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.827865,
+            0.862037
+          ],
+          "court_position": {
+            "x": 0.840295,
+            "y": 0.991197,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 99.467,
+          "frame_index": 5968,
+          "side": "near",
+          "bbox": [
+            1494,
+            659,
+            1702,
+            968
+          ],
+          "detection_confidence": 0.850682,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.832292,
+            0.896296
+          ],
+          "court_position": {
+            "x": 0.828293,
+            "y": 1.005715,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 99.967,
+          "frame_index": 5998,
+          "side": "near",
+          "bbox": [
+            1437,
+            693,
+            1658,
+            1039
+          ],
+          "detection_confidence": 0.835804,
+          "identity_confidence": 0.6396,
+          "position": [
+            0.80599,
+            0.962037
+          ],
+          "court_position": {
+            "x": 0.777227,
+            "y": 1.030011,
+            "inside_court": false
+          }
+        }
+      ],
+      "player_2": [
+        {
+          "time": 87.967,
+          "frame_index": 5278,
+          "side": "far",
+          "bbox": [
+            881,
+            292,
+            910,
+            359
+          ],
+          "detection_confidence": 0.368789,
+          "identity_confidence": 0.5419,
+          "position": [
+            0.466406,
+            0.332407
+          ],
+          "court_position": {
+            "x": 0.374014,
+            "y": -0.062878,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 93.467,
+          "frame_index": 5608,
+          "side": "far",
+          "bbox": [
+            909,
+            287,
+            946,
+            361
+          ],
+          "detection_confidence": 0.412574,
+          "identity_confidence": 0.5419,
+          "position": [
+            0.483073,
+            0.334259
+          ],
+          "court_position": {
+            "x": 0.450692,
+            "y": -0.046593,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 93.967,
+          "frame_index": 5638,
+          "side": "far",
+          "bbox": [
+            917,
+            299,
+            948,
+            357
+          ],
+          "detection_confidence": 0.353925,
+          "identity_confidence": 0.5419,
+          "position": [
+            0.485677,
+            0.330556
+          ],
+          "court_position": {
+            "x": 0.46153,
+            "y": -0.079555,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 94.467,
+          "frame_index": 5668,
+          "side": "far",
+          "bbox": [
+            925,
+            301,
+            961,
+            363
+          ],
+          "detection_confidence": 0.354182,
+          "identity_confidence": 0.5419,
+          "position": [
+            0.491146,
+            0.336111
+          ],
+          "court_position": {
+            "x": 0.487249,
+            "y": -0.030693,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 95.467,
+          "frame_index": 5728,
+          "side": "far",
+          "bbox": [
+            914,
+            300,
+            947,
+            364
+          ],
+          "detection_confidence": 0.381345,
+          "identity_confidence": 0.5419,
+          "position": [
+            0.484635,
+            0.337037
+          ],
+          "court_position": {
+            "x": 0.458472,
+            "y": -0.022884,
+            "inside_court": false
+          }
+        }
+      ]
+    },
+    "sampled_frames": []
+  },
+  {
+    "index": 6,
+    "start": 102.803673,
+    "end": 122.428798,
+    "audio": {
+      "sample_rate": 22050,
+      "hit_times": [
+        104.30367346938775,
+        105.92907029478458,
+        110.96780045351474,
+        112.6164172335601,
+        114.17215419501133,
+        116.4477097505669,
+        117.84090702947846,
+        118.72326530612244,
+        120.92879818594105
+      ],
+      "hit_energies": [
+        4.051964393704554,
+        4.276561487909007,
+        5.065007909847921,
+        4.125449821969336,
+        4.199131409004497,
+        3.9443076872006957,
+        8.47148582498157,
+        4.302730688854765,
+        4.058183563295053
+      ],
+      "hit_count": 9
+    },
+    "features": {
+      "player_motion_max": 0.033988,
+      "player_motion_var": 1.105e-05,
+      "near_motion_mean": 0.004019,
+      "far_motion_mean": 0.000527,
+      "motion_sample_count": 294
+    },
+    "players": {
+      "player_1": {
+        "detected": true,
+        "side": "near",
+        "detection_confidence": 0.832,
+        "identity_confidence": 0.4768,
+        "movement_distance": 0.522238,
+        "sample_count": 17,
+        "mean_position": [
+          0.458379,
+          0.874129
+        ]
+      },
+      "player_2": {
+        "detected": true,
+        "side": "far",
+        "detection_confidence": 0.3871,
+        "identity_confidence": 0.4552,
+        "movement_distance": 0.0,
+        "sample_count": 1,
+        "mean_position": [
+          0.548438,
+          0.342593
+        ]
+      }
+    },
+    "video_extraction": {
+      "version": 1,
+      "status": "complete",
+      "court_rois": {
+        "near": [
+          [
+            354,
+            660
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            1918,
+            953
+          ],
+          [
+            -19,
+            953
+          ]
+        ],
+        "far": [
+          [
+            728,
+            367
+          ],
+          [
+            1169,
+            367
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            354,
+            660
+          ]
+        ],
+        "format": "polygon"
+      },
+      "sample_seconds": 0.5,
+      "ball_tracking_status": "disabled",
+      "ball_frame_step": null,
+      "ball_temporal_stride": null
+    },
+    "player_trajectories": {
+      "player_1": [
+        {
+          "time": 102.8,
+          "frame_index": 6168,
+          "side": "near",
+          "bbox": [
+            1002,
+            563,
+            1107,
+            775
+          ],
+          "detection_confidence": 0.843754,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.549219,
+            0.717593
+          ],
+          "court_position": {
+            "x": 0.571027,
+            "y": 0.909647,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 103.3,
+          "frame_index": 6198,
+          "side": "near",
+          "bbox": [
+            992,
+            594,
+            1103,
+            831
+          ],
+          "detection_confidence": 0.854754,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.545573,
+            0.769444
+          ],
+          "court_position": {
+            "x": 0.560416,
+            "y": 0.943519,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 103.8,
+          "frame_index": 6228,
+          "side": "near",
+          "bbox": [
+            949,
+            623,
+            1074,
+            911
+          ],
+          "detection_confidence": 0.841294,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.526823,
+            0.843519
+          ],
+          "court_position": {
+            "x": 0.533923,
+            "y": 0.982726,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 104.3,
+          "frame_index": 6258,
+          "side": "near",
+          "bbox": [
+            878,
+            658,
+            1058,
+            986
+          ],
+          "detection_confidence": 0.892197,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.504167,
+            0.912963
+          ],
+          "court_position": {
+            "x": 0.509125,
+            "y": 1.012287,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 110.3,
+          "frame_index": 6618,
+          "side": "near",
+          "bbox": [
+            736,
+            601,
+            851,
+            1009
+          ],
+          "detection_confidence": 0.775165,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.413281,
+            0.934259
+          ],
+          "court_position": {
+            "x": 0.424952,
+            "y": 1.020262,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 110.8,
+          "frame_index": 6648,
+          "side": "near",
+          "bbox": [
+            754,
+            587,
+            915,
+            980
+          ],
+          "detection_confidence": 0.863001,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.434635,
+            0.907407
+          ],
+          "court_position": {
+            "x": 0.442647,
+            "y": 1.010129,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 111.3,
+          "frame_index": 6678,
+          "side": "near",
+          "bbox": [
+            776,
+            644,
+            928,
+            957
+          ],
+          "detection_confidence": 0.845345,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.44375,
+            0.886111
+          ],
+          "court_position": {
+            "x": 0.449925,
+            "y": 1.001546,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 111.8,
+          "frame_index": 6708,
+          "side": "near",
+          "bbox": [
+            844,
+            640,
+            985,
+            955
+          ],
+          "detection_confidence": 0.809516,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.476302,
+            0.884259
+          ],
+          "court_position": {
+            "x": 0.481976,
+            "y": 1.000775,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 112.3,
+          "frame_index": 6738,
+          "side": "near",
+          "bbox": [
+            837,
+            691,
+            989,
+            1007
+          ],
+          "detection_confidence": 0.852664,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.475521,
+            0.932407
+          ],
+          "court_position": {
+            "x": 0.482364,
+            "y": 1.019586,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 114.3,
+          "frame_index": 6858,
+          "side": "near",
+          "bbox": [
+            663,
+            649,
+            806,
+            980
+          ],
+          "detection_confidence": 0.796486,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.382552,
+            0.907407
+          ],
+          "court_position": {
+            "x": 0.392795,
+            "y": 1.010129,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 114.8,
+          "frame_index": 6888,
+          "side": "near",
+          "bbox": [
+            649,
+            659,
+            822,
+            953
+          ],
+          "detection_confidence": 0.838038,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.383073,
+            0.882407
+          ],
+          "court_position": {
+            "x": 0.38952,
+            "y": 1.0,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 115.3,
+          "frame_index": 6918,
+          "side": "near",
+          "bbox": [
+            740,
+            661,
+            907,
+            989
+          ],
+          "detection_confidence": 0.835888,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.428906,
+            0.915741
+          ],
+          "court_position": {
+            "x": 0.437867,
+            "y": 1.013353,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 120.3,
+          "frame_index": 7218,
+          "side": "near",
+          "bbox": [
+            795,
+            729,
+            970,
+            1012
+          ],
+          "detection_confidence": 0.837336,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.459635,
+            0.937037
+          ],
+          "court_position": {
+            "x": 0.467857,
+            "y": 1.021269,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 120.8,
+          "frame_index": 7248,
+          "side": "near",
+          "bbox": [
+            783,
+            651,
+            909,
+            961
+          ],
+          "detection_confidence": 0.808769,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.440625,
+            0.889815
+          ],
+          "court_position": {
+            "x": 0.447117,
+            "y": 1.003076,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 121.3,
+          "frame_index": 7278,
+          "side": "near",
+          "bbox": [
+            770,
+            608,
+            872,
+            933
+          ],
+          "detection_confidence": 0.797963,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.427604,
+            0.863889
+          ],
+          "court_position": {
+            "x": 0.431882,
+            "y": 0.992019,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 121.8,
+          "frame_index": 7308,
+          "side": "near",
+          "bbox": [
+            788,
+            615,
+            903,
+            898
+          ],
+          "detection_confidence": 0.853627,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.440365,
+            0.831481
+          ],
+          "court_position": {
+            "x": 0.442165,
+            "y": 0.976961,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 122.3,
+          "frame_index": 7338,
+          "side": "near",
+          "bbox": [
+            822,
+            623,
+            946,
+            912
+          ],
+          "detection_confidence": 0.798429,
+          "identity_confidence": 0.4768,
+          "position": [
+            0.460417,
+            0.844444
+          ],
+          "court_position": {
+            "x": 0.464292,
+            "y": 0.983161,
+            "inside_court": true
+          }
+        }
+      ],
+      "player_2": [
+        {
+          "time": 112.8,
+          "frame_index": 6768,
+          "side": "far",
+          "bbox": [
+            1032,
+            268,
+            1074,
+            370
+          ],
+          "detection_confidence": 0.387094,
+          "identity_confidence": 0.4552,
+          "position": [
+            0.548438,
+            0.342593
+          ],
+          "court_position": {
+            "x": 0.732907,
+            "y": 0.022105,
+            "inside_court": true
+          }
+        }
+      ]
+    },
+    "sampled_frames": []
+  },
+  {
+    "index": 7,
+    "start": 135.636327,
+    "end": 156.666667,
+    "audio": {
+      "sample_rate": 22050,
+      "hit_times": [
+        137.13632653061225,
+        137.69360544217687,
+        139.99238095238096,
+        143.1502947845805,
+        143.8701133786848,
+        145.42585034013607,
+        146.14566893424035,
+        147.5156462585034,
+        151.81133786848073,
+        152.7633560090703,
+        153.22775510204082,
+        153.71537414965985,
+        154.17977324263038,
+        155.10857142857142,
+        155.85160997732427
+      ],
+      "hit_energies": [
+        4.5468243021921015,
+        4.428417670720276,
+        4.97904833019491,
+        3.7836227860030744,
+        11.025776226696042,
+        4.992422943697859,
+        4.003438366688554,
+        11.425085150239497,
+        8.773770674792097,
+        3.507090881343524,
+        4.783050575861389,
+        5.338010218117358,
+        6.394975198565526,
+        5.431471932756293,
+        6.27240415737662
+      ],
+      "hit_count": 15
+    },
+    "features": {
+      "player_motion_max": 0.985536,
+      "player_motion_var": 0.00546536,
+      "near_motion_mean": 0.012344,
+      "far_motion_mean": 0.01021,
+      "motion_sample_count": 316
+    },
+    "players": {
+      "player_1": {
+        "detected": true,
+        "side": "near",
+        "detection_confidence": 0.79,
+        "identity_confidence": 0.5329,
+        "movement_distance": 0.28052,
+        "sample_count": 12,
+        "mean_position": [
+          0.426584,
+          0.896373
+        ]
+      },
+      "player_2": {
+        "detected": true,
+        "side": "far",
+        "detection_confidence": 0.3828,
+        "identity_confidence": 0.589,
+        "movement_distance": 0.032989,
+        "sample_count": 2,
+        "mean_position": [
+          0.490495,
+          0.34213
+        ]
+      }
+    },
+    "video_extraction": {
+      "version": 1,
+      "status": "complete",
+      "court_rois": {
+        "near": [
+          [
+            354,
+            660
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            1918,
+            953
+          ],
+          [
+            -19,
+            953
+          ]
+        ],
+        "far": [
+          [
+            728,
+            367
+          ],
+          [
+            1169,
+            367
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            354,
+            660
+          ]
+        ],
+        "format": "polygon"
+      },
+      "sample_seconds": 0.5,
+      "ball_tracking_status": "disabled",
+      "ball_frame_step": null,
+      "ball_temporal_stride": null
+    },
+    "player_trajectories": {
+      "player_1": [
+        {
+          "time": 136.633,
+          "frame_index": 8198,
+          "side": "near",
+          "bbox": [
+            795,
+            628,
+            934,
+            1021
+          ],
+          "detection_confidence": 0.815239,
+          "identity_confidence": 0.5329,
+          "position": [
+            0.45026,
+            0.94537
+          ],
+          "court_position": {
+            "x": 0.459672,
+            "y": 1.024246,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 137.133,
+          "frame_index": 8228,
+          "side": "near",
+          "bbox": [
+            811,
+            611,
+            966,
+            973
+          ],
+          "detection_confidence": 0.831398,
+          "identity_confidence": 0.5329,
+          "position": [
+            0.46276,
+            0.900926
+          ],
+          "court_position": {
+            "x": 0.469299,
+            "y": 1.007571,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 137.633,
+          "frame_index": 8258,
+          "side": "near",
+          "bbox": [
+            830,
+            639,
+            966,
+            957
+          ],
+          "detection_confidence": 0.85003,
+          "identity_confidence": 0.5329,
+          "position": [
+            0.467708,
+            0.886111
+          ],
+          "court_position": {
+            "x": 0.473548,
+            "y": 1.001546,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 138.133,
+          "frame_index": 8288,
+          "side": "near",
+          "bbox": [
+            779,
+            629,
+            885,
+            953
+          ],
+          "detection_confidence": 0.829495,
+          "identity_confidence": 0.5329,
+          "position": [
+            0.433333,
+            0.882407
+          ],
+          "court_position": {
+            "x": 0.439339,
+            "y": 1.0,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 138.633,
+          "frame_index": 8318,
+          "side": "near",
+          "bbox": [
+            644,
+            648,
+            831,
+            953
+          ],
+          "detection_confidence": 0.874687,
+          "identity_confidence": 0.5329,
+          "position": [
+            0.384115,
+            0.882407
+          ],
+          "court_position": {
+            "x": 0.390553,
+            "y": 1.0,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 139.133,
+          "frame_index": 8348,
+          "side": "near",
+          "bbox": [
+            633,
+            647,
+            838,
+            953
+          ],
+          "detection_confidence": 0.831862,
+          "identity_confidence": 0.5329,
+          "position": [
+            0.383073,
+            0.882407
+          ],
+          "court_position": {
+            "x": 0.38952,
+            "y": 1.0,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 139.633,
+          "frame_index": 8378,
+          "side": "near",
+          "bbox": [
+            696,
+            663,
+            827,
+            970
+          ],
+          "detection_confidence": 0.80041,
+          "identity_confidence": 0.5329,
+          "position": [
+            0.396615,
+            0.898148
+          ],
+          "court_position": {
+            "x": 0.405055,
+            "y": 1.00646,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 140.133,
+          "frame_index": 8408,
+          "side": "near",
+          "bbox": [
+            681,
+            669,
+            804,
+            963
+          ],
+          "detection_confidence": 0.815244,
+          "identity_confidence": 0.5329,
+          "position": [
+            0.386719,
+            0.891667
+          ],
+          "court_position": {
+            "x": 0.394515,
+            "y": 1.003835,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 148.133,
+          "frame_index": 8888,
+          "side": "near",
+          "bbox": [
+            685,
+            816,
+            770,
+            940
+          ],
+          "detection_confidence": 0.412507,
+          "identity_confidence": 0.5329,
+          "position": [
+            0.378906,
+            0.87037
+          ],
+          "court_position": {
+            "x": 0.383403,
+            "y": 0.994861,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 150.133,
+          "frame_index": 9008,
+          "side": "near",
+          "bbox": [
+            743,
+            672,
+            880,
+            1029
+          ],
+          "detection_confidence": 0.79425,
+          "identity_confidence": 0.5329,
+          "position": [
+            0.422656,
+            0.952778
+          ],
+          "court_position": {
+            "x": 0.435181,
+            "y": 1.026839,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 150.633,
+          "frame_index": 9038,
+          "side": "near",
+          "bbox": [
+            792,
+            627,
+            951,
+            955
+          ],
+          "detection_confidence": 0.826944,
+          "identity_confidence": 0.5329,
+          "position": [
+            0.453906,
+            0.884259
+          ],
+          "court_position": {
+            "x": 0.459835,
+            "y": 1.000775,
+            "inside_court": false
+          }
+        },
+        {
+          "time": 151.133,
+          "frame_index": 9068,
+          "side": "near",
+          "bbox": [
+            889,
+            618,
+            1027,
+            950
+          ],
+          "detection_confidence": 0.798228,
+          "identity_confidence": 0.5329,
+          "position": [
+            0.498958,
+            0.87963
+          ],
+          "court_position": {
+            "x": 0.504408,
+            "y": 0.99883,
+            "inside_court": true
+          }
+        }
+      ],
+      "player_2": [
+        {
+          "time": 140.133,
+          "frame_index": 8408,
+          "side": "far",
+          "bbox": [
+            960,
+            314,
+            995,
+            376
+          ],
+          "detection_confidence": 0.379758,
+          "identity_confidence": 0.589,
+          "position": [
+            0.509115,
+            0.348148
+          ],
+          "court_position": {
+            "x": 0.562472,
+            "y": 0.064117,
+            "inside_court": true
+          }
+        },
+        {
+          "time": 142.133,
+          "frame_index": 8528,
+          "side": "far",
+          "bbox": [
+            888,
+            300,
+            924,
+            363
+          ],
+          "detection_confidence": 0.385825,
+          "identity_confidence": 0.589,
+          "position": [
+            0.471875,
+            0.336111
+          ],
+          "court_position": {
+            "x": 0.401359,
+            "y": -0.030693,
+            "inside_court": false
+          }
+        }
+      ]
+    },
+    "sampled_frames": []
+  }
+]
