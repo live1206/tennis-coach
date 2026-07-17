@@ -20,6 +20,8 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
   const { analysis } = loaded
   const model = provider === 'cloud' ? cloudModel : localModel
   const setModel = provider === 'cloud' ? setCloudModel : setLocalModel
+  const askTitle = provider === 'cloud' ? copy.aiAnalysis.askTitleCloud : copy.aiAnalysis.askTitleLocal
+  const modelLabel = provider === 'cloud' ? copy.aiAnalysis.modelCloud : copy.aiAnalysis.modelLocal
 
   const runAnalysis = async () => {
     setRunning(true)
@@ -96,7 +98,7 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
         </section>
 
         <section style={cardStyle}>
-          <h2 style={sectionTitle}>{copy.aiAnalysis.askTitle}</h2>
+          <h2 style={sectionTitle}>{askTitle}</h2>
           <p style={mutedStyle}>
             {provider === 'cloud' ? copy.aiAnalysis.privacyCloud : copy.aiAnalysis.privacyLocal}
           </p>
@@ -122,7 +124,7 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
             </div>
           </label>
           <label style={labelStyle}>
-            {copy.aiAnalysis.model}
+            {modelLabel}
             <input value={model} onChange={(event) => setModel(event.target.value)} style={inputStyle} />
           </label>
           <label style={labelStyle}>

@@ -62,9 +62,13 @@ export interface Copy {
     supported: string
     unsupported: string
     askTitle: string
+    askTitleCloud: string
+    askTitleLocal: string
     privacyCloud: string
     privacyLocal: string
     model: string
+    modelCloud: string
+    modelLocal: string
     provider: string
     providerCloud: string
     providerLocal: string
@@ -210,9 +214,13 @@ export const COPY: Record<Language, Copy> = {
       supported: 'Supported claims',
       unsupported: 'Unsupported claims',
       askTitle: 'Ask the local coach',
+      askTitleCloud: 'Ask the cloud coach',
+      askTitleLocal: 'Ask the local coach',
       privacyCloud: 'Extracted tennis evidence is sent to your configured cloud AI endpoint. Raw video remains on your device.',
       privacyLocal: 'Only extracted tennis evidence is sent to the in-process model. Raw video remains on your device.',
       model: 'Foundry Local model alias',
+      modelCloud: 'Foundry cloud model deployment',
+      modelLocal: 'Foundry Local model alias',
       provider: 'Run mode',
       providerCloud: 'Cloud',
       providerLocal: 'Local',
@@ -374,9 +382,13 @@ export const COPY: Record<Language, Copy> = {
       supported: '支持的结论',
       unsupported: '不支持的结论',
       askTitle: '询问本地教练',
+      askTitleCloud: '询问云端教练',
+      askTitleLocal: '询问本地教练',
       privacyCloud: '提取后的网球分析证据会发送到您配置的云端 AI 服务，原始视频仍保留在本机。',
       privacyLocal: '只有提取后的网球分析证据会传给本机模型，原始视频不会离开设备。',
       model: 'Foundry Local 模型别名',
+      modelCloud: 'Foundry 云端模型部署名',
+      modelLocal: 'Foundry Local 模型别名',
       provider: '运行方式',
       providerCloud: '云端',
       providerLocal: '本地',
