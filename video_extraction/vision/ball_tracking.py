@@ -101,6 +101,8 @@ def track_ball_video(
     temporal_stride: int = 1,
     start: float = 0.0,
     end: float | None = None,
+    interpolate_max_gap: int = 0,
+    interpolation_max_speed: float = 3.5,
 ) -> list[dict]:
     if frame_step < 1:
         raise ValueError("frame_step must be at least 1")
@@ -154,7 +156,65 @@ def track_ball_video(
     finally:
         cap.release()
 
-    return observations
+    return interpolate_short_gaps(
+        observations,
+        maximum_missing_observations=interpolate_max_gap,
+        maximum_normalized_speed=interpolation_max_speed,
+    )
+
+
+def interpolate_short_gaps(
+    observations: list[dict],
+    maximum_missing_observations: int = 3,
+    maximum_normalized_speed: float = 3.5,
+) -> list[dict]:
+    if maximum_missing_observations < 1:
+        return observations
+    output = [dict(observation) for observation in observations]
+    visible_indices = [
+        index
+        for index, observation in enumerate(output)
+        if observation.get("visible")
+    ]
+    for previous_index, next_index in zip(visible_indices, visible_indices[1:]):
+        missing_count = next_index - previous_index - 1
+        if missing_count < 1 or missing_count > maximum_missing_observations:
+            continue
+        previous = output[previous_index]
+        following = output[next_index]
+        delta_time = following["time"] - previous["time"]
+        if delta_time <= 0:
+            continue
+        distance = np.hypot(
+            following["x_normalized"] - previous["x_normalized"],
+            following["y_normalized"] - previous["y_normalized"],
+        )
+        if distance / delta_time > maximum_normalized_speed:
+            continue
+        confidence = min(
+            float(previous.get("confidence") or 0.0),
+            float(following.get("confidence") or 0.0),
+        ) * 0.5
+        for index in range(previous_index + 1, next_index):
+            fraction = (output[index]["time"] - previous["time"]) / delta_time
+            output[index].update({
+                "visible": True,
+                "x": round(previous["x"] + (following["x"] - previous["x"]) * fraction, 3),
+                "y": round(previous["y"] + (following["y"] - previous["y"]) * fraction, 3),
+                "x_normalized": round(
+                    previous["x_normalized"]
+                    + (following["x_normalized"] - previous["x_normalized"]) * fraction,
+                    6,
+                ),
+                "y_normalized": round(
+                    previous["y_normalized"]
+                    + (following["y_normalized"] - previous["y_normalized"]) * fraction,
+                    6,
+                ),
+                "confidence": round(confidence, 6),
+                "interpolated": True,
+            })
+    return output
 
 
 def track_ball_intervals(
@@ -163,6 +223,8 @@ def track_ball_intervals(
     intervals: list[tuple[float, float]],
     frame_step: int = 1,
     temporal_stride: int = 1,
+    interpolate_max_gap: int = 0,
+    interpolation_max_speed: float = 3.5,
 ) -> list[dict]:
     merged_intervals: list[tuple[float, float]] = []
     for start, end in sorted(intervals):
@@ -184,6 +246,8 @@ def track_ball_intervals(
                 temporal_stride=temporal_stride,
                 start=start,
                 end=end,
+                interpolate_max_gap=interpolate_max_gap,
+                interpolation_max_speed=interpolation_max_speed,
             )
         )
     return observations
@@ -202,6 +266,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--end", type=float, default=None, help="End time in seconds")
     parser.add_argument("--frame-step", type=int, default=1, help="Run inference every Nth frame")
     parser.add_argument("--temporal-stride", type=int, default=1, help="Frame spacing between model inputs")
+    parser.add_argument(
+        "--interpolate-max-gap",
+        type=int,
+        default=3,
+        help="Interpolate up to N missing observations between speed-consistent detections",
+    )
     args = parser.parse_args(argv)
 
     detector = TrackNetOnnxDetector(args.model)
@@ -212,6 +282,7 @@ def main(argv: list[str] | None = None) -> int:
         temporal_stride=args.temporal_stride,
         start=args.start,
         end=args.end,
+        interpolate_max_gap=args.interpolate_max_gap,
     )
     output = {
         "source_video": str(Path(args.video).resolve()),

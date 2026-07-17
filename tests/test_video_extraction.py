@@ -7,6 +7,7 @@ from video_extraction.court_projection import CourtProjector, add_court_projecti
 from video_extraction.vision import ball_tracking
 from video_extraction.vision.ball_tracking import (
     TrackNetOnnxDetector,
+    interpolate_short_gaps,
     observations_for_segment,
     track_ball_intervals,
 )
@@ -363,6 +364,80 @@ def test_filters_ball_observations_by_segment_time():
     assert observations_for_segment(observations, 1.0, 2.0) == [
         {"time": 1.0, "visible": False}
     ]
+
+
+def test_interpolates_short_speed_consistent_ball_gap():
+    observations = [
+        {
+            "frame_index": 0,
+            "time": 0.0,
+            "visible": True,
+            "x": 0.0,
+            "y": 0.0,
+            "x_normalized": 0.0,
+            "y_normalized": 0.0,
+            "confidence": 0.8,
+            "interpolated": False,
+        },
+        {
+            "frame_index": 1,
+            "time": 0.1,
+            "visible": False,
+            "confidence": 0.0,
+            "interpolated": False,
+        },
+        {
+            "frame_index": 2,
+            "time": 0.2,
+            "visible": True,
+            "x": 20.0,
+            "y": 10.0,
+            "x_normalized": 0.2,
+            "y_normalized": 0.1,
+            "confidence": 0.6,
+            "interpolated": False,
+        },
+    ]
+
+    result = interpolate_short_gaps(observations, maximum_missing_observations=1)
+
+    assert result[1]["visible"] is True
+    assert result[1]["interpolated"] is True
+    assert result[1]["x"] == 10.0
+    assert result[1]["y_normalized"] == 0.05
+    assert result[1]["confidence"] == 0.3
+
+
+def test_does_not_interpolate_implausibly_fast_ball_gap():
+    observations = [
+        {
+            "time": 0.0,
+            "visible": True,
+            "x": 0.0,
+            "y": 0.0,
+            "x_normalized": 0.0,
+            "y_normalized": 0.0,
+            "confidence": 0.8,
+        },
+        {"time": 0.1, "visible": False},
+        {
+            "time": 0.2,
+            "visible": True,
+            "x": 100.0,
+            "y": 100.0,
+            "x_normalized": 1.0,
+            "y_normalized": 1.0,
+            "confidence": 0.8,
+        },
+    ]
+
+    result = interpolate_short_gaps(
+        observations,
+        maximum_missing_observations=1,
+        maximum_normalized_speed=3.5,
+    )
+
+    assert result[1]["visible"] is False
 
 
 def test_ball_tracking_only_processes_requested_intervals(monkeypatch):

@@ -67,6 +67,7 @@ def enrich_report(
     ball_detector_type: str = "tracknet",
     inference_backend: str = "opencv",
     ball_tile_grid: int = 1,
+    ball_interpolate_max_gap: int = 3,
 ) -> list[dict]:
     if not report:
         return []
@@ -95,6 +96,7 @@ def enrich_report(
             ],
             frame_step=ball_frame_step,
             temporal_stride=ball_temporal_stride,
+            interpolate_max_gap=ball_interpolate_max_gap,
         )
 
     selected_rois = rois if rois is not None else select_rois(str(video_path))
@@ -112,6 +114,7 @@ def enrich_report(
                     "ball_tile_grid": ball_tile_grid if ball_detector_type == "yolox" else None,
                     "ball_frame_step": ball_frame_step if ball_observations is not None else None,
                     "ball_temporal_stride": ball_temporal_stride if ball_observations is not None else None,
+                    "ball_interpolate_max_gap": ball_interpolate_max_gap if ball_observations is not None else None,
                 },
             }
             if ball_observations is not None:
@@ -164,6 +167,7 @@ def enrich_report(
                 "ball_tile_grid": ball_tile_grid if ball_detector_type == "yolox" else None,
                 "ball_frame_step": ball_frame_step if ball_observations is not None else None,
                 "ball_temporal_stride": ball_temporal_stride if ball_observations is not None else None,
+                "ball_interpolate_max_gap": ball_interpolate_max_gap if ball_observations is not None else None,
             },
             "player_trajectories": observation["player_trajectories"],
             "sampled_frames": observation.get("sampled_frames", []),
@@ -191,6 +195,7 @@ def enrich_report_file(
     ball_detector_type: str = "tracknet",
     inference_backend: str = "opencv",
     ball_tile_grid: int = 1,
+    ball_interpolate_max_gap: int = 3,
 ) -> list[dict]:
     report = load_report(report_path)
     enriched = enrich_report(
@@ -205,6 +210,7 @@ def enrich_report_file(
         ball_detector_type=ball_detector_type,
         inference_backend=inference_backend,
         ball_tile_grid=ball_tile_grid,
+        ball_interpolate_max_gap=ball_interpolate_max_gap,
     )
     Path(output_path).write_text(json.dumps(enriched, indent=2, ensure_ascii=False))
     return enriched
@@ -256,6 +262,12 @@ def main(argv: list[str] | None = None) -> int:
         help="Split frames into an NxN overlapping grid for higher-resolution YOLOX ball detection",
     )
     parser.add_argument(
+        "--ball-interpolate-max-gap",
+        type=int,
+        default=3,
+        help="Interpolate short speed-consistent gaps between ball detections",
+    )
+    parser.add_argument(
         "--pose-model-path",
         default=None,
         help="Optional MediaPipe Pose Landmarker model for stroke-side analysis",
@@ -297,6 +309,7 @@ def main(argv: list[str] | None = None) -> int:
         "ball_detector_type": args.ball_detector,
         "inference_backend": args.inference_backend,
         "ball_tile_grid": args.ball_tile_grid,
+        "ball_interpolate_max_gap": args.ball_interpolate_max_gap,
     }
     if args.report:
         report = load_report(args.report)

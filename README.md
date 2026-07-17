@@ -219,6 +219,7 @@ tennis-coach-extract match.mp4 \
   --ball-detector yolox \
   --ball-model-path /path/to/yolox_nano.onnx \
   --ball-tile-grid 2 \
+  --ball-interpolate-max-gap 3 \
   --inference-backend cuda \
   --pose-model-path /path/to/pose_landmarker_heavy.task \
   --target-player-image /path/to/player-key-frame.jpg \
@@ -297,7 +298,11 @@ YOLOX is expected to be less accurate than a temporal model for tiny, blurred,
 or occluded balls, so its output remains confidence-gated and must be measured
 on independent labels. `--ball-tile-grid 2` runs four overlapping higher-
 resolution crops per frame to improve tiny-ball coverage at roughly four times
-the ball-inference cost; use it primarily with CUDA. The available TrackNet V1 checkpoint has no verified
+the ball-inference cost; use it primarily with CUDA.
+`--ball-interpolate-max-gap 3` fills only short, speed-consistent gaps and marks
+every inferred observation with `interpolated: true`. The analysis reports raw
+detection coverage separately from detected-plus-interpolated usable coverage.
+The available TrackNet V1 checkpoint has no verified
 redistribution license and is not part of the publishable workflow.
 
 Standalone TrackNet-compatible tracking remains available only for externally

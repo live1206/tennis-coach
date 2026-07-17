@@ -96,7 +96,9 @@ ANALYSIS_SCHEMA = {
                 "max_hit_energy": "Maximum relative onset strength.",
             },
             "ball": {
-                "visible_ratio": "Visible detections divided by ball observations.",
+                "detected_visible_ratio": "Raw model detections divided by ball observations.",
+                "interpolated_count": "Short-gap points inferred between speed-consistent detections.",
+                "visible_ratio": "Detected plus interpolated visible points divided by observations.",
                 "normalized_image_travel": "Summed image-space trajectory distance.",
                 "mean_normalized_image_speed_per_second": (
                     "Mean image-space displacement per second; not physical ball speed."
@@ -170,9 +172,22 @@ def summarize_ball_trajectory(observations: list[dict]) -> dict:
             "observation_count": 0,
             "visible_count": 0,
             "visible_ratio": None,
+            "detected_visible_count": 0,
+            "detected_visible_ratio": None,
+            "interpolated_count": 0,
         }
 
     visible = [observation for observation in observations if observation.get("visible")]
+    detected_visible = [
+        observation
+        for observation in visible
+        if not observation.get("interpolated")
+    ]
+    interpolated_visible = [
+        observation
+        for observation in visible
+        if observation.get("interpolated")
+    ]
     speeds = []
     travel = 0.0
     court_crossings = 0
@@ -226,6 +241,12 @@ def summarize_ball_trajectory(observations: list[dict]) -> dict:
         "observation_count": len(observations),
         "visible_count": len(visible),
         "visible_ratio": round(len(visible) / len(observations), 6),
+        "detected_visible_count": len(detected_visible),
+        "detected_visible_ratio": round(
+            len(detected_visible) / len(observations),
+            6,
+        ),
+        "interpolated_count": len(interpolated_visible),
         "longest_missing_run_observations": _longest_missing_run(observations),
         "normalized_image_travel": round(travel, 6),
         "speed_sample_count": len(speeds),
@@ -234,7 +255,7 @@ def summarize_ball_trajectory(observations: list[dict]) -> dict:
         "court_half_crossings": court_crossings,
         "direction_change_candidates": direction_change_candidates,
         "mean_detection_confidence": _rounded_mean(
-            [observation["confidence"] for observation in visible]
+            [observation["confidence"] for observation in detected_visible]
         ),
     }
 
@@ -246,6 +267,12 @@ def aggregate_ball_summaries(summaries: list[dict]) -> dict:
 
     observation_count = sum(summary["observation_count"] for summary in available)
     visible_count = sum(summary["visible_count"] for summary in available)
+    detected_visible_count = sum(
+        summary["detected_visible_count"] for summary in available
+    )
+    interpolated_count = sum(
+        summary["interpolated_count"] for summary in available
+    )
     speed_values = [
         (
             summary["mean_normalized_image_speed_per_second"],
@@ -255,7 +282,10 @@ def aggregate_ball_summaries(summaries: list[dict]) -> dict:
         if summary["mean_normalized_image_speed_per_second"] is not None
     ]
     confidence_values = [
-        (summary["mean_detection_confidence"], summary["visible_count"])
+        (
+            summary["mean_detection_confidence"],
+            summary["detected_visible_count"],
+        )
         for summary in available
         if summary["mean_detection_confidence"] is not None
     ]
@@ -269,6 +299,12 @@ def aggregate_ball_summaries(summaries: list[dict]) -> dict:
         "observation_count": observation_count,
         "visible_count": visible_count,
         "visible_ratio": round(visible_count / observation_count, 6),
+        "detected_visible_count": detected_visible_count,
+        "detected_visible_ratio": round(
+            detected_visible_count / observation_count,
+            6,
+        ),
+        "interpolated_count": interpolated_count,
         "longest_missing_run_observations": max(
             summary["longest_missing_run_observations"] for summary in available
         ),
@@ -550,9 +586,12 @@ def build_llm_statistics(report: list[dict]) -> dict:
     warnings = []
     if not ball_summary["available"]:
         warnings.append("Ball tracking is unavailable in this report.")
-    elif ball_summary["visible_ratio"] is not None and ball_summary["visible_ratio"] < 0.1:
+    elif (
+        ball_summary["detected_visible_ratio"] is not None
+        and ball_summary["detected_visible_ratio"] < 0.1
+    ):
         warnings.append(
-            "Ball visibility is below 10%; contact and shot analysis may be sparse."
+            "Raw ball detection visibility is below 10%; contact and shot analysis may be sparse."
         )
     if (
         ball_summary.get("mean_detection_confidence") is not None
