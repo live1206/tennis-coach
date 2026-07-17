@@ -62,6 +62,10 @@ The enriched `reports.json` keeps the original segment fields and adds:
 
 If court detection fails, each segment is preserved and marked with `video_extraction.status: "skipped_court_detection"`.
 
+The report schema is still pre-release. Its version remains `1` while the
+fields are being designed; version increments begin after the first published
+schema release.
+
 ### Ball annotation and tracking
 
 Create a local frame-level annotation set from footage you have the right to use:

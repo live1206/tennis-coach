@@ -14,7 +14,7 @@ from video_extraction.vision.motion import analyze_motion
 from video_extraction.vision.player_observation import analyze_player_observations
 
 
-EXTRACTION_VERSION = 3
+EXTRACTION_VERSION = 1
 
 
 def load_report(path: str | Path) -> list[dict]:

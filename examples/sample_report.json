@@ -37,7 +37,7 @@
       }
     },
     "video_extraction": {
-      "version": 3,
+      "version": 1,
       "status": "complete",
       "court_rois": {
         "near": [
@@ -2916,7 +2916,7 @@
       }
     },
     "video_extraction": {
-      "version": 3,
+      "version": 1,
       "status": "complete",
       "court_rois": {
         "near": [
@@ -5691,7 +5691,7 @@
       }
     },
     "video_extraction": {
-      "version": 3,
+      "version": 1,
       "status": "complete",
       "court_rois": {
         "near": [
@@ -7849,7 +7849,7 @@
       }
     },
     "video_extraction": {
-      "version": 3,
+      "version": 1,
       "status": "complete",
       "court_rois": {
         "near": [
@@ -10544,7 +10544,7 @@
       }
     },
     "video_extraction": {
-      "version": 3,
+      "version": 1,
       "status": "complete",
       "court_rois": {
         "near": [
