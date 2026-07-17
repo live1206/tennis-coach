@@ -48,8 +48,6 @@ export interface Copy {
     recentTitle: string
     shortcutImport: string
     shortcutQuit: string
-    aiAnalysisTitle: string
-    aiAnalysisDetail: string
   }
   aiAnalysis: {
     eyebrow: string
@@ -191,13 +189,11 @@ export const COPY: Record<Language, Copy> = {
       recentTitle: 'Open recent videos',
       shortcutImport: 'Import video',
       shortcutQuit: 'Quit',
-      aiAnalysisTitle: 'AI analysis',
-      aiAnalysisDetail: 'Open a canonical analysis.json and ask a local coaching model.',
     },
     aiAnalysis: {
       eyebrow: 'Evidence-backed coaching',
       title: 'AI Analysis',
-      back: 'Back to welcome',
+      back: 'Back to review',
       evidenceTitle: 'Analysis evidence',
       segments: 'Candidate rallies',
       players: 'Anonymous players',
@@ -207,7 +203,7 @@ export const COPY: Record<Language, Copy> = {
       supported: 'Supported claims',
       unsupported: 'Unsupported claims',
       askTitle: 'Ask the local coach',
-      privacy: 'Only this structured JSON is sent to the in-process model. Raw video remains on your device.',
+      privacy: 'Only extracted tennis evidence is sent to the in-process model. Raw video remains on your device.',
       model: 'Foundry Local model alias',
       question: 'Coaching question',
       defaultQuestion: 'Summarize the strongest evidence-backed observations, limitations, and next three practice priorities.',
@@ -350,13 +346,11 @@ export const COPY: Record<Language, Copy> = {
       recentTitle: '打开之前的视频',
       shortcutImport: '导入视频',
       shortcutQuit: '退出',
-      aiAnalysisTitle: 'AI 分析',
-      aiAnalysisDetail: '打开标准 analysis.json，向本地教练模型提问。',
     },
     aiAnalysis: {
       eyebrow: '有证据支持的训练建议',
       title: 'AI 分析',
-      back: '返回欢迎页',
+      back: '返回视频查看',
       evidenceTitle: '分析证据',
       segments: '候选回合',
       players: '匿名球员',
@@ -366,7 +360,7 @@ export const COPY: Record<Language, Copy> = {
       supported: '支持的结论',
       unsupported: '不支持的结论',
       askTitle: '询问本地教练',
-      privacy: '只有结构化 JSON 会传给本机模型，原始视频不会离开设备。',
+      privacy: '只有提取后的网球分析证据会传给本机模型，原始视频不会离开设备。',
       model: 'Foundry Local 模型别名',
       question: '训练问题',
       defaultQuestion: '总结最有证据支持的观察、数据限制和接下来三个训练重点。',

@@ -33,7 +33,8 @@ export interface TennisAnalysis {
 }
 
 export interface LoadedAnalysis {
-  path: string
+  videoPath: string
+  evidenceId: string
   analysis: TennisAnalysis
 }
 

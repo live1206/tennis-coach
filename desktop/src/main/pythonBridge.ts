@@ -41,6 +41,10 @@ function getOutputDir(videoPath: string): string {
   return path.join(path.dirname(videoPath), `output_${sourceName}_${sourceHash}`)
 }
 
+export function getAnalysisReportPath(videoPath: string): string {
+  return path.join(getOutputDir(videoPath), 'analysis.json')
+}
+
 function getSourceMetadata(videoPath: string) {
   const stats = fs.statSync(videoPath)
   return {
@@ -57,6 +61,18 @@ function sourceMetadataMatches(
   return before.path === after.path
     && before.size === after.size
     && before.mtimeMs === after.mtimeMs
+}
+
+export function loadCachedAnalysisReport(videoPath: string): unknown | null {
+  const outputDir = getOutputDir(videoPath)
+  const reportPath = getAnalysisReportPath(videoPath)
+  const sourcePath = path.join(outputDir, 'source.json')
+  if (!fs.existsSync(reportPath) || !fs.existsSync(sourcePath)) return null
+
+  const recorded = JSON.parse(fs.readFileSync(sourcePath, 'utf-8'))
+  const current = getSourceMetadata(videoPath)
+  if (!sourceMetadataMatches(recorded, current)) return null
+  return JSON.parse(fs.readFileSync(reportPath, 'utf-8'))
 }
 
 export function setupPythonBridge(isApprovedVideoPath: (videoPath: string) => boolean) {
@@ -84,7 +100,7 @@ export function setupPythonBridge(isApprovedVideoPath: (videoPath: string) => bo
       ...args,
       videoPath,
       '--output',
-      path.join(outputDir, 'analysis.json'),
+      getAnalysisReportPath(videoPath),
       '--internal-output-dir',
       path.join(outputDir, 'internal'),
     ]
@@ -197,20 +213,7 @@ export function setupPythonBridge(isApprovedVideoPath: (videoPath: string) => bo
     if (!isApprovedVideoPath(reportOrVideoPath)) {
       throw new Error('Select the video through the application first.')
     }
-    const outputDir = getOutputDir(reportOrVideoPath)
-    const reportPath = path.join(outputDir, 'analysis.json')
-    const sourcePath = path.join(outputDir, 'source.json')
-    if (fs.existsSync(reportPath) && fs.existsSync(sourcePath)) {
-      const recorded = JSON.parse(fs.readFileSync(sourcePath, 'utf-8'))
-      const current = getSourceMetadata(reportOrVideoPath)
-      if (recorded.path !== current.path
-        || recorded.size !== current.size
-        || recorded.mtimeMs !== current.mtimeMs) {
-        return null
-      }
-      return JSON.parse(fs.readFileSync(reportPath, 'utf-8'))
-    }
-    return null
+    return loadCachedAnalysisReport(reportOrVideoPath)
   })
 }
 

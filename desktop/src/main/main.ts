@@ -1,9 +1,15 @@
 import { app, BrowserWindow, dialog, ipcMain, net, protocol } from 'electron'
 import path from 'node:path'
 import fs from 'node:fs'
+import { createHash } from 'node:crypto'
 import { pathToFileURL } from 'node:url'
 import Store from 'electron-store'
-import { cancelPythonAnalysis, setupPythonBridge } from './pythonBridge'
+import {
+  cancelPythonAnalysis,
+  getAnalysisReportPath,
+  loadCachedAnalysisReport,
+  setupPythonBridge,
+} from './pythonBridge'
 import { cancelFfmpegExport, setupFfmpegBridge } from './ffmpegBridge'
 import { cancelLocalAIAnalysis, setupAIAnalysisBridge } from './aiAnalysisBridge'
 import { validateTennisAnalysis } from '../shared/analysis'
@@ -19,7 +25,6 @@ process.env.VITE_PUBLIC = app.isPackaged
   : path.join(process.env.DIST_ELECTRON, '../../public')
 
 let win: BrowserWindow | null = null
-const approvedAnalysisPaths = new Set<string>()
 const approvedVideoPaths = new Set<string>()
 const VITE_DEV_SERVER_URL = app.isPackaged ? undefined : process.env.VITE_DEV_SERVER_URL
 
@@ -110,25 +115,22 @@ ipcMain.handle('approve-dropped-video-paths', (_event, candidatePaths: unknown) 
   return approved
 })
 
-ipcMain.handle('open-analysis-dialog', async (event) => {
-  const parentWin = BrowserWindow.fromWebContents(event.sender)
-  const result = await dialog.showOpenDialog(parentWin!, {
-    properties: ['openFile'],
-    filters: [{ name: 'Tennis Coach analysis', extensions: ['json'] }],
-  })
-  if (result.canceled || !result.filePaths[0]) return null
-  const selectedPath = path.resolve(result.filePaths[0])
-  approvedAnalysisPaths.add(selectedPath)
-  return selectedPath
-})
-
-ipcMain.handle('load-analysis-json', (_event, analysisPath: string) => {
-  const resolvedPath = path.resolve(analysisPath)
-  if (!approvedAnalysisPaths.has(resolvedPath)) {
-    throw new Error('Select the analysis file through the application first.')
+function loadApprovedVideoAnalysis(videoPath: string) {
+  const resolvedVideoPath = path.resolve(videoPath)
+  if (!approvedVideoPaths.has(resolvedVideoPath)) {
+    throw new Error('Select the video through the application first.')
   }
-  const parsed: unknown = JSON.parse(fs.readFileSync(resolvedPath, 'utf-8'))
-  return { path: resolvedPath, analysis: validateTennisAnalysis(parsed) }
+  const parsed = loadCachedAnalysisReport(resolvedVideoPath)
+  if (!parsed) throw new Error('Run video analysis before opening AI Analysis.')
+  const analysis = validateTennisAnalysis(parsed)
+  const evidenceId = createHash('sha256')
+    .update(JSON.stringify(analysis))
+    .digest('hex')
+  return { videoPath: resolvedVideoPath, evidenceId, analysis }
+}
+
+ipcMain.handle('load-video-analysis', (_event, videoPath: string) => {
+  return loadApprovedVideoAnalysis(videoPath)
 })
 
 ipcMain.handle('get-recent-projects', () => {
@@ -164,7 +166,10 @@ app.whenReady().then(() => {
   })
   setupPythonBridge((videoPath) => approvedVideoPaths.has(path.resolve(videoPath)))
   setupFfmpegBridge((videoPath) => approvedVideoPaths.has(path.resolve(videoPath)))
-  setupAIAnalysisBridge((analysisPath) => approvedAnalysisPaths.has(path.resolve(analysisPath)))
+  setupAIAnalysisBridge((videoPath) => {
+    const loaded = loadApprovedVideoAnalysis(videoPath)
+    return getAnalysisReportPath(loaded.videoPath)
+  })
   createWindow()
 })
 

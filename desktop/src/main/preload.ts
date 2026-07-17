@@ -23,10 +23,13 @@ contextBridge.exposeInMainWorld('api', {
     return ipcRenderer.invoke('approve-dropped-video-paths', videoPaths) as Promise<string[]>
   },
   getVideoUrl: (videoPath: string) => `tennis-media://local/${encodeURIComponent(videoPath)}`,
-  openAnalysisDialog: () => ipcRenderer.invoke('open-analysis-dialog') as Promise<string | null>,
-  loadAnalysisJson: (analysisPath: string) => ipcRenderer.invoke('load-analysis-json', analysisPath),
-  runLocalAIAnalysis: (analysisPath: string, question: string, modelAlias: string) =>
-    ipcRenderer.invoke('run-local-ai-analysis', analysisPath, question, modelAlias),
+  loadVideoAnalysis: (videoPath: string) => ipcRenderer.invoke('load-video-analysis', videoPath),
+  runLocalAIAnalysis: (
+    videoPath: string,
+    evidenceId: string,
+    question: string,
+    modelAlias: string,
+  ) => ipcRenderer.invoke('run-local-ai-analysis', videoPath, evidenceId, question, modelAlias),
   cancelLocalAIAnalysis: () => ipcRenderer.invoke('cancel-local-ai-analysis') as Promise<void>,
   getRecentProjects: () => ipcRenderer.invoke('get-recent-projects'),
   getAppVersion: () => ipcRenderer.invoke('get-app-version') as Promise<string>,

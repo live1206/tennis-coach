@@ -1,6 +1,7 @@
 import { spawn, type ChildProcess } from 'node:child_process'
 import { app, ipcMain } from 'electron'
 import fs from 'node:fs'
+import { createHash, randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { validateTennisAnalysis } from '../shared/analysis'
 import { processTreeSpawnOptions, terminateProcessTree } from './processControl'
@@ -31,23 +32,47 @@ function getLocalAnalysisCommand(): { cmd: string; args: string[] } {
 
 function loadCanonicalAnalysis(analysisPath: string) {
   if (!path.isAbsolute(analysisPath) || path.extname(analysisPath).toLowerCase() !== '.json') {
-    throw new Error('Select an absolute analysis.json path.')
+    throw new Error('Select a completed video analysis.')
   }
   const parsed: unknown = JSON.parse(fs.readFileSync(analysisPath, 'utf-8'))
   return validateTennisAnalysis(parsed)
 }
 
-export function setupAIAnalysisBridge(isApprovedAnalysisPath: (analysisPath: string) => boolean) {
+export function setupAIAnalysisBridge(
+  resolveAnalysisPath: (videoPath: string) => string,
+) {
   ipcMain.handle('cancel-local-ai-analysis', cancelLocalAIAnalysis)
 
   ipcMain.handle(
     'run-local-ai-analysis',
-    async (_event, analysisPath: string, question: string, modelAlias: string) => {
+    async (
+      _event,
+      videoPath: string,
+      evidenceId: string,
+      question: string,
+      modelAlias: string,
+    ) => {
       if (localAnalysisProcess) return { error: 'A local AI analysis is already running.' }
-      if (!isApprovedAnalysisPath(analysisPath)) {
-        return { error: 'Select the analysis file through the application first.' }
+      let analysisPath: string
+      let snapshotPath: string
+      try {
+        analysisPath = resolveAnalysisPath(videoPath)
+        const analysis = loadCanonicalAnalysis(analysisPath)
+        const currentEvidenceId = createHash('sha256')
+          .update(JSON.stringify(analysis))
+          .digest('hex')
+        if (currentEvidenceId !== evidenceId) {
+          throw new Error('The extracted video evidence changed. Reopen AI Analysis and try again.')
+        }
+        snapshotPath = path.join(app.getPath('temp'), `tennis-coach-ai-${randomUUID()}.json`)
+        fs.writeFileSync(snapshotPath, JSON.stringify(analysis), { encoding: 'utf-8', mode: 0o600 })
+      } catch (error) {
+        return {
+          error: error instanceof Error
+            ? error.message
+            : 'The extracted video evidence is no longer available.',
+        }
       }
-      loadCanonicalAnalysis(analysisPath)
       const cleanQuestion = question.trim()
       if (!cleanQuestion || cleanQuestion.length > 2000) {
         return { error: 'Question must contain between 1 and 2000 characters.' }
@@ -59,7 +84,7 @@ export function setupAIAnalysisBridge(isApprovedAnalysisPath: (analysisPath: str
       const command = getLocalAnalysisCommand()
       const args = [
         ...command.args,
-        analysisPath,
+        snapshotPath,
         '--question',
         cleanQuestion,
         '--model',
@@ -90,10 +115,12 @@ export function setupAIAnalysisBridge(isApprovedAnalysisPath: (analysisPath: str
         child.stderr?.on('data', (data: Buffer) => { stderr = append(stderr, data) })
         child.on('error', (error) => {
           if (localAnalysisProcess === child) localAnalysisProcess = null
+          fs.rmSync(snapshotPath, { force: true })
           settle({ error: error.message })
         })
         child.on('close', (code) => {
           if (localAnalysisProcess === child) localAnalysisProcess = null
+          fs.rmSync(snapshotPath, { force: true })
           if (localAnalysisCancelled) {
             settle({ error: 'Local AI analysis was cancelled.' })
           } else if (code === 0) {

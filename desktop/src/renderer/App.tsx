@@ -167,18 +167,18 @@ function AppInner() {
     batchRunIdRef.current += 1
     batchCancelledRef.current = true
     await window.api.cancelAnalysis()
+    setLoadedAIAnalysis(null)
+    setAIOpenError(null)
     const videos = createVideoRecords(paths)
     dispatch({ type: 'CREATE_BATCH', videos })
     setExportResult(null)
     startBatchAnalysis(videos)
   }, [dispatch, startBatchAnalysis])
 
-  const handleOpenAIAnalysis = useCallback(async () => {
+  const handleOpenAIAnalysis = useCallback(async (videoPath: string) => {
     setAIOpenError(null)
     try {
-      const analysisPath = await window.api.openAnalysisDialog()
-      if (!analysisPath) return
-      setLoadedAIAnalysis(await window.api.loadAnalysisJson(analysisPath))
+      setLoadedAIAnalysis(await window.api.loadVideoAnalysis(videoPath))
     } catch (error) {
       setAIOpenError(error instanceof Error ? error.message : copy.app.unknownError)
     }
@@ -237,6 +237,7 @@ function AppInner() {
   }, [dispatch])
 
   const activeVideo = state.videos.find((video) => video.id === state.activeVideoId) ?? null
+  const hasCompletedVideo = state.videos.some((video) => video.status === 'done')
   const selectedRally = state.selectedRallyId ? state.rallies.find((rally) => rally.id === state.selectedRallyId) : null
   const runningVideoIndex = state.videos.findIndex((video) => video.status === 'running')
   const runningVideo = runningVideoIndex >= 0 ? state.videos[runningVideoIndex] : null
@@ -254,27 +255,30 @@ function AppInner() {
     )
   }
 
-  if (state.videos.length === 0) {
-    if (loadedAIAnalysis) {
-      return <AIAnalysisScreen loaded={loadedAIAnalysis} languageSwitch={languageSwitch} onBack={() => setLoadedAIAnalysis(null)} />
-    }
-    return <WelcomeScreen onVideosSelected={handleVideosSelected} onOpenAIAnalysis={handleOpenAIAnalysis} aiOpenError={aiOpenError} languageSwitch={languageSwitch} />
+  if (loadedAIAnalysis) {
+    return <AIAnalysisScreen loaded={loadedAIAnalysis} languageSwitch={languageSwitch} onBack={() => setLoadedAIAnalysis(null)} />
   }
 
-  if (state.analysisStatus === 'running' || state.analysisStatus === 'error') {
+  if (state.videos.length === 0) {
+    return <WelcomeScreen onVideosSelected={handleVideosSelected} languageSwitch={languageSwitch} />
+  }
+
+  const cancelBatchAnalysis = () => {
+    batchRunIdRef.current += 1
+    batchCancelledRef.current = true
+    window.api.cancelAnalysis()
+    if (runningVideo) {
+      dispatch({ type: 'VIDEO_ANALYSIS_ERROR', videoId: runningVideo.id, message: copy.app.cancelled })
+    }
+    dispatch({ type: 'BATCH_ANALYSIS_ERROR', message: copy.app.cancelled })
+  }
+
+  if ((state.analysisStatus === 'running' || state.analysisStatus === 'error') && !hasCompletedVideo) {
     return (
       <AnalysisScreen
         step={runningVideo?.currentStep ?? state.currentStep}
         errorMessage={state.errorMessage ?? runningVideo?.errorMessage ?? null}
-        onCancel={() => {
-          batchRunIdRef.current += 1
-          batchCancelledRef.current = true
-          window.api.cancelAnalysis()
-          if (runningVideo) {
-            dispatch({ type: 'VIDEO_ANALYSIS_ERROR', videoId: runningVideo.id, message: copy.app.cancelled })
-          }
-          dispatch({ type: 'BATCH_ANALYSIS_ERROR', message: copy.app.cancelled })
-        }}
+        onCancel={cancelBatchAnalysis}
         onReturnWelcome={handleReturnWelcome}
         onRetry={() => {
           if (retryVideo) handleRetryVideo(retryVideo.id)
@@ -302,9 +306,18 @@ function AppInner() {
           {copy.common.appName} · {copy.app.reviewTitle}
         </span>
         <div style={{ display: 'flex', gap: 8, WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
+          {aiOpenError && <span style={{ color: 'var(--color-danger)', fontSize: 11 }}>{aiOpenError}</span>}
           {languageSwitch}
           <button onClick={handleReturnWelcome} style={topBtnStyle}>{copy.app.returnWelcome}</button>
+          {state.analysisStatus === 'running' && (
+            <button onClick={cancelBatchAnalysis} style={topBtnStyle}>{copy.analysisPanel.cancel}</button>
+          )}
           {activeVideo && <button onClick={() => handleRetryVideo(activeVideo.id)} style={topBtnStyle}>{copy.app.rerunAnalysis}</button>}
+          {activeVideo?.status === 'done' && (
+            <button onClick={() => handleOpenAIAnalysis(activeVideo.path)} style={topBtnStyle}>
+              {copy.aiAnalysis.title}
+            </button>
+          )}
         </div>
       </div>
 

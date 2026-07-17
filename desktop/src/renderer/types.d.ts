@@ -46,10 +46,10 @@ declare global {
       openFileDialog: () => Promise<string[] | null>
       resolveDroppedVideoPaths: (files: File[]) => Promise<string[]>
       getVideoUrl: (videoPath: string) => string
-      openAnalysisDialog: () => Promise<string | null>
-      loadAnalysisJson: (analysisPath: string) => Promise<LoadedAnalysis>
+      loadVideoAnalysis: (videoPath: string) => Promise<LoadedAnalysis>
       runLocalAIAnalysis: (
-        analysisPath: string,
+        videoPath: string,
+        evidenceId: string,
         question: string,
         modelAlias: string,
       ) => Promise<{ output?: string; error?: string }>

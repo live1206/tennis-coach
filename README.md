@@ -27,11 +27,12 @@ The migrated Electron/React application lives in [`desktop/`](desktop/). It
 preserves Breakpoint's video review and highlight-export workflow, adapted to
 consume Tennis Coach's canonical `analysis.json`.
 
-The welcome screen also includes an **AI Analysis** entry. It opens a canonical
-analysis file, displays mandatory quality warnings and supported/unsupported
-capabilities, and can invoke the existing Foundry Local CLI without exposing
-raw video. See [`desktop/README.md`](desktop/README.md) for development setup
-and Breakpoint attribution.
+After a video finishes extraction, the review workspace enables **AI
+Analysis**. It displays mandatory quality warnings and supported/unsupported
+capabilities, and can invoke the existing Foundry Local CLI without requiring
+users to manage intermediate files or exposing raw video. See
+[`desktop/README.md`](desktop/README.md) for development setup and Breakpoint
+attribution.
 
 ## Implemented extraction pipeline
 

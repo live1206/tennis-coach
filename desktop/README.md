@@ -1,7 +1,7 @@
 # Tennis Coach desktop
 
 The desktop application combines Breakpoint's rally-review workflow with
-Tennis Coach's canonical `analysis.json` and optional Foundry Local coaching
+Tennis Coach's structured video evidence and optional Foundry Local coaching
 analysis.
 
 ## Development
@@ -19,10 +19,11 @@ the `foundry-local` optional dependency installed.
 TENNIS_COACH_PYTHON=/path/to/python npm run dev
 ```
 
-The **AI Analysis** entry opens a canonical `tennis-coach-analysis` version 1
-JSON document. The renderer displays deterministic quality/capability
+After a video finishes extraction, **AI Analysis** becomes available from the
+review workspace. The renderer displays deterministic quality/capability
 metadata, while model execution goes through Electron IPC to
-`video_extraction.local_analysis`. Raw video is not sent to the model.
+`video_extraction.local_analysis`. Users never need to locate the intermediate
+JSON, and raw video is not sent to the model.
 
 ## Attribution
 

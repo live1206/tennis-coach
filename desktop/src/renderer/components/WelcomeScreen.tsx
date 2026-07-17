@@ -3,8 +3,6 @@ import { useCopy } from '../i18n'
 
 interface Props {
   onVideosSelected: (paths: string[]) => void
-  onOpenAIAnalysis: () => void
-  aiOpenError: string | null
   languageSwitch: ReactNode
 }
 
@@ -29,7 +27,7 @@ const actionPanel: CSSProperties = {
   WebkitAppRegion: 'drag',
 } as CSSProperties
 
-export default function WelcomeScreen({ onVideosSelected, onOpenAIAnalysis, aiOpenError, languageSwitch }: Props) {
+export default function WelcomeScreen({ onVideosSelected, languageSwitch }: Props) {
   const copy = useCopy()
   const [recent, setRecent] = useState<string[]>([])
   const [appVersion, setAppVersion] = useState('')
@@ -159,29 +157,6 @@ export default function WelcomeScreen({ onVideosSelected, onOpenAIAnalysis, aiOp
               </div>
             </div>
           </button>
-
-          <button onClick={onOpenAIAnalysis} style={{
-            display: 'flex', alignItems: 'center', gap: 14, width: '100%', marginTop: 12,
-            padding: '18px 20px', background: 'var(--color-green-dark)', color: '#fff',
-            border: '1.5px solid var(--color-green-dark)', borderRadius: 'var(--radius-md)',
-            cursor: 'pointer', textAlign: 'left',
-          }}>
-            <div style={{
-              width: 40, height: 40, border: '1px solid rgba(255,255,255,0.35)', borderRadius: '50%',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-            }}>
-              <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 800 }}>AI</span>
-            </div>
-            <div>
-              <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 13, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-                {copy.welcome.aiAnalysisTitle}
-              </div>
-              <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.68)', marginTop: 2 }}>
-                {copy.welcome.aiAnalysisDetail}
-              </div>
-            </div>
-          </button>
-          {aiOpenError && <p style={{ color: 'var(--color-danger)', fontSize: 12, marginTop: 8 }}>{aiOpenError}</p>}
 
           <div
             onDragOver={(e) => { e.preventDefault(); setDragOver(true) }}

@@ -22,7 +22,12 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
     setError('')
     setResult('')
     try {
-      const response = await window.api.runLocalAIAnalysis(loaded.path, question, model)
+      const response = await window.api.runLocalAIAnalysis(
+        loaded.videoPath,
+        loaded.evidenceId,
+        question,
+        model,
+      )
       if (response.error) setError(response.error)
       else setResult(response.output ?? '')
     } catch (reason) {
@@ -59,7 +64,6 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
       <main style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 0.8fr) minmax(420px, 1.2fr)', gap: 20, padding: 24 }}>
         <section style={cardStyle}>
           <h2 style={sectionTitle}>{copy.aiAnalysis.evidenceTitle}</h2>
-          <p style={pathStyle}>{loaded.path}</p>
           <Metric label={copy.aiAnalysis.segments} value={analysis.source?.segment_count ?? analysis.segments.length} />
           <Metric label={copy.aiAnalysis.players} value={Object.keys(analysis.players).length} />
           <Metric label={copy.aiAnalysis.warnings} value={analysis.data_quality.warnings.length} />
@@ -121,7 +125,6 @@ const eyebrowStyle: CSSProperties = { color: 'var(--color-accent)', fontFamily: 
 const sectionTitle: CSSProperties = { fontFamily: 'var(--font-display)', fontSize: 18, margin: '0 0 14px' }
 const subheading: CSSProperties = { fontFamily: 'var(--font-display)', fontSize: 13, margin: '22px 0 8px', textTransform: 'uppercase', letterSpacing: '0.05em' }
 const mutedStyle: CSSProperties = { color: 'var(--color-text-secondary)', fontSize: 12, lineHeight: 1.5 }
-const pathStyle: CSSProperties = { ...mutedStyle, fontFamily: 'var(--font-mono)', overflowWrap: 'anywhere', marginBottom: 14 }
 const listStyle: CSSProperties = { margin: 0, paddingLeft: 20, color: 'var(--color-text-secondary)', fontSize: 12, lineHeight: 1.6 }
 const labelStyle: CSSProperties = { display: 'flex', flexDirection: 'column', gap: 7, fontSize: 12, fontWeight: 700, marginTop: 16 }
 const inputStyle: CSSProperties = { padding: '10px 12px', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', background: '#fff', color: 'var(--color-text)', font: 'inherit' }
