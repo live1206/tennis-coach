@@ -23,7 +23,7 @@ PLAYER_IDS = ("player_1", "player_2")
 
 def default_model_path() -> Path:
     bundle_root = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parents[2]))
-    bundled = bundle_root / "tennis_coach" / "vision" / "models" / MODEL_NAME
+    bundled = bundle_root / "video_extraction" / "vision" / "models" / MODEL_NAME
     if bundled.exists():
         return bundled
     return Path(__file__).resolve().parent / "models" / MODEL_NAME
@@ -42,7 +42,7 @@ class YoloXPersonDetector:
         if not self.model_path.exists():
             raise FileNotFoundError(
                 f"YOLOX person detector not found: {self.model_path}. "
-                "Pass --model-path or add the model under tennis_coach/vision/models/."
+                "Pass --model-path or add the model under video_extraction/vision/models/."
             )
         self.net = cv2.dnn.readNetFromONNX(str(self.model_path))
         self.confidence_threshold = confidence_threshold
@@ -72,13 +72,11 @@ class YoloXPersonDetector:
 
         blob = cv2.dnn.blobFromImage(
             padded,
-            scalefactor=1.0 / 255.0,
+            scalefactor=1.0,
             size=(MODEL_INPUT_SIZE, MODEL_INPUT_SIZE),
             swapRB=True,
         )
-        mean = np.asarray((0.485, 0.456, 0.406), dtype=np.float32).reshape(1, 3, 1, 1)
-        std = np.asarray((0.229, 0.224, 0.225), dtype=np.float32).reshape(1, 3, 1, 1)
-        return (blob - mean) / std, scale
+        return blob, scale
 
     def detect(self, frame: np.ndarray) -> list[dict]:
         height, width = frame.shape[:2]

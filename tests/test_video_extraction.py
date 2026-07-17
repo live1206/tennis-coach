@@ -1,8 +1,12 @@
 import numpy as np
 
-from tennis_coach import video_extraction
-from tennis_coach.video_extraction import enrich_report, load_report
-from tennis_coach.vision.player_observation import _assign_identities, _public_player_data
+from video_extraction import cli
+from video_extraction.cli import enrich_report, load_report
+from video_extraction.vision.player_observation import (
+    YoloXPersonDetector,
+    _assign_identities,
+    _public_player_data,
+)
 
 
 def test_load_report_requires_segment_timestamps(tmp_path):
@@ -13,7 +17,7 @@ def test_load_report_requires_segment_timestamps(tmp_path):
 
 
 def test_enrich_report_marks_court_detection_skip(monkeypatch):
-    monkeypatch.setattr(video_extraction, "select_rois", lambda _video_path: None)
+    monkeypatch.setattr(cli, "select_rois", lambda _video_path: None)
 
     enriched = enrich_report("missing.mp4", [{"start": 1.0, "end": 2.0}], rois=None)
 
@@ -69,3 +73,13 @@ def test_identity_assignment_follows_appearance_after_side_switch():
 
     assert second["player_1"]["side"] == "far"
     assert second["player_2"]["side"] == "near"
+
+
+def test_yolox_preprocessing_preserves_raw_rgb_values():
+    frame = np.zeros((416, 416, 3), dtype=np.uint8)
+    frame[0, 0] = [10, 20, 30]
+
+    blob, scale = YoloXPersonDetector._preprocess(frame)
+
+    assert scale == 1.0
+    np.testing.assert_array_equal(blob[0, :, 0, 0], [30.0, 20.0, 10.0])

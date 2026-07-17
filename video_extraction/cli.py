@@ -4,9 +4,9 @@ import argparse
 import json
 from pathlib import Path
 
-from tennis_coach.vision.court import select_rois
-from tennis_coach.vision.motion import analyze_motion
-from tennis_coach.vision.player_observation import analyze_player_observations
+from video_extraction.vision.court import select_rois
+from video_extraction.vision.motion import analyze_motion
+from video_extraction.vision.player_observation import analyze_player_observations
 
 
 EXTRACTION_VERSION = 1

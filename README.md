@@ -46,7 +46,7 @@ tennis-coach-extract match.mp4 full_report.json \
 You can also run it as a module:
 
 ```bash
-python -m tennis_coach.video_extraction match.mp4 full_report.json \
+python -m video_extraction.cli match.mp4 full_report.json \
   --model-path /path/to/yolox_nano.onnx \
   --output reports.json
 ```
@@ -60,6 +60,17 @@ The enriched `reports.json` keeps the original segment fields and adds:
 - `sampled_frames` with sampled YOLO person boxes, confidence scores, and detected court side
 
 If court detection fails, each segment is preserved and marked with `video_extraction.status: "skipped_court_detection"`.
+
+### Sample output
+
+`examples/sample_report.json` was generated from Breakpoint's
+`video/DJI_20260503154223_0534_D_highlight.MP4` using its bundled
+`yolox_nano.onnx` model. `examples/sample_segments.json` divides the full
+156.7-second video into five fixed windows solely to exercise report
+enrichment; those windows are not detected rally boundaries.
+
+The sample contains court polygons, motion summaries, anonymous player
+summaries, and sampled person detections from the complete video.
 
 ## Privacy and data routing
 

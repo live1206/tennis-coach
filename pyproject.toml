@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Local-first tennis video signal extraction and coaching analysis"
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "AGPL-3.0-or-later" }
+license = "AGPL-3.0-or-later"
 dependencies = [
   "numpy>=1.24,<2.0",
   "opencv-python>=4.8,<5.0",
@@ -17,7 +17,7 @@ test = [
 ]
 
 [project.scripts]
-tennis-coach-extract = "tennis_coach.video_extraction:main"
+tennis-coach-extract = "video_extraction.cli:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

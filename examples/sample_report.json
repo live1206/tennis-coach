@@ -1,0 +1,7735 @@
+[
+  {
+    "index": 1,
+    "start": 0.0,
+    "end": 30.0,
+    "features": {
+      "player_motion_max": 0.037589,
+      "player_motion_var": 8.69e-06,
+      "near_motion_mean": 0.003287,
+      "far_motion_mean": 0.00101,
+      "motion_sample_count": 450
+    },
+    "players": {
+      "player_1": {
+        "detected": true,
+        "side": "near",
+        "detection_confidence": 0.8264,
+        "identity_confidence": 0.5,
+        "movement_distance": 1.403127,
+        "sample_count": 47,
+        "mean_position": [
+          0.427316,
+          0.880477
+        ]
+      },
+      "player_2": {
+        "detected": true,
+        "side": "far",
+        "detection_confidence": 0.5537,
+        "identity_confidence": 0.5,
+        "movement_distance": 0.46859,
+        "sample_count": 20,
+        "mean_position": [
+          0.485143,
+          0.428843
+        ]
+      }
+    },
+    "video_extraction": {
+      "version": 1,
+      "status": "complete",
+      "court_rois": {
+        "near": [
+          [
+            354,
+            660
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            1918,
+            953
+          ],
+          [
+            -19,
+            953
+          ]
+        ],
+        "far": [
+          [
+            728,
+            367
+          ],
+          [
+            1169,
+            367
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            354,
+            660
+          ]
+        ],
+        "format": "polygon"
+      },
+      "sample_seconds": 0.5
+    },
+    "sampled_frames": [
+      {
+        "time": 0.0,
+        "frame_index": 0,
+        "detections": [
+          {
+            "bbox": [
+              348,
+              666,
+              491,
+              974
+            ],
+            "confidence": 0.84493,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              451,
+              346,
+              497,
+              440
+            ],
+            "confidence": 0.42863,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 0.5,
+        "frame_index": 30,
+        "detections": [
+          {
+            "bbox": [
+              339,
+              674,
+              497,
+              965
+            ],
+            "confidence": 0.855664,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 1.0,
+        "frame_index": 60,
+        "detections": [
+          {
+            "bbox": [
+              321,
+              682,
+              507,
+              971
+            ],
+            "confidence": 0.839699,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 1.5,
+        "frame_index": 90,
+        "detections": [
+          {
+            "bbox": [
+              326,
+              679,
+              511,
+              977
+            ],
+            "confidence": 0.842405,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 2.0,
+        "frame_index": 120,
+        "detections": [
+          {
+            "bbox": [
+              308,
+              685,
+              495,
+              969
+            ],
+            "confidence": 0.82728,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 2.5,
+        "frame_index": 150,
+        "detections": [
+          {
+            "bbox": [
+              325,
+              661,
+              437,
+              980
+            ],
+            "confidence": 0.806414,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 3.0,
+        "frame_index": 180,
+        "detections": [
+          {
+            "bbox": [
+              306,
+              621,
+              437,
+              889
+            ],
+            "confidence": 0.826557,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 3.5,
+        "frame_index": 210,
+        "detections": [
+          {
+            "bbox": [
+              343,
+              590,
+              459,
+              861
+            ],
+            "confidence": 0.78718,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 4.0,
+        "frame_index": 240,
+        "detections": [
+          {
+            "bbox": [
+              342,
+              594,
+              487,
+              854
+            ],
+            "confidence": 0.798796,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 4.5,
+        "frame_index": 270,
+        "detections": [
+          {
+            "bbox": [
+              423,
+              615,
+              530,
+              880
+            ],
+            "confidence": 0.831916,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 5.0,
+        "frame_index": 300,
+        "detections": [
+          {
+            "bbox": [
+              504,
+              625,
+              671,
+              917
+            ],
+            "confidence": 0.838687,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 5.5,
+        "frame_index": 330,
+        "detections": [
+          {
+            "bbox": [
+              663,
+              618,
+              762,
+              888
+            ],
+            "confidence": 0.813566,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              953,
+              307,
+              988,
+              377
+            ],
+            "confidence": 0.436088,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              141,
+              288,
+              181,
+              360
+            ],
+            "confidence": 0.400284,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 6.0,
+        "frame_index": 360,
+        "detections": [
+          {
+            "bbox": [
+              651,
+              612,
+              776,
+              867
+            ],
+            "confidence": 0.820219,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              949,
+              290,
+              983,
+              370
+            ],
+            "confidence": 0.441436,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 6.5,
+        "frame_index": 390,
+        "detections": [
+          {
+            "bbox": [
+              566,
+              621,
+              757,
+              858
+            ],
+            "confidence": 0.866133,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              949,
+              289,
+              984,
+              368
+            ],
+            "confidence": 0.39805,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 7.0,
+        "frame_index": 420,
+        "detections": [
+          {
+            "bbox": [
+              610,
+              581,
+              743,
+              821
+            ],
+            "confidence": 0.828589,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              954,
+              302,
+              990,
+              368
+            ],
+            "confidence": 0.393615,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 7.5,
+        "frame_index": 450,
+        "detections": [
+          {
+            "bbox": [
+              704,
+              577,
+              800,
+              833
+            ],
+            "confidence": 0.853129,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 8.0,
+        "frame_index": 480,
+        "detections": [
+          {
+            "bbox": [
+              748,
+              605,
+              864,
+              866
+            ],
+            "confidence": 0.824499,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 8.5,
+        "frame_index": 510,
+        "detections": [
+          {
+            "bbox": [
+              801,
+              636,
+              911,
+              952
+            ],
+            "confidence": 0.842602,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 9.0,
+        "frame_index": 540,
+        "detections": [
+          {
+            "bbox": [
+              846,
+              671,
+              997,
+              996
+            ],
+            "confidence": 0.865107,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 9.5,
+        "frame_index": 570,
+        "detections": [
+          {
+            "bbox": [
+              838,
+              690,
+              986,
+              1006
+            ],
+            "confidence": 0.780932,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 10.0,
+        "frame_index": 600,
+        "detections": [
+          {
+            "bbox": [
+              689,
+              681,
+              949,
+              984
+            ],
+            "confidence": 0.762135,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              762,
+              685,
+              899,
+              943
+            ],
+            "confidence": 0.571391,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 10.5,
+        "frame_index": 630,
+        "detections": [
+          {
+            "bbox": [
+              726,
+              666,
+              851,
+              965
+            ],
+            "confidence": 0.809903,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 11.0,
+        "frame_index": 660,
+        "detections": [
+          {
+            "bbox": [
+              723,
+              681,
+              849,
+              1007
+            ],
+            "confidence": 0.842515,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 11.5,
+        "frame_index": 690,
+        "detections": [
+          {
+            "bbox": [
+              744,
+              722,
+              891,
+              1080
+            ],
+            "confidence": 0.854556,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 12.0,
+        "frame_index": 720,
+        "detections": [
+          {
+            "bbox": [
+              791,
+              748,
+              988,
+              1080
+            ],
+            "confidence": 0.867965,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 12.5,
+        "frame_index": 750,
+        "detections": [
+          {
+            "bbox": [
+              883,
+              746,
+              1043,
+              1080
+            ],
+            "confidence": 0.878604,
+            "side": null
+          },
+          {
+            "bbox": [
+              106,
+              286,
+              145,
+              362
+            ],
+            "confidence": 0.479685,
+            "side": null
+          },
+          {
+            "bbox": [
+              911,
+              297,
+              948,
+              373
+            ],
+            "confidence": 0.390722,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 13.0,
+        "frame_index": 780,
+        "detections": [
+          {
+            "bbox": [
+              912,
+              711,
+              1065,
+              1078
+            ],
+            "confidence": 0.864637,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 13.5,
+        "frame_index": 810,
+        "detections": [
+          {
+            "bbox": [
+              877,
+              592,
+              1052,
+              985
+            ],
+            "confidence": 0.821758,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 14.0,
+        "frame_index": 840,
+        "detections": [
+          {
+            "bbox": [
+              897,
+              633,
+              1012,
+              948
+            ],
+            "confidence": 0.802473,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              958,
+              297,
+              990,
+              367
+            ],
+            "confidence": 0.404589,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 14.5,
+        "frame_index": 870,
+        "detections": [
+          {
+            "bbox": [
+              830,
+              638,
+              990,
+              954
+            ],
+            "confidence": 0.840066,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 15.0,
+        "frame_index": 900,
+        "detections": [
+          {
+            "bbox": [
+              808,
+              675,
+              919,
+              1014
+            ],
+            "confidence": 0.810873,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              1016,
+              255,
+              1063,
+              375
+            ],
+            "confidence": 0.50993,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 15.5,
+        "frame_index": 930,
+        "detections": [
+          {
+            "bbox": [
+              707,
+              674,
+              863,
+              1003
+            ],
+            "confidence": 0.839561,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 16.0,
+        "frame_index": 960,
+        "detections": [
+          {
+            "bbox": [
+              704,
+              624,
+              885,
+              898
+            ],
+            "confidence": 0.837221,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 16.5,
+        "frame_index": 990,
+        "detections": [
+          {
+            "bbox": [
+              805,
+              529,
+              899,
+              730
+            ],
+            "confidence": 0.776004,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              956,
+              291,
+              988,
+              366
+            ],
+            "confidence": 0.407869,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              448,
+              336,
+              490,
+              444
+            ],
+            "confidence": 0.392627,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 17.0,
+        "frame_index": 1020,
+        "detections": [
+          {
+            "bbox": [
+              880,
+              482,
+              958,
+              644
+            ],
+            "confidence": 0.780439,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              947,
+              288,
+              982,
+              370
+            ],
+            "confidence": 0.458152,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              448,
+              338,
+              490,
+              444
+            ],
+            "confidence": 0.380782,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 17.5,
+        "frame_index": 1050,
+        "detections": [
+          {
+            "bbox": [
+              919,
+              418,
+              1001,
+              612
+            ],
+            "confidence": 0.782526,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              448,
+              334,
+              491,
+              444
+            ],
+            "confidence": 0.351039,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 18.0,
+        "frame_index": 1080,
+        "detections": [
+          {
+            "bbox": [
+              934,
+              416,
+              994,
+              610
+            ],
+            "confidence": 0.715444,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              447,
+              332,
+              491,
+              443
+            ],
+            "confidence": 0.35413,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 18.5,
+        "frame_index": 1110,
+        "detections": [
+          {
+            "bbox": [
+              915,
+              408,
+              977,
+              608
+            ],
+            "confidence": 0.784123,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 19.0,
+        "frame_index": 1140,
+        "detections": [
+          {
+            "bbox": [
+              899,
+              411,
+              962,
+              587
+            ],
+            "confidence": 0.780922,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 19.5,
+        "frame_index": 1170,
+        "detections": [
+          {
+            "bbox": [
+              884,
+              418,
+              955,
+              593
+            ],
+            "confidence": 0.643955,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 20.0,
+        "frame_index": 1200,
+        "detections": [
+          {
+            "bbox": [
+              870,
+              421,
+              922,
+              585
+            ],
+            "confidence": 0.794108,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 20.5,
+        "frame_index": 1230,
+        "detections": [
+          {
+            "bbox": [
+              861,
+              430,
+              925,
+              597
+            ],
+            "confidence": 0.783923,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              1636,
+              321,
+              1698,
+              475
+            ],
+            "confidence": 0.422823,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 21.0,
+        "frame_index": 1260,
+        "detections": [
+          {
+            "bbox": [
+              1033,
+              696,
+              1228,
+              1004
+            ],
+            "confidence": 0.838873,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              812,
+              286,
+              849,
+              364
+            ],
+            "confidence": 0.520172,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              356,
+              393,
+              422,
+              480
+            ],
+            "confidence": 0.373726,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 21.5,
+        "frame_index": 1290,
+        "detections": [
+          {
+            "bbox": [
+              1043,
+              708,
+              1276,
+              997
+            ],
+            "confidence": 0.864899,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              813,
+              285,
+              850,
+              364
+            ],
+            "confidence": 0.363422,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              356,
+              394,
+              421,
+              480
+            ],
+            "confidence": 0.359601,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 22.0,
+        "frame_index": 1320,
+        "detections": [
+          {
+            "bbox": [
+              1040,
+              712,
+              1256,
+              1004
+            ],
+            "confidence": 0.829728,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              355,
+              395,
+              422,
+              481
+            ],
+            "confidence": 0.365722,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 22.5,
+        "frame_index": 1350,
+        "detections": [
+          {
+            "bbox": [
+              1040,
+              700,
+              1244,
+              1007
+            ],
+            "confidence": 0.832617,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              355,
+              396,
+              422,
+              481
+            ],
+            "confidence": 0.386888,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 23.0,
+        "frame_index": 1380,
+        "detections": [
+          {
+            "bbox": [
+              1033,
+              700,
+              1185,
+              1014
+            ],
+            "confidence": 0.856411,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              356,
+              395,
+              422,
+              481
+            ],
+            "confidence": 0.372426,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 23.5,
+        "frame_index": 1410,
+        "detections": [
+          {
+            "bbox": [
+              1029,
+              699,
+              1148,
+              1014
+            ],
+            "confidence": 0.816242,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 24.0,
+        "frame_index": 1440,
+        "detections": [
+          {
+            "bbox": [
+              1025,
+              693,
+              1166,
+              1018
+            ],
+            "confidence": 0.800395,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 24.5,
+        "frame_index": 1470,
+        "detections": [
+          {
+            "bbox": [
+              1034,
+              708,
+              1210,
+              1015
+            ],
+            "confidence": 0.860532,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              108,
+              300,
+              151,
+              383
+            ],
+            "confidence": 0.428857,
+            "side": null
+          },
+          {
+            "bbox": [
+              355,
+              396,
+              422,
+              481
+            ],
+            "confidence": 0.375942,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 25.0,
+        "frame_index": 1500,
+        "detections": [
+          {
+            "bbox": [
+              1008,
+              623,
+              1272,
+              949
+            ],
+            "confidence": 0.858818,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              353,
+              394,
+              422,
+              481
+            ],
+            "confidence": 0.388327,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 25.5,
+        "frame_index": 1530,
+        "detections": [
+          {
+            "bbox": [
+              1011,
+              634,
+              1138,
+              941
+            ],
+            "confidence": 0.803581,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              352,
+              391,
+              422,
+              481
+            ],
+            "confidence": 0.421001,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 26.0,
+        "frame_index": 1560,
+        "detections": [
+          {
+            "bbox": [
+              960,
+              638,
+              1101,
+              938
+            ],
+            "confidence": 0.772096,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              354,
+              391,
+              421,
+              480
+            ],
+            "confidence": 0.410855,
+            "side": null
+          },
+          {
+            "bbox": [
+              801,
+              305,
+              842,
+              371
+            ],
+            "confidence": 0.386228,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 26.5,
+        "frame_index": 1590,
+        "detections": [
+          {
+            "bbox": [
+              1007,
+              675,
+              1187,
+              975
+            ],
+            "confidence": 0.845704,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              353,
+              390,
+              421,
+              481
+            ],
+            "confidence": 0.435841,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 27.0,
+        "frame_index": 1620,
+        "detections": [
+          {
+            "bbox": [
+              1107,
+              693,
+              1265,
+              1006
+            ],
+            "confidence": 0.850597,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              355,
+              392,
+              422,
+              481
+            ],
+            "confidence": 0.413348,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 27.5,
+        "frame_index": 1650,
+        "detections": [
+          {
+            "bbox": [
+              1026,
+              700,
+              1149,
+              1013
+            ],
+            "confidence": 0.810484,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              355,
+              393,
+              422,
+              481
+            ],
+            "confidence": 0.384345,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 28.0,
+        "frame_index": 1680,
+        "detections": [
+          {
+            "bbox": [
+              872,
+              700,
+              1055,
+              988
+            ],
+            "confidence": 0.781407,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              355,
+              395,
+              422,
+              481
+            ],
+            "confidence": 0.371517,
+            "side": null
+          },
+          {
+            "bbox": [
+              910,
+              284,
+              946,
+              364
+            ],
+            "confidence": 0.35663,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 28.5,
+        "frame_index": 1710,
+        "detections": [
+          {
+            "bbox": [
+              834,
+              685,
+              959,
+              969
+            ],
+            "confidence": 0.819336,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              355,
+              392,
+              421,
+              481
+            ],
+            "confidence": 0.394359,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 29.0,
+        "frame_index": 1740,
+        "detections": [
+          {
+            "bbox": [
+              798,
+              679,
+              918,
+              1029
+            ],
+            "confidence": 0.863273,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              353,
+              390,
+              421,
+              480
+            ],
+            "confidence": 0.431118,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 29.5,
+        "frame_index": 1770,
+        "detections": [
+          {
+            "bbox": [
+              767,
+              724,
+              910,
+              1065
+            ],
+            "confidence": 0.84543,
+            "side": null
+          },
+          {
+            "bbox": [
+              353,
+              390,
+              421,
+              480
+            ],
+            "confidence": 0.426959,
+            "side": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "index": 2,
+    "start": 30.0,
+    "end": 60.0,
+    "features": {
+      "player_motion_max": 0.042026,
+      "player_motion_var": 9.32e-06,
+      "near_motion_mean": 0.004366,
+      "far_motion_mean": 0.001236,
+      "motion_sample_count": 450
+    },
+    "players": {
+      "player_1": {
+        "detected": true,
+        "side": "near",
+        "detection_confidence": 0.8236,
+        "identity_confidence": 0.7316,
+        "movement_distance": 1.833114,
+        "sample_count": 35,
+        "mean_position": [
+          0.407374,
+          0.84619
+        ]
+      },
+      "player_2": {
+        "detected": true,
+        "side": "far",
+        "detection_confidence": 0.5579,
+        "identity_confidence": 0.8179,
+        "movement_distance": 0.420675,
+        "sample_count": 19,
+        "mean_position": [
+          0.567009,
+          0.40614
+        ]
+      }
+    },
+    "video_extraction": {
+      "version": 1,
+      "status": "complete",
+      "court_rois": {
+        "near": [
+          [
+            354,
+            660
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            1918,
+            953
+          ],
+          [
+            -19,
+            953
+          ]
+        ],
+        "far": [
+          [
+            728,
+            367
+          ],
+          [
+            1169,
+            367
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            354,
+            660
+          ]
+        ],
+        "format": "polygon"
+      },
+      "sample_seconds": 0.5
+    },
+    "sampled_frames": [
+      {
+        "time": 30.0,
+        "frame_index": 1800,
+        "detections": [
+          {
+            "bbox": [
+              756,
+              730,
+              936,
+              1080
+            ],
+            "confidence": 0.867525,
+            "side": null
+          },
+          {
+            "bbox": [
+              1024,
+              270,
+              1062,
+              383
+            ],
+            "confidence": 0.650395,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              353,
+              390,
+              421,
+              480
+            ],
+            "confidence": 0.455994,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 30.5,
+        "frame_index": 1830,
+        "detections": [
+          {
+            "bbox": [
+              786,
+              753,
+              983,
+              1075
+            ],
+            "confidence": 0.888643,
+            "side": null
+          },
+          {
+            "bbox": [
+              1029,
+              264,
+              1067,
+              382
+            ],
+            "confidence": 0.535918,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              352,
+              390,
+              421,
+              481
+            ],
+            "confidence": 0.456462,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 31.0,
+        "frame_index": 1860,
+        "detections": [
+          {
+            "bbox": [
+              570,
+              753,
+              839,
+              1071
+            ],
+            "confidence": 0.82308,
+            "side": null
+          },
+          {
+            "bbox": [
+              1021,
+              269,
+              1064,
+              379
+            ],
+            "confidence": 0.712209,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              353,
+              393,
+              421,
+              481
+            ],
+            "confidence": 0.4147,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 31.5,
+        "frame_index": 1890,
+        "detections": [
+          {
+            "bbox": [
+              316,
+              715,
+              493,
+              1035
+            ],
+            "confidence": 0.859374,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 32.0,
+        "frame_index": 1920,
+        "detections": [
+          {
+            "bbox": [
+              203,
+              658,
+              369,
+              953
+            ],
+            "confidence": 0.834762,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              1002,
+              306,
+              1039,
+              373
+            ],
+            "confidence": 0.411651,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              356,
+              393,
+              421,
+              481
+            ],
+            "confidence": 0.380983,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 32.5,
+        "frame_index": 1950,
+        "detections": [
+          {
+            "bbox": [
+              190,
+              636,
+              342,
+              955
+            ],
+            "confidence": 0.804575,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              355,
+              389,
+              422,
+              480
+            ],
+            "confidence": 0.41113,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 33.0,
+        "frame_index": 1980,
+        "detections": [
+          {
+            "bbox": [
+              319,
+              698,
+              524,
+              960
+            ],
+            "confidence": 0.775093,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              352,
+              390,
+              421,
+              480
+            ],
+            "confidence": 0.45577,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 33.5,
+        "frame_index": 2010,
+        "detections": [
+          {
+            "bbox": [
+              519,
+              650,
+              707,
+              955
+            ],
+            "confidence": 0.835848,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              352,
+              389,
+              421,
+              480
+            ],
+            "confidence": 0.450417,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 34.0,
+        "frame_index": 2040,
+        "detections": [
+          {
+            "bbox": [
+              754,
+              658,
+              870,
+              966
+            ],
+            "confidence": 0.80671,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              352,
+              391,
+              421,
+              481
+            ],
+            "confidence": 0.436986,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 34.5,
+        "frame_index": 2070,
+        "detections": [
+          {
+            "bbox": [
+              879,
+              659,
+              1023,
+              960
+            ],
+            "confidence": 0.837304,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              353,
+              389,
+              421,
+              480
+            ],
+            "confidence": 0.442635,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 35.0,
+        "frame_index": 2100,
+        "detections": [
+          {
+            "bbox": [
+              950,
+              632,
+              1050,
+              953
+            ],
+            "confidence": 0.833513,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              353,
+              391,
+              421,
+              480
+            ],
+            "confidence": 0.377881,
+            "side": null
+          },
+          {
+            "bbox": [
+              953,
+              290,
+              983,
+              367
+            ],
+            "confidence": 0.356963,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 35.5,
+        "frame_index": 2130,
+        "detections": [
+          {
+            "bbox": [
+              1523,
+              761,
+              1730,
+              1080
+            ],
+            "confidence": 0.841291,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 36.0,
+        "frame_index": 2160,
+        "detections": [
+          {
+            "bbox": [
+              1602,
+              775,
+              1746,
+              1080
+            ],
+            "confidence": 0.833878,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 36.5,
+        "frame_index": 2190,
+        "detections": [
+          {
+            "bbox": [
+              1568,
+              784,
+              1727,
+              1080
+            ],
+            "confidence": 0.805366,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 37.0,
+        "frame_index": 2220,
+        "detections": [
+          {
+            "bbox": [
+              1570,
+              782,
+              1727,
+              1080
+            ],
+            "confidence": 0.82025,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 37.5,
+        "frame_index": 2250,
+        "detections": [
+          {
+            "bbox": [
+              1567,
+              776,
+              1722,
+              1080
+            ],
+            "confidence": 0.822755,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 38.0,
+        "frame_index": 2280,
+        "detections": [
+          {
+            "bbox": [
+              1555,
+              749,
+              1744,
+              1080
+            ],
+            "confidence": 0.831893,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 38.5,
+        "frame_index": 2310,
+        "detections": [
+          {
+            "bbox": [
+              1574,
+              702,
+              1797,
+              1045
+            ],
+            "confidence": 0.845028,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 39.0,
+        "frame_index": 2340,
+        "detections": [
+          {
+            "bbox": [
+              1557,
+              619,
+              1686,
+              954
+            ],
+            "confidence": 0.834626,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 39.5,
+        "frame_index": 2370,
+        "detections": [
+          {
+            "bbox": [
+              1533,
+              647,
+              1687,
+              953
+            ],
+            "confidence": 0.817616,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 40.0,
+        "frame_index": 2400,
+        "detections": [
+          {
+            "bbox": [
+              1403,
+              656,
+              1590,
+              929
+            ],
+            "confidence": 0.762472,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 40.5,
+        "frame_index": 2430,
+        "detections": [
+          {
+            "bbox": [
+              1240,
+              653,
+              1362,
+              962
+            ],
+            "confidence": 0.814908,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              962,
+              287,
+              997,
+              363
+            ],
+            "confidence": 0.427005,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 41.0,
+        "frame_index": 2460,
+        "detections": [
+          {
+            "bbox": [
+              1052,
+              693,
+              1189,
+              1028
+            ],
+            "confidence": 0.804163,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 41.5,
+        "frame_index": 2490,
+        "detections": [
+          {
+            "bbox": [
+              934,
+              716,
+              1066,
+              1066
+            ],
+            "confidence": 0.863691,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 42.0,
+        "frame_index": 2520,
+        "detections": [
+          {
+            "bbox": [
+              792,
+              698,
+              1006,
+              1063
+            ],
+            "confidence": 0.792678,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 42.5,
+        "frame_index": 2550,
+        "detections": [
+          {
+            "bbox": [
+              777,
+              687,
+              924,
+              996
+            ],
+            "confidence": 0.852313,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              985,
+              296,
+              1024,
+              368
+            ],
+            "confidence": 0.372409,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 43.0,
+        "frame_index": 2580,
+        "detections": [
+          {
+            "bbox": [
+              743,
+              696,
+              871,
+              1039
+            ],
+            "confidence": 0.830952,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 43.5,
+        "frame_index": 2610,
+        "detections": [
+          {
+            "bbox": [
+              738,
+              727,
+              906,
+              1076
+            ],
+            "confidence": 0.870413,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 44.0,
+        "frame_index": 2640,
+        "detections": [
+          {
+            "bbox": [
+              719,
+              762,
+              857,
+              1080
+            ],
+            "confidence": 0.864428,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 44.5,
+        "frame_index": 2670,
+        "detections": [
+          {
+            "bbox": [
+              766,
+              750,
+              892,
+              1080
+            ],
+            "confidence": 0.855482,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 45.0,
+        "frame_index": 2700,
+        "detections": [
+          {
+            "bbox": [
+              724,
+              740,
+              890,
+              1080
+            ],
+            "confidence": 0.892881,
+            "side": null
+          },
+          {
+            "bbox": [
+              145,
+              282,
+              182,
+              357
+            ],
+            "confidence": 0.406616,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 45.5,
+        "frame_index": 2730,
+        "detections": [
+          {
+            "bbox": [
+              651,
+              731,
+              813,
+              1075
+            ],
+            "confidence": 0.871294,
+            "side": null
+          },
+          {
+            "bbox": [
+              142,
+              283,
+              181,
+              356
+            ],
+            "confidence": 0.420804,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 46.0,
+        "frame_index": 2760,
+        "detections": [
+          {
+            "bbox": [
+              551,
+              731,
+              692,
+              1080
+            ],
+            "confidence": 0.849925,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 46.5,
+        "frame_index": 2790,
+        "detections": [
+          {
+            "bbox": [
+              228,
+              686,
+              428,
+              984
+            ],
+            "confidence": 0.865291,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 47.0,
+        "frame_index": 2820,
+        "detections": [
+          {
+            "bbox": [
+              221,
+              669,
+              420,
+              991
+            ],
+            "confidence": 0.873241,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 47.5,
+        "frame_index": 2850,
+        "detections": [
+          {
+            "bbox": [
+              220,
+              674,
+              419,
+              986
+            ],
+            "confidence": 0.876077,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 48.0,
+        "frame_index": 2880,
+        "detections": [
+          {
+            "bbox": [
+              224,
+              670,
+              423,
+              984
+            ],
+            "confidence": 0.86397,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              49,
+              363,
+              103,
+              472
+            ],
+            "confidence": 0.481866,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 48.5,
+        "frame_index": 2910,
+        "detections": [
+          {
+            "bbox": [
+              224,
+              654,
+              448,
+              958
+            ],
+            "confidence": 0.86326,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              93,
+              353,
+              141,
+              460
+            ],
+            "confidence": 0.546513,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 49.0,
+        "frame_index": 2940,
+        "detections": [
+          {
+            "bbox": [
+              373,
+              641,
+              545,
+              932
+            ],
+            "confidence": 0.840422,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              136,
+              352,
+              183,
+              463
+            ],
+            "confidence": 0.467808,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 49.5,
+        "frame_index": 2970,
+        "detections": [
+          {
+            "bbox": [
+              478,
+              582,
+              619,
+              865
+            ],
+            "confidence": 0.808589,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              176,
+              352,
+              228,
+              457
+            ],
+            "confidence": 0.381506,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 50.0,
+        "frame_index": 3000,
+        "detections": [
+          {
+            "bbox": [
+              560,
+              595,
+              722,
+              845
+            ],
+            "confidence": 0.833978,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              206,
+              349,
+              266,
+              473
+            ],
+            "confidence": 0.47412,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 50.5,
+        "frame_index": 3030,
+        "detections": [
+          {
+            "bbox": [
+              618,
+              597,
+              729,
+              863
+            ],
+            "confidence": 0.853729,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              210,
+              349,
+              268,
+              479
+            ],
+            "confidence": 0.421667,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 51.0,
+        "frame_index": 3060,
+        "detections": [
+          {
+            "bbox": [
+              636,
+              626,
+              731,
+              932
+            ],
+            "confidence": 0.825897,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              201,
+              325,
+              267,
+              469
+            ],
+            "confidence": 0.497884,
+            "side": null
+          },
+          {
+            "bbox": [
+              1020,
+              261,
+              1064,
+              374
+            ],
+            "confidence": 0.493353,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 51.5,
+        "frame_index": 3090,
+        "detections": [
+          {
+            "bbox": [
+              617,
+              634,
+              766,
+              925
+            ],
+            "confidence": 0.808927,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              1003,
+              291,
+              1039,
+              368
+            ],
+            "confidence": 0.420492,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              172,
+              330,
+              240,
+              467
+            ],
+            "confidence": 0.380847,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 52.0,
+        "frame_index": 3120,
+        "detections": [
+          {
+            "bbox": [
+              723,
+              596,
+              841,
+              854
+            ],
+            "confidence": 0.790974,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              144,
+              337,
+              214,
+              465
+            ],
+            "confidence": 0.44691,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 52.5,
+        "frame_index": 3150,
+        "detections": [
+          {
+            "bbox": [
+              784,
+              580,
+              900,
+              818
+            ],
+            "confidence": 0.813259,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              952,
+              290,
+              984,
+              361
+            ],
+            "confidence": 0.367219,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 53.0,
+        "frame_index": 3180,
+        "detections": [
+          {
+            "bbox": [
+              844,
+              561,
+              961,
+              793
+            ],
+            "confidence": 0.816003,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              136,
+              320,
+              200,
+              416
+            ],
+            "confidence": 0.446128,
+            "side": null
+          },
+          {
+            "bbox": [
+              921,
+              245,
+              971,
+              366
+            ],
+            "confidence": 0.422763,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 53.5,
+        "frame_index": 3210,
+        "detections": [
+          {
+            "bbox": [
+              872,
+              553,
+              999,
+              781
+            ],
+            "confidence": 0.819544,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              108,
+              323,
+              183,
+              428
+            ],
+            "confidence": 0.461262,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 54.0,
+        "frame_index": 3240,
+        "detections": [
+          {
+            "bbox": [
+              898,
+              555,
+              997,
+              788
+            ],
+            "confidence": 0.801115,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 54.5,
+        "frame_index": 3270,
+        "detections": [
+          {
+            "bbox": [
+              862,
+              568,
+              958,
+              837
+            ],
+            "confidence": 0.790165,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              88,
+              323,
+              134,
+              404
+            ],
+            "confidence": 0.363265,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 55.0,
+        "frame_index": 3300,
+        "detections": [
+          {
+            "bbox": [
+              869,
+              589,
+              986,
+              836
+            ],
+            "confidence": 0.827981,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 55.5,
+        "frame_index": 3330,
+        "detections": [
+          {
+            "bbox": [
+              997,
+              525,
+              1115,
+              743
+            ],
+            "confidence": 0.789763,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              130,
+              328,
+              178,
+              405
+            ],
+            "confidence": 0.359179,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 56.0,
+        "frame_index": 3360,
+        "detections": [
+          {
+            "bbox": [
+              1138,
+              476,
+              1236,
+              673
+            ],
+            "confidence": 0.759814,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              205,
+              346,
+              259,
+              467
+            ],
+            "confidence": 0.495485,
+            "side": null
+          },
+          {
+            "bbox": [
+              960,
+              289,
+              994,
+              363
+            ],
+            "confidence": 0.41734,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              147,
+              326,
+              196,
+              401
+            ],
+            "confidence": 0.390261,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 56.5,
+        "frame_index": 3390,
+        "detections": [
+          {
+            "bbox": [
+              1214,
+              438,
+              1288,
+              605
+            ],
+            "confidence": 0.77004,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              213,
+              347,
+              266,
+              468
+            ],
+            "confidence": 0.480765,
+            "side": null
+          },
+          {
+            "bbox": [
+              155,
+              321,
+              204,
+              399
+            ],
+            "confidence": 0.4128,
+            "side": null
+          },
+          {
+            "bbox": [
+              960,
+              302,
+              993,
+              364
+            ],
+            "confidence": 0.357945,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 57.0,
+        "frame_index": 3420,
+        "detections": [
+          {
+            "bbox": [
+              1263,
+              411,
+              1319,
+              547
+            ],
+            "confidence": 0.705592,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 57.5,
+        "frame_index": 3450,
+        "detections": [
+          {
+            "bbox": [
+              1281,
+              412,
+              1326,
+              523
+            ],
+            "confidence": 0.576209,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              880,
+              299,
+              915,
+              370
+            ],
+            "confidence": 0.388718,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 58.0,
+        "frame_index": 3480,
+        "detections": [
+          {
+            "bbox": [
+              1234,
+              406,
+              1294,
+              523
+            ],
+            "confidence": 0.648319,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              805,
+              310,
+              838,
+              371
+            ],
+            "confidence": 0.431433,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              142,
+              313,
+              183,
+              399
+            ],
+            "confidence": 0.356609,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 58.5,
+        "frame_index": 3510,
+        "detections": [
+          {
+            "bbox": [
+              1170,
+              388,
+              1234,
+              546
+            ],
+            "confidence": 0.751423,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              715,
+              285,
+              772,
+              383
+            ],
+            "confidence": 0.367593,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 59.0,
+        "frame_index": 3540,
+        "detections": [
+          {
+            "bbox": [
+              1134,
+              416,
+              1203,
+              564
+            ],
+            "confidence": 0.748346,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              135,
+              311,
+              172,
+              385
+            ],
+            "confidence": 0.595861,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 59.5,
+        "frame_index": 3570,
+        "detections": [
+          {
+            "bbox": [
+              1112,
+              417,
+              1177,
+              579
+            ],
+            "confidence": 0.811747,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              627,
+              302,
+              658,
+              361
+            ],
+            "confidence": 0.370332,
+            "side": "far"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "index": 3,
+    "start": 60.0,
+    "end": 90.0,
+    "features": {
+      "player_motion_max": 0.054518,
+      "player_motion_var": 3.334e-05,
+      "near_motion_mean": 0.003422,
+      "far_motion_mean": 0.000371,
+      "motion_sample_count": 450
+    },
+    "players": {
+      "player_1": {
+        "detected": true,
+        "side": "near",
+        "detection_confidence": 0.8403,
+        "identity_confidence": 0.862,
+        "movement_distance": 1.599222,
+        "sample_count": 41,
+        "mean_position": [
+          0.540434,
+          0.883085
+        ]
+      },
+      "player_2": {
+        "detected": true,
+        "side": "far",
+        "detection_confidence": 0.5825,
+        "identity_confidence": 0.5548,
+        "movement_distance": 0.140132,
+        "sample_count": 2,
+        "mean_position": [
+          0.522005,
+          0.436111
+        ]
+      }
+    },
+    "video_extraction": {
+      "version": 1,
+      "status": "complete",
+      "court_rois": {
+        "near": [
+          [
+            354,
+            660
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            1918,
+            953
+          ],
+          [
+            -19,
+            953
+          ]
+        ],
+        "far": [
+          [
+            728,
+            367
+          ],
+          [
+            1169,
+            367
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            354,
+            660
+          ]
+        ],
+        "format": "polygon"
+      },
+      "sample_seconds": 0.5
+    },
+    "sampled_frames": [
+      {
+        "time": 60.0,
+        "frame_index": 3600,
+        "detections": [
+          {
+            "bbox": [
+              1077,
+              428,
+              1142,
+              582
+            ],
+            "confidence": 0.792254,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              607,
+              295,
+              643,
+              366
+            ],
+            "confidence": 0.446061,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 60.5,
+        "frame_index": 3630,
+        "detections": [
+          {
+            "bbox": [
+              1378,
+              661,
+              1503,
+              966
+            ],
+            "confidence": 0.848808,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 61.0,
+        "frame_index": 3660,
+        "detections": [
+          {
+            "bbox": [
+              1401,
+              656,
+              1529,
+              948
+            ],
+            "confidence": 0.829769,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 61.5,
+        "frame_index": 3690,
+        "detections": [
+          {
+            "bbox": [
+              1337,
+              649,
+              1504,
+              949
+            ],
+            "confidence": 0.866812,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 62.0,
+        "frame_index": 3720,
+        "detections": [
+          {
+            "bbox": [
+              1329,
+              660,
+              1460,
+              950
+            ],
+            "confidence": 0.839462,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 62.5,
+        "frame_index": 3750,
+        "detections": [
+          {
+            "bbox": [
+              1348,
+              672,
+              1488,
+              950
+            ],
+            "confidence": 0.825793,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 63.0,
+        "frame_index": 3780,
+        "detections": [
+          {
+            "bbox": [
+              1315,
+              668,
+              1487,
+              951
+            ],
+            "confidence": 0.860231,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              1683,
+              345,
+              1743,
+              468
+            ],
+            "confidence": 0.378349,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 63.5,
+        "frame_index": 3810,
+        "detections": [
+          {
+            "bbox": [
+              1309,
+              667,
+              1465,
+              953
+            ],
+            "confidence": 0.85906,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              1657,
+              351,
+              1730,
+              471
+            ],
+            "confidence": 0.433724,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 64.0,
+        "frame_index": 3840,
+        "detections": [
+          {
+            "bbox": [
+              1307,
+              662,
+              1464,
+              953
+            ],
+            "confidence": 0.864658,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              1646,
+              346,
+              1702,
+              472
+            ],
+            "confidence": 0.407041,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 64.5,
+        "frame_index": 3870,
+        "detections": [
+          {
+            "bbox": [
+              1331,
+              633,
+              1522,
+              901
+            ],
+            "confidence": 0.848903,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 65.0,
+        "frame_index": 3900,
+        "detections": [
+          {
+            "bbox": [
+              1442,
+              623,
+              1702,
+              900
+            ],
+            "confidence": 0.788946,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 65.5,
+        "frame_index": 3930,
+        "detections": [
+          {
+            "bbox": [
+              1726,
+              616,
+              1885,
+              897
+            ],
+            "confidence": 0.813712,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 66.0,
+        "frame_index": 3960,
+        "detections": [
+          {
+            "bbox": [
+              1775,
+              672,
+              1885,
+              928
+            ],
+            "confidence": 0.780096,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 66.5,
+        "frame_index": 3990,
+        "detections": [
+          {
+            "bbox": [
+              1648,
+              684,
+              1769,
+              959
+            ],
+            "confidence": 0.820744,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 67.0,
+        "frame_index": 4020,
+        "detections": [
+          {
+            "bbox": [
+              1399,
+              716,
+              1575,
+              997
+            ],
+            "confidence": 0.809973,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              1638,
+              368,
+              1689,
+              472
+            ],
+            "confidence": 0.350336,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 67.5,
+        "frame_index": 4050,
+        "detections": [
+          {
+            "bbox": [
+              1140,
+              699,
+              1283,
+              1020
+            ],
+            "confidence": 0.832034,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              1653,
+              368,
+              1725,
+              480
+            ],
+            "confidence": 0.431024,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 68.0,
+        "frame_index": 4080,
+        "detections": [
+          {
+            "bbox": [
+              976,
+              727,
+              1097,
+              1061
+            ],
+            "confidence": 0.807632,
+            "side": null
+          },
+          {
+            "bbox": [
+              1701,
+              373,
+              1749,
+              484
+            ],
+            "confidence": 0.369399,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 68.5,
+        "frame_index": 4110,
+        "detections": [
+          {
+            "bbox": [
+              899,
+              779,
+              1105,
+              1080
+            ],
+            "confidence": 0.86651,
+            "side": null
+          },
+          {
+            "bbox": [
+              1725,
+              372,
+              1788,
+              505
+            ],
+            "confidence": 0.57847,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 69.0,
+        "frame_index": 4140,
+        "detections": [
+          {
+            "bbox": [
+              859,
+              770,
+              1021,
+              1079
+            ],
+            "confidence": 0.812071,
+            "side": null
+          },
+          {
+            "bbox": [
+              1764,
+              373,
+              1826,
+              497
+            ],
+            "confidence": 0.501485,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 69.5,
+        "frame_index": 4170,
+        "detections": [
+          {
+            "bbox": [
+              788,
+              825,
+              950,
+              1080
+            ],
+            "confidence": 0.829212,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 70.0,
+        "frame_index": 4200,
+        "detections": [
+          {
+            "bbox": [
+              791,
+              867,
+              937,
+              1080
+            ],
+            "confidence": 0.807767,
+            "side": null
+          },
+          {
+            "bbox": [
+              1860,
+              379,
+              1918,
+              516
+            ],
+            "confidence": 0.544012,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 70.5,
+        "frame_index": 4230,
+        "detections": [
+          {
+            "bbox": [
+              767,
+              906,
+              940,
+              1080
+            ],
+            "confidence": 0.794555,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 71.0,
+        "frame_index": 4260,
+        "detections": [
+          {
+            "bbox": [
+              719,
+              894,
+              888,
+              1076
+            ],
+            "confidence": 0.820343,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 71.5,
+        "frame_index": 4290,
+        "detections": [
+          {
+            "bbox": [
+              716,
+              865,
+              865,
+              1079
+            ],
+            "confidence": 0.807292,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 72.0,
+        "frame_index": 4320,
+        "detections": [
+          {
+            "bbox": [
+              696,
+              812,
+              876,
+              1080
+            ],
+            "confidence": 0.797808,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 72.5,
+        "frame_index": 4350,
+        "detections": [
+          {
+            "bbox": [
+              554,
+              799,
+              732,
+              1080
+            ],
+            "confidence": 0.820481,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 73.0,
+        "frame_index": 4380,
+        "detections": [
+          {
+            "bbox": [
+              333,
+              815,
+              513,
+              1080
+            ],
+            "confidence": 0.848745,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 73.5,
+        "frame_index": 4410,
+        "detections": [
+          {
+            "bbox": [
+              221,
+              849,
+              373,
+              1080
+            ],
+            "confidence": 0.839276,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 74.0,
+        "frame_index": 4440,
+        "detections": [
+          {
+            "bbox": [
+              62,
+              899,
+              203,
+              1080
+            ],
+            "confidence": 0.801829,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 74.5,
+        "frame_index": 4470,
+        "detections": []
+      },
+      {
+        "time": 75.0,
+        "frame_index": 4500,
+        "detections": [
+          {
+            "bbox": [
+              495,
+              703,
+              689,
+              992
+            ],
+            "confidence": 0.843929,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 75.5,
+        "frame_index": 4530,
+        "detections": [
+          {
+            "bbox": [
+              508,
+              717,
+              742,
+              998
+            ],
+            "confidence": 0.864637,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 76.0,
+        "frame_index": 4560,
+        "detections": [
+          {
+            "bbox": [
+              545,
+              715,
+              722,
+              997
+            ],
+            "confidence": 0.82055,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 76.5,
+        "frame_index": 4590,
+        "detections": [
+          {
+            "bbox": [
+              529,
+              715,
+              710,
+              994
+            ],
+            "confidence": 0.822368,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 77.0,
+        "frame_index": 4620,
+        "detections": [
+          {
+            "bbox": [
+              532,
+              728,
+              759,
+              1002
+            ],
+            "confidence": 0.883544,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 77.5,
+        "frame_index": 4650,
+        "detections": [
+          {
+            "bbox": [
+              582,
+              716,
+              776,
+              1001
+            ],
+            "confidence": 0.883216,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 78.0,
+        "frame_index": 4680,
+        "detections": [
+          {
+            "bbox": [
+              581,
+              717,
+              759,
+              999
+            ],
+            "confidence": 0.849662,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 78.5,
+        "frame_index": 4710,
+        "detections": [
+          {
+            "bbox": [
+              571,
+              712,
+              779,
+              1001
+            ],
+            "confidence": 0.885678,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 79.0,
+        "frame_index": 4740,
+        "detections": [
+          {
+            "bbox": [
+              586,
+              711,
+              764,
+              1004
+            ],
+            "confidence": 0.882583,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 79.5,
+        "frame_index": 4770,
+        "detections": [
+          {
+            "bbox": [
+              589,
+              711,
+              758,
+              1001
+            ],
+            "confidence": 0.872297,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 80.0,
+        "frame_index": 4800,
+        "detections": [
+          {
+            "bbox": [
+              566,
+              703,
+              739,
+              1015
+            ],
+            "confidence": 0.865116,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 80.5,
+        "frame_index": 4830,
+        "detections": [
+          {
+            "bbox": [
+              532,
+              694,
+              688,
+              1008
+            ],
+            "confidence": 0.82643,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 81.0,
+        "frame_index": 4860,
+        "detections": [
+          {
+            "bbox": [
+              514,
+              671,
+              728,
+              1020
+            ],
+            "confidence": 0.854605,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 81.5,
+        "frame_index": 4890,
+        "detections": [
+          {
+            "bbox": [
+              550,
+              684,
+              754,
+              1012
+            ],
+            "confidence": 0.865635,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 82.0,
+        "frame_index": 4920,
+        "detections": [
+          {
+            "bbox": [
+              582,
+              624,
+              766,
+              950
+            ],
+            "confidence": 0.824122,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 82.5,
+        "frame_index": 4950,
+        "detections": [
+          {
+            "bbox": [
+              578,
+              631,
+              703,
+              955
+            ],
+            "confidence": 0.809226,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 83.0,
+        "frame_index": 4980,
+        "detections": [
+          {
+            "bbox": [
+              553,
+              623,
+              697,
+              913
+            ],
+            "confidence": 0.833616,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 83.5,
+        "frame_index": 5010,
+        "detections": [
+          {
+            "bbox": [
+              587,
+              623,
+              712,
+              917
+            ],
+            "confidence": 0.841978,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 84.0,
+        "frame_index": 5040,
+        "detections": [
+          {
+            "bbox": [
+              662,
+              616,
+              797,
+              899
+            ],
+            "confidence": 0.83901,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              109,
+              286,
+              151,
+              357
+            ],
+            "confidence": 0.376877,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 84.5,
+        "frame_index": 5070,
+        "detections": [
+          {
+            "bbox": [
+              673,
+              584,
+              850,
+              859
+            ],
+            "confidence": 0.84652,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 85.0,
+        "frame_index": 5100,
+        "detections": [
+          {
+            "bbox": [
+              665,
+              569,
+              782,
+              818
+            ],
+            "confidence": 0.806706,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 85.5,
+        "frame_index": 5130,
+        "detections": [
+          {
+            "bbox": [
+              702,
+              568,
+              792,
+              822
+            ],
+            "confidence": 0.814972,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 86.0,
+        "frame_index": 5160,
+        "detections": [
+          {
+            "bbox": [
+              690,
+              574,
+              857,
+              841
+            ],
+            "confidence": 0.822353,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 86.5,
+        "frame_index": 5190,
+        "detections": [
+          {
+            "bbox": [
+              1616,
+              750,
+              1890,
+              1079
+            ],
+            "confidence": 0.839597,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              383,
+              338,
+              516
+            ],
+            "confidence": 0.442435,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 87.0,
+        "frame_index": 5220,
+        "detections": [
+          {
+            "bbox": [
+              1620,
+              745,
+              1883,
+              1077
+            ],
+            "confidence": 0.81672,
+            "side": null
+          },
+          {
+            "bbox": [
+              287,
+              383,
+              337,
+              515
+            ],
+            "confidence": 0.399064,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 87.5,
+        "frame_index": 5250,
+        "detections": [
+          {
+            "bbox": [
+              1625,
+              738,
+              1891,
+              1077
+            ],
+            "confidence": 0.829242,
+            "side": null
+          },
+          {
+            "bbox": [
+              287,
+              383,
+              337,
+              515
+            ],
+            "confidence": 0.385894,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 88.0,
+        "frame_index": 5280,
+        "detections": [
+          {
+            "bbox": [
+              1618,
+              758,
+              1855,
+              1078
+            ],
+            "confidence": 0.789617,
+            "side": null
+          },
+          {
+            "bbox": [
+              287,
+              383,
+              337,
+              516
+            ],
+            "confidence": 0.412474,
+            "side": null
+          },
+          {
+            "bbox": [
+              881,
+              292,
+              909,
+              360
+            ],
+            "confidence": 0.372791,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 88.5,
+        "frame_index": 5310,
+        "detections": [
+          {
+            "bbox": [
+              1560,
+              673,
+              1743,
+              960
+            ],
+            "confidence": 0.843996,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 89.0,
+        "frame_index": 5340,
+        "detections": [
+          {
+            "bbox": [
+              1515,
+              644,
+              1720,
+              954
+            ],
+            "confidence": 0.83766,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 89.5,
+        "frame_index": 5370,
+        "detections": [
+          {
+            "bbox": [
+              1487,
+              614,
+              1660,
+              949
+            ],
+            "confidence": 0.824674,
+            "side": "near"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "index": 4,
+    "start": 90.0,
+    "end": 120.0,
+    "features": {
+      "player_motion_max": 0.033979,
+      "player_motion_var": 1.226e-05,
+      "near_motion_mean": 0.004013,
+      "far_motion_mean": 0.000859,
+      "motion_sample_count": 450
+    },
+    "players": {
+      "player_1": {
+        "detected": true,
+        "side": "near",
+        "detection_confidence": 0.8105,
+        "identity_confidence": 0.4153,
+        "movement_distance": 1.525419,
+        "sample_count": 29,
+        "mean_position": [
+          0.598707,
+          0.82302
+        ]
+      },
+      "player_2": {
+        "detected": true,
+        "side": "far",
+        "detection_confidence": 0.393,
+        "identity_confidence": 0.4539,
+        "movement_distance": 0.07647,
+        "sample_count": 5,
+        "mean_position": [
+          0.495156,
+          0.337222
+        ]
+      }
+    },
+    "video_extraction": {
+      "version": 1,
+      "status": "complete",
+      "court_rois": {
+        "near": [
+          [
+            354,
+            660
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            1918,
+            953
+          ],
+          [
+            -19,
+            953
+          ]
+        ],
+        "far": [
+          [
+            728,
+            367
+          ],
+          [
+            1169,
+            367
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            354,
+            660
+          ]
+        ],
+        "format": "polygon"
+      },
+      "sample_seconds": 0.5
+    },
+    "sampled_frames": [
+      {
+        "time": 90.0,
+        "frame_index": 5400,
+        "detections": [
+          {
+            "bbox": [
+              1495,
+              629,
+              1683,
+              950
+            ],
+            "confidence": 0.814807,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 90.5,
+        "frame_index": 5430,
+        "detections": [
+          {
+            "bbox": [
+              1505,
+              632,
+              1678,
+              958
+            ],
+            "confidence": 0.80937,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              287,
+              383,
+              338,
+              516
+            ],
+            "confidence": 0.36607,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 91.0,
+        "frame_index": 5460,
+        "detections": [
+          {
+            "bbox": [
+              1423,
+              648,
+              1604,
+              952
+            ],
+            "confidence": 0.79283,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              287,
+              383,
+              338,
+              516
+            ],
+            "confidence": 0.350607,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 91.5,
+        "frame_index": 5490,
+        "detections": [
+          {
+            "bbox": [
+              1361,
+              642,
+              1514,
+              957
+            ],
+            "confidence": 0.789606,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 92.0,
+        "frame_index": 5520,
+        "detections": [
+          {
+            "bbox": [
+              1259,
+              650,
+              1427,
+              956
+            ],
+            "confidence": 0.836364,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              357,
+              385,
+              419,
+              469
+            ],
+            "confidence": 0.360287,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 92.5,
+        "frame_index": 5550,
+        "detections": [
+          {
+            "bbox": [
+              1104,
+              627,
+              1290,
+              952
+            ],
+            "confidence": 0.805395,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              1075,
+              646,
+              1124,
+              738
+            ],
+            "confidence": 0.412116,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              287,
+              383,
+              338,
+              516
+            ],
+            "confidence": 0.390477,
+            "side": null
+          },
+          {
+            "bbox": [
+              356,
+              386,
+              419,
+              470
+            ],
+            "confidence": 0.355056,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 93.0,
+        "frame_index": 5580,
+        "detections": [
+          {
+            "bbox": [
+              1015,
+              569,
+              1146,
+              822
+            ],
+            "confidence": 0.838677,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              287,
+              383,
+              339,
+              516
+            ],
+            "confidence": 0.355865,
+            "side": null
+          },
+          {
+            "bbox": [
+              887,
+              301,
+              923,
+              357
+            ],
+            "confidence": 0.354721,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              356,
+              386,
+              419,
+              469
+            ],
+            "confidence": 0.352616,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 93.5,
+        "frame_index": 5610,
+        "detections": [
+          {
+            "bbox": [
+              946,
+              527,
+              1056,
+              745
+            ],
+            "confidence": 0.820384,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              912,
+              291,
+              946,
+              359
+            ],
+            "confidence": 0.386193,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              356,
+              385,
+              419,
+              470
+            ],
+            "confidence": 0.353327,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 94.0,
+        "frame_index": 5640,
+        "detections": [
+          {
+            "bbox": [
+              924,
+              492,
+              1004,
+              698
+            ],
+            "confidence": 0.8147,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              287,
+              383,
+              338,
+              516
+            ],
+            "confidence": 0.361677,
+            "side": null
+          },
+          {
+            "bbox": [
+              357,
+              385,
+              419,
+              469
+            ],
+            "confidence": 0.354006,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 94.5,
+        "frame_index": 5670,
+        "detections": [
+          {
+            "bbox": [
+              896,
+              474,
+              1000,
+              694
+            ],
+            "confidence": 0.824527,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              383,
+              339,
+              517
+            ],
+            "confidence": 0.36085,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 95.0,
+        "frame_index": 5700,
+        "detections": [
+          {
+            "bbox": [
+              877,
+              472,
+              978,
+              688
+            ],
+            "confidence": 0.822345,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              356,
+              386,
+              419,
+              470
+            ],
+            "confidence": 0.366565,
+            "side": null
+          },
+          {
+            "bbox": [
+              924,
+              303,
+              958,
+              367
+            ],
+            "confidence": 0.354591,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 95.5,
+        "frame_index": 5730,
+        "detections": [
+          {
+            "bbox": [
+              835,
+              475,
+              914,
+              682
+            ],
+            "confidence": 0.803734,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              913,
+              299,
+              947,
+              365
+            ],
+            "confidence": 0.408352,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              356,
+              386,
+              419,
+              470
+            ],
+            "confidence": 0.391198,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 96.0,
+        "frame_index": 5760,
+        "detections": [
+          {
+            "bbox": [
+              1698,
+              777,
+              1903,
+              1079
+            ],
+            "confidence": 0.690501,
+            "side": null
+          },
+          {
+            "bbox": [
+              287,
+              376,
+              336,
+              514
+            ],
+            "confidence": 0.555858,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 96.5,
+        "frame_index": 5790,
+        "detections": [
+          {
+            "bbox": [
+              1697,
+              777,
+              1905,
+              1078
+            ],
+            "confidence": 0.754701,
+            "side": null
+          },
+          {
+            "bbox": [
+              290,
+              371,
+              346,
+              514
+            ],
+            "confidence": 0.616875,
+            "side": null
+          },
+          {
+            "bbox": [
+              1690,
+              762,
+              1780,
+              899
+            ],
+            "confidence": 0.392615,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 97.0,
+        "frame_index": 5820,
+        "detections": [
+          {
+            "bbox": [
+              1694,
+              774,
+              1907,
+              1080
+            ],
+            "confidence": 0.800122,
+            "side": null
+          },
+          {
+            "bbox": [
+              290,
+              367,
+              346,
+              515
+            ],
+            "confidence": 0.62397,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 97.5,
+        "frame_index": 5850,
+        "detections": [
+          {
+            "bbox": [
+              1681,
+              750,
+              1865,
+              1078
+            ],
+            "confidence": 0.811294,
+            "side": null
+          },
+          {
+            "bbox": [
+              290,
+              369,
+              345,
+              515
+            ],
+            "confidence": 0.606871,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 98.0,
+        "frame_index": 5880,
+        "detections": [
+          {
+            "bbox": [
+              1607,
+              692,
+              1839,
+              1054
+            ],
+            "confidence": 0.789191,
+            "side": null
+          },
+          {
+            "bbox": [
+              290,
+              368,
+              345,
+              516
+            ],
+            "confidence": 0.584622,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 98.5,
+        "frame_index": 5910,
+        "detections": [
+          {
+            "bbox": [
+              1555,
+              662,
+              1706,
+              952
+            ],
+            "confidence": 0.80632,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              290,
+              369,
+              347,
+              516
+            ],
+            "confidence": 0.665777,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 99.0,
+        "frame_index": 5940,
+        "detections": [
+          {
+            "bbox": [
+              1485,
+              633,
+              1698,
+              929
+            ],
+            "confidence": 0.834691,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              290,
+              368,
+              346,
+              515
+            ],
+            "confidence": 0.638029,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 99.5,
+        "frame_index": 5970,
+        "detections": [
+          {
+            "bbox": [
+              1493,
+              665,
+              1693,
+              980
+            ],
+            "confidence": 0.844082,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              290,
+              367,
+              348,
+              516
+            ],
+            "confidence": 0.68285,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 100.0,
+        "frame_index": 6000,
+        "detections": [
+          {
+            "bbox": [
+              1440,
+              702,
+              1626,
+              1057
+            ],
+            "confidence": 0.824498,
+            "side": null
+          },
+          {
+            "bbox": [
+              291,
+              368,
+              347,
+              515
+            ],
+            "confidence": 0.649373,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 100.5,
+        "frame_index": 6030,
+        "detections": [
+          {
+            "bbox": [
+              1374,
+              691,
+              1520,
+              1066
+            ],
+            "confidence": 0.869159,
+            "side": null
+          },
+          {
+            "bbox": [
+              290,
+              367,
+              349,
+              515
+            ],
+            "confidence": 0.682576,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 101.0,
+        "frame_index": 6060,
+        "detections": [
+          {
+            "bbox": [
+              1258,
+              714,
+              1409,
+              1075
+            ],
+            "confidence": 0.85973,
+            "side": null
+          },
+          {
+            "bbox": [
+              290,
+              367,
+              348,
+              515
+            ],
+            "confidence": 0.677812,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 101.5,
+        "frame_index": 6090,
+        "detections": [
+          {
+            "bbox": [
+              1131,
+              644,
+              1284,
+              958
+            ],
+            "confidence": 0.844117,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              290,
+              368,
+              349,
+              516
+            ],
+            "confidence": 0.667617,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 102.0,
+        "frame_index": 6120,
+        "detections": [
+          {
+            "bbox": [
+              965,
+              618,
+              1203,
+              822
+            ],
+            "confidence": 0.847326,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              290,
+              367,
+              348,
+              516
+            ],
+            "confidence": 0.671552,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 102.5,
+        "frame_index": 6150,
+        "detections": [
+          {
+            "bbox": [
+              1023,
+              559,
+              1125,
+              766
+            ],
+            "confidence": 0.833842,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              290,
+              367,
+              349,
+              516
+            ],
+            "confidence": 0.676131,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 103.0,
+        "frame_index": 6180,
+        "detections": [
+          {
+            "bbox": [
+              1010,
+              565,
+              1099,
+              781
+            ],
+            "confidence": 0.842582,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              290,
+              367,
+              349,
+              515
+            ],
+            "confidence": 0.692447,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 103.5,
+        "frame_index": 6210,
+        "detections": [
+          {
+            "bbox": [
+              983,
+              602,
+              1094,
+              867
+            ],
+            "confidence": 0.833653,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              290,
+              368,
+              349,
+              513
+            ],
+            "confidence": 0.684555,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 104.0,
+        "frame_index": 6240,
+        "detections": [
+          {
+            "bbox": [
+              904,
+              637,
+              1079,
+              956
+            ],
+            "confidence": 0.84734,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              290,
+              368,
+              349,
+              514
+            ],
+            "confidence": 0.694149,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 104.5,
+        "frame_index": 6270,
+        "detections": [
+          {
+            "bbox": [
+              867,
+              684,
+              1047,
+              989
+            ],
+            "confidence": 0.873472,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              290,
+              367,
+              348,
+              516
+            ],
+            "confidence": 0.671414,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 105.0,
+        "frame_index": 6300,
+        "detections": [
+          {
+            "bbox": [
+              871,
+              721,
+              1052,
+              1080
+            ],
+            "confidence": 0.837477,
+            "side": null
+          },
+          {
+            "bbox": [
+              290,
+              366,
+              347,
+              516
+            ],
+            "confidence": 0.680095,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 105.5,
+        "frame_index": 6330,
+        "detections": [
+          {
+            "bbox": [
+              876,
+              762,
+              1005,
+              1077
+            ],
+            "confidence": 0.839548,
+            "side": null
+          },
+          {
+            "bbox": [
+              290,
+              369,
+              346,
+              516
+            ],
+            "confidence": 0.653143,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 106.0,
+        "frame_index": 6360,
+        "detections": [
+          {
+            "bbox": [
+              958,
+              812,
+              1104,
+              1080
+            ],
+            "confidence": 0.800843,
+            "side": null
+          },
+          {
+            "bbox": [
+              289,
+              368,
+              347,
+              509
+            ],
+            "confidence": 0.616447,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 106.5,
+        "frame_index": 6390,
+        "detections": [
+          {
+            "bbox": [
+              1034,
+              909,
+              1183,
+              1080
+            ],
+            "confidence": 0.820399,
+            "side": null
+          },
+          {
+            "bbox": [
+              289,
+              368,
+              350,
+              510
+            ],
+            "confidence": 0.634949,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 107.0,
+        "frame_index": 6420,
+        "detections": [
+          {
+            "bbox": [
+              714,
+              696,
+              882,
+              1070
+            ],
+            "confidence": 0.812942,
+            "side": null
+          },
+          {
+            "bbox": [
+              289,
+              367,
+              348,
+              518
+            ],
+            "confidence": 0.659242,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 107.5,
+        "frame_index": 6450,
+        "detections": [
+          {
+            "bbox": [
+              676,
+              686,
+              882,
+              1072
+            ],
+            "confidence": 0.842363,
+            "side": null
+          },
+          {
+            "bbox": [
+              289,
+              367,
+              349,
+              519
+            ],
+            "confidence": 0.68853,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 108.0,
+        "frame_index": 6480,
+        "detections": [
+          {
+            "bbox": [
+              727,
+              709,
+              871,
+              1067
+            ],
+            "confidence": 0.815976,
+            "side": null
+          },
+          {
+            "bbox": [
+              289,
+              366,
+              349,
+              519
+            ],
+            "confidence": 0.706525,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 108.5,
+        "frame_index": 6510,
+        "detections": [
+          {
+            "bbox": [
+              675,
+              695,
+              878,
+              1070
+            ],
+            "confidence": 0.817411,
+            "side": null
+          },
+          {
+            "bbox": [
+              289,
+              367,
+              349,
+              519
+            ],
+            "confidence": 0.701538,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 109.0,
+        "frame_index": 6540,
+        "detections": [
+          {
+            "bbox": [
+              755,
+              686,
+              867,
+              1080
+            ],
+            "confidence": 0.811413,
+            "side": null
+          },
+          {
+            "bbox": [
+              289,
+              367,
+              348,
+              518
+            ],
+            "confidence": 0.696922,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 109.5,
+        "frame_index": 6570,
+        "detections": [
+          {
+            "bbox": [
+              749,
+              732,
+              858,
+              1080
+            ],
+            "confidence": 0.816032,
+            "side": null
+          },
+          {
+            "bbox": [
+              289,
+              367,
+              348,
+              519
+            ],
+            "confidence": 0.711275,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 110.0,
+        "frame_index": 6600,
+        "detections": [
+          {
+            "bbox": [
+              288,
+              366,
+              350,
+              519
+            ],
+            "confidence": 0.702001,
+            "side": null
+          },
+          {
+            "bbox": [
+              745,
+              691,
+              849,
+              1073
+            ],
+            "confidence": 0.701231,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 110.5,
+        "frame_index": 6630,
+        "detections": [
+          {
+            "bbox": [
+              740,
+              717,
+              865,
+              1003
+            ],
+            "confidence": 0.775981,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              289,
+              369,
+              349,
+              519
+            ],
+            "confidence": 0.70204,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 111.0,
+        "frame_index": 6660,
+        "detections": [
+          {
+            "bbox": [
+              752,
+              641,
+              915,
+              982
+            ],
+            "confidence": 0.830125,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              289,
+              368,
+              349,
+              518
+            ],
+            "confidence": 0.712746,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 111.5,
+        "frame_index": 6690,
+        "detections": [
+          {
+            "bbox": [
+              809,
+              632,
+              949,
+              954
+            ],
+            "confidence": 0.799776,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              366,
+              347,
+              517
+            ],
+            "confidence": 0.715944,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 112.0,
+        "frame_index": 6720,
+        "detections": [
+          {
+            "bbox": [
+              849,
+              656,
+              1007,
+              963
+            ],
+            "confidence": 0.846803,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              366,
+              348,
+              517
+            ],
+            "confidence": 0.710524,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 112.5,
+        "frame_index": 6750,
+        "detections": [
+          {
+            "bbox": [
+              817,
+              692,
+              991,
+              1070
+            ],
+            "confidence": 0.849748,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              366,
+              348,
+              517
+            ],
+            "confidence": 0.709226,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 113.0,
+        "frame_index": 6780,
+        "detections": [
+          {
+            "bbox": [
+              728,
+              749,
+              917,
+              1080
+            ],
+            "confidence": 0.89189,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              367,
+              347,
+              517
+            ],
+            "confidence": 0.705472,
+            "side": null
+          },
+          {
+            "bbox": [
+              1024,
+              261,
+              1073,
+              373
+            ],
+            "confidence": 0.46135,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 113.5,
+        "frame_index": 6810,
+        "detections": [
+          {
+            "bbox": [
+              567,
+              763,
+              843,
+              1080
+            ],
+            "confidence": 0.853872,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              368,
+              347,
+              517
+            ],
+            "confidence": 0.703562,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 114.0,
+        "frame_index": 6840,
+        "detections": [
+          {
+            "bbox": [
+              591,
+              711,
+              820,
+              1080
+            ],
+            "confidence": 0.809615,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              368,
+              347,
+              517
+            ],
+            "confidence": 0.700368,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 114.5,
+        "frame_index": 6870,
+        "detections": [
+          {
+            "bbox": [
+              660,
+              647,
+              789,
+              948
+            ],
+            "confidence": 0.832087,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              368,
+              346,
+              517
+            ],
+            "confidence": 0.702508,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 115.0,
+        "frame_index": 6900,
+        "detections": [
+          {
+            "bbox": [
+              650,
+              679,
+              839,
+              974
+            ],
+            "confidence": 0.847097,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              285,
+              366,
+              346,
+              517
+            ],
+            "confidence": 0.714288,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 115.5,
+        "frame_index": 6930,
+        "detections": [
+          {
+            "bbox": [
+              766,
+              699,
+              943,
+              1045
+            ],
+            "confidence": 0.858889,
+            "side": null
+          },
+          {
+            "bbox": [
+              285,
+              369,
+              345,
+              517
+            ],
+            "confidence": 0.697908,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 116.0,
+        "frame_index": 6960,
+        "detections": [
+          {
+            "bbox": [
+              884,
+              720,
+              1033,
+              1080
+            ],
+            "confidence": 0.874213,
+            "side": null
+          },
+          {
+            "bbox": [
+              285,
+              369,
+              345,
+              517
+            ],
+            "confidence": 0.706227,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 116.5,
+        "frame_index": 6990,
+        "detections": [
+          {
+            "bbox": [
+              1003,
+              765,
+              1149,
+              1080
+            ],
+            "confidence": 0.871811,
+            "side": null
+          },
+          {
+            "bbox": [
+              284,
+              367,
+              345,
+              517
+            ],
+            "confidence": 0.714827,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 117.0,
+        "frame_index": 7020,
+        "detections": [
+          {
+            "bbox": [
+              908,
+              800,
+              1154,
+              1080
+            ],
+            "confidence": 0.869628,
+            "side": null
+          },
+          {
+            "bbox": [
+              285,
+              368,
+              345,
+              517
+            ],
+            "confidence": 0.702172,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 117.5,
+        "frame_index": 7050,
+        "detections": [
+          {
+            "bbox": [
+              627,
+              793,
+              964,
+              1080
+            ],
+            "confidence": 0.890873,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              369,
+              345,
+              517
+            ],
+            "confidence": 0.676404,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 118.0,
+        "frame_index": 7080,
+        "detections": [
+          {
+            "bbox": [
+              476,
+              781,
+              679,
+              1079
+            ],
+            "confidence": 0.839665,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              368,
+              346,
+              517
+            ],
+            "confidence": 0.685871,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 118.5,
+        "frame_index": 7110,
+        "detections": [
+          {
+            "bbox": [
+              313,
+              865,
+              496,
+              1080
+            ],
+            "confidence": 0.773579,
+            "side": null
+          },
+          {
+            "bbox": [
+              285,
+              367,
+              344,
+              518
+            ],
+            "confidence": 0.710725,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 119.0,
+        "frame_index": 7140,
+        "detections": [
+          {
+            "bbox": [
+              419,
+              861,
+              584,
+              1078
+            ],
+            "confidence": 0.798606,
+            "side": null
+          },
+          {
+            "bbox": [
+              289,
+              368,
+              346,
+              517
+            ],
+            "confidence": 0.721414,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 119.5,
+        "frame_index": 7170,
+        "detections": [
+          {
+            "bbox": [
+              653,
+              813,
+              848,
+              1077
+            ],
+            "confidence": 0.846248,
+            "side": null
+          },
+          {
+            "bbox": [
+              289,
+              368,
+              346,
+              518
+            ],
+            "confidence": 0.725635,
+            "side": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "index": 5,
+    "start": 120.0,
+    "end": 156.667,
+    "features": {
+      "player_motion_max": 0.44575,
+      "player_motion_var": 0.00082943,
+      "near_motion_mean": 0.006635,
+      "far_motion_mean": 0.005199,
+      "motion_sample_count": 550
+    },
+    "players": {
+      "player_1": {
+        "detected": true,
+        "side": "near",
+        "detection_confidence": 0.8033,
+        "identity_confidence": 0.4976,
+        "movement_distance": 1.797381,
+        "sample_count": 35,
+        "mean_position": [
+          0.444963,
+          0.874894
+        ]
+      },
+      "player_2": {
+        "detected": true,
+        "side": "far",
+        "detection_confidence": 0.3962,
+        "identity_confidence": 0.5074,
+        "movement_distance": 0.016362,
+        "sample_count": 3,
+        "mean_position": [
+          0.471788,
+          0.344444
+        ]
+      }
+    },
+    "video_extraction": {
+      "version": 1,
+      "status": "complete",
+      "court_rois": {
+        "near": [
+          [
+            354,
+            660
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            1918,
+            953
+          ],
+          [
+            -19,
+            953
+          ]
+        ],
+        "far": [
+          [
+            728,
+            367
+          ],
+          [
+            1169,
+            367
+          ],
+          [
+            1543,
+            660
+          ],
+          [
+            354,
+            660
+          ]
+        ],
+        "format": "polygon"
+      },
+      "sample_seconds": 0.5
+    },
+    "sampled_frames": [
+      {
+        "time": 120.0,
+        "frame_index": 7200,
+        "detections": [
+          {
+            "bbox": [
+              786,
+              780,
+              941,
+              1080
+            ],
+            "confidence": 0.821869,
+            "side": null
+          },
+          {
+            "bbox": [
+              285,
+              369,
+              344,
+              518
+            ],
+            "confidence": 0.704157,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 120.5,
+        "frame_index": 7230,
+        "detections": [
+          {
+            "bbox": [
+              813,
+              704,
+              924,
+              1016
+            ],
+            "confidence": 0.807346,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              289,
+              372,
+              345,
+              516
+            ],
+            "confidence": 0.655878,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 121.0,
+        "frame_index": 7260,
+        "detections": [
+          {
+            "bbox": [
+              765,
+              601,
+              888,
+              941
+            ],
+            "confidence": 0.79058,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              290,
+              371,
+              346,
+              518
+            ],
+            "confidence": 0.661312,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 121.5,
+        "frame_index": 7290,
+        "detections": [
+          {
+            "bbox": [
+              781,
+              596,
+              879,
+              899
+            ],
+            "confidence": 0.859098,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              289,
+              370,
+              345,
+              517
+            ],
+            "confidence": 0.693353,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 122.0,
+        "frame_index": 7320,
+        "detections": [
+          {
+            "bbox": [
+              797,
+              626,
+              953,
+              908
+            ],
+            "confidence": 0.818984,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              289,
+              369,
+              345,
+              517
+            ],
+            "confidence": 0.69516,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 122.5,
+        "frame_index": 7350,
+        "detections": [
+          {
+            "bbox": [
+              826,
+              627,
+              973,
+              916
+            ],
+            "confidence": 0.820288,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              289,
+              369,
+              346,
+              517
+            ],
+            "confidence": 0.709419,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 123.0,
+        "frame_index": 7380,
+        "detections": [
+          {
+            "bbox": [
+              872,
+              626,
+              1031,
+              908
+            ],
+            "confidence": 0.800065,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              289,
+              370,
+              345,
+              517
+            ],
+            "confidence": 0.706299,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 123.5,
+        "frame_index": 7410,
+        "detections": [
+          {
+            "bbox": [
+              1066,
+              679,
+              1192,
+              1080
+            ],
+            "confidence": 0.849319,
+            "side": null
+          },
+          {
+            "bbox": [
+              285,
+              389,
+              338,
+              515
+            ],
+            "confidence": 0.379121,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 124.0,
+        "frame_index": 7440,
+        "detections": [
+          {
+            "bbox": [
+              1071,
+              669,
+              1187,
+              1078
+            ],
+            "confidence": 0.834235,
+            "side": null
+          },
+          {
+            "bbox": [
+              285,
+              389,
+              338,
+              515
+            ],
+            "confidence": 0.37237,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 124.5,
+        "frame_index": 7470,
+        "detections": [
+          {
+            "bbox": [
+              1062,
+              692,
+              1209,
+              1080
+            ],
+            "confidence": 0.79996,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              390,
+              338,
+              516
+            ],
+            "confidence": 0.362827,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 125.0,
+        "frame_index": 7500,
+        "detections": [
+          {
+            "bbox": [
+              1048,
+              634,
+              1200,
+              1078
+            ],
+            "confidence": 0.824334,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              390,
+              338,
+              515
+            ],
+            "confidence": 0.360629,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 125.5,
+        "frame_index": 7530,
+        "detections": [
+          {
+            "bbox": [
+              1088,
+              633,
+              1200,
+              1007
+            ],
+            "confidence": 0.794061,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              390,
+              338,
+              515
+            ],
+            "confidence": 0.384605,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 126.0,
+        "frame_index": 7560,
+        "detections": [
+          {
+            "bbox": [
+              1064,
+              512,
+              1206,
+              962
+            ],
+            "confidence": 0.826578,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              390,
+              338,
+              516
+            ],
+            "confidence": 0.404881,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 126.5,
+        "frame_index": 7590,
+        "detections": [
+          {
+            "bbox": [
+              1053,
+              640,
+              1212,
+              957
+            ],
+            "confidence": 0.863891,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              285,
+              389,
+              338,
+              515
+            ],
+            "confidence": 0.394813,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 127.0,
+        "frame_index": 7620,
+        "detections": [
+          {
+            "bbox": [
+              1011,
+              627,
+              1144,
+              931
+            ],
+            "confidence": 0.835227,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              285,
+              388,
+              338,
+              515
+            ],
+            "confidence": 0.3531,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 127.5,
+        "frame_index": 7650,
+        "detections": [
+          {
+            "bbox": [
+              940,
+              625,
+              1071,
+              958
+            ],
+            "confidence": 0.844248,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              877,
+              306,
+              909,
+              373
+            ],
+            "confidence": 0.451808,
+            "side": "far"
+          },
+          {
+            "bbox": [
+              285,
+              389,
+              337,
+              516
+            ],
+            "confidence": 0.396773,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 128.0,
+        "frame_index": 7680,
+        "detections": [
+          {
+            "bbox": [
+              852,
+              665,
+              1039,
+              958
+            ],
+            "confidence": 0.850376,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              391,
+              338,
+              516
+            ],
+            "confidence": 0.397678,
+            "side": null
+          },
+          {
+            "bbox": [
+              882,
+              316,
+              910,
+              374
+            ],
+            "confidence": 0.369824,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 128.5,
+        "frame_index": 7710,
+        "detections": [
+          {
+            "bbox": [
+              925,
+              649,
+              1105,
+              956
+            ],
+            "confidence": 0.850081,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              390,
+              338,
+              515
+            ],
+            "confidence": 0.405121,
+            "side": null
+          },
+          {
+            "bbox": [
+              910,
+              296,
+              947,
+              369
+            ],
+            "confidence": 0.366856,
+            "side": "far"
+          }
+        ]
+      },
+      {
+        "time": 129.0,
+        "frame_index": 7740,
+        "detections": [
+          {
+            "bbox": [
+              976,
+              681,
+              1154,
+              958
+            ],
+            "confidence": 0.791846,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              391,
+              339,
+              515
+            ],
+            "confidence": 0.358544,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 129.5,
+        "frame_index": 7770,
+        "detections": [
+          {
+            "bbox": [
+              934,
+              690,
+              1087,
+              958
+            ],
+            "confidence": 0.77016,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              391,
+              339,
+              515
+            ],
+            "confidence": 0.358253,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 130.0,
+        "frame_index": 7800,
+        "detections": [
+          {
+            "bbox": [
+              960,
+              640,
+              1086,
+              949
+            ],
+            "confidence": 0.849597,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              287,
+              392,
+              338,
+              515
+            ],
+            "confidence": 0.361242,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 130.5,
+        "frame_index": 7830,
+        "detections": [
+          {
+            "bbox": [
+              861,
+              627,
+              975,
+              951
+            ],
+            "confidence": 0.835468,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              287,
+              392,
+              338,
+              515
+            ],
+            "confidence": 0.379035,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 131.0,
+        "frame_index": 7860,
+        "detections": [
+          {
+            "bbox": [
+              777,
+              633,
+              921,
+              906
+            ],
+            "confidence": 0.852246,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              287,
+              391,
+              338,
+              515
+            ],
+            "confidence": 0.37169,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 131.5,
+        "frame_index": 7890,
+        "detections": [
+          {
+            "bbox": [
+              619,
+              639,
+              771,
+              897
+            ],
+            "confidence": 0.828085,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              287,
+              392,
+              338,
+              516
+            ],
+            "confidence": 0.372296,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 132.0,
+        "frame_index": 7920,
+        "detections": [
+          {
+            "bbox": [
+              350,
+              594,
+              543,
+              871
+            ],
+            "confidence": 0.85506,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              288,
+              394,
+              338,
+              515
+            ],
+            "confidence": 0.361685,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 132.5,
+        "frame_index": 7950,
+        "detections": [
+          {
+            "bbox": [
+              128,
+              569,
+              293,
+              801
+            ],
+            "confidence": 0.772295,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 133.0,
+        "frame_index": 7980,
+        "detections": [
+          {
+            "bbox": [
+              41,
+              550,
+              157,
+              741
+            ],
+            "confidence": 0.774739,
+            "side": null
+          },
+          {
+            "bbox": [
+              287,
+              388,
+              338,
+              512
+            ],
+            "confidence": 0.430593,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 133.5,
+        "frame_index": 8010,
+        "detections": [
+          {
+            "bbox": [
+              9,
+              463,
+              110,
+              682
+            ],
+            "confidence": 0.779263,
+            "side": null
+          },
+          {
+            "bbox": [
+              287,
+              392,
+              340,
+              515
+            ],
+            "confidence": 0.477754,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 134.0,
+        "frame_index": 8040,
+        "detections": [
+          {
+            "bbox": [
+              38,
+              450,
+              122,
+              638
+            ],
+            "confidence": 0.744645,
+            "side": null
+          },
+          {
+            "bbox": [
+              287,
+              389,
+              337,
+              515
+            ],
+            "confidence": 0.44781,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 134.5,
+        "frame_index": 8070,
+        "detections": [
+          {
+            "bbox": [
+              68,
+              438,
+              146,
+              613
+            ],
+            "confidence": 0.682017,
+            "side": null
+          },
+          {
+            "bbox": [
+              287,
+              390,
+              338,
+              515
+            ],
+            "confidence": 0.424729,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 135.0,
+        "frame_index": 8100,
+        "detections": [
+          {
+            "bbox": [
+              765,
+              662,
+              917,
+              1080
+            ],
+            "confidence": 0.857841,
+            "side": null
+          },
+          {
+            "bbox": [
+              285,
+              390,
+              337,
+              515
+            ],
+            "confidence": 0.446288,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 135.5,
+        "frame_index": 8130,
+        "detections": [
+          {
+            "bbox": [
+              746,
+              695,
+              899,
+              1080
+            ],
+            "confidence": 0.804319,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              389,
+              337,
+              515
+            ],
+            "confidence": 0.434444,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 136.0,
+        "frame_index": 8160,
+        "detections": [
+          {
+            "bbox": [
+              714,
+              674,
+              962,
+              1080
+            ],
+            "confidence": 0.85397,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              390,
+              337,
+              515
+            ],
+            "confidence": 0.441265,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 136.5,
+        "frame_index": 8190,
+        "detections": [
+          {
+            "bbox": [
+              785,
+              632,
+              925,
+              1021
+            ],
+            "confidence": 0.83588,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              390,
+              338,
+              515
+            ],
+            "confidence": 0.452343,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 137.0,
+        "frame_index": 8220,
+        "detections": [
+          {
+            "bbox": [
+              808,
+              606,
+              938,
+              987
+            ],
+            "confidence": 0.802673,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              390,
+              338,
+              515
+            ],
+            "confidence": 0.439648,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 137.5,
+        "frame_index": 8250,
+        "detections": [
+          {
+            "bbox": [
+              825,
+              646,
+              958,
+              985
+            ],
+            "confidence": 0.853521,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              389,
+              337,
+              515
+            ],
+            "confidence": 0.454105,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 138.0,
+        "frame_index": 8280,
+        "detections": [
+          {
+            "bbox": [
+              798,
+              633,
+              959,
+              953
+            ],
+            "confidence": 0.848788,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              389,
+              337,
+              516
+            ],
+            "confidence": 0.480653,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 138.5,
+        "frame_index": 8310,
+        "detections": [
+          {
+            "bbox": [
+              644,
+              649,
+              833,
+              955
+            ],
+            "confidence": 0.864789,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              389,
+              338,
+              516
+            ],
+            "confidence": 0.475506,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 139.0,
+        "frame_index": 8340,
+        "detections": [
+          {
+            "bbox": [
+              631,
+              649,
+              809,
+              956
+            ],
+            "confidence": 0.842374,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              388,
+              338,
+              516
+            ],
+            "confidence": 0.472837,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 139.5,
+        "frame_index": 8370,
+        "detections": [
+          {
+            "bbox": [
+              696,
+              655,
+              847,
+              963
+            ],
+            "confidence": 0.787641,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              389,
+              338,
+              516
+            ],
+            "confidence": 0.4842,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 140.0,
+        "frame_index": 8400,
+        "detections": [
+          {
+            "bbox": [
+              696,
+              674,
+              811,
+              958
+            ],
+            "confidence": 0.802378,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              285,
+              388,
+              337,
+              516
+            ],
+            "confidence": 0.470931,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 140.5,
+        "frame_index": 8430,
+        "detections": [
+          {
+            "bbox": [
+              628,
+              692,
+              807,
+              1042
+            ],
+            "confidence": 0.849423,
+            "side": null
+          },
+          {
+            "bbox": [
+              285,
+              386,
+              338,
+              516
+            ],
+            "confidence": 0.484236,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 141.0,
+        "frame_index": 8460,
+        "detections": [
+          {
+            "bbox": [
+              735,
+              701,
+              880,
+              1080
+            ],
+            "confidence": 0.878225,
+            "side": null
+          },
+          {
+            "bbox": [
+              285,
+              385,
+              339,
+              516
+            ],
+            "confidence": 0.491779,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 141.5,
+        "frame_index": 8490,
+        "detections": [
+          {
+            "bbox": [
+              750,
+              711,
+              905,
+              1074
+            ],
+            "confidence": 0.881042,
+            "side": null
+          },
+          {
+            "bbox": [
+              285,
+              386,
+              339,
+              516
+            ],
+            "confidence": 0.491974,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 142.0,
+        "frame_index": 8520,
+        "detections": [
+          {
+            "bbox": [
+              699,
+              713,
+              883,
+              1080
+            ],
+            "confidence": 0.866489,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              386,
+              338,
+              516
+            ],
+            "confidence": 0.492343,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 142.5,
+        "frame_index": 8550,
+        "detections": [
+          {
+            "bbox": [
+              648,
+              757,
+              827,
+              1080
+            ],
+            "confidence": 0.838188,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              387,
+              340,
+              516
+            ],
+            "confidence": 0.488721,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 143.0,
+        "frame_index": 8580,
+        "detections": [
+          {
+            "bbox": [
+              506,
+              749,
+              638,
+              1076
+            ],
+            "confidence": 0.702975,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              387,
+              341,
+              515
+            ],
+            "confidence": 0.483632,
+            "side": null
+          },
+          {
+            "bbox": [
+              505,
+              724,
+              634,
+              903
+            ],
+            "confidence": 0.430433,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 143.5,
+        "frame_index": 8610,
+        "detections": [
+          {
+            "bbox": [
+              378,
+              813,
+              566,
+              1080
+            ],
+            "confidence": 0.779266,
+            "side": null
+          },
+          {
+            "bbox": [
+              287,
+              388,
+              340,
+              516
+            ],
+            "confidence": 0.476211,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 144.0,
+        "frame_index": 8640,
+        "detections": [
+          {
+            "bbox": [
+              242,
+              798,
+              499,
+              1080
+            ],
+            "confidence": 0.747217,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              386,
+              340,
+              516
+            ],
+            "confidence": 0.48759,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 144.5,
+        "frame_index": 8670,
+        "detections": [
+          {
+            "bbox": [
+              305,
+              818,
+              497,
+              1080
+            ],
+            "confidence": 0.712238,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              386,
+              339,
+              516
+            ],
+            "confidence": 0.460396,
+            "side": null
+          },
+          {
+            "bbox": [
+              220,
+              803,
+              415,
+              956
+            ],
+            "confidence": 0.432274,
+            "side": "near"
+          }
+        ]
+      },
+      {
+        "time": 145.0,
+        "frame_index": 8700,
+        "detections": [
+          {
+            "bbox": [
+              480,
+              784,
+              618,
+              1078
+            ],
+            "confidence": 0.838699,
+            "side": null
+          },
+          {
+            "bbox": [
+              285,
+              386,
+              339,
+              515
+            ],
+            "confidence": 0.464906,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 145.5,
+        "frame_index": 8730,
+        "detections": [
+          {
+            "bbox": [
+              636,
+              751,
+              802,
+              1080
+            ],
+            "confidence": 0.876155,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              387,
+              338,
+              515
+            ],
+            "confidence": 0.451943,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 146.0,
+        "frame_index": 8760,
+        "detections": [
+          {
+            "bbox": [
+              764,
+              746,
+              944,
+              1080
+            ],
+            "confidence": 0.857543,
+            "side": null
+          },
+          {
+            "bbox": [
+              285,
+              386,
+              338,
+              516
+            ],
+            "confidence": 0.471801,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 146.5,
+        "frame_index": 8790,
+        "detections": [
+          {
+            "bbox": [
+              734,
+              740,
+              942,
+              1080
+            ],
+            "confidence": 0.87431,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              389,
+              339,
+              516
+            ],
+            "confidence": 0.458854,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 147.0,
+        "frame_index": 8820,
+        "detections": [
+          {
+            "bbox": [
+              580,
+              754,
+              730,
+              1077
+            ],
+            "confidence": 0.781557,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              388,
+              340,
+              515
+            ],
+            "confidence": 0.451405,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 147.5,
+        "frame_index": 8850,
+        "detections": [
+          {
+            "bbox": [
+              527,
+              787,
+              679,
+              1080
+            ],
+            "confidence": 0.835833,
+            "side": null
+          },
+          {
+            "bbox": [
+              287,
+              389,
+              340,
+              516
+            ],
+            "confidence": 0.474647,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 148.0,
+        "frame_index": 8880,
+        "detections": [
+          {
+            "bbox": [
+              523,
+              776,
+              765,
+              1076
+            ],
+            "confidence": 0.867137,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              391,
+              338,
+              516
+            ],
+            "confidence": 0.457802,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 148.5,
+        "frame_index": 8910,
+        "detections": [
+          {
+            "bbox": [
+              623,
+              762,
+              767,
+              1080
+            ],
+            "confidence": 0.827504,
+            "side": null
+          },
+          {
+            "bbox": [
+              287,
+              390,
+              338,
+              516
+            ],
+            "confidence": 0.46075,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 149.0,
+        "frame_index": 8940,
+        "detections": [
+          {
+            "bbox": [
+              657,
+              736,
+              807,
+              1079
+            ],
+            "confidence": 0.839042,
+            "side": null
+          },
+          {
+            "bbox": [
+              287,
+              390,
+              338,
+              516
+            ],
+            "confidence": 0.431041,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 149.5,
+        "frame_index": 8970,
+        "detections": [
+          {
+            "bbox": [
+              628,
+              703,
+              830,
+              1080
+            ],
+            "confidence": 0.851044,
+            "side": null
+          },
+          {
+            "bbox": [
+              286,
+              390,
+              338,
+              515
+            ],
+            "confidence": 0.454653,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 150.0,
+        "frame_index": 9000,
+        "detections": [
+          {
+            "bbox": [
+              735,
+              671,
+              862,
+              1030
+            ],
+            "confidence": 0.838234,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              287,
+              389,
+              338,
+              515
+            ],
+            "confidence": 0.428515,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 150.5,
+        "frame_index": 9030,
+        "detections": [
+          {
+            "bbox": [
+              793,
+              633,
+              917,
+              957
+            ],
+            "confidence": 0.802085,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              286,
+              388,
+              339,
+              515
+            ],
+            "confidence": 0.441865,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 151.0,
+        "frame_index": 9060,
+        "detections": [
+          {
+            "bbox": [
+              883,
+              617,
+              993,
+              950
+            ],
+            "confidence": 0.834708,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              287,
+              388,
+              340,
+              515
+            ],
+            "confidence": 0.461877,
+            "side": null
+          },
+          {
+            "bbox": [
+              1437,
+              358,
+              1560,
+              495
+            ],
+            "confidence": 0.407129,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 151.5,
+        "frame_index": 9090,
+        "detections": [
+          {
+            "bbox": [
+              967,
+              587,
+              1069,
+              889
+            ],
+            "confidence": 0.824642,
+            "side": "near"
+          },
+          {
+            "bbox": [
+              287,
+              388,
+              341,
+              515
+            ],
+            "confidence": 0.478559,
+            "side": null
+          },
+          {
+            "bbox": [
+              1433,
+              392,
+              1560,
+              498
+            ],
+            "confidence": 0.393757,
+            "side": null
+          }
+        ]
+      },
+      {
+        "time": 152.0,
+        "frame_index": 9120,
+        "detections": []
+      },
+      {
+        "time": 152.5,
+        "frame_index": 9150,
+        "detections": []
+      },
+      {
+        "time": 153.0,
+        "frame_index": 9180,
+        "detections": []
+      },
+      {
+        "time": 153.5,
+        "frame_index": 9210,
+        "detections": []
+      },
+      {
+        "time": 154.0,
+        "frame_index": 9240,
+        "detections": []
+      },
+      {
+        "time": 154.5,
+        "frame_index": 9270,
+        "detections": []
+      },
+      {
+        "time": 155.0,
+        "frame_index": 9300,
+        "detections": []
+      },
+      {
+        "time": 155.5,
+        "frame_index": 9330,
+        "detections": []
+      },
+      {
+        "time": 156.0,
+        "frame_index": 9360,
+        "detections": []
+      },
+      {
+        "time": 156.5,
+        "frame_index": 9390,
+        "detections": []
+      }
+    ]
+  }
+]

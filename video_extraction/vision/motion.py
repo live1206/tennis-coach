@@ -12,7 +12,7 @@ from __future__ import annotations
 import cv2
 import numpy as np
 
-from tennis_coach.vision.court import make_polygon_mask
+from video_extraction.vision.court import make_polygon_mask
 
 
 def _scale_roi(roi: list[list[int]], scale: float) -> list[list[int]]:
