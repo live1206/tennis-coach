@@ -25,7 +25,7 @@ services:
         - Azure AI AgentServer
         - Responses Protocol
         - Streaming
-    project: src/tennis-analysis-agent
+    project: src/tennis_analysis_agent
     language: python
     codeConfiguration:
       runtime: python_3_13

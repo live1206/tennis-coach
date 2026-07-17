@@ -1,0 +1,1 @@
+"""Microsoft Foundry cloud integration."""

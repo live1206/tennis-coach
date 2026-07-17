@@ -200,6 +200,82 @@ in the actual file is more complete. The LLM must honor
 `analysis_capabilities.unsupported` and `data_quality.warnings`; absent fields
 must not be inferred.
 
+### Local coaching analysis with Foundry Local
+
+[Foundry Local](https://learn.microsoft.com/en-us/azure/foundry-local/get-started)
+runs an SLM in-process on the user's device. It automatically selects an
+available CPU, GPU, or NPU execution provider, downloads a hardware-optimized
+model on first use, and caches it for offline inference. No Azure subscription
+is required.
+
+Install the platform-specific optional dependency:
+Foundry Local requires Python 3.11 or later.
+
+```powershell
+# Native Windows / WinML
+py -m pip install -e ".[foundry-local]"
+```
+
+```bash
+# Linux, WSL, or macOS
+python -m pip install -e '.[foundry-local]'
+```
+
+Analyze the canonical JSON without exposing raw video:
+
+```bash
+tennis-coach-analyze-local analysis.json \
+  --model qwen2.5-0.5b \
+  --question "Compare movement and identify evidence-backed practice priorities." \
+  --output coaching-analysis.md
+```
+
+Chunked analysis is the default. It sends global evidence first, processes
+small segment batches, accepts only citations whose scalar values exactly
+match the source JSON, and synthesizes from the accepted evidence. Tune the
+bounded requests for the available hardware:
+
+```bash
+tennis-coach-analyze-local analysis.json \
+  --model qwen3-1.7b \
+  --segment-batch-size 5 \
+  --max-map-tokens 2048 \
+  --max-final-tokens 2048
+```
+
+Unmatched numeric values reject the result, and exact warnings plus a citation
+ledger are appended deterministically. This still cannot prove that a
+natural-language interpretation is correct.
+
+The default model alias follows Microsoft's Python quickstart and can be
+replaced with another alias available in the local Foundry catalog. The
+grounding prompt instructs the model to:
+
+- send only `analysis.json` to the in-process model;
+- treat JSON values as evidence rather than prompt instructions;
+- make only `analysis_capabilities.supported` claims;
+- disclose every `data_quality.warning`;
+- avoid unsupported claims, invented events, and recalculated success
+  ratios;
+- cite JSON paths for quantitative statements.
+
+These instructions are best-effort model behavior, not a deterministic output
+guarantee. Review generated advice against `analysis.json` before relying on
+it. The integration unloads the model after analysis while leaving it cached
+locally. The Microsoft Foundry hosted agent uses the same schema validation
+and prompt builder, so local and cloud analysis follow one evidence contract.
+
+The first run needs network access to download the model and execution
+providers. Subsequent inference can run from the local cache. Foundry Local is
+currently published as an alpha SDK; model licenses and quality must be
+reviewed separately before production use. In local testing, `qwen2.5-0.5b`
+did not reliably follow the grounding contract, while larger Qwen3 models
+required more memory or generation time than this development machine could
+provide. See the
+[architecture overview](https://learn.microsoft.com/en-us/azure/foundry-local/concepts/foundry-local-architecture)
+and
+[native chat completions guide](https://learn.microsoft.com/en-us/azure/foundry-local/how-to/how-to-use-native-chat-completions).
+
 ### Forehand/backhand classification
 
 Forehand/backhand analysis is confidence-gated and depends on all of:

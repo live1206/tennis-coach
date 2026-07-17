@@ -81,27 +81,16 @@ def _build_extract_command(args: argparse.Namespace, report_path: Path) -> list[
 
 
 def _build_invoke_message(report_path: Path, analysis_focus: str) -> str:
-    output_format = (
-        "Return the final answer in bilingual format (English + Chinese) using exactly these 4 Markdown sections: "
-        "## Summary, ## Best Performance, ## Biggest Weakness, ## Improvement Advice. "
-        "In each section, provide concise English first, then concise Chinese. "
-        "Write for the athlete (coaching tone, direct and actionable), not for data scientists. "
-        "Use evidence from JSON but avoid overloading with raw metrics. "
-        "After the 4 sections, add a short `## Recommended Coaching Videos` section with 3-5 video suggestions "
-        "tailored to the athlete's biggest weakness. "
-        "Each suggestion must include: title, one-line reason, and a direct clickable URL starting with https://."
-    )
     focus = analysis_focus.strip()
     if focus:
         return (
             "Use analyze_tennis_technique_from_json with "
-            f"file_name='{report_path.as_posix()}' and analysis_focus='{focus}'. "
-            + output_format
+            f"file_name='{report_path.as_posix()}' and analysis_focus='{focus}', "
+            "then follow the instructions returned by the tool."
         )
     return (
         "Use analyze_tennis_technique_from_json with "
-        f"file_name='{report_path.as_posix()}'. "
-        + output_format
+        f"file_name='{report_path.as_posix()}', then follow the instructions returned by the tool."
     )
 
 
@@ -115,8 +104,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--report-path",
         type=Path,
-        default=Path("reports.json"),
-        help="Output path for extracted report JSON",
+        default=Path("analysis.json"),
+        help="Output path for canonical analysis JSON",
     )
     parser.add_argument(
         "--analysis-output",
@@ -188,7 +177,7 @@ def main(argv: list[str] | None = None) -> int:
 
     repo_root = Path(__file__).resolve().parent
     llm_process_root = repo_root / "llm_process"
-    agent_env_file = llm_process_root / "src" / "tennis-analysis-agent" / ".env"
+    agent_env_file = llm_process_root / "src" / "tennis_analysis_agent" / ".env"
 
     report_path = args.report_path
     if not report_path.is_absolute():
@@ -244,7 +233,7 @@ def main(argv: list[str] | None = None) -> int:
         raise ValueError(
             "Missing agent configuration: "
             + ", ".join(missing)
-            + ". Set them in llm_process/src/tennis-analysis-agent/.env or pass overrides via "
+            + ". Set them in llm_process/src/tennis_analysis_agent/.env or pass overrides via "
             "--foundry-project-endpoint / --model-deployment-name."
         )
 
@@ -286,7 +275,7 @@ def main(argv: list[str] | None = None) -> int:
                 + "\n".join(output_lines[-20:])
             )
 
-        print("Step 3/3: invoking local agent with reports.json...")
+        print("Step 3/3: invoking local agent with analysis.json...")
         invoke_message = _build_invoke_message(report_path, args.analysis_focus)
         invoke_command = ["azd", "ai", "agent", "invoke", "--local", invoke_message]
         completed = subprocess.run(

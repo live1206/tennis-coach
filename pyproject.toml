@@ -19,6 +19,10 @@ gpu = [
 pose = [
   "mediapipe>=0.10,<1.0",
 ]
+foundry-local = [
+  "foundry-local-sdk>=1.2,<2.0; platform_system != 'Windows'",
+  "foundry-local-sdk-winml>=1.2,<2.0; platform_system == 'Windows'",
+]
 test = [
   "pytest>=8,<9",
 ]
@@ -26,6 +30,7 @@ test = [
 [project.scripts]
 tennis-coach-extract = "video_extraction.cli:main"
 tennis-coach-stats = "video_extraction.statistics:main"
+tennis-coach-analyze-local = "video_extraction.local_analysis:main"
 tennis-coach-ball-frames = "video_extraction.ball_annotations:extract_main"
 tennis-coach-ball-annotate = "video_extraction.ball_annotations:annotate_main"
 tennis-coach-ball-evaluate = "video_extraction.ball_annotations:evaluate_main"
@@ -36,4 +41,4 @@ tennis-coach-ball-validate = "video_extraction.ball_annotations:validate_main"
 testpaths = ["tests"]
 
 [tool.setuptools.packages.find]
-include = ["video_extraction*"]
+include = ["video_extraction*", "llm_process*"]

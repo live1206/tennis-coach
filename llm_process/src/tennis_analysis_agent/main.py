@@ -14,6 +14,11 @@ from dotenv import load_dotenv
 from pydantic import Field
 from typing_extensions import Annotated
 
+if __package__:
+    from .analysis_prompt import build_analysis_prompt
+else:
+    from analysis_prompt import build_analysis_prompt
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -232,7 +237,7 @@ def analyze_tennis_dataset(
 def analyze_tennis_technique_from_json(
     file_name: Annotated[
         str,
-        Field(description="JSON file name or path, e.g. reports.json or C:/.../reports.json"),
+        Field(description="JSON file name or path, e.g. analysis.json or C:/.../analysis.json"),
     ],
     analysis_focus: Annotated[
         str,
@@ -253,37 +258,14 @@ def analyze_tennis_technique_from_json(
     except json.JSONDecodeError as exc:
         return f"JSON analysis failed: invalid JSON format ({exc})."
 
-    normalized_json = json.dumps(parsed, ensure_ascii=False, indent=2)
-
-    prompt_lines = [
-        "You are an elite tennis technique analyst.",
-        "Analyze the JSON as video-derived tennis motion data and provide:",
-        "1) summary,",
-        "2) best performance,",
-        "3) biggest weakness,",
-        "4) improvement advice.",
-        "Return in bilingual format (English + Chinese) with exactly these Markdown headings:",
-        "## Summary",
-        "## Best Performance",
-        "## Biggest Weakness",
-        "## Improvement Advice",
-        "Inside each section, write concise English first, then concise Chinese.",
-        "After these sections, add:",
-        "## Recommended Coaching Videos",
-        "Provide 3-5 practical video recommendations tailored to the athlete's biggest weakness.",
-        "For each recommendation, include title, one-line reason, and a direct clickable URL starting with https://.",
-        "Write for the athlete in coaching language: clear, direct, and actionable.",
-        "Ground conclusions in JSON evidence, but avoid raw data dump style.",
-    ]
-    if analysis_focus.strip():
-        prompt_lines.append(f"Focus area: {analysis_focus.strip()}")
-
-    return (
-        "\n".join(prompt_lines)
-        + "\n\nTennis video analysis JSON:\n```json\n"
-        + normalized_json
-        + "\n```"
+    question = analysis_focus.strip() or (
+        "Summarize the strongest evidence-backed coaching observations and "
+        "prioritize the next three areas to practice."
     )
+    try:
+        return build_analysis_prompt(parsed, question)
+    except ValueError as exc:
+        return f"JSON analysis failed: {exc}"
 
 
 def main():
@@ -299,13 +281,7 @@ def main():
             "You are a tennis analytics assistant. "
             "Use tools to inspect uploaded datasets before drawing conclusions. "
             "When the user provides a JSON file for tennis video analysis, call analyze_tennis_technique_from_json first "
-            "and then produce a technique-focused report based on that JSON evidence. "
-            "For JSON-based technique reports, always return exactly four sections: "
-            "Summary, Best Performance, Biggest Weakness, Improvement Advice. "
-            "Each section must be bilingual (English + Chinese). "
-            "Then add a `Recommended Coaching Videos` section with 3-5 tailored video suggestions. "
-            "Each recommended video must include a direct clickable URL starting with https://. "
-            "The report must be athlete-facing coaching feedback, not a data-centric report. "
+            "and follow the shared evidence and response instructions returned by that tool. "
             "When data is missing, ask for a CSV/JSON upload or a clearer analysis objective."
         ),
         tools=[
