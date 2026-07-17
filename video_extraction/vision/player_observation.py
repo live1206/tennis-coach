@@ -171,6 +171,17 @@ def _appearance_descriptor(frame: np.ndarray, bbox: list[int]) -> np.ndarray | N
     return _normalize_histogram(histogram)
 
 
+def appearance_descriptor(
+    frame: np.ndarray,
+    bbox: list[int] | None = None,
+) -> np.ndarray | None:
+    height, width = frame.shape[:2]
+    return _appearance_descriptor(
+        frame,
+        bbox if bbox is not None else [0, 0, width, height],
+    )
+
+
 def court_side(bbox: list[int], rois: dict, frame_height: int) -> str | None:
     x1, _y1, x2, y2 = bbox
     foot = ((x1 + x2) / 2.0, float(y2))
@@ -223,6 +234,13 @@ def _appearance_distance(descriptor: np.ndarray | None, prototype: np.ndarray | 
             cv2.HISTCMP_BHATTACHARYYA,
         )
     )
+
+
+def appearance_distance(
+    descriptor: np.ndarray | None,
+    prototype: np.ndarray | None,
+) -> float:
+    return _appearance_distance(descriptor, prototype)
 
 
 def _assign_identities(observations: dict[str, dict | None], prototypes: dict[str, np.ndarray]) -> dict:

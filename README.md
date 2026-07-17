@@ -136,6 +136,12 @@ The output shape is:
     "supported": ["player movement comparison"],
     "unsupported": ["forehand/backhand classification"]
   },
+  "target_player": {
+    "player_id": "player_1",
+    "confidence": 0.86,
+    "margin": 0.31,
+    "reason": null
+  },
   "players": {
     "player_1": {
       "segments_detected": 7,
@@ -153,9 +159,19 @@ The output shape is:
           "player_id": "player_1",
           "classification": "forehand",
           "confidence": 0.78,
-          "reason": null
+          "reason": null,
+          "shot_role": "return",
+          "contact_confidence": 0.81,
+          "outcome": "continued",
+          "outcome_confidence": 0.74
         }
-      ]
+      ],
+      "outcome": {
+        "classification": "unknown",
+        "winner_player_id": null,
+        "confidence": 0.0,
+        "reason": "terminal_ball_event_unavailable"
+      }
     }
   ]
 }
@@ -185,6 +201,7 @@ tennis-coach-extract match.mp4 \
   --ball-model-path /path/to/yolox_nano.onnx \
   --inference-backend cuda \
   --pose-model-path /path/to/pose_landmarker_heavy.task \
+  --target-player-image /path/to/player-key-frame.jpg \
   --player-handedness player_1=right \
   --player-handedness player_2=right \
   --output analysis.json \
@@ -198,6 +215,21 @@ weak player identity, weak poses, and unknown handedness produce
 `classification: "unknown"` with a reason rather than a forced label. Pose
 model assets are not bundled; users must obtain and review their upstream
 terms separately.
+
+Each resolved shot also includes the inferred ball contact point and the
+dominant wrist as a racket-location proxy. This is explicitly identified as
+pose-based inference, not direct racket detection.
+
+The same run also binds an optional target-player key frame to `player_1` or
+`player_2`, labels a high-confidence overhead first contact as `serve`, labels
+the opponent's next contact as `return`, and records whether each resolved
+shot was followed by an opponent contact. Point winners are emitted only when
+validated terminal `net` or `out` evidence is present; otherwise the outcome
+is explicitly `unknown`. Forced versus unforced errors are not claimed.
+
+Ball motion metrics intentionally remain in normalized image/court space.
+Physical 3D speed is outside the project scope because the input is a single
+uncalibrated camera.
 
 ### Ball annotation and tracking
 

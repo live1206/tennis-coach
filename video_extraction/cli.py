@@ -8,8 +8,10 @@ import cv2
 
 from video_extraction.audio import extract_rally_segments
 from video_extraction.court_projection import CourtProjector, add_court_projections
+from video_extraction.outcomes import infer_outcomes
 from video_extraction.shot_analysis import analyze_segment_shots
 from video_extraction.statistics import build_llm_statistics
+from video_extraction.target_player import match_target_player
 from video_extraction.vision.ball_tracking import (
     TrackNetOnnxDetector,
     observations_for_segment,
@@ -247,6 +249,11 @@ def main(argv: list[str] | None = None) -> int:
         help="Optional MediaPipe Pose Landmarker model for stroke-side analysis",
     )
     parser.add_argument(
+        "--target-player-image",
+        default=None,
+        help="Optional cropped key frame used to bind target_player to an anonymous ID",
+    )
+    parser.add_argument(
         "--player-handedness",
         action="append",
         default=[],
@@ -285,6 +292,12 @@ def main(argv: list[str] | None = None) -> int:
         if not report:
             parser.error("Audio analysis found no rally candidates")
     enriched = enrich_report(args.video, report, **common_options)
+    if args.target_player_image:
+        enriched, _target_match = match_target_player(
+            args.video,
+            enriched,
+            args.target_player_image,
+        )
     if args.pose_model_path:
         try:
             player_handedness = parse_player_handedness(args.player_handedness)
@@ -296,6 +309,7 @@ def main(argv: list[str] | None = None) -> int:
             args.pose_model_path,
             player_handedness,
         )
+    enriched = infer_outcomes(enriched)
     analysis = build_llm_statistics(enriched)
     Path(args.output).write_text(
         json.dumps(analysis, indent=2, ensure_ascii=False)

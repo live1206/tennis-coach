@@ -88,15 +88,21 @@ def associate_hitter(
         return {"player_id": None, "ball": ball, "reason": "ball_too_far_from_players"}
     if len(candidates) > 1 and candidates[1][0] - distance < 0.1:
         return {"player_id": None, "ball": ball, "reason": "ambiguous_player"}
+    player_confidence = min(
+        float(player["detection_confidence"]),
+        float(player["identity_confidence"]),
+    )
+    proximity_confidence = max(0.0, 1.0 - distance / maximum_box_distance)
+    contact_confidence = (
+        float(ball["confidence"]) * player_confidence * proximity_confidence
+    ) ** (1.0 / 3.0)
     return {
         "player_id": player_id,
         "player": player,
         "ball": ball,
         "box_distance": round(distance, 6),
-        "player_confidence": min(
-            float(player["detection_confidence"]),
-            float(player["identity_confidence"]),
-        ),
+        "player_confidence": player_confidence,
+        "contact_confidence": round(contact_confidence, 6),
         "reason": None,
     }
 
@@ -164,6 +170,103 @@ def classify_stroke_side(
     }
 
 
+def serve_candidate_confidence(
+    landmarks: dict[str, dict],
+    contact_point: tuple[float, float],
+    handedness: str | None,
+) -> float:
+    if handedness not in {"left", "right"}:
+        return 0.0
+    shoulder = landmarks[f"{handedness}_shoulder"]
+    wrist = landmarks[f"{handedness}_wrist"]
+    opposite_shoulder = landmarks[
+        "left_shoulder" if handedness == "right" else "right_shoulder"
+    ]
+    shoulder_width = math.hypot(
+        shoulder["x"] - opposite_shoulder["x"],
+        shoulder["y"] - opposite_shoulder["y"],
+    )
+    if shoulder_width < 0.01:
+        return 0.0
+    shoulder_mid_y = (shoulder["y"] + opposite_shoulder["y"]) / 2.0
+    contact_height = (shoulder_mid_y - contact_point[1]) / shoulder_width
+    wrist_height = (shoulder_mid_y - wrist["y"]) / shoulder_width
+    landmark_confidence = min(
+        shoulder["visibility"],
+        shoulder["presence"],
+        wrist["visibility"],
+        wrist["presence"],
+    )
+    overhead_score = min(max(min(contact_height, wrist_height), 0.0), 1.0)
+    return round(landmark_confidence * overhead_score, 6)
+
+
+def assign_shot_roles(shots: list[dict]) -> list[dict]:
+    resolved_indices = [
+        index
+        for index, shot in enumerate(shots)
+        if shot.get("player_id") is not None
+    ]
+    if not resolved_indices:
+        return [
+            {
+                **shot,
+                "shot_role": "unknown",
+                "role_confidence": 0.0,
+                "role_reason": "hitter_unresolved",
+            }
+            for shot in shots
+        ]
+
+    first_index = resolved_indices[0]
+    first = shots[first_index]
+    serve_confidence = (
+        float(first.get("serve_candidate_confidence") or 0.0)
+        * float(first.get("contact_confidence") or 0.0)
+    ) ** 0.5
+    serve_detected = serve_confidence >= 0.45
+    output = []
+    return_assigned = False
+    for index, shot in enumerate(shots):
+        if shot.get("player_id") is None:
+            role = {
+                "shot_role": "unknown",
+                "role_confidence": 0.0,
+                "role_reason": "hitter_unresolved",
+            }
+        elif index == first_index:
+            role = {
+                "shot_role": "serve" if serve_detected else "unknown",
+                "role_confidence": serve_confidence,
+                "role_reason": None if serve_detected else "serve_evidence_insufficient",
+            }
+        elif (
+            serve_detected
+            and not return_assigned
+            and shot["player_id"] != first["player_id"]
+        ):
+            return_assigned = True
+            role = {
+                "shot_role": "return",
+                "role_confidence": round(
+                    min(
+                        serve_confidence,
+                        float(shot.get("contact_confidence") or 0.0),
+                    ),
+                    6,
+                ),
+                "role_reason": None,
+            }
+        else:
+            role = {
+                "shot_role": "rally_shot",
+                "role_confidence": float(shot.get("contact_confidence") or 0.0),
+                "role_reason": None,
+            }
+        output.append({**shot, **role})
+    return output
+
+
 def analyze_segment_shots(
     video_path: str | Path,
     segments: list[dict],
@@ -199,6 +302,7 @@ def analyze_segment_shots(
                 if association["player_id"] is None:
                     shots.append({**base, "reason": association["reason"]})
                     continue
+                base["contact_confidence"] = association["contact_confidence"]
 
                 frame_index = max(0, round(float(hit_time) * fps))
                 cap.set(cv2.CAP_PROP_POS_FRAMES, frame_index)
@@ -230,6 +334,10 @@ def analyze_segment_shots(
                     float(ball["confidence"]),
                     association["player_confidence"],
                 )
+                contact_point = (
+                    ball["x"] / max(frame_width, 1),
+                    ball["y"] / max(frame_height, 1),
+                )
                 shots.append({
                     **base,
                     **classification,
@@ -237,9 +345,24 @@ def analyze_segment_shots(
                     "ball_time": ball["time"],
                     "ball_confidence": ball["confidence"],
                     "player_box_distance": association["box_distance"],
+                    "contact_method": "audio_ball_player_pose",
+                    "contact_point": {
+                        "x": ball["x"],
+                        "y": ball["y"],
+                        "x_normalized": round(contact_point[0], 6),
+                        "y_normalized": round(contact_point[1], 6),
+                    },
+                    "racket_hand_position": landmarks.get(
+                        f"{player_handedness.get(association['player_id'])}_wrist"
+                    ),
                     "pose_landmarks": landmarks,
+                    "serve_candidate_confidence": serve_candidate_confidence(
+                        landmarks,
+                        contact_point,
+                        player_handedness.get(association["player_id"]),
+                    ),
                 })
-            results.append({**segment, "shots": shots})
+            results.append({**segment, "shots": assign_shot_roles(shots)})
     finally:
         cap.release()
     return results

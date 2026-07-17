@@ -41,11 +41,18 @@ ANALYSIS_SCHEMA = {
             "audio": "Availability and total count of audio hit candidates.",
             "ball": "Aggregate ball visibility, trajectory continuity, and confidence.",
             "shots": "Counts of classified and abstained contact candidates.",
+            "outcomes": "Counts of resolved and unresolved candidate-rally outcomes.",
             "warnings": "Mandatory limitations the LLM must account for.",
         },
         "analysis_capabilities": {
             "supported": "Claims supported by available deterministic evidence.",
             "unsupported": "Claims the LLM must not infer from this file.",
+        },
+        "target_player": {
+            "player_id": "Anonymous player ID matched to the supplied key frame.",
+            "confidence": "Appearance-match confidence.",
+            "margin": "Confidence lead over the next-best anonymous player.",
+            "reason": "Why matching abstained; null when resolved.",
         },
         "players": {
             "segments_detected": "Candidate rallies in which the anonymous player was detected.",
@@ -67,6 +74,12 @@ ANALYSIS_SCHEMA = {
             "mean_court_position": "Mean projected court [x, y], including outside points.",
             "mean_in_court_position": "Mean projected [x, y] using only inside-court points.",
             "shot_counts": "Confidence-gated forehand, backhand, and unknown counts.",
+            "shot_role_counts": "Counts of serve, return, rally_shot, and unknown roles.",
+            "shot_outcome_counts": "Counts of continued, error, and unresolved outcomes.",
+            "shot_continuation_rate": (
+                "continued divided by continued plus error; unresolved endings are excluded."
+            ),
+            "is_target": "True when this anonymous ID matches the supplied key frame.",
         },
         "segments": {
             "index": "Candidate-rally identifier inherited from extraction.",
@@ -99,7 +112,25 @@ ANALYSIS_SCHEMA = {
                     "Combined ball, player detection/identity, pose, and "
                     "geometric confidence."
                 ),
+                "contact_confidence": (
+                    "Ball/player/proximity confidence independent of stroke class."
+                ),
+                "contact_method": "Signals used to infer contact; not direct racket detection.",
+                "contact_point": (
+                    "Ball position at the associated audio-contact time in image coordinates."
+                ),
+                "racket_hand_position": (
+                    "Pose-estimated dominant wrist used as a racket-location proxy."
+                ),
                 "reason": "Why classification abstained; null when classified.",
+                "shot_role": "serve, return, rally_shot, or unknown.",
+                "outcome": "continued, error, terminal_unknown, or null.",
+            },
+            "outcome": {
+                "classification": "point_ended or unknown.",
+                "winner_player_id": "Resolved anonymous winner, or null.",
+                "terminal_event": "Validated net/out evidence when available.",
+                "confidence": "Outcome evidence confidence.",
             },
         },
     },
@@ -351,6 +382,20 @@ def _aggregate_players(report: list[dict], player_ids: list[str]) -> dict:
             for shot in segment.get("shots", [])
             if shot.get("player_id") == player_id
         ]
+        target_player_id = next(
+            (
+                segment.get("target_player", {}).get("player_id")
+                for segment in report
+                if segment.get("target_player")
+            ),
+            None,
+        )
+        resolved_shot_outcomes = [
+            shot
+            for shot in player_shots
+            if shot.get("outcome") in {"continued", "error"}
+            and float(shot.get("outcome_confidence") or 0.0) >= 0.35
+        ]
         for segment in report:
             player = segment.get("players", {}).get(player_id)
             if player and player.get("detected"):
@@ -404,6 +449,33 @@ def _aggregate_players(report: list[dict], player_ids: list[str]) -> dict:
                 )
                 for classification in ("forehand", "backhand", "unknown")
             },
+            "shot_role_counts": {
+                role: sum(
+                    shot.get("shot_role") == role
+                    for shot in player_shots
+                )
+                for role in ("serve", "return", "rally_shot", "unknown")
+            },
+            "shot_outcome_counts": {
+                outcome: sum(
+                    shot.get("outcome") == outcome
+                    for shot in player_shots
+                )
+                for outcome in ("continued", "error", "terminal_unknown")
+            },
+            "shot_continuation_rate": (
+                round(
+                    sum(
+                        shot.get("outcome") == "continued"
+                        for shot in resolved_shot_outcomes
+                    )
+                    / len(resolved_shot_outcomes),
+                    6,
+                )
+                if resolved_shot_outcomes
+                else None
+            ),
+            "is_target": player_id == target_player_id,
         }
     return aggregates
 
@@ -433,6 +505,16 @@ def build_llm_statistics(report: list[dict]) -> dict:
                     "classification",
                     "confidence",
                     "reason",
+                    "contact_confidence",
+                    "contact_method",
+                    "contact_point",
+                    "racket_hand_position",
+                    "shot_role",
+                    "role_confidence",
+                    "role_reason",
+                    "outcome",
+                    "outcome_confidence",
+                    "outcome_reason",
                 )
             }
             for shot in segment.get("shots", [])
@@ -460,6 +542,7 @@ def build_llm_statistics(report: list[dict]) -> dict:
             "audio": audio_summary,
             "ball": ball_summary,
             "shots": compact_shots,
+            "outcome": segment.get("outcome"),
         })
 
     players = _aggregate_players(report, player_ids)
@@ -507,6 +590,39 @@ def build_llm_statistics(report: list[dict]) -> dict:
         for shot in all_shots
         if shot.get("classification") in {"forehand", "backhand"}
     ]
+    target_player = next(
+        (
+            segment.get("target_player")
+            for segment in report
+            if segment.get("target_player")
+        ),
+        {
+            "player_id": None,
+            "confidence": 0.0,
+            "reason": "target_image_not_supplied",
+        },
+    )
+    resolved_roles = [
+        shot for shot in all_shots
+        if shot.get("shot_role") in {"serve", "return"}
+        and float(shot.get("role_confidence") or 0.0) >= 0.35
+    ]
+    continued_shots = [
+        shot for shot in all_shots
+        if shot.get("outcome") == "continued"
+        and float(shot.get("outcome_confidence") or 0.0) >= 0.35
+    ]
+    error_shots = [
+        shot for shot in all_shots
+        if shot.get("outcome") == "error"
+        and float(shot.get("outcome_confidence") or 0.0) >= 0.35
+    ]
+    resolved_outcomes = [
+        segment["outcome"]
+        for segment in segments
+        if (segment.get("outcome") or {}).get("winner_player_id")
+        and float((segment.get("outcome") or {}).get("confidence") or 0.0) >= 0.35
+    ]
     unknown_shot_count = len(all_shots) - len(classified_shots)
     if all_shots and unknown_shot_count:
         warnings.append(
@@ -515,6 +631,14 @@ def build_llm_statistics(report: list[dict]) -> dict:
         )
     if classified_shots:
         supported.append("confidence-gated forehand/backhand classification")
+    if resolved_roles:
+        supported.append("confidence-gated serve and return classification")
+    if target_player.get("player_id"):
+        supported.append("target-player identification from a key frame")
+    if continued_shots or error_shots:
+        supported.append("resolved in-play/error shot ratios")
+    if resolved_outcomes:
+        supported.append("terminal-event point winner attribution")
     if comparable_movement_players >= 2:
         supported.append("player movement comparison")
     if has_player_positions:
@@ -568,6 +692,10 @@ def build_llm_statistics(report: list[dict]) -> dict:
                 "classified_count": len(classified_shots),
                 "unknown_count": unknown_shot_count,
             },
+            "outcomes": {
+                "resolved_point_count": len(resolved_outcomes),
+                "unknown_point_count": len(segments) - len(resolved_outcomes),
+            },
             "warnings": warnings,
         },
         "analysis_capabilities": {
@@ -578,13 +706,30 @@ def build_llm_statistics(report: list[dict]) -> dict:
                     if classified_shots
                     else ["forehand/backhand classification"]
                 ),
-                "shot success ratios",
-                "winner/error attribution",
-                "serve and return classification",
-                "target-player identification from a key frame",
-                "physical ball speed or 3D trajectory",
+                *(
+                    []
+                    if continued_shots or error_shots
+                    else ["shot success ratios"]
+                ),
+                *(
+                    []
+                    if resolved_outcomes
+                    else ["winner/error attribution"]
+                ),
+                *(
+                    []
+                    if resolved_roles
+                    else ["serve and return classification"]
+                ),
+                *(
+                    []
+                    if target_player.get("player_id")
+                    else ["target-player identification from a key frame"]
+                ),
+                "forced/unforced error attribution",
             ],
         },
+        "target_player": target_player,
         "players": players,
         "segments": segments,
     }
