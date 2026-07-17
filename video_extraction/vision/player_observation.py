@@ -254,6 +254,51 @@ def _public_player_data(observation: dict | None) -> dict:
     }
 
 
+def _attach_player_ids(
+    sampled_frames: list[dict],
+    assigned: dict,
+    frame_shape: tuple[int, int],
+) -> dict[str, list[dict]]:
+    frame_height, frame_width = frame_shape
+    assignments_by_side = {
+        observation["side"]: {
+            "player_id": player_id,
+            "identity_confidence": round(observation["identity_confidence"], 4),
+        }
+        for player_id, observation in assigned.items()
+    }
+    trajectories = {player_id: [] for player_id in PLAYER_IDS}
+
+    for sampled_frame in sampled_frames:
+        for detection in sampled_frame["detections"]:
+            assignment = (
+                assignments_by_side.get(detection["side"])
+                if detection["is_primary_player_detection"]
+                else None
+            )
+            detection["player_id"] = assignment["player_id"] if assignment else None
+            detection["identity_confidence"] = assignment["identity_confidence"] if assignment else None
+
+            if assignment is None:
+                continue
+
+            x1, _y1, x2, y2 = detection["bbox"]
+            trajectories[assignment["player_id"]].append({
+                "time": sampled_frame["time"],
+                "frame_index": sampled_frame["frame_index"],
+                "side": detection["side"],
+                "bbox": detection["bbox"],
+                "detection_confidence": detection["confidence"],
+                "identity_confidence": assignment["identity_confidence"],
+                "position": [
+                    round(((x1 + x2) / 2.0) / max(frame_width, 1), 6),
+                    round(y2 / max(frame_height, 1), 6),
+                ],
+            })
+
+    return trajectories
+
+
 def analyze_player_observations(
     video_path: str,
     segments: list[dict],
@@ -293,28 +338,33 @@ def analyze_player_observations(
                     break
 
                 detections = []
-                best_by_side = {}
+                best_index_by_side = {}
                 for detection in detector.detect(frame):
                     side = court_side(detection["bbox"], rois, frame_height)
                     enriched_detection = {
                         "bbox": detection["bbox"],
                         "confidence": detection["confidence"],
                         "side": side,
+                        "is_primary_player_detection": False,
                     }
                     detections.append(enriched_detection)
                     if side is None:
                         continue
-                    if side not in best_by_side or detection["confidence"] > best_by_side[side]["confidence"]:
-                        best_by_side[side] = detection
+                    best_index = best_index_by_side.get(side)
+                    if best_index is None or detection["confidence"] > detections[best_index]["confidence"]:
+                        best_index_by_side[side] = len(detections) - 1
 
-                if include_sampled_detections:
-                    sampled_frames.append({
-                        "time": round(frame_index / fps, 3),
-                        "frame_index": frame_index,
-                        "detections": detections,
-                    })
+                for detection_index in best_index_by_side.values():
+                    detections[detection_index]["is_primary_player_detection"] = True
 
-                for side, detection in best_by_side.items():
+                sampled_frames.append({
+                    "time": round(frame_index / fps, 3),
+                    "frame_index": frame_index,
+                    "detections": detections,
+                })
+
+                for side, detection_index in best_index_by_side.items():
+                    detection = detections[detection_index]
                     x1, _y1, x2, y2 = detection["bbox"]
                     side_observations[side].append({
                         "side": side,
@@ -328,11 +378,17 @@ def analyze_player_observations(
                 for side, items in side_observations.items()
             }
             assigned = _assign_identities(summarized, prototypes)
+            player_trajectories = _attach_player_ids(
+                sampled_frames,
+                assigned,
+                (frame_height, frame_width),
+            )
             result = {
                 "players": {
                     player_id: _public_player_data(assigned.get(player_id))
                     for player_id in PLAYER_IDS
                 },
+                "player_trajectories": player_trajectories,
                 "player_observation_status": "complete",
             }
             if include_sampled_detections:

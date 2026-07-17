@@ -9,7 +9,7 @@ from video_extraction.vision.motion import analyze_motion
 from video_extraction.vision.player_observation import analyze_player_observations
 
 
-EXTRACTION_VERSION = 1
+EXTRACTION_VERSION = 2
 
 
 def load_report(path: str | Path) -> list[dict]:
@@ -67,6 +67,7 @@ def enrich_report(
                 "court_rois": selected_rois,
                 "sample_seconds": sample_seconds,
             },
+            "player_trajectories": observation["player_trajectories"],
             "sampled_frames": observation.get("sampled_frames", []),
         })
     return enriched

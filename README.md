@@ -56,8 +56,9 @@ The enriched `reports.json` keeps the original segment fields and adds:
 - `features.player_motion_max`, `features.player_motion_var`
 - `features.near_motion_mean`, `features.far_motion_mean`, `features.motion_sample_count`
 - `players.player_1` and `players.player_2` with anonymous side, confidence, movement, and normalized mean position
+- `player_trajectories.player_1` and `player_trajectories.player_2` grouped by stable anonymous identity
 - `video_extraction.status`, `video_extraction.version`, `video_extraction.court_rois`, and `video_extraction.sample_seconds`
-- `sampled_frames` with sampled YOLO person boxes, confidence scores, and detected court side
+- `sampled_frames` with person boxes, confidence, court side, primary-player status, `player_id`, and identity confidence
 
 If court detection fails, each segment is preserved and marked with `video_extraction.status: "skipped_court_detection"`.
 

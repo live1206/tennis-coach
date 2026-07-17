@@ -4,6 +4,7 @@ from video_extraction import cli
 from video_extraction.cli import enrich_report, load_report
 from video_extraction.vision.player_observation import (
     YoloXPersonDetector,
+    _attach_player_ids,
     _assign_identities,
     _public_player_data,
 )
@@ -83,3 +84,48 @@ def test_yolox_preprocessing_preserves_raw_rgb_values():
 
     assert scale == 1.0
     np.testing.assert_array_equal(blob[0, :, 0, 0], [30.0, 20.0, 10.0])
+
+
+def test_attaches_player_ids_and_builds_grouped_trajectories():
+    sampled_frames = [{
+        "time": 1.5,
+        "frame_index": 90,
+        "detections": [
+            {
+                "bbox": [100, 200, 200, 400],
+                "confidence": 0.9,
+                "side": "near",
+                "is_primary_player_detection": True,
+            },
+            {
+                "bbox": [300, 100, 350, 200],
+                "confidence": 0.8,
+                "side": "near",
+                "is_primary_player_detection": False,
+            },
+        ],
+    }]
+    assigned = {
+        "player_2": {
+            "side": "near",
+            "identity_confidence": 0.81234,
+        },
+    }
+
+    trajectories = _attach_player_ids(sampled_frames, assigned, (500, 1000))
+
+    primary, unrelated = sampled_frames[0]["detections"]
+    assert primary["player_id"] == "player_2"
+    assert primary["identity_confidence"] == 0.8123
+    assert unrelated["player_id"] is None
+    assert unrelated["identity_confidence"] is None
+    assert trajectories["player_1"] == []
+    assert trajectories["player_2"] == [{
+        "time": 1.5,
+        "frame_index": 90,
+        "side": "near",
+        "bbox": [100, 200, 200, 400],
+        "detection_confidence": 0.9,
+        "identity_confidence": 0.8123,
+        "position": [0.15, 0.8],
+    }]
