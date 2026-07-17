@@ -10,28 +10,39 @@ The project builds on the ideas in the sibling [Breakpoint](../Breakpoint) proje
 
 Tennis Coach starts with raw match or practice footage and extracts structured information that can be analyzed without requiring the model to watch the full video directly.
 
-The intended workflow is:
+The implemented workflow is:
 
 1. Import a raw match video and an optional player key frame.
-2. Run local processing for audio hit detection, rally segmentation, person detection, player re-identification, motion ranking, pose or shot classification, and video clipping.
-3. Produce one self-describing `analysis.json` containing timestamps, density, intensity, player IDs, and supported analysis signals.
-4. Let the user ask for coaching insights, such as technical stats, training tips, tactical patterns, or highlight reel requests.
-5. Route simple requests to local rules or a small local model.
-6. Delegate complex requests to a cloud LLM/agent using structured JSON and optional sampled frames only.
-7. Present results in the app as technical stats, training tips, and selected rally IDs for export.
+2. Run local processing for audio hit detection, rally segmentation, court/player detection, player re-identification, motion analysis, ball detection, pose, contact association, and shot classification.
+3. Optionally bind a player key frame, classify serve/return and forehand/backhand evidence, and infer conservative shot/rally outcomes.
+4. Produce one self-describing `analysis.json` containing only evidence-backed signals and explicit limitations.
+5. Let the user ask for coaching insights, such as technical stats, training tips, tactical patterns, or highlight reel requests.
+6. Route simple requests to local rules or a small local model.
+7. Delegate complex requests to a cloud LLM/agent using structured JSON and optional sampled frames only.
+8. Present results in the app as technical stats, training tips, and selected rally IDs for export.
 
-## Planned extraction foundation
+## Implemented extraction pipeline
 
-The first implementation phase reuses the focused Breakpoint YOLO + OpenCV approach for local video understanding, then emits a JSON analysis file for later coaching workflows. The initial target is structured data extraction rather than direct model-driven video interpretation.
+The pipeline reuses focused Breakpoint audio, YOLOX, OpenCV, and anonymous
+identity concepts, then adds court projection, publishable ball detection,
+pose-based contact analysis, and deterministic LLM-ready aggregation.
 
-Planned JSON signals include:
+Implemented signals include:
 
-- rally timestamps and duration
-- hit density and intensity metrics
-- anonymous player IDs and court-side tracking
-- player motion and positioning features
-- shot or pose labels when confidence is sufficient
-- selected rally IDs for downstream clip export
+- audio-derived candidate rallies, hit times, and onset energies;
+- anonymous player IDs, court-side tracking, movement, and positioning;
+- normalized image/court trajectories and data-quality metrics;
+- Apache-2.0 YOLOX `sports ball` observations;
+- target-player key-frame matching;
+- pose-assisted contact and dominant-wrist racket-location proxies;
+- confidence-gated forehand/backhand and serve/return labels;
+- shot continuation/error evidence and conservative point outcomes;
+- explicit `unknown` reasons and supported/unsupported capability lists.
+
+The checked-in `examples/analysis.json` currently contains audio, player,
+motion, and court data. Ball, pose, target, and shot fields are structurally
+present but remain unpopulated until the licensed workflow is run on a GPU
+machine and its output is imported.
 
 ## Video extraction
 
@@ -73,6 +84,8 @@ The optional `artifacts/internal/report.json` includes:
 - `player_trajectories.player_1` and `player_trajectories.player_2` grouped by stable anonymous identity
 - `video_extraction.status`, `video_extraction.version`, `video_extraction.court_rois`, and `video_extraction.sample_seconds`
 - `sampled_frames` with person boxes, confidence, court side, primary-player status, `player_id`, and identity confidence
+- `target_player` appearance match and confidence when a key frame is supplied
+- `ball_trajectory`, `shots`, inferred contact/racket-hand positions, and conservative `outcome` evidence when enabled
 
 If court detection fails, each segment is preserved and marked with `video_extraction.status: "skipped_court_detection"`.
 
@@ -93,8 +106,10 @@ tennis-coach-stats artifacts/internal/report.json --output analysis.json
 `analysis.json` contains per-player movement, identity quality, side usage, and
 mean court position; compact per-segment audio, motion, and ball summaries;
 global data quality warnings; and explicit supported/unsupported analysis capabilities.
-It intentionally does not claim forehand/backhand, shot success, winners, or
-errors until those signals are implemented and validated.
+It exposes forehand/backhand, serve/return, shot continuation/error, target
+identity, and winner evidence only when their confidence and prerequisite
+signals pass the implemented gates. Otherwise those capabilities remain
+unsupported and individual records use explicit `unknown` reasons.
 
 The top-level `schema` section explains field meanings, coordinate systems,
 units, confidence ranges, candidate-event semantics, and mandatory
@@ -131,10 +146,14 @@ The output shape is:
     }
   },
   "source": {"segment_count": 7, "start": 1.31, "end": 156.67},
-  "data_quality": {"warnings": ["Ball tracking is unavailable in this report."]},
+  "data_quality": {"warnings": []},
   "analysis_capabilities": {
-    "supported": ["player movement comparison"],
-    "unsupported": ["forehand/backhand classification"]
+    "supported": [
+      "player movement comparison",
+      "confidence-gated forehand/backhand classification",
+      "target-player identification from a key frame"
+    ],
+    "unsupported": ["forced/unforced error attribution"]
   },
   "target_player": {
     "player_id": "player_1",
@@ -177,9 +196,10 @@ The output shape is:
 }
 ```
 
-The embedded `schema` in the actual file is more complete than this abbreviated
-README sample. The LLM must honor `analysis_capabilities.unsupported` and
-`data_quality.warnings`; absent fields must not be inferred.
+This is an abbreviated illustrative populated result. The embedded `schema`
+in the actual file is more complete. The LLM must honor
+`analysis_capabilities.unsupported` and `data_quality.warnings`; absent fields
+must not be inferred.
 
 ### Forehand/backhand classification
 
@@ -277,7 +297,8 @@ or occluded balls, so its output remains confidence-gated and must be measured
 on independent labels. The available TrackNet V1 checkpoint has no verified
 redistribution license and is not part of the publishable workflow.
 
-Standalone tracking and evaluation are also available:
+Standalone TrackNet-compatible tracking remains available only for externally
+licensed models. Independent prediction evaluation is model-agnostic:
 
 ```bash
 tennis-coach-ball-track match.mp4 /path/to/tracknet.onnx \
@@ -304,8 +325,37 @@ is not a release-quality benchmark.
 enrichment; those windows are not detected rally boundaries and are not
 required by the normal automatic extraction flow.
 
-The sample contains court polygons, motion summaries, anonymous player
-summaries, and sampled person detections from the complete video.
+The current canonical sample is `examples/analysis.json`. It contains seven
+audio-derived rally candidates, 72 hit candidates, court/motion summaries, and
+anonymous player trajectories. `examples/internal/` contains its detailed
+report, generated segments, and legacy fixtures; those files are not intended
+for LLM input.
+
+### Expected analysis after the GPU run
+
+For the current 156.7-second sample, rally/audio extraction already establishes
+seven candidate rallies and 72 audio-hit candidates. After the licensed YOLOX
+and MediaPipe workflow finishes, the same `analysis.json` will additionally
+summarize:
+
+- ball observation count, visibility ratio, missing runs, image-space travel,
+  speed, court-half crossings, and direction-change candidates;
+- target-player binding to `player_1`, `player_2`, or `null`, with confidence,
+  match margin, and abstention reason;
+- up to 72 contact candidates containing hitter identity, contact confidence,
+  inferred ball contact point, and dominant-wrist racket-location proxy;
+- per-player forehand, backhand, and unknown counts;
+- serve, return, rally-shot, and unknown role counts;
+- continued, error, and unresolved shot outcomes plus a confidence-gated
+  in-play/error ratio;
+- candidate-rally winner/loser identity only when validated terminal `net` or
+  `out` evidence exists;
+- updated data-quality warnings and dynamically enabled analysis capabilities.
+
+The exact ball, contact, shot, and outcome counts cannot be known before
+inference. Missing or weak evidence remains `unknown`; the pipeline does not
+manufacture labels. Physical 3D speed and forced/unforced error attribution
+are outside the output contract.
 
 ## Privacy and data routing
 
@@ -319,7 +369,7 @@ The default principle is local-first processing:
 
 ## Relationship to Breakpoint
 
-Breakpoint provides a strong foundation for:
+Breakpoint provides the foundation for:
 
 - audio-based hit detection
 - rally segmentation
@@ -328,11 +378,20 @@ Breakpoint provides a strong foundation for:
 - ffmpeg-based clip export
 - Electron desktop app packaging
 
-Tennis Coach should reuse those concepts while evolving the product goal from automatic highlight extraction to actionable coaching intelligence.
+Tennis Coach reuses those concepts while evolving the product goal from
+automatic highlight extraction to actionable coaching intelligence.
 
-## Initial repository scope
+## Current status and validation
 
-This repository currently documents the project concept and data-routing model. Implementation code, model choices, and app architecture will be added after the initial product direction is agreed.
+The extraction, aggregation, schema, annotation, target matching, pose/contact,
+shot-role, and conservative outcome implementations are published. The
+licensed YOLOX and optional MediaPipe path is ready for execution on a CUDA
+machine.
+
+Production readiness still requires a representative independently labeled
+benchmark and GPU results for the publishable YOLOX/pose workflow. The
+checked-in TrackNet V1 numbers are private-baseline research only because that
+checkpoint has no verified redistribution license.
 
 ## Open Source License and Commercial Licensing (License)
 
@@ -342,4 +401,7 @@ This project follows Breakpoint's licensing model and is released under the **GN
 - **Cloud service and commercial use**: if you integrate this project's core algorithms, including tennis target detection, rally segmentation, video-derived JSON extraction, coaching analysis, or automatic highlight editing logic, into a commercial SaaS, mini-program, commercial app, or paid website backend service, AGPL-3.0 requires you to open-source the complete source code of that system under compatible terms.
 - **Commercial License**: if you do not want to open-source your system code but would like to use Tennis Coach technology in commercial products, contact the author for a commercial license.
 
-Future bundled YOLOX-Nano model files should preserve their upstream Apache License 2.0 attribution and model source documentation, following Breakpoint's `MODEL_INFO.txt` pattern.
+Externally supplied YOLOX-Nano model files should preserve their upstream
+Apache License 2.0 attribution and model source documentation, following
+Breakpoint's `MODEL_INFO.txt` pattern. Model weights and MediaPipe model assets
+are not bundled by this repository.
