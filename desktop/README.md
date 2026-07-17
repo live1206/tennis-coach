@@ -27,8 +27,9 @@ sudo apt update && sudo apt install -y ffmpeg
 ```
 
 Desktop extraction always passes `--pose-model-path` so shot analysis can run.
-If the model is missing, the app now downloads `pose_landmarker_heavy.task`
-automatically to a local models folder. You can still override the path:
+It uses the bundled `video_extraction/vision/models/pose_landmarker_heavy.task`
+by default. If missing, the app downloads it automatically to a local models
+folder. You can still override the path:
 
 ```bash
 TENNIS_COACH_POSE_MODEL_PATH=/absolute/path/to/pose_landmarker_heavy.task
@@ -81,4 +82,6 @@ The Electron/React rally review application was migrated from
 Zhang and licensed under AGPL-3.0. Tennis Coach remains AGPL-3.0-or-later.
 The Apache-2.0 YOLOX-Nano model used for person and sports-ball detection is
 bundled with its source, checksum, and license under
-`video_extraction/vision/models/` and `third_party/YOLOX/`.
+`video_extraction/vision/models/` and `third_party/YOLOX/`. The Apache-2.0
+MediaPipe Pose Landmarker model is bundled with attribution under
+`video_extraction/vision/models/` and `third_party/MediaPipe/`.

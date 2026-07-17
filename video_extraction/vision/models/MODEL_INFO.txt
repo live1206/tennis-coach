@@ -6,3 +6,11 @@ SHA-256: c789161ed43c8269fcd4e67c67eeb4e80c622da2eb296a20bc6007bd18a0b7d
 
 The model is trained on COCO. Tennis Coach uses class 0 (person) and class 32
 (sports ball).
+
+Model: MediaPipe Pose Landmarker (Heavy)
+File: pose_landmarker_heavy.task
+Source: https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_heavy/float16/latest/pose_landmarker_heavy.task
+License: Apache License 2.0
+SHA-256: 64437af838a65d18e5ba7a0d39b465540069bc8aae8308de3e318aad31fcbc7b
+
+The pose model is bundled for confidence-gated stroke-side and contact analysis.
