@@ -70,7 +70,8 @@ TENNIS_COACH_CLOUD_API_KEY=<your-api-key>
 TENNIS_COACH_CLOUD_API_PATH=/chat/completions
 ```
 
-Local mode remains available as a fallback.
+Local mode integration remains in backend code for development, but the current
+UI is cloud-only until local UX is finalized.
 
 If extraction fails, Tennis Coach writes a copyable failure log to the video
 output folder as `analysis-error.log` (next to `analysis.json`).

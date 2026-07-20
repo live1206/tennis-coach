@@ -11,36 +11,23 @@ interface Props {
 export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Props) {
   const copy = useCopy()
   const [question, setQuestion] = useState(copy.aiAnalysis.defaultQuestion)
-  const [cloudModel, setCloudModel] = useState('gpt-5.6-sol')
-  const [localModel, setLocalModel] = useState('qwen2.5-0.5b')
-  const [provider, setProvider] = useState<'cloud' | 'local'>('cloud')
+  const [model, setModel] = useState('gpt-5.6-sol')
   const [running, setRunning] = useState(false)
   const [result, setResult] = useState('')
   const [error, setError] = useState('')
   const { analysis } = loaded
-  const model = provider === 'cloud' ? cloudModel : localModel
-  const setModel = provider === 'cloud' ? setCloudModel : setLocalModel
-  const askTitle = provider === 'cloud' ? copy.aiAnalysis.askTitleCloud : copy.aiAnalysis.askTitleLocal
-  const modelLabel = provider === 'cloud' ? copy.aiAnalysis.modelCloud : copy.aiAnalysis.modelLocal
 
   const runAnalysis = async () => {
     setRunning(true)
     setError('')
     setResult('')
     try {
-      const response = provider === 'cloud'
-        ? await window.api.runCloudAIAnalysis(
-          loaded.videoPath,
-          loaded.evidenceId,
-          question,
-          model,
-        )
-        : await window.api.runLocalAIAnalysis(
-          loaded.videoPath,
-          loaded.evidenceId,
-          question,
-          model,
-        )
+      const response = await window.api.runCloudAIAnalysis(
+        loaded.videoPath,
+        loaded.evidenceId,
+        question,
+        model,
+      )
       if (response.error) setError(response.error)
       else setResult(response.output ?? '')
     } catch (reason) {
@@ -98,33 +85,10 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
         </section>
 
         <section style={cardStyle}>
-          <h2 style={sectionTitle}>{askTitle}</h2>
-          <p style={mutedStyle}>
-            {provider === 'cloud' ? copy.aiAnalysis.privacyCloud : copy.aiAnalysis.privacyLocal}
-          </p>
+          <h2 style={sectionTitle}>{copy.aiAnalysis.askTitleCloud}</h2>
+          <p style={mutedStyle}>{copy.aiAnalysis.privacyCloud}</p>
           <label style={labelStyle}>
-            {copy.aiAnalysis.provider}
-            <div style={{ display: 'flex', gap: 8 }}>
-              <button
-                type="button"
-                disabled={running}
-                onClick={() => setProvider('cloud')}
-                style={provider === 'cloud' ? selectedProviderButton : providerButton}
-              >
-                {copy.aiAnalysis.providerCloud}
-              </button>
-              <button
-                type="button"
-                disabled={running}
-                onClick={() => setProvider('local')}
-                style={provider === 'local' ? selectedProviderButton : providerButton}
-              >
-                {copy.aiAnalysis.providerLocal}
-              </button>
-            </div>
-          </label>
-          <label style={labelStyle}>
-            {modelLabel}
+            {copy.aiAnalysis.modelCloud}
             <input value={model} onChange={(event) => setModel(event.target.value)} style={inputStyle} />
           </label>
           <label style={labelStyle}>
@@ -132,9 +96,7 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
             <textarea value={question} onChange={(event) => setQuestion(event.target.value)} rows={5} style={{ ...inputStyle, resize: 'vertical' }} />
           </label>
           <button disabled={running || !question.trim() || !model.trim()} onClick={runAnalysis} style={primaryButton}>
-            {running
-              ? copy.aiAnalysis.running
-              : (provider === 'cloud' ? copy.aiAnalysis.runCloud : copy.aiAnalysis.runLocal)}
+            {running ? copy.aiAnalysis.running : copy.aiAnalysis.runCloud}
           </button>
           {running && <button onClick={cancelAnalysis} style={{ ...secondaryButton, marginLeft: 8 }}>{copy.aiAnalysis.cancel}</button>}
 
@@ -166,8 +128,6 @@ const mutedStyle: CSSProperties = { color: 'var(--color-text-secondary)', fontSi
 const listStyle: CSSProperties = { margin: 0, paddingLeft: 20, color: 'var(--color-text-secondary)', fontSize: 12, lineHeight: 1.6 }
 const labelStyle: CSSProperties = { display: 'flex', flexDirection: 'column', gap: 7, fontSize: 12, fontWeight: 700, marginTop: 16 }
 const inputStyle: CSSProperties = { padding: '10px 12px', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', background: '#fff', color: 'var(--color-text)', font: 'inherit' }
-const providerButton: CSSProperties = { padding: '8px 12px', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', background: 'var(--color-surface)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }
-const selectedProviderButton: CSSProperties = { ...providerButton, border: '1px solid var(--color-accent)', background: 'rgba(204,78,14,0.08)', color: 'var(--color-accent)' }
 const primaryButton: CSSProperties = { marginTop: 18, padding: '11px 18px', border: 0, borderRadius: 'var(--radius-md)', background: 'var(--color-accent)', color: '#fff', cursor: 'pointer', fontWeight: 700 }
 const secondaryButton: CSSProperties = { padding: '8px 12px', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', background: 'var(--color-surface)', cursor: 'pointer', WebkitAppRegion: 'no-drag' } as CSSProperties
 const errorStyle: CSSProperties = { marginTop: 16, padding: 12, borderRadius: 'var(--radius-md)', color: 'var(--color-danger)', background: 'rgba(196,91,91,0.08)', whiteSpace: 'pre-wrap', fontSize: 12 }
