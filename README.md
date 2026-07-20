@@ -29,8 +29,10 @@ consume Tennis Coach's canonical `analysis.json`.
 
 After a video finishes extraction, the review workspace enables **AI
 Analysis**. It displays mandatory quality warnings and supported/unsupported
-capabilities, and can invoke the existing Foundry Local CLI without requiring
-users to manage intermediate files or exposing raw video. See
+capabilities, and exposes a cloud AI coaching flow without requiring users to
+manage intermediate files or exposing raw video. Foundry Local integration is
+kept in backend code, but hidden from the current UI until local UX is
+finalized. See
 [`desktop/README.md`](desktop/README.md) for development setup and Breakpoint
 attribution.
 
@@ -478,8 +480,8 @@ automatic highlight extraction to actionable coaching intelligence.
 
 The extraction, aggregation, schema, annotation, target matching, pose/contact,
 shot-role, and conservative outcome implementations are published. The
-licensed YOLOX and optional MediaPipe path has completed an end-to-end CPU run
-and remains ready for faster execution on a CUDA machine.
+licensed YOLOX and bundled MediaPipe pose path has completed an end-to-end CPU
+run and remains ready for faster execution on a CUDA machine.
 
 Production readiness still requires a representative independently labeled
 benchmark and GPU validation for the publishable YOLOX/pose workflow. The
