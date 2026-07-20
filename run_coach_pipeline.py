@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import json
 import os
 import re
@@ -13,34 +14,91 @@ from pathlib import Path
 _AGENT_LINE_PREFIX_RE = re.compile(r"^\[[^\]]+\]\s?")
 
 
-def _prune_segment(segment: dict) -> dict:
-    # Remove high-volume raw arrays/frames that are not required for structured coaching output.
-    drop_keys = {
-        "player_trajectories",
-        "trajectory",
-        "frames",
-        "frame_events",
-        "detections",
-        "ball_track",
-        "ball_positions",
-        "raw_points",
+SHOT_TRANSPORT_FIELDS = (
+    "time",
+    "player_id",
+    "classification",
+    "confidence",
+    "reason",
+    "contact_confidence",
+    "shot_role",
+    "role_confidence",
+    "role_reason",
+    "outcome",
+    "outcome_confidence",
+    "outcome_reason",
+)
+
+
+def _is_resolved_shot(shot: dict) -> bool:
+    return (
+        shot.get("player_id") is not None
+        or shot.get("classification") in {"forehand", "backhand"}
+        or shot.get("outcome") in {"continued", "error"}
+    )
+
+
+def _compact_shot(shot: dict) -> dict:
+    return {
+        field: shot[field]
+        for field in SHOT_TRANSPORT_FIELDS
+        if field in shot
     }
-    pruned: dict = {}
-    for key, value in segment.items():
-        if key in drop_keys:
-            continue
-        if isinstance(value, dict):
-            pruned[key] = {k: v for k, v in value.items() if k not in drop_keys}
-        else:
-            pruned[key] = value
-    return pruned
+
+
+def _compact_segment(segment: dict) -> dict:
+    shots = [
+        shot
+        for shot in segment.get("shots", [])
+        if isinstance(shot, dict)
+    ]
+    reasons = Counter(
+        str(shot.get("reason") or "classified")
+        for shot in shots
+    )
+    return {
+        key: segment.get(key)
+        for key in (
+            "index",
+            "start",
+            "end",
+            "duration",
+            "motion",
+            "audio",
+            "ball",
+            "outcome",
+        )
+    } | {
+        "shots": [
+            _compact_shot(shot)
+            for shot in shots
+            if _is_resolved_shot(shot)
+        ],
+        "shot_candidate_summary": {
+            "total": len(shots),
+            "by_reason": dict(reasons),
+        },
+    }
 
 
 def _compact_report_payload(parsed: dict, max_segments: int = 12) -> dict:
     segments = parsed.get("segments") if isinstance(parsed.get("segments"), list) else []
-    compact_segments = [_prune_segment(s) for s in segments[:max_segments] if isinstance(s, dict)]
+    compact_segments = [
+        _compact_segment(segment)
+        for segment in segments[:max_segments]
+        if isinstance(segment, dict)
+    ]
+    schema = parsed.get("schema")
+    compact_schema = (
+        {
+            "name": schema.get("name"),
+            "version": schema.get("version"),
+        }
+        if isinstance(schema, dict)
+        else schema
+    )
     compact: dict = {
-        "schema": parsed.get("schema"),
+        "schema": compact_schema,
         "source": parsed.get("source"),
         "data_quality": parsed.get("data_quality"),
         "analysis_capabilities": parsed.get("analysis_capabilities"),
@@ -50,7 +108,11 @@ def _compact_report_payload(parsed: dict, max_segments: int = 12) -> dict:
         "truncation": {
             "segments_total": len(segments),
             "segments_included": len(compact_segments),
-            "note": "High-volume trajectory/frame fields were omitted for transport limits.",
+            "note": (
+                "Verbose schema documentation, repeated player samples, pose landmarks, "
+                "contact coordinates, and unresolved shot rows were omitted for transport. "
+                "Unresolved shot totals and reasons are retained in shot_candidate_summary."
+            ),
         },
     }
     return compact
@@ -131,14 +193,16 @@ def _resolve_azd_command() -> str:
         shutil.which("azd"),
         os.path.join(os.environ.get("USERPROFILE", ""), ".azd", "bin", "azd.exe"),
         os.path.join(os.environ.get("ProgramFiles", r"C:\\Program Files"), "Azure Dev CLI", "azd.exe"),
+        str(Path.home() / ".local" / "bin" / "azd"),
+        str(Path.home() / ".azd" / "bin" / "azd"),
     ]
     for candidate in candidates:
         if candidate and Path(candidate).is_file():
             return candidate
-    raise FileNotFoundError(
-        "Azure Developer CLI (azd) was not found. Install it from "
-        "https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd, "
-        "then restart desktop."
+    raise RuntimeError(
+        "Azure Developer CLI (azd) is not installed or could not be found. Install it from "
+        "https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd "
+        "and run `azd auth login`, then restart desktop."
     )
 
 

@@ -46,6 +46,8 @@ def test_local_and_cloud_prompts_share_grounding_rules():
     assert cloud_prompt.startswith(messages[0]["content"])
     assert messages[1]["content"] in cloud_prompt
     assert "## Improvement Advice" in messages[0]["content"]
+    assert "Never expose raw JSON paths" in cloud_prompt
+    assert "[players.player_1.shot_counts]" in cloud_prompt
 
 
 def test_load_analysis_requires_capability_metadata(tmp_path):

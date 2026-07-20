@@ -11,6 +11,21 @@ export interface TennisAnalysis {
   }
   data_quality: {
     warnings: string[]
+    audio?: {
+      hit_count?: number
+    }
+    ball?: {
+      detected_visible_count?: number
+      detected_visible_ratio?: number | null
+      interpolated_count?: number
+      visible_count?: number
+      visible_ratio?: number | null
+    }
+    shots?: {
+      candidate_count?: number
+      classified_count?: number
+      unknown_count?: number
+    }
     [key: string]: unknown
   }
   analysis_capabilities: {
@@ -24,6 +39,7 @@ export interface TennisAnalysis {
   }
   players: Record<string, {
     trajectory_samples?: number
+    total_court_movement_normalized?: number
     shot_counts?: Record<string, number>
     shot_role_counts?: Record<string, number>
     shot_outcome_counts?: Record<string, number>

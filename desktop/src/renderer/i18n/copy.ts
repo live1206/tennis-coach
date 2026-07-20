@@ -62,6 +62,16 @@ export interface Copy {
     noWarnings: string
     supported: string
     unsupported: string
+    actualResults: string
+    audioHits: string
+    classifiedShots: string
+    ballDetections: string
+    ballVisibility: string
+    playerResults: string
+    forehands: string
+    backhands: string
+    courtMovement: string
+    trajectorySamples: string
     askTitle: string
     askTitleCloud: string
     askTitleLocal: string
@@ -220,6 +230,16 @@ export const COPY: Record<Language, Copy> = {
       noWarnings: 'No data-quality warnings were reported.',
       supported: 'Supported claims',
       unsupported: 'Unsupported claims',
+      actualResults: 'Your analysis results',
+      audioHits: 'Audio hit candidates',
+      classifiedShots: 'Classified shots',
+      ballDetections: 'Ball detections',
+      ballVisibility: 'Ball visibility',
+      playerResults: 'Player results',
+      forehands: 'Forehands',
+      backhands: 'Backhands',
+      courtMovement: 'Court movement',
+      trajectorySamples: 'Tracking samples',
       askTitle: 'Ask the local coach',
       askTitleCloud: 'Ask the cloud coach',
       askTitleLocal: 'Ask the local coach',
@@ -394,6 +414,16 @@ export const COPY: Record<Language, Copy> = {
       noWarnings: '没有数据质量警告。',
       supported: '支持的结论',
       unsupported: '不支持的结论',
+      actualResults: '本次分析结果',
+      audioHits: '声音击球候选',
+      classifiedShots: '已分类击球',
+      ballDetections: '网球检测数',
+      ballVisibility: '网球可见率',
+      playerResults: '球员结果',
+      forehands: '正手',
+      backhands: '反手',
+      courtMovement: '场地移动距离',
+      trajectorySamples: '跟踪样本',
       askTitle: '询问本地教练',
       askTitleCloud: '询问云端教练',
       askTitleLocal: '询问本地教练',
