@@ -115,7 +115,22 @@ assert.equal(
   ),
   'Confidence [players / player 2 / mean detection confidence: 0.495; players / player 2 / mean identity confidence: 0.718]',
 )
+assert.equal(
+  expandEvidenceReferences(
+    'Player 1 (`players.player_1.segments_detected`; `players.player_1.shot_counts`)',
+    { players: { player_1: { segments_detected: 10, shot_counts: { forehand: 6, backhand: 4 } } } },
+  ),
+  'Player 1 (players / player 1 / segments detected: 10; players / player 1 / shot counts: forehand 6, backhand 4)',
+)
+assert.equal(
+  expandEvidenceReferences(
+    'Player 2 (`players.player_2.total_court_movement_normalized`; `players.player_2.trajectory_samples`)',
+    { players: { player_2: { total_court_movement_normalized: 10.204507, trajectory_samples: 95 } } },
+  ),
+  'Player 2 (players / player 2 / total court movement normalized: 10.205; players / player 2 / trajectory samples: 95)',
+)
 assert.equal(expandEvidenceReferences('Keep [normal text] unchanged.', {}), 'Keep [normal text] unchanged.')
+assert.equal(expandEvidenceReferences('Keep (normal text) unchanged.', {}), 'Keep (normal text) unchanged.')
 
 const batchVideos = createVideoRecords([
   'D:\\match\\first.mp4',

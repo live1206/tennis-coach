@@ -1,8 +1,26 @@
 const PATH_REFERENCE = /^\$?[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*|\[\d+\])+$/
 
 export function expandEvidenceReferences(text: string, analysis: object): string {
-  return text.replace(/\[([^\]\n]+)\]/g, (original, content: string) => {
-    const paths = content.split(';').map((path) => path.trim())
+  return expandReferenceGroup(
+    expandReferenceGroup(text, analysis, /\[([^\]\n]+)\]/g, '[', ']'),
+    analysis,
+    /\(([^()\n]+)\)/g,
+    '(',
+    ')',
+  )
+}
+
+function expandReferenceGroup(
+  text: string,
+  analysis: object,
+  pattern: RegExp,
+  opening: string,
+  closing: string,
+): string {
+  return text.replace(pattern, (original, content: string) => {
+    const paths = content
+      .split(';')
+      .map((path) => path.trim().replace(/^`|`$/g, '').trim())
     if (paths.length === 0 || paths.some((path) => !PATH_REFERENCE.test(path))) {
       return original
     }
@@ -14,7 +32,7 @@ export function expandEvidenceReferences(text: string, analysis: object): string
         : null
     })
     return evidence.every((item) => item !== null)
-      ? `[${evidence.join('; ')}]`
+      ? `${opening}${evidence.join('; ')}${closing}`
       : original
   })
 }
