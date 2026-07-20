@@ -100,7 +100,7 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
           <h2 style={sectionTitle}>{copy.aiAnalysis.askTitleCloud}</h2>
           <p style={mutedStyle}>{copy.aiAnalysis.privacyCloud}</p>
           {running && <p style={runningStyle}>{copy.aiAnalysis.cloudRunning}</p>}
-          {running && <button onClick={cancelAnalysis} style={{ ...secondaryButton, marginLeft: 8 }}>{copy.aiAnalysis.cancel}</button>}
+          {running && <button onClick={cancelAnalysis} style={{ ...secondaryButton, marginTop: 12 }}>{copy.aiAnalysis.cancel}</button>}
 
           {error && <div style={errorStyle}>{error}</div>}
           {result && (
