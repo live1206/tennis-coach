@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import type { LoadedAnalysis } from '../../shared/analysis'
+import { expandEvidenceReferences } from '../evidenceFormatting'
 import { useCopy } from '../i18n'
 
 interface Props {
@@ -28,7 +29,7 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
           copy.aiAnalysis.defaultQuestion,
         )
         if (response.error) setError(response.error)
-        else setResult(response.output ?? '')
+        else setResult(expandEvidenceReferences(response.output ?? '', analysis))
       } catch (reason) {
         setError(reason instanceof Error ? reason.message : copy.aiAnalysis.cloudUnknownError)
       } finally {
@@ -37,7 +38,7 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
     }
 
     void runCloudAnalysis()
-  }, [copy.aiAnalysis.cloudUnknownError, copy.aiAnalysis.defaultQuestion, loaded.evidenceId, loaded.videoPath])
+  }, [analysis, copy.aiAnalysis.cloudUnknownError, copy.aiAnalysis.defaultQuestion, loaded.evidenceId, loaded.videoPath])
 
   const cancelAnalysis = async () => {
     await window.api.cancelCloudAIAnalysis()

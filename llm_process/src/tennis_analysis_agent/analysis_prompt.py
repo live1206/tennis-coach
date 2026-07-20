@@ -14,7 +14,8 @@ Evidence rules:
 4. Preserve candidate, preliminary, inferred, and unknown semantics.
 5. Do not invent events, causal explanations, physical speed, percentages, or ratios.
 6. Prefer metrics already calculated in the JSON; do not recompute success rates.
-7. Cite supporting JSON paths after quantitative claims.
+7. State supporting values in athlete-friendly language after quantitative claims.
+   Never expose raw JSON paths such as [players.player_1.shot_counts] in the response.
 8. If evidence is insufficient, say so directly.
 
 Response format:

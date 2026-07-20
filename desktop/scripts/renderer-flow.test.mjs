@@ -62,6 +62,10 @@ const {
 } = loadTsModule(path.join('src', 'shared', 'analysis.ts'))
 
 const {
+  expandEvidenceReferences,
+} = loadTsModule(path.join('src', 'renderer', 'evidenceFormatting.ts'))
+
+const {
   createVideoRecords,
   createRalliesForVideo,
   getSortedRallies,
@@ -96,6 +100,22 @@ const canonicalAnalysis = (segments) => ({
   players: {},
   segments,
 })
+
+assert.equal(
+  expandEvidenceReferences(
+    'Player 1 [players.player_1.shot_counts]',
+    { players: { player_1: { shot_counts: { forehand: 5, backhand: 1 } } } },
+  ),
+  'Player 1 [players / player 1 / shot counts: forehand 5, backhand 1]',
+)
+assert.equal(
+  expandEvidenceReferences(
+    'Confidence [players.player_2.mean_detection_confidence; players.player_2.mean_identity_confidence]',
+    { players: { player_2: { mean_detection_confidence: 0.494512, mean_identity_confidence: 0.717732 } } },
+  ),
+  'Confidence [players / player 2 / mean detection confidence: 0.495; players / player 2 / mean identity confidence: 0.718]',
+)
+assert.equal(expandEvidenceReferences('Keep [normal text] unchanged.', {}), 'Keep [normal text] unchanged.')
 
 const batchVideos = createVideoRecords([
   'D:\\match\\first.mp4',
@@ -497,6 +517,7 @@ assert.match(aiScreenSource, /analysis\.data_quality\.shots\?\.classified_count/
 assert.match(aiScreenSource, /analysis\.data_quality\.ball\?\.detected_visible_count/)
 assert.match(aiScreenSource, /Object\.entries\(analysis\.players\)/)
 assert.match(aiScreenSource, /player\.shot_counts\?\.forehand/)
+assert.match(aiScreenSource, /expandEvidenceReferences\(response\.output/)
 assert.match(aiScreenSource, /overflowY: 'auto'/)
 assert.match(aiScreenSource, /scrollbarGutter: 'stable'/)
 assert.match(aiScreenSource, /window\.api\.runCloudAIAnalysis/)
