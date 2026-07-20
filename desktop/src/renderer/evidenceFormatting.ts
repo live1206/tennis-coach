@@ -1,5 +1,5 @@
-const PATH_REFERENCE = /^(?:\$\.?)?[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*|\[\d+\])+$/
-const INLINE_PATH_REFERENCE = /`?((?:\$\.?)?(?:schema|source|data_quality|analysis_capabilities|target_player|players|segments)(?:\.[A-Za-z_][A-Za-z0-9_]*|\[\d+\])+)`?(?=[\s,;:)\]}.]|$)/g
+const PATH_REFERENCE = /^(?:\$\.?)?[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*|\[(?:\d+|\*)\])+$/
+const INLINE_PATH_REFERENCE = /`?((?:\$\.?)?(?:schema|source|data_quality|analysis_capabilities|target_player|players|segments)(?:\.[A-Za-z_][A-Za-z0-9_]*|\[(?:\d+|\*)\])+)`?(?=[\s,;:)\]}.]|$)/g
 
 export function expandEvidenceReferences(text: string, analysis: object): string {
   const grouped = expandReferenceGroup(
@@ -54,28 +54,44 @@ function expandReferenceGroup(
 }
 
 function resolveEvidencePath(root: object, path: string): { found: boolean; value?: unknown } {
-  const tokens = path.replace(/^\$\.?/, '').match(/[A-Za-z_][A-Za-z0-9_]*|\d+/g) ?? []
-  let current: unknown = root
-  for (const token of tokens) {
-    if (Array.isArray(current)) {
-      const index = Number(token)
-      if (!Number.isInteger(index) || index < 0 || index >= current.length) {
-        return { found: false }
-      }
-      current = current[index]
-    } else if (isRecord(current) && token in current) {
-      current = current[token]
-    } else {
-      return { found: false }
-    }
+  const tokens = path
+    .replace(/^\$\.?/, '')
+    .match(/[A-Za-z_][A-Za-z0-9_]*|\d+|\*/g) ?? []
+  return resolveTokens(root, tokens, 0)
+}
+
+function resolveTokens(
+  current: unknown,
+  tokens: string[],
+  position: number,
+): { found: boolean; value?: unknown } {
+  if (position === tokens.length) return { found: true, value: current }
+  const token = tokens[position]
+  if (token === '*') {
+    if (!Array.isArray(current)) return { found: false }
+    const resolved = current
+      .map((item) => resolveTokens(item, tokens, position + 1))
+      .filter((result) => result.found)
+    return resolved.length > 0
+      ? { found: true, value: resolved.map((result) => result.value) }
+      : { found: false }
   }
-  return { found: true, value: current }
+  if (Array.isArray(current)) {
+    const index = Number(token)
+    return Number.isInteger(index) && index >= 0 && index < current.length
+      ? resolveTokens(current[index], tokens, position + 1)
+      : { found: false }
+  }
+  return isRecord(current) && token in current
+    ? resolveTokens(current[token], tokens, position + 1)
+    : { found: false }
 }
 
 function formatEvidenceLabel(path: string): string {
   return path
     .replace(/^\$\.?/, '')
     .replace(/\[(\d+)\]/g, ' $1')
+    .replace(/\[\*\]/g, ' all')
     .split('.')
     .map((part) => part.replace(/_/g, ' '))
     .join(' / ')

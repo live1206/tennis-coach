@@ -160,6 +160,19 @@ assert.equal(
   expandEvidenceReferences('Unknown `players.player_3.shot_counts` stays.', { players: {} }),
   'Unknown `players.player_3.shot_counts` stays.',
 )
+assert.equal(
+  expandEvidenceReferences(
+    'Rhythm [segments[*].audio.mean_hit_interval_seconds; data_quality.warnings]',
+    {
+      segments: [
+        { audio: { mean_hit_interval_seconds: 0.888163 } },
+        { audio: { mean_hit_interval_seconds: 1.422222 } },
+      ],
+      data_quality: { warnings: ['Audio intervals are candidates.', 'Contacts are not validated.'] },
+    },
+  ),
+  'Rhythm [segments all / audio / mean hit interval seconds: 0.888, 1.422; data quality / warnings: Audio intervals are candidates., Contacts are not validated.]',
+)
 assert.equal(expandEvidenceReferences('Keep [normal text] unchanged.', {}), 'Keep [normal text] unchanged.')
 assert.equal(expandEvidenceReferences('Keep (normal text) unchanged.', {}), 'Keep (normal text) unchanged.')
 
