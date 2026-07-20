@@ -2,7 +2,13 @@ const PATH_REFERENCE = /^\$?[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*|\[
 
 export function expandEvidenceReferences(text: string, analysis: object): string {
   return expandReferenceGroup(
-    expandReferenceGroup(text, analysis, /\[([^\]\n]+)\]/g, '[', ']'),
+    expandReferenceGroup(
+      text,
+      analysis,
+      /\[((?:[^\]\n]|\](?=\.))*)\]/g,
+      '[',
+      ']',
+    ),
     analysis,
     /\(([^()\n]+)\)/g,
     '(',
@@ -19,7 +25,7 @@ function expandReferenceGroup(
 ): string {
   return text.replace(pattern, (original, content: string) => {
     const paths = content
-      .split(';')
+      .split(/[;,]/)
       .map((path) => path.trim().replace(/^`|`$/g, '').trim())
     if (paths.length === 0 || paths.some((path) => !PATH_REFERENCE.test(path))) {
       return original
@@ -28,7 +34,7 @@ function expandReferenceGroup(
     const evidence = paths.map((path) => {
       const value = resolveEvidencePath(analysis, path)
       return value.found
-        ? `${formatEvidenceLabel(path)}: ${formatEvidenceValue(value.value)}`
+        ? `${formatEvidenceLabel(path)}: ${formatEvidenceValue(value.value, path)}`
         : null
     })
     return evidence.every((item) => item !== null)
@@ -65,9 +71,15 @@ function formatEvidenceLabel(path: string): string {
     .join(' / ')
 }
 
-function formatEvidenceValue(value: unknown): string {
+function formatEvidenceValue(value: unknown, path = ''): string {
   if (Array.isArray(value)) {
-    return value.map(formatEvidenceValue).join(', ')
+    if (path.endsWith('.shots')) {
+      return formatShotSummary(value)
+    }
+    if (value.every(isRecord)) {
+      return `${value.length} records`
+    }
+    return value.map((item) => formatEvidenceValue(item)).join(', ')
   }
   if (isRecord(value)) {
     return Object.entries(value)
@@ -79,6 +91,22 @@ function formatEvidenceValue(value: unknown): string {
   }
   if (value === null) return 'unknown'
   return String(value)
+}
+
+function formatShotSummary(value: unknown[]): string {
+  const shots = value.filter(isRecord)
+  const classifications = shots.reduce<Record<string, number>>((counts, shot) => {
+    const classification = shot.classification
+    if (classification === 'forehand' || classification === 'backhand') {
+      counts[classification] = (counts[classification] ?? 0) + 1
+    }
+    return counts
+  }, {})
+  const classified = Object.values(classifications).reduce((total, count) => total + count, 0)
+  const details = Object.entries(classifications)
+    .map(([classification, count]) => `${classification} ${count}`)
+    .join(', ')
+  return `${shots.length} candidates (${classified} classified${details ? `: ${details}` : ''})`
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

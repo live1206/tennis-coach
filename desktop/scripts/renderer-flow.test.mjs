@@ -129,6 +129,19 @@ assert.equal(
   ),
   'Player 2 (players / player 2 / total court movement normalized: 10.205; players / player 2 / trajectory samples: 95)',
 )
+assert.equal(
+  expandEvidenceReferences(
+    'Player 1 [segments[0].shots, segments[1].shots, players.player_1.mean_detection_confidence]',
+    {
+      segments: [
+        { shots: [{ classification: 'forehand' }, { classification: 'unknown' }] },
+        { shots: [{ classification: 'backhand' }] },
+      ],
+      players: { player_1: { mean_detection_confidence: 0.82318 } },
+    },
+  ),
+  'Player 1 [segments 0 / shots: 2 candidates (1 classified: forehand 1); segments 1 / shots: 1 candidates (1 classified: backhand 1); players / player 1 / mean detection confidence: 0.823]',
+)
 assert.equal(expandEvidenceReferences('Keep [normal text] unchanged.', {}), 'Keep [normal text] unchanged.')
 assert.equal(expandEvidenceReferences('Keep (normal text) unchanged.', {}), 'Keep (normal text) unchanged.')
 
