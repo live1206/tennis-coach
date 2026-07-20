@@ -42,3 +42,26 @@ testpaths = ["tests"]
 
 [tool.setuptools.packages.find]
 include = ["video_extraction*", "llm_process*"]
+
+[tool.poetry]
+name = "tennis-coach"
+version = "0.1.0"
+description = "Local-first tennis video signal extraction and coaching analysis"
+readme = "README.md"
+authors = ["Tennis Coach Team <noreply@example.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+librosa = ">=0.10,<1.0"
+numpy = ">=1.24,<2.0"
+opencv-python = ">=4.8,<5.0"
+scipy = ">=1.10,<2.0"
+agent-framework-foundry = "*"
+agent-framework-foundry-hosting = ">=1.0.0a260630"
+azure-identity = "*"
+python-dotenv = "*"
+pydantic = "*"
+typing-extensions = "*"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=8,<9"

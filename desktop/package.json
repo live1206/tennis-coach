@@ -21,12 +21,15 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^6.0.3",
-    "electron": "^43.1.1",
+    "electron": "^43.1.0",
     "electron-builder": "^26.15.3",
     "typescript": "^5.6.3",
-    "vite": "^8.1.5",
+    "vite": "^8.1.4",
     "vite-plugin-electron": "^1.1.0",
     "vite-plugin-electron-renderer": "^1.0.0"
+  },
+  "overrides": {
+    "tar": "7.5.19"
   },
   "build": {
     "appId": "com.tenniscoach.app",

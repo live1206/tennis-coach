@@ -1,49 +1,49 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 
 requiredVersions:
-  extensions:
-    azure.ai.agents: '>=1.0.0-beta.4'
-name: tennis-analysis-agent
+    extensions:
+        azure.ai.agents: '>=1.0.0-beta.4'
+name: tennis-coach
 services:
-  ai-project:
-    host: azure.ai.project
-    deployments:
-      - name: gpt-5.4-mini
-        model:
-          format: OpenAI
-          name: gpt-5.4-mini
-          version: '2026-03-17'
-        sku:
-          name: GlobalStandard
-          capacity: 10
-  tennis-analysis-agent:
-    host: azure.ai.agent
-    metadata:
-      tags:
-        - Agent Framework
-        - AI Agent Hosting
-        - Azure AI AgentServer
-        - Responses Protocol
-        - Streaming
-    project: src/tennis_analysis_agent
-    language: python
-    codeConfiguration:
-      runtime: python_3_13
-      entryPoint: main.py
-    uses:
-      - ai-project
-    kind: hosted
-    name: tennis-analysis-agent
-    description: An Agent Framework agent with local tools hosted by Foundry.
-    protocols:
-      - protocol: responses
-        version: 2.0.0
-    environmentVariables:
-      - name: AZURE_AI_MODEL_DEPLOYMENT_NAME
-        value: ${AZURE_AI_MODEL_DEPLOYMENT_NAME}
-    container:
-      resources:
-        cpu: '0.5'
-        memory: 1Gi
+    ai-project:
+        host: azure.ai.project
+        deployments:
+            - model:
+                format: OpenAI
+                name: gpt-5.4-mini
+                version: "2026-03-17"
+              name: gpt-5.4-mini
+              sku:
+                capacity: 10
+                name: GlobalStandard
+    tennis-coach:
+        project: src/tennis_analysis_agent
+        host: azure.ai.agent
+        language: python
+        uses:
+            - ai-project
+        codeConfiguration:
+            entryPoint: main.py
+            runtime: python_3_13
+        container:
+            resources:
+                cpu: "0.5"
+                memory: 1Gi
+        description: An Agent Framework agent with local tools hosted by Foundry.
+        environmentVariables:
+            - name: AZURE_AI_MODEL_DEPLOYMENT_NAME
+              value: ${AZURE_AI_MODEL_DEPLOYMENT_NAME}
+        kind: hosted
+        metadata:
+            tags:
+                - Agent Framework
+                - AI Agent Hosting
+                - Azure AI AgentServer
+                - Responses Protocol
+                - Streaming
+        name: tennis-coach
+        protocols:
+            - protocol: responses
+              version: 2.0.0
 infra:
-  provider: microsoft.foundry
+    provider: microsoft.foundry

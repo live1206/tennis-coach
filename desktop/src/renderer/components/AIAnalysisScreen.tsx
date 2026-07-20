@@ -15,7 +15,32 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
   const [running, setRunning] = useState(false)
   const [result, setResult] = useState('')
   const [error, setError] = useState('')
+  const [cloudRunning, setCloudRunning] = useState(false)
+  const [cloudResult, setCloudResult] = useState('')
+  const [cloudError, setCloudError] = useState('')
   const { analysis } = loaded
+
+  const cleanAnalysisOutput = (text: string): string => {
+    const lines = text.replace(/\r\n/g, '\n').split('\n')
+
+    const bodyStart = lines.findIndex((line) => {
+      const trimmed = line.trim()
+      return (
+        trimmed.startsWith('[tennis-coach]')
+        || trimmed.startsWith('## ')
+        || trimmed.startsWith('**Player')
+        || trimmed.startsWith('**球员')
+      )
+    })
+
+    const source = bodyStart >= 0 ? lines.slice(bodyStart) : lines
+    const cleaned = source
+      .map((line) => line.replace(/^\[tennis-coach\]\s*/, ''))
+      .join('\n')
+      .trim()
+
+    return cleaned || text.trim()
+  }
 
   const runAnalysis = async () => {
     setRunning(true)
@@ -29,7 +54,7 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
         model,
       )
       if (response.error) setError(response.error)
-      else setResult(response.output ?? '')
+      else setResult(cleanAnalysisOutput(response.output ?? ''))
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : copy.aiAnalysis.unknownError)
     } finally {
@@ -41,8 +66,32 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
     await window.api.cancelLocalAIAnalysis()
   }
 
+  const runCloudAnalysis = async () => {
+    setCloudRunning(true)
+    setCloudError('')
+    setCloudResult('')
+    try {
+      const response = await window.api.runCloudAIAnalysis(
+        loaded.videoPath,
+        loaded.evidenceId,
+        question,
+      )
+      if (response.error) setCloudError(response.error)
+      else setCloudResult(cleanAnalysisOutput(response.output ?? ''))
+    } catch (reason) {
+      setCloudError(reason instanceof Error ? reason.message : copy.aiAnalysis.cloudUnknownError)
+    } finally {
+      setCloudRunning(false)
+    }
+  }
+
+  const cancelCloudAnalysis = async () => {
+    await window.api.cancelCloudAIAnalysis()
+  }
+
   const returnToWelcome = async () => {
     if (running) await cancelAnalysis()
+    if (cloudRunning) await cancelCloudAnalysis()
     onBack()
   }
 
@@ -107,6 +156,22 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
               <pre style={resultStyle}>{result}</pre>
             </div>
           )}
+
+          <div style={sectionDividerStyle}>
+            <h2 style={{ ...sectionTitle, marginTop: 0 }}>{copy.aiAnalysis.askCloudTitle}</h2>
+            <p style={mutedStyle}>{copy.aiAnalysis.cloudPrivacy}</p>
+            <button disabled={cloudRunning} onClick={runCloudAnalysis} style={primaryButton}>
+              {cloudRunning ? copy.aiAnalysis.cloudRunning : copy.aiAnalysis.runCloud}
+            </button>
+            {cloudRunning && <button onClick={cancelCloudAnalysis} style={{ ...secondaryButton, marginLeft: 8 }}>{copy.aiAnalysis.cancel}</button>}
+            {cloudError && <div style={errorStyle}>{cloudError}</div>}
+            {cloudResult && (
+              <div style={{ marginTop: 20 }}>
+                <h3 style={subheading}>{copy.aiAnalysis.resultTitle}</h3>
+                <pre style={resultStyle}>{cloudResult}</pre>
+              </div>
+            )}
+          </div>
         </section>
       </main>
     </div>
@@ -129,6 +194,20 @@ const listStyle: CSSProperties = { margin: 0, paddingLeft: 20, color: 'var(--col
 const labelStyle: CSSProperties = { display: 'flex', flexDirection: 'column', gap: 7, fontSize: 12, fontWeight: 700, marginTop: 16 }
 const inputStyle: CSSProperties = { padding: '10px 12px', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', background: '#fff', color: 'var(--color-text)', font: 'inherit' }
 const primaryButton: CSSProperties = { marginTop: 18, padding: '11px 18px', border: 0, borderRadius: 'var(--radius-md)', background: 'var(--color-accent)', color: '#fff', cursor: 'pointer', fontWeight: 700 }
+const sectionDividerStyle: CSSProperties = { marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--color-border)' }
 const secondaryButton: CSSProperties = { padding: '8px 12px', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', background: 'var(--color-surface)', cursor: 'pointer', WebkitAppRegion: 'no-drag' } as CSSProperties
 const errorStyle: CSSProperties = { marginTop: 16, padding: 12, borderRadius: 'var(--radius-md)', color: 'var(--color-danger)', background: 'rgba(196,91,91,0.08)', whiteSpace: 'pre-wrap', fontSize: 12 }
-const resultStyle: CSSProperties = { margin: 0, padding: 16, borderRadius: 'var(--radius-md)', background: '#fff', border: '1px solid var(--color-border)', whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', fontFamily: 'var(--font-body)', fontSize: 13, lineHeight: 1.6 }
+const resultStyle: CSSProperties = {
+  margin: 0,
+  padding: 16,
+  borderRadius: 'var(--radius-md)',
+  background: '#fff',
+  border: '1px solid var(--color-border)',
+  whiteSpace: 'pre-wrap',
+  overflowWrap: 'anywhere',
+  fontFamily: 'var(--font-body)',
+  fontSize: 13,
+  lineHeight: 1.6,
+  maxHeight: 460,
+  overflowY: 'auto',
+}

@@ -1,55 +1,61 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
-import socket
 import subprocess
 import sys
-import threading
-import time
+import tempfile
 from pathlib import Path
 
 
-def _drain_output(stream, sink: list[str], print_lines: bool) -> None:
-    for line in iter(stream.readline, ""):
-        text = line.rstrip("\n")
-        sink.append(text)
-        if print_lines:
-            print(f"[agent] {text}")
+def _prune_segment(segment: dict) -> dict:
+    # Remove high-volume raw arrays/frames that are not required for structured coaching output.
+    drop_keys = {
+        "player_trajectories",
+        "trajectory",
+        "frames",
+        "frame_events",
+        "detections",
+        "ball_track",
+        "ball_positions",
+        "raw_points",
+    }
+    pruned: dict = {}
+    for key, value in segment.items():
+        if key in drop_keys:
+            continue
+        if isinstance(value, dict):
+            pruned[key] = {k: v for k, v in value.items() if k not in drop_keys}
+        else:
+            pruned[key] = value
+    return pruned
 
 
-def _wait_for_port(host: str, port: int, timeout_seconds: float) -> bool:
-    deadline = time.time() + timeout_seconds
-    while time.time() < deadline:
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-            sock.settimeout(1.0)
-            if sock.connect_ex((host, port)) == 0:
-                return True
-        time.sleep(0.5)
-    return False
+def _compact_report_payload(parsed: dict, max_segments: int = 12) -> dict:
+    segments = parsed.get("segments") if isinstance(parsed.get("segments"), list) else []
+    compact_segments = [_prune_segment(s) for s in segments[:max_segments] if isinstance(s, dict)]
+    compact: dict = {
+        "schema": parsed.get("schema"),
+        "source": parsed.get("source"),
+        "data_quality": parsed.get("data_quality"),
+        "analysis_capabilities": parsed.get("analysis_capabilities"),
+        "target_player": parsed.get("target_player"),
+        "players": parsed.get("players"),
+        "segments": compact_segments,
+        "truncation": {
+            "segments_total": len(segments),
+            "segments_included": len(compact_segments),
+            "note": "High-volume trajectory/frame fields were omitted for transport limits.",
+        },
+    }
+    return compact
 
 
 def _run_command(command: list[str], cwd: Path) -> None:
     completed = subprocess.run(command, cwd=str(cwd), check=False)
     if completed.returncode != 0:
         raise RuntimeError(f"Command failed with exit code {completed.returncode}: {' '.join(command)}")
-
-
-def _load_dotenv(path: Path) -> dict[str, str]:
-    if not path.is_file():
-        return {}
-
-    values: dict[str, str] = {}
-    for raw_line in path.read_text(encoding="utf-8").splitlines():
-        line = raw_line.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        key, value = line.split("=", 1)
-        clean_key = key.strip()
-        clean_value = value.strip().strip('"').strip("'")
-        if clean_key:
-            values[clean_key] = clean_value
-    return values
 
 
 def _build_extract_command(args: argparse.Namespace, report_path: Path) -> list[str]:
@@ -80,24 +86,44 @@ def _build_extract_command(args: argparse.Namespace, report_path: Path) -> list[
     return command
 
 
-def _build_invoke_message(report_path: Path, analysis_focus: str) -> str:
-    focus = analysis_focus.strip()
-    if focus:
-        return (
-            "Use analyze_tennis_technique_from_json with "
-            f"file_name='{report_path.as_posix()}' and analysis_focus='{focus}', "
-            "then follow the instructions returned by the tool."
+def _load_report_json_for_invoke(report_path: Path, inline_json_max_chars: int) -> str:
+    raw_text = report_path.read_text(encoding="utf-8")
+    parsed = json.loads(raw_text)
+    compact_payload = _compact_report_payload(parsed)
+    compact_json = json.dumps(compact_payload, ensure_ascii=False, separators=(",", ":"))
+    if len(compact_json) > inline_json_max_chars:
+        raise ValueError(
+            "Report JSON is too large to inline for hosted invoke "
+            f"({len(compact_json)} chars > {inline_json_max_chars}). "
+            "Increase --inline-json-max-chars or reduce report size."
         )
+    return compact_json
+
+
+def _build_invoke_message(report_json_text: str, analysis_focus: str) -> str:
+    focus = analysis_focus.strip()
+    if not focus:
+        focus = (
+            "Summarize the strongest evidence-backed coaching observations and "
+            "prioritize the next three areas to practice."
+        )
+
+    # Send JSON inline because hosted agents cannot read the caller's local file path.
     return (
-        "Use analyze_tennis_technique_from_json with "
-        f"file_name='{report_path.as_posix()}', then follow the instructions returned by the tool."
+        "Call analyze_tennis_technique_from_json_text first with these inputs:\n"
+        f"1) analysis_focus: {focus}\n"
+        "2) analysis_json_text: the JSON block below exactly as provided\n"
+        "After that, follow the instructions returned by the tool.\n\n"
+        "```json\n"
+        f"{report_json_text}\n"
+        "```"
     )
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description=(
-            "Run one-click pipeline: video extraction -> local llm_process agent invoke."
+            "Run one-click pipeline: video extraction -> hosted llm_process agent invoke."
         )
     )
     parser.add_argument("video", type=Path, help="Path to tennis video file")
@@ -117,6 +143,12 @@ def main(argv: list[str] | None = None) -> int:
         "--analysis-focus",
         default="",
         help="Optional technique focus for LLM analysis",
+    )
+    parser.add_argument(
+        "--inline-json-max-chars",
+        type=int,
+        default=24000,
+        help="Maximum number of characters allowed when inlining report JSON into hosted invoke message.",
     )
     parser.add_argument(
         "--skip-extraction",
@@ -150,18 +182,18 @@ def main(argv: list[str] | None = None) -> int:
         "--agent-ready-timeout",
         type=float,
         default=90.0,
-        help="Seconds to wait for local agent server readiness",
+        help="Reserved for backward compatibility; not used in hosted invoke mode",
     )
     parser.add_argument(
         "--agent-port",
         type=int,
         default=8088,
-        help="Local port used by azd ai agent run",
+        help="Reserved for backward compatibility; not used in hosted invoke mode",
     )
     parser.add_argument(
         "--print-agent-logs",
         action="store_true",
-        help="Print local agent startup logs while waiting",
+        help="Reserved for backward compatibility; not used in hosted invoke mode",
     )
     parser.add_argument(
         "--model-deployment-name",
@@ -171,13 +203,20 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--foundry-project-endpoint",
         default="",
-        help="Optional override for FOUNDRY_PROJECT_ENDPOINT",
+        help="Reserved for backward compatibility; not used in hosted invoke mode",
+    )
+    parser.add_argument(
+        "--agent-endpoint",
+        default=(
+            "https://foundry-tennis-001.services.ai.azure.com/api/projects/proj-default/agents/"
+            "tennis-coach/endpoint/protocols/openai/responses?api-version=v1"
+        ),
+        help="Hosted agent endpoint URL used by azd ai agent invoke",
     )
     args = parser.parse_args(argv)
 
     repo_root = Path(__file__).resolve().parent
     llm_process_root = repo_root / "llm_process"
-    agent_env_file = llm_process_root / "src" / "tennis_analysis_agent" / ".env"
 
     report_path = args.report_path
     if not report_path.is_absolute():
@@ -217,95 +256,51 @@ def main(argv: list[str] | None = None) -> int:
     if not report_path.is_file():
         raise FileNotFoundError(f"Report file was not generated: {report_path}")
 
-    agent_env = os.environ.copy()
-    agent_env.update(_load_dotenv(agent_env_file))
-    if args.model_deployment_name.strip():
-        agent_env["AZURE_AI_MODEL_DEPLOYMENT_NAME"] = args.model_deployment_name.strip()
-    if args.foundry_project_endpoint.strip():
-        agent_env["FOUNDRY_PROJECT_ENDPOINT"] = args.foundry_project_endpoint.strip()
+    print("Step 2/3: invoking hosted llm_process agent...")
+    report_json_text = _load_report_json_for_invoke(report_path, args.inline_json_max_chars)
+    invoke_message = _build_invoke_message(report_json_text, args.analysis_focus)
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".txt", delete=False) as temp_file:
+        temp_file.write(invoke_message)
+        invoke_input_file = temp_file.name
 
-    missing = [
-        key
-        for key in ["FOUNDRY_PROJECT_ENDPOINT", "AZURE_AI_MODEL_DEPLOYMENT_NAME"]
-        if not str(agent_env.get(key, "")).strip()
+    invoke_command = [
+        "azd",
+        "ai",
+        "agent",
+        "invoke",
+        "--new-session",
+        "--new-conversation",
+        "--agent-endpoint",
+        args.agent_endpoint,
+        "--input-file",
+        invoke_input_file,
     ]
-    if missing:
-        raise ValueError(
-            "Missing agent configuration: "
-            + ", ".join(missing)
-            + ". Set them in llm_process/src/tennis_analysis_agent/.env or pass overrides via "
-            "--foundry-project-endpoint / --model-deployment-name."
-        )
-
-    print("Step 2/3: starting local llm_process agent...")
-    agent_command = ["azd", "ai", "agent", "run"]
-    agent_process = subprocess.Popen(
-        agent_command,
-        cwd=str(llm_process_root),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,
-        bufsize=1,
-        env=agent_env,
-        encoding="utf-8",
-        errors="replace",
-    )
-
-    output_lines: list[str] = []
-    reader_thread = threading.Thread(
-        target=_drain_output,
-        args=(agent_process.stdout, output_lines, args.print_agent_logs),
-        daemon=True,
-    )
-    reader_thread.start()
-
     try:
-        deadline = time.time() + args.agent_ready_timeout
-        ready = False
-        while time.time() < deadline:
-            if agent_process.poll() is not None:
-                break
-            if _wait_for_port("127.0.0.1", args.agent_port, 1.0):
-                ready = True
-                break
-        if not ready:
-            raise TimeoutError(
-                "Timed out waiting for local agent server on "
-                f"127.0.0.1:{args.agent_port}. Last logs:\n"
-                + "\n".join(output_lines[-20:])
-            )
-
-        print("Step 3/3: invoking local agent with analysis.json...")
-        invoke_message = _build_invoke_message(report_path, args.analysis_focus)
-        invoke_command = ["azd", "ai", "agent", "invoke", "--local", invoke_message]
         completed = subprocess.run(
             invoke_command,
             cwd=str(llm_process_root),
             check=False,
             capture_output=True,
             text=True,
-            env=agent_env,
             encoding="utf-8",
             errors="replace",
         )
-        if completed.returncode != 0:
-            raise RuntimeError(
-                "Invoke failed with exit code "
-                f"{completed.returncode}:\n{completed.stdout}\n{completed.stderr}"
-            )
-
-        analysis_output.parent.mkdir(parents=True, exist_ok=True)
-        analysis_text = completed.stdout or ""
-        analysis_output.write_text(analysis_text, encoding="utf-8")
-        print(f"Pipeline completed. Analysis saved to: {analysis_output}")
-        return 0
     finally:
-        if agent_process.poll() is None:
-            agent_process.terminate()
-            try:
-                agent_process.wait(timeout=10)
-            except subprocess.TimeoutExpired:
-                agent_process.kill()
+        try:
+            os.remove(invoke_input_file)
+        except OSError:
+            pass
+    if completed.returncode != 0:
+        raise RuntimeError(
+            "Invoke failed with exit code "
+            f"{completed.returncode}:\n{completed.stdout}\n{completed.stderr}"
+        )
+
+    analysis_output.parent.mkdir(parents=True, exist_ok=True)
+    analysis_text = completed.stdout or ""
+    analysis_output.write_text(analysis_text, encoding="utf-8")
+    print(f"Step 3/3: hosted analysis complete. Analysis saved to: {analysis_output}")
+    return 0
 
 
 if __name__ == "__main__":

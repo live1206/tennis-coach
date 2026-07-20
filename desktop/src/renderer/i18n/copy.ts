@@ -69,6 +69,11 @@ export interface Copy {
     run: string
     running: string
     cancel: string
+    askCloudTitle: string
+    cloudPrivacy: string
+    runCloud: string
+    cloudRunning: string
+    cloudUnknownError: string
     resultTitle: string
     unknownError: string
   }
@@ -210,6 +215,11 @@ export const COPY: Record<Language, Copy> = {
       run: 'Run local AI analysis',
       running: 'Analyzing locally…',
       cancel: 'Cancel',
+      askCloudTitle: 'Ask the cloud coach',
+      cloudPrivacy: 'Sends the extracted reports.json evidence to llm_process for cloud coaching analysis.',
+      runCloud: 'Run cloud AI analysis',
+      cloudRunning: 'Analyzing in cloud…',
+      cloudUnknownError: 'Cloud AI analysis failed.',
       resultTitle: 'Coaching analysis',
       unknownError: 'Local AI analysis failed.',
     },
@@ -367,6 +377,11 @@ export const COPY: Record<Language, Copy> = {
       run: '运行本地 AI 分析',
       running: '正在本地分析…',
       cancel: '取消',
+      askCloudTitle: '询问云端教练',
+      cloudPrivacy: '将提取后的 reports.json 证据发送到 llm_process，执行云端训练分析。',
+      runCloud: '运行云端 AI 分析',
+      cloudRunning: '正在云端分析…',
+      cloudUnknownError: '云端 AI 分析失败。',
       resultTitle: '训练分析',
       unknownError: '本地 AI 分析失败。',
     },

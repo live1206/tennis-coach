@@ -11,7 +11,11 @@ import {
   setupPythonBridge,
 } from './pythonBridge'
 import { cancelFfmpegExport, setupFfmpegBridge } from './ffmpegBridge'
-import { cancelLocalAIAnalysis, setupAIAnalysisBridge } from './aiAnalysisBridge'
+import {
+  cancelCloudAIAnalysis,
+  cancelLocalAIAnalysis,
+  setupAIAnalysisBridge,
+} from './aiAnalysisBridge'
 import { validateTennisAnalysis } from '../shared/analysis'
 
 const store = new Store<{ recentProjects: string[] }>({
@@ -186,6 +190,7 @@ app.on('before-quit', (event) => {
   Promise.allSettled([
     cancelPythonAnalysis(),
     cancelLocalAIAnalysis(),
+    cancelCloudAIAnalysis(),
     cancelFfmpegExport(),
   ]).finally(() => app.exit(0))
 })

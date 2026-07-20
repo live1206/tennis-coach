@@ -8,9 +8,16 @@ import { processTreeSpawnOptions, terminateProcessTree } from './processControl'
 
 let localAnalysisProcess: ChildProcess | null = null
 let localAnalysisCancelled = false
+let cloudAnalysisProcess: ChildProcess | null = null
+let cloudAnalysisCancelled = false
 
 function getProjectRoot(): string {
   return app.isPackaged ? process.resourcesPath : path.resolve(app.getAppPath(), '..')
+}
+
+function getPythonCommand(): string {
+  return process.env.TENNIS_COACH_PYTHON
+    || (process.platform === 'win32' ? 'python' : 'python3')
 }
 
 function getLocalAnalysisCommand(): { cmd: string; args: string[] } {
@@ -25,8 +32,7 @@ function getLocalAnalysisCommand(): { cmd: string; args: string[] } {
       args: [],
     }
   }
-  const python = process.env.TENNIS_COACH_PYTHON
-    || (process.platform === 'win32' ? 'python' : 'python3')
+  const python = getPythonCommand()
   return { cmd: python, args: ['-m', 'video_extraction.local_analysis'] }
 }
 
@@ -42,6 +48,7 @@ export function setupAIAnalysisBridge(
   resolveAnalysisPath: (videoPath: string) => string,
 ) {
   ipcMain.handle('cancel-local-ai-analysis', cancelLocalAIAnalysis)
+  ipcMain.handle('cancel-cloud-ai-analysis', cancelCloudAIAnalysis)
 
   ipcMain.handle(
     'run-local-ai-analysis',
@@ -132,9 +139,119 @@ export function setupAIAnalysisBridge(
       })
     },
   )
+
+  ipcMain.handle(
+    'run-cloud-ai-analysis',
+    async (
+      _event,
+      videoPath: string,
+      evidenceId: string,
+      question: string,
+    ) => {
+      if (cloudAnalysisProcess) return { error: 'A cloud AI analysis is already running.' }
+      if (app.isPackaged) {
+        return { error: 'Cloud coach is currently unavailable in packaged desktop builds.' }
+      }
+
+      let analysisPath: string
+      let outputPath: string
+      try {
+        analysisPath = resolveAnalysisPath(videoPath)
+        const analysis = loadCanonicalAnalysis(analysisPath)
+        const currentEvidenceId = createHash('sha256')
+          .update(JSON.stringify(analysis))
+          .digest('hex')
+        if (currentEvidenceId !== evidenceId) {
+          throw new Error('The extracted video evidence changed. Reopen AI Analysis and try again.')
+        }
+        outputPath = path.join(app.getPath('temp'), `tennis-coach-cloud-ai-${randomUUID()}.txt`)
+      } catch (error) {
+        return {
+          error: error instanceof Error
+            ? error.message
+            : 'The extracted video evidence is no longer available.',
+        }
+      }
+
+      const cleanQuestion = question.trim()
+      if (cleanQuestion.length > 2000) {
+        return { error: 'Question cannot exceed 2000 characters.' }
+      }
+
+      const command = getPythonCommand()
+      const pipelineScript = path.join(getProjectRoot(), 'run_coach_pipeline.py')
+      if (!fs.existsSync(pipelineScript)) {
+        return { error: `Pipeline script not found: ${pipelineScript}` }
+      }
+
+      const args = [
+        pipelineScript,
+        videoPath,
+        '--skip-extraction',
+        '--report-path',
+        analysisPath,
+        '--analysis-output',
+        outputPath,
+      ]
+      if (cleanQuestion) {
+        args.push('--analysis-focus', cleanQuestion)
+      }
+
+      return new Promise<{ output?: string; error?: string }>((resolve) => {
+        let settled = false
+        const settle = (result: { output?: string; error?: string }) => {
+          if (settled) return
+          settled = true
+          resolve(result)
+        }
+
+        const child = spawn(command, args, {
+          cwd: getProjectRoot(),
+          env: process.env,
+          stdio: ['ignore', 'pipe', 'pipe'],
+          ...processTreeSpawnOptions,
+        })
+        cloudAnalysisProcess = child
+        cloudAnalysisCancelled = false
+        let stdout = ''
+        let stderr = ''
+        const append = (current: string, data: Buffer) => (
+          current + data.toString('utf-8')
+        ).slice(-1_000_000)
+
+        child.stdout?.on('data', (data: Buffer) => { stdout = append(stdout, data) })
+        child.stderr?.on('data', (data: Buffer) => { stderr = append(stderr, data) })
+        child.on('error', (error) => {
+          if (cloudAnalysisProcess === child) cloudAnalysisProcess = null
+          fs.rmSync(outputPath, { force: true })
+          settle({ error: error.message })
+        })
+        child.on('close', (code) => {
+          if (cloudAnalysisProcess === child) cloudAnalysisProcess = null
+          const outputFromFile = fs.existsSync(outputPath)
+            ? fs.readFileSync(outputPath, 'utf-8').trim()
+            : ''
+          fs.rmSync(outputPath, { force: true })
+
+          if (cloudAnalysisCancelled) {
+            settle({ error: 'Cloud AI analysis was cancelled.' })
+          } else if (code === 0) {
+            settle({ output: outputFromFile || stdout.trim() })
+          } else {
+            settle({ error: stderr.trim() || stdout.trim() || `Cloud analysis exited with code ${code}.` })
+          }
+        })
+      })
+    },
+  )
 }
 
 export async function cancelLocalAIAnalysis(): Promise<void> {
   localAnalysisCancelled = true
   if (localAnalysisProcess) await terminateProcessTree(localAnalysisProcess)
+}
+
+export async function cancelCloudAIAnalysis(): Promise<void> {
+  cloudAnalysisCancelled = true
+  if (cloudAnalysisProcess) await terminateProcessTree(cloudAnalysisProcess)
 }

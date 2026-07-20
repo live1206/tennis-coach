@@ -31,6 +31,12 @@ contextBridge.exposeInMainWorld('api', {
     modelAlias: string,
   ) => ipcRenderer.invoke('run-local-ai-analysis', videoPath, evidenceId, question, modelAlias),
   cancelLocalAIAnalysis: () => ipcRenderer.invoke('cancel-local-ai-analysis') as Promise<void>,
+  runCloudAIAnalysis: (
+    videoPath: string,
+    evidenceId: string,
+    question: string,
+  ) => ipcRenderer.invoke('run-cloud-ai-analysis', videoPath, evidenceId, question),
+  cancelCloudAIAnalysis: () => ipcRenderer.invoke('cancel-cloud-ai-analysis') as Promise<void>,
   getRecentProjects: () => ipcRenderer.invoke('get-recent-projects'),
   getAppVersion: () => ipcRenderer.invoke('get-app-version') as Promise<string>,
   checkResources: () => ipcRenderer.invoke('check-resources') as Promise<{ ok: boolean; missing: string[] }>,

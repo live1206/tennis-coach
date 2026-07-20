@@ -5,6 +5,7 @@ import json
 import os
 from statistics import mean
 from pathlib import Path
+from typing import Any
 
 from agent_framework import Agent, tool
 from agent_framework.foundry import FoundryChatClient
@@ -24,7 +25,8 @@ load_dotenv()
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 os.makedirs(DATA_DIR, exist_ok=True)
-WORKSPACE_ROOT = Path(__file__).resolve().parents[3]
+_MAIN_FILE_PATH = Path(__file__).resolve()
+WORKSPACE_ROOT = _MAIN_FILE_PATH.parents[3] if len(_MAIN_FILE_PATH.parents) > 3 else _MAIN_FILE_PATH.parent
 
 
 def _resolve_dataset_path(file_name: str) -> str:
@@ -79,6 +81,102 @@ def _parse_float(value: str) -> float | None:
         return float(text)
     except ValueError:
         return None
+
+
+def _extract_segments(parsed: Any) -> list[dict]:
+    if isinstance(parsed, list):
+        return [item for item in parsed if isinstance(item, dict)]
+    if isinstance(parsed, dict):
+        segments = parsed.get("segments")
+        if isinstance(segments, list):
+            return [item for item in segments if isinstance(item, dict)]
+    return []
+
+
+def _avg(values: list[float]) -> float | None:
+    return round(sum(values) / len(values), 6) if values else None
+
+
+def _build_player_breakdown(segments: list[dict]) -> dict[str, Any]:
+    player_views: dict[str, dict[str, Any]] = {
+        "player_1": {"segments": []},
+        "player_2": {"segments": []},
+    }
+
+    for index, segment in enumerate(segments, start=1):
+        players = segment.get("players") if isinstance(segment.get("players"), dict) else {}
+        trajectories = (
+            segment.get("player_trajectories")
+            if isinstance(segment.get("player_trajectories"), dict)
+            else {}
+        )
+
+        for player_key in ["player_1", "player_2"]:
+            player_info = players.get(player_key) if isinstance(players, dict) else None
+            trajectory = trajectories.get(player_key) if isinstance(trajectories, dict) else None
+
+            if not isinstance(player_info, dict) and not isinstance(trajectory, list):
+                continue
+
+            movement_value = None
+            confidence_value = None
+            side_value = None
+            mean_position = None
+            sample_points = 0
+
+            if isinstance(player_info, dict):
+                movement = player_info.get("movement_score")
+                confidence = player_info.get("confidence")
+                movement_value = float(movement) if isinstance(movement, (int, float)) else None
+                confidence_value = float(confidence) if isinstance(confidence, (int, float)) else None
+                side_value = player_info.get("side") if isinstance(player_info.get("side"), str) else None
+                mean_pos = player_info.get("mean_position")
+                if isinstance(mean_pos, dict):
+                    mean_position = {
+                        "x": mean_pos.get("x") if isinstance(mean_pos.get("x"), (int, float)) else None,
+                        "y": mean_pos.get("y") if isinstance(mean_pos.get("y"), (int, float)) else None,
+                    }
+
+            if isinstance(trajectory, list):
+                sample_points = len([p for p in trajectory if isinstance(p, dict)])
+
+            player_views[player_key]["segments"].append(
+                {
+                    "segment_index": index,
+                    "start": segment.get("start"),
+                    "end": segment.get("end"),
+                    "side": side_value,
+                    "confidence": confidence_value,
+                    "movement_score": movement_value,
+                    "trajectory_points": sample_points,
+                    "mean_position": mean_position,
+                }
+            )
+
+    for player_key in ["player_1", "player_2"]:
+        entries = player_views[player_key]["segments"]
+        confidence_values = [e["confidence"] for e in entries if isinstance(e.get("confidence"), (int, float))]
+        movement_values = [e["movement_score"] for e in entries if isinstance(e.get("movement_score"), (int, float))]
+        trajectory_points = [e["trajectory_points"] for e in entries if isinstance(e.get("trajectory_points"), int)]
+
+        side_counts: dict[str, int] = {}
+        for e in entries:
+            side = e.get("side")
+            if isinstance(side, str) and side:
+                side_counts[side] = side_counts.get(side, 0) + 1
+
+        player_views[player_key]["summary"] = {
+            "segment_count": len(entries),
+            "avg_confidence": _avg([float(v) for v in confidence_values]),
+            "avg_movement_score": _avg([float(v) for v in movement_values]),
+            "avg_trajectory_points": _avg([float(v) for v in trajectory_points]),
+            "side_counts": side_counts,
+        }
+
+    return {
+        "player_1": player_views["player_1"],
+        "player_2": player_views["player_2"],
+    }
 
 
 @tool(approval_mode="never_require")
@@ -268,6 +366,37 @@ def analyze_tennis_technique_from_json(
         return f"JSON analysis failed: {exc}"
 
 
+@tool(approval_mode="never_require")
+def analyze_tennis_technique_from_json_text(
+    analysis_json_text: Annotated[
+        str,
+        Field(description="Tennis analysis JSON text content (stringified JSON object)."),
+    ],
+    analysis_focus: Annotated[
+        str,
+        Field(description="Optional focus, e.g. 'forehand biomechanics' or 'serve toss consistency'"),
+    ] = "",
+) -> str:
+    """Analyze tennis technique from raw JSON text, useful when the agent cannot access local file paths."""
+    raw_text = analysis_json_text.strip()
+    if not raw_text:
+        return "JSON analysis failed: analysis_json_text is empty."
+
+    try:
+        parsed = json.loads(raw_text)
+    except json.JSONDecodeError as exc:
+        return f"JSON analysis failed: invalid JSON format ({exc})."
+
+    question = analysis_focus.strip() or (
+        "Summarize the strongest evidence-backed coaching observations and "
+        "prioritize the next three areas to practice."
+    )
+    try:
+        return build_analysis_prompt(parsed, question)
+    except ValueError as exc:
+        return f"JSON analysis failed: {exc}"
+
+
 def main():
     client = FoundryChatClient(
         project_endpoint=os.environ["FOUNDRY_PROJECT_ENDPOINT"],
@@ -280,8 +409,16 @@ def main():
         instructions=(
             "You are a tennis analytics assistant. "
             "Use tools to inspect uploaded datasets before drawing conclusions. "
-            "When the user provides a JSON file for tennis video analysis, call analyze_tennis_technique_from_json first "
+            "When the user provides a JSON file path for tennis video analysis, call analyze_tennis_technique_from_json first. "
+            "When the user provides JSON content directly, call analyze_tennis_technique_from_json_text first. "
             "and follow the shared evidence and response instructions returned by that tool. "
+            "For JSON-based technique reports, always return exactly four sections: "
+            "Summary, Best Performance, Biggest Weakness, Improvement Advice. "
+            "Each section must be bilingual (English + Chinese). "
+            "Each section must include separate conclusions for Player 1 and Player 2. "
+            "Then add a `Recommended Coaching Videos` section with 3-5 tailored video suggestions. "
+            "Each recommended video must include a direct clickable URL starting with https://. "
+            "The report must be athlete-facing coaching feedback, not a data-centric report. "
             "When data is missing, ask for a CSV/JSON upload or a clearer analysis objective."
         ),
         tools=[
@@ -290,6 +427,7 @@ def main():
             preview_tennis_dataset,
             analyze_tennis_dataset,
             analyze_tennis_technique_from_json,
+            analyze_tennis_technique_from_json_text,
         ],
         # History will be managed by the hosting infrastructure, thus there
         # is no need to store history by the service. Learn more at:
