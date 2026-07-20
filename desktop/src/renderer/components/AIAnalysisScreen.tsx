@@ -69,10 +69,31 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
           <Metric label={copy.aiAnalysis.segments} value={analysis.source?.segment_count ?? analysis.segments.length} />
           <Metric label={copy.aiAnalysis.players} value={Object.keys(analysis.players).length} />
 
-          <h3 style={subheading}>{copy.aiAnalysis.supported}</h3>
-          <ul style={listStyle}>
-            {analysis.analysis_capabilities.supported.map((capability) => <li key={capability}>{capability}</li>)}
-          </ul>
+          <h3 style={subheading}>{copy.aiAnalysis.actualResults}</h3>
+          <Metric label={copy.aiAnalysis.audioHits} value={analysis.data_quality.audio?.hit_count ?? 0} />
+          <Metric
+            label={copy.aiAnalysis.classifiedShots}
+            value={`${analysis.data_quality.shots?.classified_count ?? 0} / ${analysis.data_quality.shots?.candidate_count ?? 0}`}
+          />
+          <Metric
+            label={copy.aiAnalysis.ballDetections}
+            value={analysis.data_quality.ball?.detected_visible_count ?? analysis.data_quality.ball?.visible_count ?? 0}
+          />
+          <Metric
+            label={copy.aiAnalysis.ballVisibility}
+            value={formatPercentage(analysis.data_quality.ball?.detected_visible_ratio ?? analysis.data_quality.ball?.visible_ratio)}
+          />
+
+          <h3 style={subheading}>{copy.aiAnalysis.playerResults}</h3>
+          {Object.entries(analysis.players).map(([playerId, player]) => (
+            <div key={playerId} style={playerCardStyle}>
+              <strong style={playerTitleStyle}>{formatPlayerName(playerId)}</strong>
+              <Metric label={copy.aiAnalysis.forehands} value={player.shot_counts?.forehand ?? 0} compact />
+              <Metric label={copy.aiAnalysis.backhands} value={player.shot_counts?.backhand ?? 0} compact />
+              <Metric label={copy.aiAnalysis.courtMovement} value={formatDistance(player.total_court_movement_normalized)} compact />
+              <Metric label={copy.aiAnalysis.trajectorySamples} value={player.trajectory_samples ?? 0} compact />
+            </div>
+          ))}
         </section>
 
         <section style={cardStyle}>
@@ -94,10 +115,22 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
   )
 }
 
-function Metric({ label, value }: { label: string; value: number }) {
-  return <div style={{ display: 'flex', justifyContent: 'space-between', padding: '9px 0', borderBottom: '1px solid var(--color-border)' }}>
+function Metric({ label, value, compact = false }: { label: string; value: number | string; compact?: boolean }) {
+  return <div style={{ display: 'flex', justifyContent: 'space-between', padding: compact ? '5px 0' : '9px 0', borderBottom: '1px solid var(--color-border)' }}>
     <span style={mutedStyle}>{label}</span><strong>{value}</strong>
   </div>
+}
+
+function formatPercentage(value: number | null | undefined): string {
+  return typeof value === 'number' ? `${(value * 100).toFixed(1)}%` : '—'
+}
+
+function formatDistance(value: number | undefined): string {
+  return typeof value === 'number' ? value.toFixed(2) : '—'
+}
+
+function formatPlayerName(playerId: string): string {
+  return playerId.replace(/_/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase())
 }
 
 const headerStyle: CSSProperties = { padding: '16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--color-border)', background: 'var(--color-surface)', WebkitAppRegion: 'drag' } as CSSProperties
@@ -106,7 +139,8 @@ const eyebrowStyle: CSSProperties = { color: 'var(--color-accent)', fontFamily: 
 const sectionTitle: CSSProperties = { fontFamily: 'var(--font-display)', fontSize: 18, margin: '0 0 14px' }
 const subheading: CSSProperties = { fontFamily: 'var(--font-display)', fontSize: 13, margin: '22px 0 8px', textTransform: 'uppercase', letterSpacing: '0.05em' }
 const mutedStyle: CSSProperties = { color: 'var(--color-text-secondary)', fontSize: 12, lineHeight: 1.5 }
-const listStyle: CSSProperties = { margin: 0, paddingLeft: 20, color: 'var(--color-text-secondary)', fontSize: 12, lineHeight: 1.6 }
+const playerCardStyle: CSSProperties = { marginTop: 10, padding: '10px 12px', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', background: 'rgba(255,255,255,0.55)' }
+const playerTitleStyle: CSSProperties = { display: 'block', marginBottom: 3, fontFamily: 'var(--font-display)', fontSize: 13 }
 const runningStyle: CSSProperties = { marginTop: 20, color: 'var(--color-accent)', fontFamily: 'var(--font-display)', fontWeight: 800 }
 const secondaryButton: CSSProperties = { padding: '8px 12px', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', background: 'var(--color-surface)', cursor: 'pointer', WebkitAppRegion: 'no-drag' } as CSSProperties
 const errorStyle: CSSProperties = { marginTop: 16, padding: 12, borderRadius: 'var(--radius-md)', color: 'var(--color-danger)', background: 'rgba(196,91,91,0.08)', whiteSpace: 'pre-wrap', fontSize: 12 }
