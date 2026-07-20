@@ -49,7 +49,7 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--color-bg)', color: 'var(--color-text)' }}>
+    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', background: 'var(--color-bg)', color: 'var(--color-text)' }}>
       <header style={headerStyle}>
         <div>
           <div style={eyebrowStyle}>{copy.aiAnalysis.eyebrow}</div>
@@ -63,8 +63,8 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
         </div>
       </header>
 
-      <main style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 0.8fr) minmax(420px, 1.2fr)', gap: 20, padding: 24 }}>
-        <section style={cardStyle}>
+      <main style={mainStyle}>
+        <section style={{ ...cardStyle, ...scrollPanelStyle }}>
           <h2 style={sectionTitle}>{copy.aiAnalysis.evidenceTitle}</h2>
           <Metric label={copy.aiAnalysis.segments} value={analysis.source?.segment_count ?? analysis.segments.length} />
           <Metric label={copy.aiAnalysis.players} value={Object.keys(analysis.players).length} />
@@ -134,7 +134,9 @@ function formatPlayerName(playerId: string): string {
 }
 
 const headerStyle: CSSProperties = { padding: '16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--color-border)', background: 'var(--color-surface)', WebkitAppRegion: 'drag' } as CSSProperties
+const mainStyle: CSSProperties = { flex: 1, minHeight: 0, display: 'grid', gridTemplateColumns: 'minmax(280px, 0.8fr) minmax(420px, 1.2fr)', gap: 20, padding: 24, overflow: 'hidden' }
 const cardStyle: CSSProperties = { background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)', padding: 24, minWidth: 0 }
+const scrollPanelStyle: CSSProperties = { minHeight: 0, overflowY: 'auto', scrollbarGutter: 'stable' }
 const eyebrowStyle: CSSProperties = { color: 'var(--color-accent)', fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 5 }
 const sectionTitle: CSSProperties = { fontFamily: 'var(--font-display)', fontSize: 18, margin: '0 0 14px' }
 const subheading: CSSProperties = { fontFamily: 'var(--font-display)', fontSize: 13, margin: '22px 0 8px', textTransform: 'uppercase', letterSpacing: '0.05em' }

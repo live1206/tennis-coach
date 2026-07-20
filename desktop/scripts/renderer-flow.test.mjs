@@ -497,6 +497,8 @@ assert.match(aiScreenSource, /analysis\.data_quality\.shots\?\.classified_count/
 assert.match(aiScreenSource, /analysis\.data_quality\.ball\?\.detected_visible_count/)
 assert.match(aiScreenSource, /Object\.entries\(analysis\.players\)/)
 assert.match(aiScreenSource, /player\.shot_counts\?\.forehand/)
+assert.match(aiScreenSource, /overflowY: 'auto'/)
+assert.match(aiScreenSource, /scrollbarGutter: 'stable'/)
 assert.match(aiScreenSource, /window\.api\.runCloudAIAnalysis/)
 assert.doesNotMatch(aiScreenSource, /window\.api\.runLocalAIAnalysis/)
 assert.match(aiScreenSource, /window\.api\.cancelCloudAIAnalysis/)
