@@ -30,9 +30,8 @@ consume Tennis Coach's canonical `analysis.json`.
 After a video finishes extraction, the review workspace enables **AI
 Analysis**. It displays mandatory quality warnings and supported/unsupported
 capabilities, and exposes a cloud AI coaching flow without requiring users to
-manage intermediate files or exposing raw video. Foundry Local integration is
-kept in backend code, but hidden from the current UI until local UX is
-finalized. See
+manage intermediate files or exposing raw video. Cloud analysis is selected by
+default, with Foundry Local available from the same AI Analysis screen. See
 [`desktop/README.md`](desktop/README.md) for development setup and Breakpoint
 attribution.
 
