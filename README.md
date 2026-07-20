@@ -28,9 +28,11 @@ preserves Breakpoint's video review and highlight-export workflow, adapted to
 consume Tennis Coach's canonical `analysis.json`.
 
 After a video finishes extraction, the review workspace enables **AI
-Analysis**. It displays mandatory quality warnings and supported/unsupported
-capabilities, and can invoke the existing Foundry Local CLI without requiring
-users to manage intermediate files or exposing raw video. See
+Analysis**. It displays evidence metrics and supported capabilities without
+requiring users to manage intermediate files or exposing raw video. The review
+workspace's **Run AI Analysis** action opens the result screen and starts
+Foundry Cloud immediately. Foundry Local remains implemented in backend code
+but is not exposed by this streamlined UI flow. See
 [`desktop/README.md`](desktop/README.md) for development setup and Breakpoint
 attribution.
 
@@ -295,7 +297,7 @@ Forehand/backhand analysis is confidence-gated and depends on all of:
 
 - a ball observation near an audio hit candidate;
 - an unambiguous nearby player box;
-- usable shoulder pose from an externally supplied MediaPipe Pose Landmarker;
+- usable shoulder pose from the bundled MediaPipe Pose Landmarker;
 - declared player handedness.
 
 Install the optional pose dependency and run the complete publishable path:
@@ -322,9 +324,7 @@ The classifier associates each audio onset with a nearby ball and anonymous
 player, projects the contact onto the anatomical shoulder axis, and maps the
 contact side using declared handedness. Ambiguous contacts, missing balls,
 weak player identity, weak poses, and unknown handedness produce
-`classification: "unknown"` with a reason rather than a forced label. Pose
-model assets are not bundled; users must obtain and review their upstream
-terms separately.
+`classification: "unknown"` with a reason rather than a forced label.
 
 Each resolved shot also includes the inferred ball contact point and the
 dominant wrist as a racket-location proxy. This is explicitly identified as
@@ -480,8 +480,8 @@ automatic highlight extraction to actionable coaching intelligence.
 
 The extraction, aggregation, schema, annotation, target matching, pose/contact,
 shot-role, and conservative outcome implementations are published. The
-licensed YOLOX and optional MediaPipe path has completed an end-to-end CPU run
-and remains ready for faster execution on a CUDA machine.
+licensed YOLOX and bundled MediaPipe pose path has completed an end-to-end CPU
+run and remains ready for faster execution on a CUDA machine.
 
 Production readiness still requires a representative independently labeled
 benchmark and GPU validation for the publishable YOLOX/pose workflow. The
@@ -496,7 +496,8 @@ This project follows Breakpoint's licensing model and is released under the **GN
 - **Cloud service and commercial use**: if you integrate this project's core algorithms, including tennis target detection, rally segmentation, video-derived JSON extraction, coaching analysis, or automatic highlight editing logic, into a commercial SaaS, mini-program, commercial app, or paid website backend service, AGPL-3.0 requires you to open-source the complete source code of that system under compatible terms.
 - **Commercial License**: if you do not want to open-source your system code but would like to use Tennis Coach technology in commercial products, contact the author for a commercial license.
 
-The bundled YOLOX-Nano model is distributed under Apache License 2.0 with
-source/checksum metadata in `video_extraction/vision/models/MODEL_INFO.txt`
-and its license in `third_party/YOLOX/LICENSE`. TrackNet and MediaPipe model
-assets are not bundled by this repository.
+The bundled YOLOX-Nano and MediaPipe Pose Landmarker models are distributed
+under Apache License 2.0 with source/checksum metadata in
+`video_extraction/vision/models/MODEL_INFO.txt` and licenses in
+`third_party/YOLOX/LICENSE` and `third_party/MediaPipe/LICENSE`.
+TrackNet model assets are not bundled by this repository.

@@ -5,6 +5,7 @@ import { createHash, randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { validateTennisAnalysis } from '../shared/analysis'
 import { processTreeSpawnOptions, terminateProcessTree } from './processControl'
+import { resolveProjectPython } from './pythonRuntime'
 
 let localAnalysisProcess: ChildProcess | null = null
 let localAnalysisCancelled = false
@@ -32,7 +33,7 @@ function getLocalAnalysisCommand(): { cmd: string; args: string[] } {
       args: [],
     }
   }
-  const python = getPythonCommand()
+  const python = resolveProjectPython(getProjectRoot())
   return { cmd: python, args: ['-m', 'video_extraction.local_analysis'] }
 }
 
@@ -42,6 +43,22 @@ function loadCanonicalAnalysis(analysisPath: string) {
   }
   const parsed: unknown = JSON.parse(fs.readFileSync(analysisPath, 'utf-8'))
   return validateTennisAnalysis(parsed)
+}
+
+function validateAnalysisRequest(
+  resolveAnalysisPath: (videoPath: string) => string,
+  videoPath: string,
+  evidenceId: string,
+): { analysis: unknown; analysisPath: string } {
+  const analysisPath = resolveAnalysisPath(videoPath)
+  const analysis = loadCanonicalAnalysis(analysisPath)
+  const currentEvidenceId = createHash('sha256')
+    .update(JSON.stringify(analysis))
+    .digest('hex')
+  if (currentEvidenceId !== evidenceId) {
+    throw new Error('The extracted video evidence changed. Reopen AI Analysis and try again.')
+  }
+  return { analysis, analysisPath }
 }
 
 export function setupAIAnalysisBridge(
@@ -59,18 +76,20 @@ export function setupAIAnalysisBridge(
       question: string,
       modelAlias: string,
     ) => {
-      if (localAnalysisProcess) return { error: 'A local AI analysis is already running.' }
-      let analysisPath: string
+      if (localAnalysisProcess || cloudAnalysisProcess) {
+        return { error: 'An AI analysis is already running.' }
+      }
+      const cleanQuestion = question.trim()
+      if (!cleanQuestion || cleanQuestion.length > 2000) {
+        return { error: 'Question must contain between 1 and 2000 characters.' }
+      }
+      if (!/^[A-Za-z0-9._-]+$/.test(modelAlias)) {
+        return { error: 'Model alias contains unsupported characters.' }
+      }
       let snapshotPath: string
       try {
-        analysisPath = resolveAnalysisPath(videoPath)
-        const analysis = loadCanonicalAnalysis(analysisPath)
-        const currentEvidenceId = createHash('sha256')
-          .update(JSON.stringify(analysis))
-          .digest('hex')
-        if (currentEvidenceId !== evidenceId) {
-          throw new Error('The extracted video evidence changed. Reopen AI Analysis and try again.')
-        }
+        const validated = validateAnalysisRequest(resolveAnalysisPath, videoPath, evidenceId)
+        const analysis = validated.analysis
         snapshotPath = path.join(app.getPath('temp'), `tennis-coach-ai-${randomUUID()}.json`)
         fs.writeFileSync(snapshotPath, JSON.stringify(analysis), { encoding: 'utf-8', mode: 0o600 })
       } catch (error) {
@@ -79,13 +98,6 @@ export function setupAIAnalysisBridge(
             ? error.message
             : 'The extracted video evidence is no longer available.',
         }
-      }
-      const cleanQuestion = question.trim()
-      if (!cleanQuestion || cleanQuestion.length > 2000) {
-        return { error: 'Question must contain between 1 and 2000 characters.' }
-      }
-      if (!/^[A-Za-z0-9._-]+$/.test(modelAlias)) {
-        return { error: 'Model alias contains unsupported characters.' }
       }
 
       const command = getLocalAnalysisCommand()
@@ -148,22 +160,21 @@ export function setupAIAnalysisBridge(
       evidenceId: string,
       question: string,
     ) => {
-      if (cloudAnalysisProcess) return { error: 'A cloud AI analysis is already running.' }
+      if (localAnalysisProcess || cloudAnalysisProcess) {
+        return { error: 'An AI analysis is already running.' }
+      }
       if (app.isPackaged) {
         return { error: 'Cloud coach is currently unavailable in packaged desktop builds.' }
       }
 
+      const cleanQuestion = question.trim()
+      if (cleanQuestion.length > 2000) return { error: 'Question cannot exceed 2000 characters.' }
+
       let analysisPath: string
       let outputPath: string
       try {
-        analysisPath = resolveAnalysisPath(videoPath)
-        const analysis = loadCanonicalAnalysis(analysisPath)
-        const currentEvidenceId = createHash('sha256')
-          .update(JSON.stringify(analysis))
-          .digest('hex')
-        if (currentEvidenceId !== evidenceId) {
-          throw new Error('The extracted video evidence changed. Reopen AI Analysis and try again.')
-        }
+        const validated = validateAnalysisRequest(resolveAnalysisPath, videoPath, evidenceId)
+        analysisPath = validated.analysisPath
         outputPath = path.join(app.getPath('temp'), `tennis-coach-cloud-ai-${randomUUID()}.txt`)
       } catch (error) {
         return {
@@ -173,12 +184,7 @@ export function setupAIAnalysisBridge(
         }
       }
 
-      const cleanQuestion = question.trim()
-      if (cleanQuestion.length > 2000) {
-        return { error: 'Question cannot exceed 2000 characters.' }
-      }
-
-      const command = getPythonCommand()
+      const command = resolveProjectPython(getProjectRoot())
       const pipelineScript = path.join(getProjectRoot(), 'run_coach_pipeline.py')
       if (!fs.existsSync(pipelineScript)) {
         return { error: `Pipeline script not found: ${pipelineScript}` }

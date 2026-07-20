@@ -153,6 +153,8 @@ ipcMain.handle('check-resources', () => {
     { label: 'engine (TennisCoachAnalysis.exe)', path: path.join(process.resourcesPath, 'engine', 'TennisCoachAnalysis', 'TennisCoachAnalysis.exe') },
     { label: 'local AI (TennisCoachLocalAnalysis.exe)', path: path.join(process.resourcesPath, 'engine', 'TennisCoachLocalAnalysis', 'TennisCoachLocalAnalysis.exe') },
     { label: 'ffmpeg (ffmpeg.exe)', path: path.join(process.resourcesPath, 'engine', 'ffmpeg', 'ffmpeg.exe') },
+    { label: 'YOLOX ball model (yolox_nano.onnx)', path: path.join(process.resourcesPath, 'engine', 'video_extraction', 'vision', 'models', 'yolox_nano.onnx') },
+    { label: 'MediaPipe pose model (pose_landmarker_heavy.task)', path: path.join(process.resourcesPath, 'engine', 'video_extraction', 'vision', 'models', 'pose_landmarker_heavy.task') },
   ]
   const missing = checks.filter((c) => !fs.existsSync(c.path)).map((c) => c.label)
   return { ok: missing.length === 0, missing }

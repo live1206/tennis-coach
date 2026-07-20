@@ -22,7 +22,6 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
 
   const cleanAnalysisOutput = (text: string): string => {
     const lines = text.replace(/\r\n/g, '\n').split('\n')
-
     const bodyStart = lines.findIndex((line) => {
       const trimmed = line.trim()
       return (
@@ -134,10 +133,10 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
         </section>
 
         <section style={cardStyle}>
-          <h2 style={sectionTitle}>{copy.aiAnalysis.askTitle}</h2>
-          <p style={mutedStyle}>{copy.aiAnalysis.privacy}</p>
+          <h2 style={sectionTitle}>{copy.aiAnalysis.askTitleLocal}</h2>
+          <p style={mutedStyle}>{copy.aiAnalysis.privacyLocal}</p>
           <label style={labelStyle}>
-            {copy.aiAnalysis.model}
+            {copy.aiAnalysis.modelLocal}
             <input value={model} onChange={(event) => setModel(event.target.value)} style={inputStyle} />
           </label>
           <label style={labelStyle}>
@@ -145,7 +144,7 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
             <textarea value={question} onChange={(event) => setQuestion(event.target.value)} rows={5} style={{ ...inputStyle, resize: 'vertical' }} />
           </label>
           <button disabled={running || !question.trim() || !model.trim()} onClick={runAnalysis} style={primaryButton}>
-            {running ? copy.aiAnalysis.running : copy.aiAnalysis.run}
+            {running ? copy.aiAnalysis.running : copy.aiAnalysis.runLocal}
           </button>
           {running && <button onClick={cancelAnalysis} style={{ ...secondaryButton, marginLeft: 8 }}>{copy.aiAnalysis.cancel}</button>}
 
@@ -160,7 +159,7 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
           <div style={sectionDividerStyle}>
             <h2 style={{ ...sectionTitle, marginTop: 0 }}>{copy.aiAnalysis.askCloudTitle}</h2>
             <p style={mutedStyle}>{copy.aiAnalysis.cloudPrivacy}</p>
-            <button disabled={cloudRunning} onClick={runCloudAnalysis} style={primaryButton}>
+            <button disabled={cloudRunning || !question.trim()} onClick={runCloudAnalysis} style={primaryButton}>
               {cloudRunning ? copy.aiAnalysis.cloudRunning : copy.aiAnalysis.runCloud}
             </button>
             {cloudRunning && <button onClick={cancelCloudAnalysis} style={{ ...secondaryButton, marginLeft: 8 }}>{copy.aiAnalysis.cancel}</button>}

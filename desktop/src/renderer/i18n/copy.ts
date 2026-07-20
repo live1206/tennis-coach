@@ -52,6 +52,7 @@ export interface Copy {
   aiAnalysis: {
     eyebrow: string
     title: string
+    launch: string
     back: string
     evidenceTitle: string
     segments: string
@@ -62,16 +63,24 @@ export interface Copy {
     supported: string
     unsupported: string
     askTitle: string
-    privacy: string
+    askTitleCloud: string
+    askTitleLocal: string
+    privacyCloud: string
+    privacyLocal: string
     model: string
+    modelCloud: string
+    modelLocal: string
+    provider: string
+    providerCloud: string
+    providerLocal: string
     question: string
     defaultQuestion: string
-    run: string
+    runCloud: string
+    runLocal: string
     running: string
     cancel: string
     askCloudTitle: string
     cloudPrivacy: string
-    runCloud: string
     cloudRunning: string
     cloudUnknownError: string
     resultTitle: string
@@ -85,6 +94,8 @@ export interface Copy {
     done: string
     failed: string
     retryVideo: string
+    copyError: string
+    copied: string
     successfulVideos: (done: number, total: number) => string
   }
   app: {
@@ -198,6 +209,7 @@ export const COPY: Record<Language, Copy> = {
     aiAnalysis: {
       eyebrow: 'Evidence-backed coaching',
       title: 'AI Analysis',
+      launch: 'Run AI Analysis',
       back: 'Back to review',
       evidenceTitle: 'Analysis evidence',
       segments: 'Candidate rallies',
@@ -208,16 +220,24 @@ export const COPY: Record<Language, Copy> = {
       supported: 'Supported claims',
       unsupported: 'Unsupported claims',
       askTitle: 'Ask the local coach',
-      privacy: 'Only extracted tennis evidence is sent to the in-process model. Raw video remains on your device.',
+      askTitleCloud: 'Ask the cloud coach',
+      askTitleLocal: 'Ask the local coach',
+      privacyCloud: 'Extracted tennis evidence is sent to your configured cloud AI endpoint. Raw video remains on your device.',
+      privacyLocal: 'Only extracted tennis evidence is sent to the in-process model. Raw video remains on your device.',
       model: 'Foundry Local model alias',
+      modelCloud: 'Foundry cloud model deployment',
+      modelLocal: 'Foundry Local model alias',
+      provider: 'Run mode',
+      providerCloud: 'Cloud',
+      providerLocal: 'Local',
       question: 'Coaching question',
       defaultQuestion: 'Summarize the strongest evidence-backed observations, limitations, and next three practice priorities.',
-      run: 'Run local AI analysis',
-      running: 'Analyzing locally…',
+      runCloud: 'Run cloud AI analysis',
+      runLocal: 'Run local AI analysis',
+      running: 'Analyzing…',
       cancel: 'Cancel',
       askCloudTitle: 'Ask the cloud coach',
       cloudPrivacy: 'Sends the extracted reports.json evidence to llm_process for cloud coaching analysis.',
-      runCloud: 'Run cloud AI analysis',
       cloudRunning: 'Analyzing in cloud…',
       cloudUnknownError: 'Cloud AI analysis failed.',
       resultTitle: 'Coaching analysis',
@@ -231,6 +251,8 @@ export const COPY: Record<Language, Copy> = {
       done: 'Ready',
       failed: 'Failed',
       retryVideo: 'Retry',
+      copyError: 'Copy error',
+      copied: 'Copied',
       successfulVideos: (done: number, total: number) => `${done} / ${total} videos ready`,
     },
     app: {
@@ -360,6 +382,7 @@ export const COPY: Record<Language, Copy> = {
     aiAnalysis: {
       eyebrow: '有证据支持的训练建议',
       title: 'AI 分析',
+      launch: '运行 AI 分析',
       back: '返回视频查看',
       evidenceTitle: '分析证据',
       segments: '候选回合',
@@ -370,16 +393,24 @@ export const COPY: Record<Language, Copy> = {
       supported: '支持的结论',
       unsupported: '不支持的结论',
       askTitle: '询问本地教练',
-      privacy: '只有提取后的网球分析证据会传给本机模型，原始视频不会离开设备。',
+      askTitleCloud: '询问云端教练',
+      askTitleLocal: '询问本地教练',
+      privacyCloud: '提取后的网球分析证据会发送到您配置的云端 AI 服务，原始视频仍保留在本机。',
+      privacyLocal: '只有提取后的网球分析证据会传给本机模型，原始视频不会离开设备。',
       model: 'Foundry Local 模型别名',
+      modelCloud: 'Foundry 云端模型部署名',
+      modelLocal: 'Foundry Local 模型别名',
+      provider: '运行方式',
+      providerCloud: '云端',
+      providerLocal: '本地',
       question: '训练问题',
       defaultQuestion: '总结最有证据支持的观察、数据限制和接下来三个训练重点。',
-      run: '运行本地 AI 分析',
-      running: '正在本地分析…',
+      runCloud: '运行云端 AI 分析',
+      runLocal: '运行本地 AI 分析',
+      running: '正在分析…',
       cancel: '取消',
       askCloudTitle: '询问云端教练',
       cloudPrivacy: '将提取后的 reports.json 证据发送到 llm_process，执行云端训练分析。',
-      runCloud: '运行云端 AI 分析',
       cloudRunning: '正在云端分析…',
       cloudUnknownError: '云端 AI 分析失败。',
       resultTitle: '训练分析',
@@ -393,6 +424,8 @@ export const COPY: Record<Language, Copy> = {
       done: '已完成',
       failed: '失败',
       retryVideo: '重试',
+      copyError: '复制错误',
+      copied: '已复制',
       successfulVideos: (done: number, total: number) => `${done} / ${total} 个视频已就绪`,
     },
     app: {

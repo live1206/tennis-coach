@@ -25,7 +25,7 @@ export default function AnalysisProgressPanel({ step, errorMessage, onCancel, on
       <div style={{ padding: 'clamp(20px, 3vw, 42px) clamp(8px, 1.4vw, 16px)' }}>
         <div style={{ color: 'var(--color-accent)', fontFamily: 'var(--font-display)', fontWeight: 900, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 16 }}>{copy.analysisPanel.failedEyebrow}</div>
         <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(26px, 4vw, 48px)', lineHeight: 0.98, letterSpacing: '-0.045em', margin: '0 0 16px', color: 'var(--color-text)' }}>{copy.analysisPanel.failedTitle}</h1>
-        <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.7, marginBottom: 24 }}>{errorMessage}</p>
+        <pre style={{ whiteSpace: 'pre-wrap', color: 'var(--color-text-secondary)', lineHeight: 1.7, marginBottom: 24, userSelect: 'text' }}>{errorMessage}</pre>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
           <button onClick={onRetry} style={{ padding: '10px 18px', borderRadius: 999, background: 'var(--color-accent)', color: '#fff', border: 'none', fontWeight: 800 }}>{copy.analysisPanel.retry}</button>
           <button onClick={onReturnWelcome} style={{ padding: '10px 18px', borderRadius: 999, background: 'transparent', color: 'var(--color-text-secondary)', border: '1px solid var(--color-border)', fontWeight: 800 }}>{copy.analysisPanel.returnWelcome}</button>

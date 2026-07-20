@@ -9,6 +9,8 @@ Thumbs.db
 # Runtime and build outputs
 dist/
 build/
+dist-engine/
+build-engine/
 !desktop/build/
 !desktop/build/*
 out/
@@ -31,4 +33,5 @@ desktop/dist-electron/
 !video_extraction/vision/models/yolox_nano.onnx
 *.pth
 *.pt
+/models/
 annotations.local/

@@ -11,9 +11,45 @@ npm install
 npm run dev
 ```
 
-Set `TENNIS_COACH_PYTHON` when the desired Python executable is not available
-as `python`/`python3`. The selected environment must have this repository and
-the `foundry-local` optional dependency installed.
+In development, the app automatically uses `../.venv` when present. Set
+`TENNIS_COACH_PYTHON` when you need a different Python executable. The selected
+environment must have this repository and dependencies installed (including
+OpenCV/cv2 and `foundry-local` for AI analysis).
+
+```bash
+python -m pip install -e ".[foundry-local]"
+```
+
+Audio extraction also requires `ffmpeg` to be available. In WSL/Ubuntu:
+
+```bash
+sudo apt update && sudo apt install -y ffmpeg
+```
+
+Desktop extraction always passes `--pose-model-path` so shot analysis can run.
+It uses the bundled `video_extraction/vision/models/pose_landmarker_heavy.task`
+by default. If missing, the app downloads it automatically to a local models
+folder. You can still override the path:
+
+```bash
+TENNIS_COACH_POSE_MODEL_PATH=/absolute/path/to/pose_landmarker_heavy.task
+```
+
+Desktop extraction also always passes player handedness flags:
+- `player_1` and `player_2` default to `right`
+- override with environment variables before launch:
+
+```bash
+TENNIS_COACH_PLAYER_1_HAND=right
+TENNIS_COACH_PLAYER_2_HAND=left
+```
+
+Desktop extraction now also enables YOLOX ball tracking by default using the
+bundled `video_extraction/vision/models/yolox_nano.onnx`. Override with:
+
+```bash
+TENNIS_COACH_BALL_MODEL_PATH=/absolute/path/to/yolox_nano.onnx
+```
 
 ```bash
 TENNIS_COACH_PYTHON=/path/to/python npm run dev
@@ -25,6 +61,23 @@ metadata, while model execution goes through Electron IPC to
 `video_extraction.local_analysis`. Users never need to locate the intermediate
 JSON, and raw video is not sent to the model.
 
+AI Analysis defaults to **Cloud** mode. Configure cloud execution with:
+
+```bash
+TENNIS_COACH_CLOUD_API_BASE=https://api.openai.com/v1
+TENNIS_COACH_CLOUD_API_KEY=<your-api-key>
+# Optional, defaults to /chat/completions
+TENNIS_COACH_CLOUD_API_PATH=/chat/completions
+```
+
+The review workspace exposes a single **Run AI Analysis** action. It opens the
+AI Analysis screen and starts Foundry Cloud immediately using the default
+coaching question. Foundry Local remains available in backend code but is not
+part of this streamlined UI flow.
+
+If extraction fails, Tennis Coach writes a copyable failure log to the video
+output folder as `analysis-error.log` (next to `analysis.json`).
+
 ## Attribution
 
 The Electron/React rally review application was migrated from
@@ -32,4 +85,6 @@ The Electron/React rally review application was migrated from
 Zhang and licensed under AGPL-3.0. Tennis Coach remains AGPL-3.0-or-later.
 The Apache-2.0 YOLOX-Nano model used for person and sports-ball detection is
 bundled with its source, checksum, and license under
-`video_extraction/vision/models/` and `third_party/YOLOX/`.
+`video_extraction/vision/models/` and `third_party/YOLOX/`. The Apache-2.0
+MediaPipe Pose Landmarker model is bundled with attribution under
+`video_extraction/vision/models/` and `third_party/MediaPipe/`.
