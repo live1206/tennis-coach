@@ -28,8 +28,45 @@ function AppInner() {
   const [exportResult, setExportResult] = useState<{ status: 'complete' | 'error'; message: string; outputPath?: string } | null>(null)
   const [loadedAIAnalysis, setLoadedAIAnalysis] = useState<LoadedAnalysis | null>(null)
   const [aiOpenError, setAIOpenError] = useState<string | null>(null)
+  const [restoringRecentProject, setRestoringRecentProject] = useState(true)
   const batchCancelledRef = useRef(false)
   const batchRunIdRef = useRef(0)
+
+  useEffect(() => {
+    let cancelled = false
+    const restoreRecentProject = async () => {
+      try {
+        const recentPaths = await window.api.getRecentProjects()
+        const restoredVideos: VideoRecord[] = []
+        const restoredReports: Array<{ video: VideoRecord; report: LoadedAnalysis['analysis'] }> = []
+
+        for (const video of createVideoRecords(recentPaths)) {
+          const report = await window.api.loadReport(video.path)
+          if (report && hasReusableAnalysisReport(report)) {
+            restoredVideos.push(video)
+            restoredReports.push({ video, report })
+          }
+        }
+
+        if (!cancelled && restoredVideos.length > 0) {
+          dispatch({ type: 'CREATE_BATCH', videos: restoredVideos })
+          for (const { video, report } of restoredReports) {
+            dispatch({
+              type: 'VIDEO_ANALYSIS_DONE',
+              videoId: video.id,
+              rallies: createRalliesForVideo(video, report),
+            })
+          }
+          dispatch({ type: 'BATCH_ANALYSIS_DONE' })
+        }
+      } finally {
+        if (!cancelled) setRestoringRecentProject(false)
+      }
+    }
+
+    restoreRecentProject()
+    return () => { cancelled = true }
+  }, [dispatch])
 
   useEffect(() => {
     if (!window.api?.checkResources) return
@@ -258,6 +295,10 @@ function AppInner() {
 
   if (loadedAIAnalysis) {
     return <AIAnalysisScreen loaded={loadedAIAnalysis} languageSwitch={languageSwitch} onBack={() => setLoadedAIAnalysis(null)} />
+  }
+
+  if (restoringRecentProject) {
+    return null
   }
 
   if (state.videos.length === 0) {

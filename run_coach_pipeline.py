@@ -3,10 +3,14 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
+import shutil
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
+
+_AGENT_LINE_PREFIX_RE = re.compile(r"^\[[^\]]+\]\s?")
 
 
 def _prune_segment(segment: dict) -> dict:
@@ -120,6 +124,44 @@ def _build_invoke_message(report_json_text: str, analysis_focus: str) -> str:
     )
 
 
+def _resolve_azd_command() -> str:
+    configured = os.environ.get("TENNIS_COACH_AZD_PATH", "").strip()
+    candidates = [
+        configured,
+        shutil.which("azd"),
+        os.path.join(os.environ.get("USERPROFILE", ""), ".azd", "bin", "azd.exe"),
+        os.path.join(os.environ.get("ProgramFiles", r"C:\\Program Files"), "Azure Dev CLI", "azd.exe"),
+    ]
+    for candidate in candidates:
+        if candidate and Path(candidate).is_file():
+            return candidate
+    raise FileNotFoundError(
+        "Azure Developer CLI (azd) was not found. Install it from "
+        "https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd, "
+        "then restart desktop."
+    )
+
+
+def _extract_agent_response_text(raw_stdout: str) -> str:
+    # `azd ai agent invoke` prints a request/response metadata header (Agent, Message,
+    # Session, Conversation, Trace ID, ...) before the actual agent reply. Strip that
+    # header so only the agent's response content is surfaced to the caller.
+    lines = raw_stdout.splitlines()
+    start_index = None
+    for idx, line in enumerate(lines):
+        if line.strip().lower().startswith("trace id:"):
+            start_index = idx + 1
+            break
+    if start_index is None:
+        return raw_stdout.strip()
+
+    content_lines = lines[start_index:]
+    while content_lines and not content_lines[0].strip():
+        content_lines.pop(0)
+    cleaned_lines = [_AGENT_LINE_PREFIX_RE.sub("", line, count=1) for line in content_lines]
+    return "\n".join(cleaned_lines).strip()
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description=(
@@ -147,7 +189,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--inline-json-max-chars",
         type=int,
-        default=24000,
+        default=60000,
         help="Maximum number of characters allowed when inlining report JSON into hosted invoke message.",
     )
     parser.add_argument(
@@ -264,7 +306,7 @@ def main(argv: list[str] | None = None) -> int:
         invoke_input_file = temp_file.name
 
     invoke_command = [
-        "azd",
+        _resolve_azd_command(),
         "ai",
         "agent",
         "invoke",
@@ -297,7 +339,7 @@ def main(argv: list[str] | None = None) -> int:
         )
 
     analysis_output.parent.mkdir(parents=True, exist_ok=True)
-    analysis_text = completed.stdout or ""
+    analysis_text = _extract_agent_response_text(completed.stdout or "")
     analysis_output.write_text(analysis_text, encoding="utf-8")
     print(f"Step 3/3: hosted analysis complete. Analysis saved to: {analysis_output}")
     return 0

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import type { LoadedAnalysis } from '../../shared/analysis'
 import { useCopy } from '../i18n'
 
@@ -16,28 +16,30 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
   const [error, setError] = useState('')
   const { analysis } = loaded
 
+  const runCloudAnalysis = useCallback(async () => {
+    setRunning(true)
+    setError('')
+    setResult('')
+    try {
+      const response = await window.api.runCloudAIAnalysis(
+        loaded.videoPath,
+        loaded.evidenceId,
+        copy.aiAnalysis.defaultQuestion,
+      )
+      if (response.error) setError(response.error)
+      else setResult(response.output ?? '')
+    } catch (reason) {
+      setError(reason instanceof Error ? reason.message : copy.aiAnalysis.cloudUnknownError)
+    } finally {
+      setRunning(false)
+    }
+  }, [copy.aiAnalysis.cloudUnknownError, copy.aiAnalysis.defaultQuestion, loaded.evidenceId, loaded.videoPath])
+
   useEffect(() => {
     if (startedRef.current) return
     startedRef.current = true
-
-    const runCloudAnalysis = async () => {
-      try {
-        const response = await window.api.runCloudAIAnalysis(
-          loaded.videoPath,
-          loaded.evidenceId,
-          copy.aiAnalysis.defaultQuestion,
-        )
-        if (response.error) setError(response.error)
-        else setResult(response.output ?? '')
-      } catch (reason) {
-        setError(reason instanceof Error ? reason.message : copy.aiAnalysis.cloudUnknownError)
-      } finally {
-        setRunning(false)
-      }
-    }
-
     void runCloudAnalysis()
-  }, [copy.aiAnalysis.cloudUnknownError, copy.aiAnalysis.defaultQuestion, loaded.evidenceId, loaded.videoPath])
+  }, [runCloudAnalysis])
 
   const cancelAnalysis = async () => {
     await window.api.cancelCloudAIAnalysis()
@@ -82,6 +84,11 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
           {running && <button onClick={cancelAnalysis} style={{ ...secondaryButton, marginLeft: 8 }}>{copy.aiAnalysis.cancel}</button>}
 
           {error && <div style={errorStyle}>{error}</div>}
+          {error && !running && (
+            <button onClick={() => void runCloudAnalysis()} style={{ ...secondaryButton, marginTop: 12 }}>
+              {copy.aiAnalysis.cloudRetry}
+            </button>
+          )}
           {result && (
             <div style={{ marginTop: 20 }}>
               <h3 style={subheading}>{copy.aiAnalysis.resultTitle}</h3>
