@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState, type CSSProperties, type Reac
 import type { LoadedAnalysis } from '../../shared/analysis'
 import { expandEvidenceReferences } from '../evidenceFormatting'
 import { useCopy } from '../i18n'
+import { renderMarkdown } from '../markdown'
 
 interface Props {
   loaded: LoadedAnalysis
@@ -99,7 +100,7 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
           ))}
         </section>
 
-        <section style={cardStyle}>
+        <section style={{ ...cardStyle, ...cloudCardStyle }}>
           <h2 style={sectionTitle}>{copy.aiAnalysis.askTitleCloud}</h2>
           <p style={mutedStyle}>{copy.aiAnalysis.privacyCloud}</p>
           {running && <p style={runningStyle}>{copy.aiAnalysis.cloudRunning}</p>}
@@ -112,9 +113,9 @@ export default function AIAnalysisScreen({ loaded, languageSwitch, onBack }: Pro
             </button>
           )}
           {result && (
-            <div style={{ marginTop: 20 }}>
+            <div style={resultWrapperStyle}>
               <h3 style={subheading}>{copy.aiAnalysis.resultTitle}</h3>
-              <pre style={resultStyle}>{result}</pre>
+              <div style={resultStyle}>{renderMarkdown(result)}</div>
             </div>
           )}
         </section>
@@ -154,4 +155,6 @@ const playerTitleStyle: CSSProperties = { display: 'block', marginBottom: 3, fon
 const runningStyle: CSSProperties = { marginTop: 20, color: 'var(--color-accent)', fontFamily: 'var(--font-display)', fontWeight: 800 }
 const secondaryButton: CSSProperties = { padding: '8px 12px', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', background: 'var(--color-surface)', cursor: 'pointer', WebkitAppRegion: 'no-drag' } as CSSProperties
 const errorStyle: CSSProperties = { marginTop: 16, padding: 12, borderRadius: 'var(--radius-md)', color: 'var(--color-danger)', background: 'rgba(196,91,91,0.08)', whiteSpace: 'pre-wrap', fontSize: 12 }
-const resultStyle: CSSProperties = { margin: 0, padding: 16, borderRadius: 'var(--radius-md)', background: '#fff', border: '1px solid var(--color-border)', whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', fontFamily: 'var(--font-body)', fontSize: 13, lineHeight: 1.6, maxHeight: 460, overflowY: 'auto' }
+const cloudCardStyle: CSSProperties = { display: 'flex', flexDirection: 'column', minHeight: 0, overflow: 'hidden' }
+const resultWrapperStyle: CSSProperties = { marginTop: 20, flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }
+const resultStyle: CSSProperties = { margin: 0, padding: 16, borderRadius: 'var(--radius-md)', background: '#fff', border: '1px solid var(--color-border)', overflowWrap: 'anywhere', fontFamily: 'var(--font-body)', fontSize: 13, lineHeight: 1.6, flex: 1, minHeight: 0, overflowY: 'auto' }
