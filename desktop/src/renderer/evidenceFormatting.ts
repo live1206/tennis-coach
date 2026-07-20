@@ -1,7 +1,8 @@
-const PATH_REFERENCE = /^\$?[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*|\[\d+\])+$/
+const PATH_REFERENCE = /^(?:\$\.?)?[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*|\[\d+\])+$/
+const INLINE_PATH_REFERENCE = /`?((?:\$\.?)?(?:schema|source|data_quality|analysis_capabilities|target_player|players|segments)(?:\.[A-Za-z_][A-Za-z0-9_]*|\[\d+\])+)`?(?=[\s,;:)\]}.]|$)/g
 
 export function expandEvidenceReferences(text: string, analysis: object): string {
-  return expandReferenceGroup(
+  const grouped = expandReferenceGroup(
     expandReferenceGroup(
       text,
       analysis,
@@ -13,6 +14,15 @@ export function expandEvidenceReferences(text: string, analysis: object): string
     /\(([^()\n]+)\)/g,
     '(',
     ')',
+  )
+  return grouped.replace(
+    INLINE_PATH_REFERENCE,
+    (original, path: string) => {
+      const value = resolveEvidencePath(analysis, path)
+      return value.found
+        ? `${formatEvidenceLabel(path)}: ${formatEvidenceValue(value.value, path)}`
+        : original
+    },
   )
 }
 

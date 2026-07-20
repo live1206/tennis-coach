@@ -142,6 +142,24 @@ assert.equal(
   ),
   'Player 1 [segments 0 / shots: 2 candidates (1 classified: forehand 1); segments 1 / shots: 1 candidates (1 classified: backhand 1); players / player 1 / mean detection confidence: 0.823]',
 )
+assert.equal(
+  expandEvidenceReferences(
+    'Evidence: `players.player_1.shot_counts`.',
+    { players: { player_1: { shot_counts: { forehand: 6, backhand: 4 } } } },
+  ),
+  'Evidence: players / player 1 / shot counts: forehand 6, backhand 4.',
+)
+assert.equal(
+  expandEvidenceReferences(
+    'Movement (Source: `$.players.player_2.total_court_movement_normalized`).',
+    { players: { player_2: { total_court_movement_normalized: 10.204507 } } },
+  ),
+  'Movement (Source: players / player 2 / total court movement normalized: 10.205).',
+)
+assert.equal(
+  expandEvidenceReferences('Unknown `players.player_3.shot_counts` stays.', { players: {} }),
+  'Unknown `players.player_3.shot_counts` stays.',
+)
 assert.equal(expandEvidenceReferences('Keep [normal text] unchanged.', {}), 'Keep [normal text] unchanged.')
 assert.equal(expandEvidenceReferences('Keep (normal text) unchanged.', {}), 'Keep (normal text) unchanged.')
 
