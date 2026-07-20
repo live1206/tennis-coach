@@ -315,7 +315,7 @@ function AppInner() {
           {activeVideo && <button onClick={() => handleRetryVideo(activeVideo.id)} style={topBtnStyle}>{copy.app.rerunAnalysis}</button>}
           {activeVideo?.status === 'done' && (
             <button onClick={() => handleOpenAIAnalysis(activeVideo.path)} style={topBtnStyle}>
-              {copy.aiAnalysis.title}
+              {copy.aiAnalysis.launch}
             </button>
           )}
         </div>

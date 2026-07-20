@@ -70,8 +70,10 @@ TENNIS_COACH_CLOUD_API_KEY=<your-api-key>
 TENNIS_COACH_CLOUD_API_PATH=/chat/completions
 ```
 
-Cloud remains the default, and users can switch to Foundry Local from the AI
-Analysis screen.
+The review workspace exposes a single **Run AI Analysis** action. It opens the
+AI Analysis screen and starts Foundry Cloud immediately using the default
+coaching question. Foundry Local remains available in backend code but is not
+part of this streamlined UI flow.
 
 If extraction fails, Tennis Coach writes a copyable failure log to the video
 output folder as `analysis-error.log` (next to `analysis.json`).

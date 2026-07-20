@@ -52,6 +52,7 @@ export interface Copy {
   aiAnalysis: {
     eyebrow: string
     title: string
+    launch: string
     back: string
     evidenceTitle: string
     segments: string
@@ -204,6 +205,7 @@ export const COPY: Record<Language, Copy> = {
     aiAnalysis: {
       eyebrow: 'Evidence-backed coaching',
       title: 'AI Analysis',
+      launch: 'Run AI Analysis',
       back: 'Back to review',
       evidenceTitle: 'Analysis evidence',
       segments: 'Candidate rallies',
@@ -372,6 +374,7 @@ export const COPY: Record<Language, Copy> = {
     aiAnalysis: {
       eyebrow: '有证据支持的训练建议',
       title: 'AI 分析',
+      launch: '运行 AI 分析',
       back: '返回视频查看',
       evidenceTitle: '分析证据',
       segments: '候选回合',

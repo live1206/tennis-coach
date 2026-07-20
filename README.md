@@ -28,10 +28,11 @@ preserves Breakpoint's video review and highlight-export workflow, adapted to
 consume Tennis Coach's canonical `analysis.json`.
 
 After a video finishes extraction, the review workspace enables **AI
-Analysis**. It displays mandatory quality warnings and supported/unsupported
-capabilities, and exposes a cloud AI coaching flow without requiring users to
-manage intermediate files or exposing raw video. Cloud analysis is selected by
-default, with Foundry Local available from the same AI Analysis screen. See
+Analysis**. It displays evidence metrics and supported capabilities without
+requiring users to manage intermediate files or exposing raw video. The review
+workspace's **Run AI Analysis** action opens the result screen and starts
+Foundry Cloud immediately. Foundry Local remains implemented in backend code
+but is not exposed by this streamlined UI flow. See
 [`desktop/README.md`](desktop/README.md) for development setup and Breakpoint
 attribution.
 
