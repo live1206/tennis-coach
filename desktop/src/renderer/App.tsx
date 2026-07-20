@@ -32,6 +32,7 @@ function AppInner() {
   const batchRunIdRef = useRef(0)
 
   useEffect(() => {
+    if (!window.api?.checkResources) return
     window.api.checkResources().then((res) => {
       if (!res.ok) {
         setResourceError(`${copy.app.missingResources} ${res.missing.join(', ')}`)

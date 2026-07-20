@@ -35,11 +35,16 @@ export default function WelcomeScreen({ onVideosSelected, languageSwitch }: Prop
   const [dropError, setDropError] = useState<string | null>(null)
 
   useEffect(() => {
+    if (!window.api) return
     window.api.getRecentProjects().then(setRecent)
     window.api.getAppVersion().then(setAppVersion)
   }, [])
 
   const handleOpen = async () => {
+    if (!window.api) {
+      setDropError('Desktop API is not available in browser preview mode.')
+      return
+    }
     const paths = await window.api.openFileDialog()
     if (paths && paths.length > 0) onVideosSelected(paths)
   }
@@ -48,6 +53,10 @@ export default function WelcomeScreen({ onVideosSelected, languageSwitch }: Prop
     e.preventDefault()
     setDragOver(false)
     setDropError(null)
+    if (!window.api) {
+      setDropError('Desktop API is not available in browser preview mode.')
+      return
+    }
     try {
       const approved = await window.api.resolveDroppedVideoPaths(Array.from(e.dataTransfer.files))
       if (approved.length === 0) {
